@@ -15,6 +15,9 @@ namespace SpecFlow.Actions.Selenium
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
+        // TODO: We don't need to get this every time
+        private string ChromeFilePath => Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
+
         public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _seleniumConfiguration = seleniumConfiguration;
@@ -33,37 +36,12 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            switch (_seleniumConfiguration.Browser)
+            return _seleniumConfiguration.Browser switch
             {
-                case Browser.Chrome:
-
-                    var chromeWebdriverLocation = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
-
-                    ChromeDriverService chromeDriverService;
-                    if (string.IsNullOrWhiteSpace(chromeWebdriverLocation))
-                    {
-                        chromeDriverService = ChromeDriverService.CreateDefaultService();
-                    }
-                    else
-                    {
-                        chromeDriverService = ChromeDriverService.CreateDefaultService(chromeWebdriverLocation);
-                    }
-                    
-                    var chromeOptions = new ChromeOptions();
-                    
-                    if (_seleniumConfiguration.Arguments != null || _seleniumConfiguration.Arguments.Length != 0)
-                    {
-                        chromeOptions.AddArguments(_seleniumConfiguration.Arguments);
-                    }
-
-                    return new ChromeDriver(chromeDriverService, chromeOptions);
-
-                case Browser.Noop:
-                    return new NoopWebdriver();
-                    
-            }
-
-            throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet");
+                Browser.Chrome => GetChromeDriver(ChromeFilePath),
+                Browser.Noop => new NoopWebdriver(),
+                _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
+            };
         }
 
         /// <summary>
@@ -82,6 +60,19 @@ namespace SpecFlow.Actions.Selenium
             }
 
             _isDisposed = true;
+        }
+
+        private IWebDriver GetChromeDriver(string filepath) 
+        {
+            var chromeOptions = new ChromeOptions();
+
+            if (_seleniumConfiguration.Arguments != null || _seleniumConfiguration.Arguments.Length != 0)
+            {
+                chromeOptions.AddArguments(_seleniumConfiguration.Arguments);
+            }
+
+            return new ChromeDriver(string.IsNullOrWhiteSpace(filepath) ?
+                ChromeDriverService.CreateDefaultService() : ChromeDriverService.CreateDefaultService(filepath), chromeOptions);
         }
     }
 }
