@@ -18,11 +18,13 @@ jobs:
             dotnet-version: '5.0.x' 
           env:
             NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        - run: dotnet build <my project>
+        - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+        - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+
         - name: Create the package
-          run: dotnet pack --configuration Release <my project>
+          run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
         - name: Publish the package to GPR
-          run: dotnet nuget push <my project>/bin/Release/*.nupkg
+          run: dotnet nuget push Plugins/GeneratedNuGetPackages/Release/SpecFlow.Actions.Selenium.*.nupkg
 
         # Authenticates packages to push to nuget.org.
         # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
