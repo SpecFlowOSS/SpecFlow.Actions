@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Remote;
+using TechTalk.SpecFlow.Infrastructure;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -11,12 +12,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
+        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _seleniumConfiguration = seleniumConfiguration;
+            _specFlowOutputHelper = specFlowOutputHelper;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -34,16 +37,21 @@ namespace SpecFlow.Actions.Selenium
             switch (_seleniumConfiguration.Browser.ToLower())
             {
                 case "chrome":
-                    var chromeDriverService = ChromeDriverService.CreateDefaultService();
 
-                    var chromeOptions = new ChromeOptions();
+                    var chromeWebdriverLocation = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
 
-                    var chromeBinaryLocation = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
-                    if (!string.IsNullOrWhiteSpace(chromeBinaryLocation))
+                    ChromeDriverService chromeDriverService;
+                    if (string.IsNullOrWhiteSpace(chromeWebdriverLocation))
                     {
-                        chromeOptions.BinaryLocation = chromeBinaryLocation;
+                        chromeDriverService = ChromeDriverService.CreateDefaultService();
                     }
-
+                    else
+                    {
+                        chromeDriverService = ChromeDriverService.CreateDefaultService(chromeWebdriverLocation);
+                    }
+                    
+                    var chromeOptions = new ChromeOptions();
+                    
                     var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
 
                     return chromeDriver;
