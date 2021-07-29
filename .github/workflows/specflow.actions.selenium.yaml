@@ -48,6 +48,6 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Publish the package to nuget.org
-        run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+        run: dotnet nuget push Plugins/GeneratedNuGetPackages/Release/SpecFlow.Actions.Selenium.*.nupkg" -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}
