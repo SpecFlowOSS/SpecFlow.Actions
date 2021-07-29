@@ -3,7 +3,6 @@ using TechTalk.SpecFlow.Configuration;
 
 namespace SpecFlow.Actions.Selenium
 {
-
     public interface ISpecFlowJsonLoader
     {
         string Load();
@@ -21,7 +20,6 @@ namespace SpecFlow.Actions.Selenium
         {
             var specFlowJsonFilePath = _specFlowJsonLocator.GetSpecFlowJsonFilePath();
             var specflowJsonContent = File.ReadAllText(specFlowJsonFilePath);
-
 
             return specflowJsonContent;
         }

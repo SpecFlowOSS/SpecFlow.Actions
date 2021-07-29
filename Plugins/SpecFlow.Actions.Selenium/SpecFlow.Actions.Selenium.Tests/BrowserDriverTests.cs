@@ -9,10 +9,10 @@ namespace SpecFlow.Actions.Selenium.Tests
     {
         class MockSeleniumConfiguration : ISeleniumConfiguration
         {
+            public Browser Browser { get; set; }
 
-            public string Browser { get; set; }
+            public string[] Arguments { get; set; }
         }
-
 
         public class BrowserDriverAccessor : BrowserDriver
         {
@@ -31,11 +31,10 @@ namespace SpecFlow.Actions.Selenium.Tests
             target.CurrentWebDriverLazy.IsValueCreated.Should().BeFalse();
         }
 
-
         [Fact]
         public void Current_AfterAccessing_Instantiated()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(){Browser = "noop"});
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(){Browser = Browser.Noop});
 
             var webdriver = target.Current;
 

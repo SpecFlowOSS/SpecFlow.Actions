@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using TechTalk.SpecFlow.Configuration;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -8,8 +6,11 @@ namespace SpecFlow.Actions.Selenium
 {
     public interface ISeleniumConfiguration
     {
-        string Browser { get; }
+        Browser Browser { get; }
+
+        string[] Arguments { get; }
     }
+
     public class SeleniumConfiguration : ISeleniumConfiguration
     {
         private readonly ISpecFlowJsonLoader _specFlowJsonLoader;
@@ -23,9 +24,11 @@ namespace SpecFlow.Actions.Selenium
         private class SeleniumSpecFlowJsonPart
         {
             [JsonInclude]
-            public string Browser { get; private set; }
-        }
+            public Browser Browser { get; private set; }
 
+            [JsonInclude]
+            public string[] Arguments { get; private set; }
+        }
 
         private readonly Lazy<SpecFlowJson> _specflowJsonPart;
 
@@ -41,6 +44,8 @@ namespace SpecFlow.Actions.Selenium
                 PropertyNameCaseInsensitive = true
             };
 
+            jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+
             return JsonSerializer.Deserialize<SpecFlowJson>(json, jsonSerializerOptions);
         }
 
@@ -49,6 +54,9 @@ namespace SpecFlow.Actions.Selenium
             _specFlowJsonLoader = specFlowJsonLoader;
             _specflowJsonPart = new Lazy<SpecFlowJson>(LoadSpecFlowJson);
         }
-        public string Browser => _specflowJsonPart.Value.Selenium.Browser;
+
+        public Browser Browser => _specflowJsonPart.Value.Selenium.Browser;
+
+        public string[] Arguments => _specflowJsonPart.Value.Selenium.Arguments;
     }
 }

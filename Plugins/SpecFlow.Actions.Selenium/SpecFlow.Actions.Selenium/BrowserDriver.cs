@@ -1,7 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Remote;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -31,17 +30,20 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            switch (_seleniumConfiguration.Browser.ToLower())
+            switch (_seleniumConfiguration.Browser)
             {
-                case "chrome":
+                case Browser.Chrome:
                     var chromeDriverService = ChromeDriverService.CreateDefaultService();
-
                     var chromeOptions = new ChromeOptions();
 
-                    var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
+                    if (_seleniumConfiguration.Arguments != null || _seleniumConfiguration.Arguments.Length != 0)
+                    {
+                        chromeOptions.AddArguments(_seleniumConfiguration.Arguments);
+                    }
 
-                    return chromeDriver;
-                case "noop":
+                    return new ChromeDriver(chromeDriverService, chromeOptions);
+
+                case Browser.Noop:
                     return new NoopWebdriver();
                     
             }
