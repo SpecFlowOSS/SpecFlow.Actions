@@ -1,6 +1,17 @@
 name: dotnet package
 
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - 'Plugins/*'
+  pull_request:
+    paths:
+      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - 'Plugins/*'
+
 
 jobs:
   build:
