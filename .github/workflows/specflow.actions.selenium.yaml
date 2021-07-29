@@ -4,12 +4,9 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: ubuntu-latest
-
+    runs-on: windows-latest
     env:
         DOTNET_NOLOGO: true
-
     steps:
       - uses: actions/checkout@v2
         with:
@@ -20,10 +17,6 @@ jobs:
           dotnet-version: '5.0.x' 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Install Google Chrome # Using shell script to install Google Chrome
-        run: |
-          chmod +x ./build/InstallChrome.sh
-          ./build/InstallChrome.sh
       - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
       - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
@@ -32,13 +25,11 @@ jobs:
 
 
   release:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     env: 
       DOTNET_NOLOGO: true
-
     needs: build
     if: github.ref == 'refs/heads/master'
-
     steps:
       # Authenticates packages to push to nuget.org.
       # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
