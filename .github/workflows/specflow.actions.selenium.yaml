@@ -22,8 +22,8 @@ jobs:
             NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         - name: Install Google Chrome # Using shell script to install Google Chrome
           run: |
-            chmod +x ./scripts/InstallChrome.sh
-            ./scripts/InstallChrome.sh
+            chmod +x ./build/InstallChrome.sh
+            ./build/InstallChrome.sh
         - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
         - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
