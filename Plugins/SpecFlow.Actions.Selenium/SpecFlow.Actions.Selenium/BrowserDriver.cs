@@ -1,6 +1,7 @@
 ﻿using System;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using TechTalk.SpecFlow.Infrastructure;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -10,12 +11,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
+        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper)
         {
             _seleniumConfiguration = seleniumConfiguration;
+            _specFlowOutputHelper = specFlowOutputHelper;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -33,9 +36,21 @@ namespace SpecFlow.Actions.Selenium
             switch (_seleniumConfiguration.Browser)
             {
                 case Browser.Chrome:
-                    var chromeDriverService = ChromeDriverService.CreateDefaultService();
-                    var chromeOptions = new ChromeOptions();
 
+                    var chromeWebdriverLocation = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
+
+                    ChromeDriverService chromeDriverService;
+                    if (string.IsNullOrWhiteSpace(chromeWebdriverLocation))
+                    {
+                        chromeDriverService = ChromeDriverService.CreateDefaultService();
+                    }
+                    else
+                    {
+                        chromeDriverService = ChromeDriverService.CreateDefaultService(chromeWebdriverLocation);
+                    }
+                    
+                    var chromeOptions = new ChromeOptions();
+                    
                     if (_seleniumConfiguration.Arguments != null || _seleniumConfiguration.Arguments.Length != 0)
                     {
                         chromeOptions.AddArguments(_seleniumConfiguration.Arguments);

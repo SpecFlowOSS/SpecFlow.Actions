@@ -99,10 +99,7 @@ namespace CalculatorSelenium.Specs.PageObjects
             return wait.Until(driver =>
             {
                 var result = getResult();
-                if (!isResultAccepted(result))
-                    return default;
-
-                return result;
+                return isResultAccepted(result) ? result : default;
             });
 
         }

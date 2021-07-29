@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using OpenQA.Selenium;
+using TechTalk.SpecFlow.Infrastructure;
 using Xunit;
 
 namespace SpecFlow.Actions.Selenium.Tests
@@ -14,11 +15,29 @@ namespace SpecFlow.Actions.Selenium.Tests
             public string[] Arguments { get; set; }
         }
 
+        class MockSpecFlowOutputHelper : ISpecFlowOutputHelper
+        {
+            public void WriteLine(string message)
+            {
+                
+            }
+
+            public void WriteLine(string format, params object[] args)
+            {
+                
+            }
+
+            public void AddAttachment(string filePath)
+            {
+                
+            }
+        }
+
         public class BrowserDriverAccessor : BrowserDriver
         {
             public Lazy<IWebDriver> CurrentWebDriverLazy => _currentWebDriverLazy;
 
-            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration) : base(seleniumConfiguration)
+            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper) : base(seleniumConfiguration, specFlowOutputHelper)
             {
             }
         }
@@ -26,7 +45,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_NotInstantiatedAfterCreation()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration());
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockSpecFlowOutputHelper());
 
             target.CurrentWebDriverLazy.IsValueCreated.Should().BeFalse();
         }
@@ -34,7 +53,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_AfterAccessing_Instantiated()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(){Browser = Browser.Noop});
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(){Browser = Browser.Noop}, new MockSpecFlowOutputHelper());
 
             var webdriver = target.Current;
 

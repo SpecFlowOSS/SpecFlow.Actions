@@ -3,11 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.Selenium", "SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj", "{F6429365-EFAD-4400-A10A-3F9CFE973886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium", "SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj", "{F6429365-EFAD-4400-A10A-3F9CFE973886}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "..\Example\Example.csproj", "{F1BDEB03-A2FC-4E4D-BE72-0049CD92C159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium.Tests", "SpecFlow.Actions.Selenium.Tests\SpecFlow.Actions.Selenium.Tests.csproj", "{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.Selenium.Tests", "SpecFlow.Actions.Selenium.Tests\SpecFlow.Actions.Selenium.Tests.csproj", "{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{B083B326-D064-492D-B58A-5352FEAE8C7B}"
+	ProjectSection(SolutionItems) = preProject
+		..\.editorconfig = ..\.editorconfig
+		..\Directory.Build.props = ..\Directory.Build.props
+		..\Directory.Build.targets = ..\Directory.Build.targets
+		..\..\.github\workflows\specflow.actions.selenium.yaml = ..\..\.github\workflows\specflow.actions.selenium.yaml
+		..\version.json = ..\version.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +28,14 @@ Global
 		{F6429365-EFAD-4400-A10A-3F9CFE973886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6429365-EFAD-4400-A10A-3F9CFE973886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6429365-EFAD-4400-A10A-3F9CFE973886}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1BDEB03-A2FC-4E4D-BE72-0049CD92C159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1BDEB03-A2FC-4E4D-BE72-0049CD92C159}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1BDEB03-A2FC-4E4D-BE72-0049CD92C159}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1BDEB03-A2FC-4E4D-BE72-0049CD92C159}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C09D3AEA-77ED-409A-B31A-A9F989DE9DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
