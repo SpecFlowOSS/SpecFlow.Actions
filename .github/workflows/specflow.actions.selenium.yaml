@@ -20,6 +20,10 @@ jobs:
             dotnet-version: '5.0.x' 
           env:
             NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        - name: Install Google Chrome # Using shell script to install Google Chrome
+          run: |
+            chmod +x ./scripts/InstallChrome.sh
+            ./scripts/InstallChrome.sh
         - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
         - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
