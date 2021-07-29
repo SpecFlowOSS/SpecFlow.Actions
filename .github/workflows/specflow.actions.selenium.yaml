@@ -5,10 +5,12 @@ on:
     branches:
       - main
     paths:
+      - '.github\workflows\specflow.actions.selenium.yaml'
       - 'Plugins/SpecFlow.Actions.Selenium/**'
       - 'Plugins/*'
   pull_request:
     paths:
+      - '.github\workflows\specflow.actions.selenium.yaml'
       - 'Plugins/SpecFlow.Actions.Selenium/**'
       - 'Plugins/*'
 
