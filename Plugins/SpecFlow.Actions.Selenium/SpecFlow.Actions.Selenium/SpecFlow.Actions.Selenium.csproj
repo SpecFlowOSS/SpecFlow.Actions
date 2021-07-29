@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>SpecFlow.Actions.Selenium.SpecFlowPlugin</AssemblyName>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>SpecFlow.Actions.Selenium</PackageId>
+    <Product>SpecFlow.Actions.Selenium</Product>
   </PropertyGroup>
 
   <ItemGroup>
