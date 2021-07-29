@@ -24,7 +24,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Browser_NoSpecFlowJsonContent_ReturnsNone()
         {
-            var specflowJsonContent = String.Empty;
+            var specflowJsonContent = string.Empty;
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 
