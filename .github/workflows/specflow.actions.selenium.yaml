@@ -11,33 +11,41 @@ jobs:
         DOTNET_NOLOGO: true
 
     steps:
-        - uses: actions/checkout@v2
-          with:
-            fetch-depth: 0
-        # Authenticates packages to push to GPR
-        - uses: actions/setup-dotnet@v1
-          with:
-            dotnet-version: '5.0.x' 
-          env:
-            NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        - name: Install Google Chrome # Using shell script to install Google Chrome
-          run: |
-            chmod +x ./build/InstallChrome.sh
-            ./build/InstallChrome.sh
-        - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
-        - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # Authenticates packages to push to GPR
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x' 
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Install Google Chrome # Using shell script to install Google Chrome
+        run: |
+          chmod +x ./build/InstallChrome.sh
+          ./build/InstallChrome.sh
+      - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
-        - name: Create the package
-          run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
-        - name: Publish the package to GPR
-          run: dotnet nuget push Plugins/GeneratedNuGetPackages/Release/SpecFlow.Actions.Selenium.*.nupkg
+      - name: Create the package
+        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
-        # Authenticates packages to push to nuget.org.
-        # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
-        - uses: actions/setup-dotnet@v1
-          with:
-            dotnet-version: 5.0.x
-        - name: Publish the package to nuget.org
-          run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
-          env:
-            NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}
+
+  release:
+    runs-on: ubuntu-latest
+    env: 
+      DOTNET_NOLOGO: true
+
+    needs: build
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      # Authenticates packages to push to nuget.org.
+      # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Publish the package to nuget.org
+        run: dotnet nuget push */bin/Release/*.nupkg -k $NUGET_AUTH_TOKEN -s https://api.nuget.org/v3/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}

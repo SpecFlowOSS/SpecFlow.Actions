@@ -38,6 +38,12 @@ namespace SpecFlow.Actions.Selenium
 
                     var chromeOptions = new ChromeOptions();
 
+                    var chromeBinaryLocation = Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
+                    if (!string.IsNullOrWhiteSpace(chromeBinaryLocation))
+                    {
+                        chromeOptions.BinaryLocation = chromeBinaryLocation;
+                    }
+
                     var chromeDriver = new ChromeDriver(chromeDriverService, chromeOptions);
 
                     return chromeDriver;
