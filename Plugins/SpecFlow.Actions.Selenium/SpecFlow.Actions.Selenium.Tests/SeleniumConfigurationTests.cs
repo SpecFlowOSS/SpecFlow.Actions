@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using FluentAssertions;
 using Xunit;
 
@@ -6,6 +7,11 @@ namespace SpecFlow.Actions.Selenium.Tests
 {
     public class SeleniumConfigurationTests
     {
+        private Browser GetBrowser(SeleniumConfiguration seleniumConfiguration)
+        {
+            return seleniumConfiguration.Browser;
+        }
+
         class MockSpecFlowJsonLoader : ISpecFlowJsonLoader
         {
             private readonly string _content;
@@ -21,45 +27,94 @@ namespace SpecFlow.Actions.Selenium.Tests
             }
         }
 
-
         [Fact]
-        public void Browser_NoSpecFlowJsonContent_ReturnsNull()
+        public void Browser_NoSpecFlowJsonContent_ReturnsNone()
         {
-            var specflowJsonContent = String.Empty;
+            var specflowJsonContent = string.Empty;
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 
-            seleniumConfiguration.Browser.Should().BeNull();
+            seleniumConfiguration.Browser.Should().Be(Browser.None);
         }
 
         [Fact]
-        public void Browser_EmptyJson_ReturnsNull()
+        public void Browser_EmptyJson_ReturnsNone()
         {
             var specflowJsonContent = "{}";
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 
-            seleniumConfiguration.Browser.Should().BeNull();
+            seleniumConfiguration.Browser.Should().Be(Browser.None);
         }
 
         [Fact]
-        public void Browser_SeleniumNodeExists_NoBrowserSet_ReturnsNull()
+        public void Browser_SeleniumNodeExists_NoBrowserSet_ReturnsNone()
         {
             var specflowJsonContent = @"{ ""selenium"": {} }";
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 
-            seleniumConfiguration.Browser.Should().BeNull();
+            seleniumConfiguration.Browser.Should().Be(Browser.None);
         }
 
         [Fact]
         public void Browser_SeleniumNodeExists_BrowserSet_ReturnsValue()
         {
-            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Some Browser"" } }";
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Chrome"" } }";
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 
-            seleniumConfiguration.Browser.Should().Be("Some Browser");
+            seleniumConfiguration.Browser.Should().Be(Browser.Chrome);
+        }
+
+        [Fact]
+        public void Browser_SeleniumNodeExists_BrowserSet_NoMatchingEnum_ReturnsException()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""NoMatchingBrowser"" } }";
+
+            Action action = () => GetBrowser(new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent)));
+
+            action.Should().Throw<JsonException>();
+        }
+
+        [Fact]
+        public void Browser_SeleniumNodeExists_BrowserSet_LowerCase_ReturnsValue()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""chrome"" } }";
+
+            var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
+
+            seleniumConfiguration.Browser.Should().Be(Browser.Chrome);
+        }
+
+        [Fact]
+        public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsNotSet_ArgumentsReturnsNull()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Chrome"" } }";
+
+            var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
+
+            seleniumConfiguration.Arguments.Should().BeNull();
+        }
+
+        [Fact]
+        public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsNotSet_ArgumentsReturnsEmpty()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Chrome"", ""arguments"": [] } }";
+
+            var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
+
+            seleniumConfiguration.Arguments.Should().BeEmpty();
+        }
+
+        [Fact]
+        public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsSet_ReturnsValue()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Chrome"", ""arguments"": [ ""--argument-one"", ""--argument-two"" ] } }";
+
+            var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
+
+            seleniumConfiguration.Arguments.Should().Equal(new[] { "--argument-one", "--argument-two" });
         }
     }
 }

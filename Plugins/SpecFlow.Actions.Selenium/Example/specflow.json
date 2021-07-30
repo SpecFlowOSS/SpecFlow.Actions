@@ -1,6 +1,10 @@
 {
   "selenium":
   {
-    "browser": "Chrome" 
+    "browser": "chrome",
+    "arguments": [
+      "--start-maximized",
+      "--incognito"
+    ]
   }
 }

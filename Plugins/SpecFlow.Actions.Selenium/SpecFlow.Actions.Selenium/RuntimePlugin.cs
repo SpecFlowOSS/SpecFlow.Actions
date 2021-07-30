@@ -6,7 +6,6 @@ using TechTalk.SpecFlow.UnitTestProvider;
 
 namespace SpecFlow.Actions.Selenium
 {
-    
     public class SeleniumRuntimePlugin : IRuntimePlugin
     {
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
@@ -19,7 +18,6 @@ namespace SpecFlow.Actions.Selenium
         {
             e.ObjectContainer.RegisterTypeAs<SpecFlowJsonLoader, ISpecFlowJsonLoader>();
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-
         }
     }
 }
