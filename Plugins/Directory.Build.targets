@@ -21,17 +21,4 @@
     </PropertyGroup>
   </Target>
 
-  <Target Name="CleanupNupkgs" BeforeTargets="Build" >
-    <ItemGroup>
-      <Nupkgs2Delete Include="$(PackageOutputAbsolutePath)\*.nupkg"/>
-    </ItemGroup>
-    <Delete Files="@(Nupkgs2Delete)" />
-  </Target>
-
-  <Target Name="CopyNupkgToFolder" AfterTargets="Pack">
-    <ItemGroup>
-      <GeneratedNupkgs Include="$(PackageOutputAbsolutePath)\*.nupkg"/>
-    </ItemGroup>
-    <Copy SourceFiles="@(GeneratedNupkgs)" DestinationFolder="$(MSBuildThisFileDirectory)GeneratedNuGetPackages\$(Configuration)" />
-  </Target>
 </Project>
