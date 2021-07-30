@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using FluentAssertions;
 using Xunit;
 
@@ -6,6 +7,11 @@ namespace SpecFlow.Actions.Selenium.Tests
 {
     public class SeleniumConfigurationTests
     {
+        private Browser GetBrowser(SeleniumConfiguration seleniumConfiguration)
+        {
+            return seleniumConfiguration.Browser;
+        }
+
         class MockSpecFlowJsonLoader : ISpecFlowJsonLoader
         {
             private readonly string _content;
@@ -55,6 +61,26 @@ namespace SpecFlow.Actions.Selenium.Tests
         public void Browser_SeleniumNodeExists_BrowserSet_ReturnsValue()
         {
             var specflowJsonContent = @"{ ""selenium"": { ""browser"":""Chrome"" } }";
+
+            var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
+
+            seleniumConfiguration.Browser.Should().Be(Browser.Chrome);
+        }
+
+        [Fact]
+        public void Browser_SeleniumNodeExists_BrowserSet_NoMatchingEnum_ReturnsException()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""NoMatchingBrowser"" } }";
+
+            Action action = () => GetBrowser(new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent)));
+
+            action.Should().Throw<JsonException>();
+        }
+
+        [Fact]
+        public void Browser_SeleniumNodeExists_BrowserSet_LowerCase_ReturnsValue()
+        {
+            var specflowJsonContent = @"{ ""selenium"": { ""browser"":""chrome"" } }";
 
             var seleniumConfiguration = new SeleniumConfiguration(new MockSpecFlowJsonLoader(specflowJsonContent));
 

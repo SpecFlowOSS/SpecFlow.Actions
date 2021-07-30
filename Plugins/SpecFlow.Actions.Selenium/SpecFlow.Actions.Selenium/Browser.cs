@@ -3,7 +3,7 @@
     public enum Browser
     {
         None = 0,
-        Chrome,
-        Noop
+        Chrome = 1,
+        Noop = 2
     }
 }
