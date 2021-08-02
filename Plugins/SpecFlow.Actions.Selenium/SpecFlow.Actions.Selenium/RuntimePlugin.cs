@@ -19,6 +19,7 @@ namespace SpecFlow.Actions.Selenium
             e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLocator, ISpecFlowActionJsonLocator>();
             e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLoader, ISpecFlowActionJsonLoader>();
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>();
         }
     }
 }

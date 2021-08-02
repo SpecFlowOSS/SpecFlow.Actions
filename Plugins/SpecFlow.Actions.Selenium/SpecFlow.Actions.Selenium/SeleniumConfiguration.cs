@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -9,6 +10,8 @@ namespace SpecFlow.Actions.Selenium
         Browser Browser { get; }
 
         string[]? Arguments { get; }
+
+        Dictionary<string, object>? Capabilities { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
@@ -28,6 +31,9 @@ namespace SpecFlow.Actions.Selenium
 
             [JsonInclude]
             public string[]? Arguments { get; private set; }
+
+            [JsonInclude]
+            public Dictionary<string, object>? Capabilities { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -37,7 +43,9 @@ namespace SpecFlow.Actions.Selenium
             var json = _specFlowActionJsonLoader.Load();
 
             if (string.IsNullOrWhiteSpace(json))
+            {
                 return new SpecFlowActionJson();
+            }
 
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
@@ -60,5 +68,7 @@ namespace SpecFlow.Actions.Selenium
         public Browser Browser => _specflowJsonPart.Value.Selenium.Browser; 
 
         public string[]? Arguments => _specflowJsonPart.Value.Selenium.Arguments;
+
+        public Dictionary<string, object>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
     }
 }

@@ -1,10 +1,11 @@
 {
-  "selenium":
-  {
-    "browser": "chrome",
+  "selenium": {
+    "browser": "edge",
     "arguments": [
-      "--start-maximized",
-      "--incognito"
-    ]
+      "start-maximized"
+    ],
+    "capabilities": {
+      "args": "start-maximized"
+    }
   }
 }
