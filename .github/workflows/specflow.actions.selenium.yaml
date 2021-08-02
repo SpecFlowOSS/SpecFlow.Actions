@@ -38,6 +38,12 @@ jobs:
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
+      - name: Upload NuGet Package to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: NuGet-Package
+          path: Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg
+            
 
   release:
     runs-on: windows-latest
@@ -48,6 +54,10 @@ jobs:
     steps:
       # Authenticates packages to push to nuget.org.
       # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: NuGet-Package
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.x
