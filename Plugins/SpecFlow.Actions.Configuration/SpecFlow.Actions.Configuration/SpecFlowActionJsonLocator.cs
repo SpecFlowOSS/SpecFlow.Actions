@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
-using TechTalk.SpecFlow.Configuration;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Configuration
 {
     public class SpecFlowActionJsonLocator : ISpecFlowActionJsonLocator
     {
@@ -33,10 +32,5 @@ namespace SpecFlow.Actions.Selenium
 
             return null;
         }
-    }
-
-    public interface ISpecFlowActionJsonLocator
-    {
-        string? GetFilePath();
     }
 }
