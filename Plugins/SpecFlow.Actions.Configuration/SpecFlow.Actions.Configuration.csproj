@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <AssemblyName>SpecFlow.Actions.Configuration.SpecFlowPlugin</AssemblyName>
+    <PackageId>SpecFlow.Actions.Configuration</PackageId>
+    <Product>SpecFlow.Actions.Configuration</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SpecFlow" Version="3.9.8" />
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

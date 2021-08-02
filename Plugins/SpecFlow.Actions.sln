@@ -11,6 +11,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "SpecFlow.Actions
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium.Tests", "SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.Tests\SpecFlow.Actions.Selenium.Tests.csproj", "{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{D6FFB660-2A29-452D-B704-A5783DB80607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.Configuration", "SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj", "{9D505174-84FA-4497-A506-B251C4436FA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D505174-84FA-4497-A506-B251C4436FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D505174-84FA-4497-A506-B251C4436FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D505174-84FA-4497-A506-B251C4436FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D505174-84FA-4497-A506-B251C4436FA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +45,7 @@ Global
 		{9DDC8FE3-A071-41CC-AD04-13A5BE79D5B5} = {742074B7-55BC-4270-910E-C0D372F55ADB}
 		{FF2D7A20-9D5C-4E13-9DE6-FE78E358D024} = {742074B7-55BC-4270-910E-C0D372F55ADB}
 		{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650} = {742074B7-55BC-4270-910E-C0D372F55ADB}
+		{9D505174-84FA-4497-A506-B251C4436FA2} = {D6FFB660-2A29-452D-B704-A5783DB80607}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C77D596F-1752-43EB-8984-FB53D4DAF102}

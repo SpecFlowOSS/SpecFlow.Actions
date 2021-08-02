@@ -1,12 +1,7 @@
 ﻿using System.IO;
-using TechTalk.SpecFlow.Configuration;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Configuration
 {
-    public interface ISpecFlowActionJsonLoader
-    {
-        string Load();
-    }
     public class SpecFlowActionJsonLoader : ISpecFlowActionJsonLoader
     {
         private readonly ISpecFlowActionJsonLocator _specFlowActionJsonLocator;
