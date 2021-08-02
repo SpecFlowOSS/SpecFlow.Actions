@@ -8,9 +8,9 @@ on:
     #   - '.github\workflows\specflow.actions.selenium.yaml'
     #   - 'Plugins/SpecFlow.Actions.Selenium/**'
     #   - 'Plugins/*'
-    pull_request:
-  #   branches:
-  #     - main
+  pull_request:
+    # branches:
+    #   - main
   #   paths:
   #     - '.github\workflows\specflow.actions.selenium.yaml'
   #     - 'Plugins/SpecFlow.Actions.Selenium/**'
