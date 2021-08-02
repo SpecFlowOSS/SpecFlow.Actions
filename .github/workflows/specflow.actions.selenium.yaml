@@ -65,5 +65,5 @@ jobs:
         shell: pwsh
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}
-        run: dotnet nuget push "./Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg" -k "$env:NUGET_AUTH_TOKEN" -s "https://api.nuget.org/v3/index.json"
+        run: dotnet nuget push "*.nupkg" -k "$env:NUGET_AUTH_TOKEN" -s "https://api.nuget.org/v3/index.json"
         
