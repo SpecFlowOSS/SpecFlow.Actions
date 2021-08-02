@@ -1,11 +1,11 @@
 {
   "selenium": {
     "browser": "edge",
-    "arguments": [
-      "start-maximized"
-    ],
     "capabilities": {
-      "args": "start-maximized"
+      "args": [
+        "start-maximized",
+        "test"
+      ]
     }
   }
 }

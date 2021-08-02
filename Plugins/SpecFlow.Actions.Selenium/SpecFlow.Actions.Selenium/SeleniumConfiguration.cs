@@ -59,16 +59,29 @@ namespace SpecFlow.Actions.Selenium
             return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
+        /// <summary>
+        /// Provides the configuration details for the webdriver instance
+        /// </summary>
+        /// <param name="specFlowActionJsonLoader"></param>
         public SeleniumConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
             _specFlowActionJsonLoader = specFlowActionJsonLoader;
             _specflowJsonPart = new Lazy<SpecFlowActionJson>(LoadSpecFlowJson);
         }
 
+        /// <summary>
+        /// The browser specified in the configuration
+        /// </summary>
         public Browser Browser => _specflowJsonPart.Value.Selenium.Browser; 
 
+        /// <summary>
+        /// Arguments used to configure the webdriver
+        /// </summary>
         public string[]? Arguments => _specflowJsonPart.Value.Selenium.Arguments;
 
+        /// <summary>
+        /// Capabilities used to configure the webdriver
+        /// </summary>
         public Dictionary<string, object>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
     }
 }

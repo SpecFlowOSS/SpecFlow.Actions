@@ -5,33 +5,45 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SpecFlow.Actions.Selenium
 {
     public interface IDriverInitialiser
     {
-        IWebDriver GetChromeDriver(string[]? args);
-        IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities, string[]? args = null);
-        IWebDriver GetFirefoxDriver(string[]? args);
-        IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities, string[]? args = null);
+        IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null);
+        IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities);
+        IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null);
+        IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities);
     }
 
     public class DriverInitialiser : IDriverInitialiser
     {
-        //TODO: some issue here with getting env variable if EnvironmentVariableTarget is not set???
         private readonly Lazy<string?> _chromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
-        private readonly Lazy<string?> _edgeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("EDGE_WEBDRIVER_FILE_PATH", EnvironmentVariableTarget.User));
+        private readonly Lazy<string?> _edgeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("EDGE_WEBDRIVER_FILE_PATH"));
         private readonly Lazy<string?> _firefoxWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("FIREFOX_WEBDRIVER_FILE_PATH"));
         private readonly Lazy<string?> _internetExplorerWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
 
         //TODO: Should these be internal as to not be called externally by the consuming project???
         /// <summary>
-        /// Gets the Chrome driver with the desired arguments
+        /// Gets the Chrome driver with the desired arguments and/or capabilities
         /// </summary>
+        /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetChromeDriver(string[]? args = null)
+        public IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
         {
             var options = new ChromeOptions();
+
+            if (capabilities?.Count != 0)
+            {
+                if (capabilities != null)
+                {
+                    foreach (var capability in capabilities)
+                    {
+                        options.AddAdditionalCapability(capability.Key, capability.Value);
+                    }
+                }
+            }
 
             if (args != null && args?.Length != 0)
             {
@@ -44,12 +56,24 @@ namespace SpecFlow.Actions.Selenium
         }
 
         /// <summary>
-        /// Gets the Firefox driver with the desired arguments
+        /// Gets the Firefox driver with the desired arguments and/or capabilities
         /// </summary>
+        /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetFirefoxDriver(string[]? args = null)
+        public IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
         {
             var options = new FirefoxOptions();
+
+            if (capabilities?.Count != 0)
+            {
+                if (capabilities != null)
+                {
+                    foreach (var capability in capabilities)
+                    {
+                        options.AddAdditionalCapability(capability.Key, capability.Value);
+                    }
+                }
+            }
 
             if (args != null && args?.Length != 0)
             {
@@ -66,7 +90,7 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+        public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities = null)
         {
             var options = new InternetExplorerOptions();
 
@@ -78,12 +102,7 @@ namespace SpecFlow.Actions.Selenium
                     {
                         options.AddAdditionalCapability(capability.Key, capability.Value);
                     }
-                } 
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddAdditionalCapability("args", args);
+                }
             }
 
             return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value) 
@@ -96,7 +115,7 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+        public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities = null)
         {
             var options = new EdgeOptions();
 
@@ -106,14 +125,10 @@ namespace SpecFlow.Actions.Selenium
                 {
                     foreach (var capability in capabilities)
                     {
-                        options.AddAdditionalCapability(capability.Key, capability.Value);
+                        //TODO: make this shit work.
+                        options.AddAdditionalCapability(capability.Key, ((string[])capability.Value).ToList());
                     } 
                 }
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddAdditionalCapability("args", args);
             }
 
             return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)

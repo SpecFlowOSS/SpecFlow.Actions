@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using OpenQA.Selenium;
-using TechTalk.SpecFlow.Infrastructure;
 using Xunit;
 
 namespace SpecFlow.Actions.Selenium.Tests
@@ -20,22 +19,22 @@ namespace SpecFlow.Actions.Selenium.Tests
 
         class MockDriverInitialiser : IDriverInitialiser
         {
-            public IWebDriver GetChromeDriver(string[]? args)
+            public IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities, string[]? args = null)
+            public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetFirefoxDriver(string[]? args)
+            public IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities, string[]? args = null)
+            public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities)
             {
                 throw new NotImplementedException();
             }

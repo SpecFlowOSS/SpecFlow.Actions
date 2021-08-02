@@ -82,8 +82,6 @@ namespace SpecFlow.Actions.Selenium.Tests
             action.Should().Throw<JsonException>();
         }
 
-        
-
         [Fact]
         public void Browser_SeleniumNodeExists_BrowserSet_LowerCase_ReturnsValue()
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -22,7 +21,7 @@ namespace SpecFlow.Actions.Selenium
         }
 
         /// <summary>
-        /// The Selenium IWebDriver instance
+        /// The current Selenium IWebDriver instance
         /// </summary>
         public IWebDriver Current => _currentWebDriverLazy.Value;
 
@@ -34,10 +33,10 @@ namespace SpecFlow.Actions.Selenium
         {
             return _seleniumConfiguration.Browser switch
             {
-                Browser.Chrome => _driverInitialiser.GetChromeDriver(_seleniumConfiguration.Arguments),
-                Browser.Firefox => _driverInitialiser.GetFirefoxDriver(_seleniumConfiguration.Arguments),
-                Browser.Edge => _driverInitialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.InternetExplorer => _driverInitialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Chrome => _driverInitialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Firefox => _driverInitialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Edge => _driverInitialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities),
+                Browser.InternetExplorer => _driverInitialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities),
                 Browser.Noop => new NoopWebdriver(),
                 _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
             };

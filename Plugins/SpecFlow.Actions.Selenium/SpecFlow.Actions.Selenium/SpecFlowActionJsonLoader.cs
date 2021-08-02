@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using TechTalk.SpecFlow.Configuration;
 
 namespace SpecFlow.Actions.Selenium
 {
