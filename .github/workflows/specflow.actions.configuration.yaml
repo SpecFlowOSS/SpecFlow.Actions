@@ -1,19 +1,19 @@
-name: SpecFlow.Actions.Selenium
+name: SpecFlow.Actions.Configuration
 
 on: 
   push:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.selenium.yaml'
-      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - '.github/workflows/specflow.actions.configuration.yaml'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.selenium.yaml'
-      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - '.github/workflows/specflow.actions.configuration.yaml'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
 
 
@@ -32,17 +32,17 @@ jobs:
           dotnet-version: '5.0.x' 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
-      - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+      - run: dotnet build Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.sln
 
       - name: Create the package
-        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.sln
 
       - name: Upload NuGet Package to Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: NuGet-Package
-          path: Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg
+          path: Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
             
 
   release:
