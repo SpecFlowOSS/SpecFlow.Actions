@@ -12,7 +12,7 @@ on:
     branches:
       - main
     paths:
-      - '.github\workflows\specflow.actions.selenium.yaml'
+      - '.github/workflows/specflow.actions.selenium.yaml'
   #     - 'Plugins/SpecFlow.Actions.Selenium/**'
   #     - 'Plugins/*'
 
