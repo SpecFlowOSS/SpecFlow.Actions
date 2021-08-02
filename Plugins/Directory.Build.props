@@ -2,6 +2,7 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>enable</Nullable>
     
     <SpecFlow_Copyright>Copyright © SpecFlow Team</SpecFlow_Copyright>
     <SpecFlow_Authors>SpecFlow Team</SpecFlow_Authors>

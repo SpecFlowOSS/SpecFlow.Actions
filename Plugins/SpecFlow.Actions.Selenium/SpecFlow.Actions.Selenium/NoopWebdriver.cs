@@ -45,10 +45,10 @@ namespace SpecFlow.Actions.Selenium
             throw new System.NotImplementedException();
         }
 
-        public string Url { get; set; }
-        public string Title { get; }
-        public string PageSource { get; }
-        public string CurrentWindowHandle { get; }
-        public ReadOnlyCollection<string> WindowHandles { get; }
+        public string? Url { get; set; }
+        public string? Title { get; }
+        public string? PageSource { get; }
+        public string? CurrentWindowHandle { get; }
+        public ReadOnlyCollection<string>? WindowHandles { get; }
     }
 }

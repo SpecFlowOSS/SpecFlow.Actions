@@ -12,7 +12,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             public Browser Browser { get; set; }
 
-            public string[] Arguments { get; set; }
+            public string[]? Arguments { get; set; }
         }
 
         class MockSpecFlowOutputHelper : ISpecFlowOutputHelper

@@ -8,14 +8,14 @@ namespace SpecFlow.Actions.Selenium
     {
         Browser Browser { get; }
 
-        string[] Arguments { get; }
+        string[]? Arguments { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
     {
-        private readonly ISpecFlowJsonLoader _specFlowJsonLoader;
+        private readonly ISpecFlowActionJsonLoader _specFlowActionJsonLoader;
 
-        private class SpecFlowJson
+        private class SpecFlowActionJson
         {
             [JsonInclude]
             public SeleniumSpecFlowJsonPart Selenium { get; private set; } = new SeleniumSpecFlowJsonPart();
@@ -27,17 +27,17 @@ namespace SpecFlow.Actions.Selenium
             public Browser Browser { get; private set; }
 
             [JsonInclude]
-            public string[] Arguments { get; private set; }
+            public string[]? Arguments { get; private set; }
         }
 
-        private readonly Lazy<SpecFlowJson> _specflowJsonPart;
+        private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
 
-        private SpecFlowJson LoadSpecFlowJson()
+        private SpecFlowActionJson LoadSpecFlowJson()
         {
-            var json = _specFlowJsonLoader.Load();
+            var json = _specFlowActionJsonLoader.Load();
 
             if (string.IsNullOrWhiteSpace(json))
-                return new SpecFlowJson();
+                return new SpecFlowActionJson();
 
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
@@ -46,17 +46,19 @@ namespace SpecFlow.Actions.Selenium
 
             jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
-            return JsonSerializer.Deserialize<SpecFlowJson>(json, jsonSerializerOptions);
+            var specflowActionConfig = JsonSerializer.Deserialize<SpecFlowActionJson>(json, jsonSerializerOptions);
+
+            return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
-        public SeleniumConfiguration(ISpecFlowJsonLoader specFlowJsonLoader)
+        public SeleniumConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
-            _specFlowJsonLoader = specFlowJsonLoader;
-            _specflowJsonPart = new Lazy<SpecFlowJson>(LoadSpecFlowJson);
+            _specFlowActionJsonLoader = specFlowActionJsonLoader;
+            _specflowJsonPart = new Lazy<SpecFlowActionJson>(LoadSpecFlowJson);
         }
 
-        public Browser Browser => _specflowJsonPart.Value.Selenium.Browser;
+        public Browser Browser => _specflowJsonPart.Value.Selenium.Browser; 
 
-        public string[] Arguments => _specflowJsonPart.Value.Selenium.Arguments;
+        public string[]? Arguments => _specflowJsonPart.Value.Selenium.Arguments;
     }
 }

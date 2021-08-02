@@ -10,13 +10,20 @@ namespace CalculatorSelenium.Specs.Hooks
     [Binding]
     public class CalculatorHooks
     {
+        private readonly BrowserDriver _browserDriver;
+
+        public CalculatorHooks(BrowserDriver browserDriver)
+        {
+            _browserDriver = browserDriver;
+        }
+
         ///<summary>
         ///  Reset the calculator before each scenario tagged with "Calculator"
         /// </summary>
         [BeforeScenario("Calculator")]
-        public static void BeforeScenario(BrowserDriver browserDriver)
+        public void BeforeScenario()
         {
-            var calculatorPageObject = new CalculatorPageObject(browserDriver.Current);
+            var calculatorPageObject = new CalculatorPageObject(_browserDriver.Current);
             calculatorPageObject.EnsureCalculatorIsOpenAndReset();
         }
     }

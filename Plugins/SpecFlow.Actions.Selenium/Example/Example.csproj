@@ -28,5 +28,11 @@
     <ProjectReference Include="..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="specflow.action.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 
 </Project>

@@ -66,7 +66,7 @@ namespace SpecFlow.Actions.Selenium
         {
             var chromeOptions = new ChromeOptions();
 
-            if (_seleniumConfiguration.Arguments != null || _seleniumConfiguration.Arguments.Length != 0)
+            if (_seleniumConfiguration.Arguments?.Length != 0)
             {
                 chromeOptions.AddArguments(_seleniumConfiguration.Arguments);
             }
