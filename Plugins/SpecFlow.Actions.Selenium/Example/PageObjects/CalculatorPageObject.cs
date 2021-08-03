@@ -16,7 +16,6 @@ namespace Example.PageObjects
         private IWebElement Result => _browserInteractions.WaitAndReturnElement(ResultLabelLocator);
         private IWebElement ResetButton => _browserInteractions.WaitAndReturnElement(ResetButtonLocator);
 
-
         public CalculatorPageObject(IBrowserInteractions browserInteractions)
         {
             _browserInteractions = browserInteractions;
@@ -24,16 +23,12 @@ namespace Example.PageObjects
 
         public void EnterFirstNumber(string number)
         {
-            //Clear text box
-            FirstNumber.Clear();
             //Enter text
             FirstNumber.SendKeysWithClear(number);
         }
 
         public void EnterSecondNumber(string number)
         {
-            //Clear text box
-            SecondNumber.Clear();
             //Enter text
             SecondNumber.SendKeysWithClear(number);
         }
