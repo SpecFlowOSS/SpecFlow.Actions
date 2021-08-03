@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{DF85
 		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.Configuration.Tests", "SpecFlow.Actions.Configuration.Tests\SpecFlow.Actions.Configuration.Tests.csproj", "{7997541A-F645-437B-940A-C3D9A7107ED3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{32C0E74F-65FF-4CD0-9AF1-A915109AF088}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C0E74F-65FF-4CD0-9AF1-A915109AF088}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C0E74F-65FF-4CD0-9AF1-A915109AF088}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7997541A-F645-437B-940A-C3D9A7107ED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7997541A-F645-437B-940A-C3D9A7107ED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7997541A-F645-437B-940A-C3D9A7107ED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7997541A-F645-437B-940A-C3D9A7107ED3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
