@@ -11,10 +11,10 @@ namespace SpecFlow.Actions.Selenium
 {
     public interface IDriverInitialiser
     {
-        IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null);
-        IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities);
-        IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null);
-        IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities);
+        IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
+        IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
+        IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
+        IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
     }
 
     public class DriverInitialiser : IDriverInitialiser
@@ -30,18 +30,15 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+        public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
             var options = new ChromeOptions();
 
-            if (capabilities?.Count != 0)
+            if (capabilities?.Count != 0 && capabilities != null)
             {
-                if (capabilities != null)
+                foreach (var capability in capabilities)
                 {
-                    foreach (var capability in capabilities)
-                    {
-                        options.AddAdditionalCapability(capability.Key, capability.Value);
-                    }
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
 
@@ -50,8 +47,8 @@ namespace SpecFlow.Actions.Selenium
                 options.AddArguments(args);
             }
 
-            return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value) 
-                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options) 
+            return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
+                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options)
                 : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options);
         }
 
@@ -60,18 +57,15 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+        public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
             var options = new FirefoxOptions();
 
-            if (capabilities?.Count != 0)
+            if (capabilities?.Count != 0 && capabilities != null)
             {
-                if (capabilities != null)
+                foreach (var capability in capabilities)
                 {
-                    foreach (var capability in capabilities)
-                    {
-                        options.AddAdditionalCapability(capability.Key, capability.Value);
-                    }
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
 
@@ -80,8 +74,8 @@ namespace SpecFlow.Actions.Selenium
                 options.AddArguments(args);
             }
 
-            return string.IsNullOrWhiteSpace(_firefoxWebDriverFilePath.Value) 
-                ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options) 
+            return string.IsNullOrWhiteSpace(_firefoxWebDriverFilePath.Value)
+                ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options)
                 : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(_firefoxWebDriverFilePath.Value), options);
         }
 
@@ -90,22 +84,24 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities = null)
+        public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
             var options = new InternetExplorerOptions();
 
-            if (capabilities?.Count != 0)
+            if (capabilities?.Count != 0 && capabilities != null)
             {
-                if (capabilities != null)
+                foreach (var capability in capabilities)
                 {
-                    foreach (var capability in capabilities)
-                    {
-                        options.AddAdditionalCapability(capability.Key, capability.Value);
-                    }
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
 
-            return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value) 
+            if (args != null && args?.Length != 0)
+            {
+                options.AddAdditionalCapability("args", args!.ToList());
+            }
+
+            return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value)
                 ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options)
                 : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(_internetExplorerWebDriverFilePath.Value), options);
         }
@@ -115,20 +111,21 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         /// <param name="capabilities"></param>
         /// <param name="args"></param>
-        public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities = null)
+        public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
             var options = new EdgeOptions();
 
-            if (capabilities?.Count != 0)
+            if (capabilities?.Count != 0 && capabilities != null)
             {
-                if (capabilities != null)
+                foreach (var capability in capabilities)
                 {
-                    foreach (var capability in capabilities)
-                    {
-                        //TODO: make this shit work.
-                        options.AddAdditionalCapability(capability.Key, ((string[])capability.Value).ToList());
-                    } 
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
+            }
+
+            if (args != null && args?.Length != 0)
+            {
+                options.AddAdditionalCapability("args", args!.ToList());
             }
 
             return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)

@@ -12,7 +12,7 @@ namespace SpecFlow.Actions.Selenium
 
         string[]? Arguments { get; }
 
-        Dictionary<string, object>? Capabilities { get; }
+        Dictionary<string, string>? Capabilities { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
@@ -34,7 +34,7 @@ namespace SpecFlow.Actions.Selenium
             public string[]? Arguments { get; private set; }
 
             [JsonInclude]
-            public Dictionary<string, object>? Capabilities { get; private set; }
+            public Dictionary<string, string>? Capabilities { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -83,6 +83,6 @@ namespace SpecFlow.Actions.Selenium
         /// <summary>
         /// Capabilities used to configure the webdriver
         /// </summary>
-        public Dictionary<string, object>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
+        public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
     }
 }

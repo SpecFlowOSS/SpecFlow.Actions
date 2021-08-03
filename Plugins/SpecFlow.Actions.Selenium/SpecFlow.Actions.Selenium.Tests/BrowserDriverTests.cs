@@ -14,27 +14,27 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             public string[]? Arguments { get; set; }
 
-            public Dictionary<string, object>? Capabilities { get; set; }
+            public Dictionary<string, string>? Capabilities { get; set; }
         }
 
         class MockDriverInitialiser : IDriverInitialiser
         {
-            public IWebDriver GetChromeDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+            public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetEdgeDriver(Dictionary<string, object>? capabilities)
+            public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetFirefoxDriver(Dictionary<string, object>? capabilities = null, string[]? args = null)
+            public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
 
-            public IWebDriver GetInternetExplorerDriver(Dictionary<string, object>? capabilities)
+            public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
                 throw new NotImplementedException();
             }
