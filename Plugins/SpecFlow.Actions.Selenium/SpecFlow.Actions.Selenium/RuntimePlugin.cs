@@ -18,6 +18,7 @@ namespace SpecFlow.Actions.Selenium
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>();
+            e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
         }
     }
 }

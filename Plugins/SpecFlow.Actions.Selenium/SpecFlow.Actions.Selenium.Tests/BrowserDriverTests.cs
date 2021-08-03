@@ -15,6 +15,10 @@ namespace SpecFlow.Actions.Selenium.Tests
             public string[]? Arguments { get; set; }
 
             public Dictionary<string, string>? Capabilities { get; set; }
+
+            double? ISeleniumConfiguration.DefaultTimeout => throw new NotImplementedException();
+
+            double? ISeleniumConfiguration.PollingInterval => throw new NotImplementedException();
         }
 
         class MockDriverInitialiser : IDriverInitialiser
