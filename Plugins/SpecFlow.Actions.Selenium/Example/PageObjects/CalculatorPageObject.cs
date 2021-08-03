@@ -1,69 +1,56 @@
-﻿using System;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
+﻿using SpecFlow.Actions.Selenium.build;
 
-namespace CalculatorSelenium.Specs.PageObjects
+namespace Example.PageObjects
 {
     /// <summary>
     /// Calculator Page Object
     /// </summary>
-    public class CalculatorPageObject
+    public class CalculatorPageObject : CalculatorPageElements
     {
+        private readonly IBrowserDriverInteractions _browserDriverInteractions;
+
         //The URL of the calculator to be opened in the browser
         private const string CalculatorUrl = "https://specflowoss.github.io/Calculator-Demo/Calculator.html";
 
-        //The Selenium web driver to automate the browser
-        private readonly IWebDriver _webDriver;
-        
-        //The default wait time in seconds for wait.Until
-        public const int DefaultWaitInSeconds = 5;
-
-        public CalculatorPageObject(IWebDriver webDriver)
+        public CalculatorPageObject(IBrowserDriverInteractions browserDriverInteractions) : base(browserDriverInteractions)
         {
-            _webDriver = webDriver;
+            _browserDriverInteractions = browserDriverInteractions;
         }
-
-        //Finding elements by ID
-        private IWebElement FirstNumberElement => _webDriver.FindElement(By.Id("first-number"));
-        private IWebElement SecondNumberElement => _webDriver.FindElement(By.Id("second-number"));
-        private IWebElement AddButtonElement => _webDriver.FindElement(By.Id("add-button"));
-        private IWebElement ResultElement => _webDriver.FindElement(By.Id("result"));
-        private IWebElement ResetButtonElement => _webDriver.FindElement(By.Id("reset-button"));
 
         public void EnterFirstNumber(string number)
         {
             //Clear text box
-            FirstNumberElement.Clear();
+            FirstNumber.Clear();
             //Enter text
-            FirstNumberElement.SendKeys(number);
+            FirstNumber.SendKeys(number);
         }
 
         public void EnterSecondNumber(string number)
         {
             //Clear text box
-            SecondNumberElement.Clear();
+            SecondNumber.Clear();
             //Enter text
-            SecondNumberElement.SendKeys(number);
+            SecondNumber.SendKeys(number);
         }
 
         public void ClickAdd()
         {
             //Click the add button
-            AddButtonElement.Click();
+            AddButton.Click();
         }
 
         public void EnsureCalculatorIsOpenAndReset()
         {
             //Open the calculator page in the browser if not opened yet
-            if (_webDriver.Url != CalculatorUrl)
+            if (_browserDriverInteractions.GetUrl() != CalculatorUrl)
             {
-                _webDriver.Url = CalculatorUrl;
+                _browserDriverInteractions.GoToUrl(CalculatorUrl);
             }
             //Otherwise reset the calculator by clicking the reset button
             else
             {
                 //Click the rest button
-                ResetButtonElement.Click();
+                ResetButton.Click();
 
                 //Wait until the result is empty again
                 WaitForEmptyResult();
@@ -73,38 +60,17 @@ namespace CalculatorSelenium.Specs.PageObjects
         public string? WaitForNonEmptyResult()
         {
             //Wait for the result to be not empty
-            return WaitUntil(
-                () => ResultElement.GetAttribute("value"),
+            return _browserDriverInteractions.WaitUntil(
+                () => Result.GetAttribute("value"),
                 result => !string.IsNullOrEmpty(result));
         }
 
         public string? WaitForEmptyResult()
         {
             //Wait for the result to be empty
-            return WaitUntil(
-                () => ResultElement.GetAttribute("value"),
+            return _browserDriverInteractions.WaitUntil(
+                () => Result.GetAttribute("value"),
                 result => result == string.Empty);
-        }
-
-        /// <summary>
-        /// Helper method to wait until the expected result is available on the UI
-        /// </summary>
-        /// <typeparam name="T">The type of result to retrieve</typeparam>
-        /// <param name="getResult">The function to poll the result from the UI</param>
-        /// <param name="isResultAccepted">The function to decide if the polled result is accepted</param>
-        /// <returns>An accepted result returned from the UI. If the UI does not return an accepted result within the timeout an exception is thrown.</returns>
-        private T? WaitUntil<T>(Func<T> getResult, Func<T, bool> isResultAccepted) where T: class
-        {
-            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(DefaultWaitInSeconds));
-
-            T? Condition(IWebDriver driver)
-            {
-                var result = getResult();
-                return isResultAccepted(result) ? result : default(T);
-            }
-
-            return wait.Until(Condition);
-
         }
     }
 }

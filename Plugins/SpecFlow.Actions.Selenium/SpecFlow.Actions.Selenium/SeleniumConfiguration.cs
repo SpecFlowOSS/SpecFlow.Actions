@@ -13,6 +13,10 @@ namespace SpecFlow.Actions.Selenium
         string[]? Arguments { get; }
 
         Dictionary<string, string>? Capabilities { get; }
+
+        double? DefaultTimeout { get; }
+
+        double? PollingInterval { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
@@ -35,6 +39,12 @@ namespace SpecFlow.Actions.Selenium
 
             [JsonInclude]
             public Dictionary<string, string>? Capabilities { get; private set; }
+
+            [JsonInclude]
+            public double? DefaultTimeout { get; private set; }
+
+            [JsonInclude]
+            public double? PollingInterval { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -84,5 +94,15 @@ namespace SpecFlow.Actions.Selenium
         /// Capabilities used to configure the webdriver
         /// </summary>
         public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
+
+        /// <summary>
+        /// The default timeout used to configure the webdriver
+        /// </summary>
+        public double? DefaultTimeout => _specflowJsonPart.Value.Selenium.DefaultTimeout;
+
+        /// <summary>
+        /// The default polling interval used to configure the webdriver
+        /// </summary>
+        public double? PollingInterval => _specflowJsonPart.Value.Selenium.PollingInterval;
     }
 }

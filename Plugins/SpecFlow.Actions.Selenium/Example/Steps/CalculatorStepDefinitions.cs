@@ -1,9 +1,9 @@
-﻿using CalculatorSelenium.Specs.PageObjects;
+﻿using Example.PageObjects;
 using FluentAssertions;
-using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.build;
 using TechTalk.SpecFlow;
 
-namespace CalculatorSelenium.Specs.Steps
+namespace Example.Steps
 {
     [Binding]
     public sealed class CalculatorStepDefinitions
@@ -11,9 +11,9 @@ namespace CalculatorSelenium.Specs.Steps
         //Page Object for Calculator
         private readonly CalculatorPageObject _calculatorPageObject;
 
-        public CalculatorStepDefinitions(BrowserDriver browserDriver)
+        public CalculatorStepDefinitions(IBrowserDriverInteractions browserDriverInteractions)
         {
-            _calculatorPageObject = new CalculatorPageObject(browserDriver.Current);
+            _calculatorPageObject = new CalculatorPageObject(browserDriverInteractions);
         }
 
         [Given("the first number is (.*)")]
