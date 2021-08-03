@@ -1,5 +1,4 @@
 ﻿using SpecFlow.Actions.Selenium;
-using SpecFlow.Actions.Selenium.build;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -19,7 +18,7 @@ namespace SpecFlow.Actions.Selenium
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>();
-            e.ObjectContainer.RegisterTypeAs<BrowserDriverInteractions, IBrowserDriverInteractions>();
+            e.ObjectContainer.RegisterTypeAs<DriverInteractions, IDriverInteractions>();
         }
     }
 }

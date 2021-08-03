@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.ObjectModel;
 
-namespace SpecFlow.Actions.Selenium.build
+namespace SpecFlow.Actions.Selenium
 {
-    public interface IBrowserDriverInteractions
+    public interface IDriverInteractions
     {
         IWebElement GetElement(By elementLocator);
         void GoToUrl(string url);
@@ -12,13 +13,13 @@ namespace SpecFlow.Actions.Selenium.build
         T? WaitUntil<T>(Func<T> getResult, Func<T, bool> isResultAccepted) where T : class;
     }
 
-    public class BrowserDriverInteractions : IBrowserDriverInteractions
+    public class DriverInteractions : IDriverInteractions
     {
         private readonly BrowserDriver _browserDriver;
         private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly Lazy<WebDriverWait> _webDriverWait;
-
-        public BrowserDriverInteractions(BrowserDriver browserDriver, ISeleniumConfiguration seleniumConfiguration)
+        
+        public DriverInteractions(BrowserDriver browserDriver, ISeleniumConfiguration seleniumConfiguration)
         {
             _browserDriver = browserDriver;
             _seleniumConfiguration = seleniumConfiguration;
@@ -33,6 +34,11 @@ namespace SpecFlow.Actions.Selenium.build
         public IWebElement GetElement(By elementLocator)
         {
             return _webDriverWait.Value.Until(_ => _browserDriver.Current.FindElement(elementLocator));
+        }
+
+        public ReadOnlyCollection<IWebElement> GetElements(By elementLocator)
+        {
+            return _webDriverWait.Value.Until(_ => _browserDriver.Current.FindElements(elementLocator));
         }
 
         /// <summary>

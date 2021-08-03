@@ -1,20 +1,25 @@
-﻿using SpecFlow.Actions.Selenium.build;
+﻿using OpenQA.Selenium;
+using SpecFlow.Actions.Selenium;
 
 namespace Example.PageObjects
 {
     /// <summary>
     /// Calculator Page Object
     /// </summary>
-    public class CalculatorPageObject : CalculatorPageElements
+    public class CalculatorPageObject : CalculatorElementLocators
     {
-        private readonly IBrowserDriverInteractions _browserDriverInteractions;
+        private readonly IDriverInteractions _driverInteractions;
 
-        //The URL of the calculator to be opened in the browser
-        private const string CalculatorUrl = "https://specflowoss.github.io/Calculator-Demo/Calculator.html";
+        private IWebElement FirstNumber => _driverInteractions.GetElement(FirstNumberFieldLocator);
+        private IWebElement SecondNumber => _driverInteractions.GetElement(SecondNumberFieldLocator);
+        private IWebElement AddButton => _driverInteractions.GetElement(AddButtonLocator);
+        private IWebElement Result => _driverInteractions.GetElement(ResultLabelLocator);
+        private IWebElement ResetButton => _driverInteractions.GetElement(ResetButtonLocator);
 
-        public CalculatorPageObject(IBrowserDriverInteractions browserDriverInteractions) : base(browserDriverInteractions)
+
+        public CalculatorPageObject(IDriverInteractions driverInteractions)
         {
-            _browserDriverInteractions = browserDriverInteractions;
+            _driverInteractions = driverInteractions;
         }
 
         public void EnterFirstNumber(string number)
@@ -42,9 +47,9 @@ namespace Example.PageObjects
         public void EnsureCalculatorIsOpenAndReset()
         {
             //Open the calculator page in the browser if not opened yet
-            if (_browserDriverInteractions.GetUrl() != CalculatorUrl)
+            if (_driverInteractions.GetUrl() != CalculatorUrl)
             {
-                _browserDriverInteractions.GoToUrl(CalculatorUrl);
+                _driverInteractions.GoToUrl(CalculatorUrl);
             }
             //Otherwise reset the calculator by clicking the reset button
             else
@@ -60,7 +65,7 @@ namespace Example.PageObjects
         public string? WaitForNonEmptyResult()
         {
             //Wait for the result to be not empty
-            return _browserDriverInteractions.WaitUntil(
+            return _driverInteractions.WaitUntil(
                 () => Result.GetAttribute("value"),
                 result => !string.IsNullOrEmpty(result));
         }
@@ -68,7 +73,7 @@ namespace Example.PageObjects
         public string? WaitForEmptyResult()
         {
             //Wait for the result to be empty
-            return _browserDriverInteractions.WaitUntil(
+            return _driverInteractions.WaitUntil(
                 () => Result.GetAttribute("value"),
                 result => result == string.Empty);
         }

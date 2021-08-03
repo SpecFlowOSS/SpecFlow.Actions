@@ -1,5 +1,5 @@
 ﻿using Example.PageObjects;
-using SpecFlow.Actions.Selenium.build;
+using SpecFlow.Actions.Selenium;
 using TechTalk.SpecFlow;
 
 namespace Example.Hooks
@@ -10,11 +10,11 @@ namespace Example.Hooks
     [Binding]
     public class CalculatorHooks
     {
-        private readonly IBrowserDriverInteractions _browserDriverInteractions;
+        private readonly IDriverInteractions _driverInteractions;
 
-        public CalculatorHooks(IBrowserDriverInteractions browserDriverInteractions)
+        public CalculatorHooks(IDriverInteractions driverInteractions)
         {
-            _browserDriverInteractions = browserDriverInteractions;
+            _driverInteractions = driverInteractions;
         }
 
         ///<summary>
@@ -23,7 +23,7 @@ namespace Example.Hooks
         [BeforeScenario("Calculator")]
         public void BeforeScenario()
         {
-            var calculatorPageObject = new CalculatorPageObject(_browserDriverInteractions);
+            var calculatorPageObject = new CalculatorPageObject(_driverInteractions);
             calculatorPageObject.EnsureCalculatorIsOpenAndReset();
         }
     }
