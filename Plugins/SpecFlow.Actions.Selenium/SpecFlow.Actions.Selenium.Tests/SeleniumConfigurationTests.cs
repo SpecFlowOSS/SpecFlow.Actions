@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using SpecFlow.Actions.Configuration;
 using System;
 using System.Text.Json;
 using Xunit;

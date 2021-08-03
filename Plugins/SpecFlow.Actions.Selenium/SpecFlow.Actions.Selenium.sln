@@ -18,6 +18,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{B083B326
 		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{A82DF61C-FFFD-4A7C-B246-E22849DEBFA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Configuration", "..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj", "{87A68009-81EA-4037-B05C-079536AB6EDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,9 +40,16 @@ Global
 		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D54ECA2-B933-47CA-9880-8B9CD7BB3009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A68009-81EA-4037-B05C-079536AB6EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A68009-81EA-4037-B05C-079536AB6EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A68009-81EA-4037-B05C-079536AB6EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A68009-81EA-4037-B05C-079536AB6EDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{87A68009-81EA-4037-B05C-079536AB6EDB} = {A82DF61C-FFFD-4A7C-B246-E22849DEBFA7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C007713E-7971-4CAE-A945-D8E2794467C9}
