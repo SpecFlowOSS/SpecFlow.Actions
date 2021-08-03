@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using OpenQA.Selenium;
-using TechTalk.SpecFlow.Infrastructure;
 using Xunit;
 
 namespace SpecFlow.Actions.Selenium.Tests
@@ -13,23 +13,30 @@ namespace SpecFlow.Actions.Selenium.Tests
             public Browser Browser { get; set; }
 
             public string[]? Arguments { get; set; }
+
+            public Dictionary<string, string>? Capabilities { get; set; }
         }
 
-        class MockSpecFlowOutputHelper : ISpecFlowOutputHelper
+        class MockDriverInitialiser : IDriverInitialiser
         {
-            public void WriteLine(string message)
+            public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
-                
+                throw new NotImplementedException();
             }
 
-            public void WriteLine(string format, params object[] args)
+            public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
-                
+                throw new NotImplementedException();
             }
 
-            public void AddAttachment(string filePath)
+            public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
             {
-                
+                throw new NotImplementedException();
+            }
+
+            public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -37,7 +44,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             public Lazy<IWebDriver> CurrentWebDriverLazy => _currentWebDriverLazy;
 
-            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper) : base(seleniumConfiguration, specFlowOutputHelper)
+            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser) : base(seleniumConfiguration, driverInitialiser)
             {
             }
         }
@@ -45,7 +52,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_NotInstantiatedAfterCreation()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockSpecFlowOutputHelper());
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockDriverInitialiser());
 
             target.CurrentWebDriverLazy.IsValueCreated.Should().BeFalse();
         }
@@ -53,7 +60,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_AfterAccessing_Instantiated()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(){Browser = Browser.Noop}, new MockSpecFlowOutputHelper());
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration() { Browser = Browser.Noop }, new MockDriverInitialiser());
 
             var webdriver = target.Current;
 

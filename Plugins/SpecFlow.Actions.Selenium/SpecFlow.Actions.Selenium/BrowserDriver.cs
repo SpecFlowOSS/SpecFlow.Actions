@@ -1,7 +1,5 @@
 ﻿using System;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using TechTalk.SpecFlow.Infrastructure;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -11,22 +9,19 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly ISpecFlowOutputHelper _specFlowOutputHelper;
+        private readonly IDriverInitialiser _driverInitialiser;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        // TODO: We don't need to get this every time
-        private string ChromeFilePath => Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
-
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, ISpecFlowOutputHelper specFlowOutputHelper)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser)
         {
             _seleniumConfiguration = seleniumConfiguration;
-            _specFlowOutputHelper = specFlowOutputHelper;
+            _driverInitialiser = driverInitialiser;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
         /// <summary>
-        /// The Selenium IWebDriver instance
+        /// The current Selenium IWebDriver instance
         /// </summary>
         public IWebDriver Current => _currentWebDriverLazy.Value;
 
@@ -38,7 +33,10 @@ namespace SpecFlow.Actions.Selenium
         {
             return _seleniumConfiguration.Browser switch
             {
-                Browser.Chrome => GetChromeDriver(ChromeFilePath),
+                Browser.Chrome => _driverInitialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Firefox => _driverInitialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Edge => _driverInitialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.InternetExplorer => _driverInitialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
                 Browser.Noop => new NoopWebdriver(),
                 _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
             };
@@ -60,19 +58,6 @@ namespace SpecFlow.Actions.Selenium
             }
 
             _isDisposed = true;
-        }
-
-        private IWebDriver GetChromeDriver(string filepath) 
-        {
-            var chromeOptions = new ChromeOptions();
-
-            if (_seleniumConfiguration.Arguments?.Length != 0)
-            {
-                chromeOptions.AddArguments(_seleniumConfiguration.Arguments);
-            }
-
-            return new ChromeDriver(string.IsNullOrWhiteSpace(filepath) ?
-                ChromeDriverService.CreateDefaultService() : ChromeDriverService.CreateDefaultService(filepath), chromeOptions);
         }
     }
 }

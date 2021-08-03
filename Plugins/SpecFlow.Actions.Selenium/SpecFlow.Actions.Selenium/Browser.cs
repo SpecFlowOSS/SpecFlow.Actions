@@ -4,6 +4,9 @@
     {
         None = 0,
         Chrome = 1,
-        Noop = 2
+        Firefox = 2,
+        Edge = 3,
+        InternetExplorer = 4,
+        Noop = 5
     }
 }

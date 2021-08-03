@@ -1,6 +1,5 @@
 {
-  "selenium":
-  {
+  "selenium": {
     "browser": "chrome",
     "arguments": [
       "--start-maximized",

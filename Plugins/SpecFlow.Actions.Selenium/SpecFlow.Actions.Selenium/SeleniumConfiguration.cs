@@ -1,5 +1,6 @@
 ﻿using SpecFlow.Actions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -10,6 +11,8 @@ namespace SpecFlow.Actions.Selenium
         Browser Browser { get; }
 
         string[]? Arguments { get; }
+
+        Dictionary<string, string>? Capabilities { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
@@ -29,6 +32,9 @@ namespace SpecFlow.Actions.Selenium
 
             [JsonInclude]
             public string[]? Arguments { get; private set; }
+
+            [JsonInclude]
+            public Dictionary<string, string>? Capabilities { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -38,7 +44,9 @@ namespace SpecFlow.Actions.Selenium
             var json = _specFlowActionJsonLoader.Load();
 
             if (string.IsNullOrWhiteSpace(json))
+            {
                 return new SpecFlowActionJson();
+            }
 
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
@@ -52,14 +60,29 @@ namespace SpecFlow.Actions.Selenium
             return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
+        /// <summary>
+        /// Provides the configuration details for the webdriver instance
+        /// </summary>
+        /// <param name="specFlowActionJsonLoader"></param>
         public SeleniumConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
             _specFlowActionJsonLoader = specFlowActionJsonLoader;
             _specflowJsonPart = new Lazy<SpecFlowActionJson>(LoadSpecFlowJson);
         }
 
+        /// <summary>
+        /// The browser specified in the configuration
+        /// </summary>
         public Browser Browser => _specflowJsonPart.Value.Selenium.Browser; 
 
+        /// <summary>
+        /// Arguments used to configure the webdriver
+        /// </summary>
         public string[]? Arguments => _specflowJsonPart.Value.Selenium.Arguments;
+
+        /// <summary>
+        /// Capabilities used to configure the webdriver
+        /// </summary>
+        public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Selenium.Capabilities;
     }
 }
