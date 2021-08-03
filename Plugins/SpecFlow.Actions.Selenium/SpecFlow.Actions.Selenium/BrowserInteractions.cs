@@ -1,25 +1,26 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public interface IDriverInteractions
+    public interface IBrowserInteractions
     {
-        IWebElement GetElement(By elementLocator);
+        IWebElement WaitAndReturnElement(By elementLocator);
         void GoToUrl(string url);
         string GetUrl();
         T? WaitUntil<T>(Func<T> getResult, Func<T, bool> isResultAccepted) where T : class;
     }
 
-    public class DriverInteractions : IDriverInteractions
+    public class BrowserInteractions : IBrowserInteractions
     {
         private readonly BrowserDriver _browserDriver;
         private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly Lazy<WebDriverWait> _webDriverWait;
         
-        public DriverInteractions(BrowserDriver browserDriver, ISeleniumConfiguration seleniumConfiguration)
+        public BrowserInteractions(BrowserDriver browserDriver, ISeleniumConfiguration seleniumConfiguration)
         {
             _browserDriver = browserDriver;
             _seleniumConfiguration = seleniumConfiguration;
@@ -27,16 +28,21 @@ namespace SpecFlow.Actions.Selenium
         }
 
         /// <summary>
-        /// Gets the IWebElement by the specified element localisation
+        /// Waits for the element to exist and returns it using the specified element localisation
         /// </summary>
         /// <param name="elementLocator"></param>
         /// <returns></returns>
-        public IWebElement GetElement(By elementLocator)
+        public IWebElement WaitAndReturnElement(By elementLocator)
         {
             return _webDriverWait.Value.Until(_ => _browserDriver.Current.FindElement(elementLocator));
         }
 
-        public ReadOnlyCollection<IWebElement> GetElements(By elementLocator)
+        /// <summary>
+        /// Waits for the element(s) to exist and returns them using the specified element localisation
+        /// </summary>
+        /// <param name="elementLocator"></param>
+        /// <returns></returns>
+        public IEnumerable<IWebElement> WaitAndReturnElements(By elementLocator)
         {
             return _webDriverWait.Value.Until(_ => _browserDriver.Current.FindElements(elementLocator));
         }
@@ -48,7 +54,6 @@ namespace SpecFlow.Actions.Selenium
         public void GoToUrl(string url)
         {
             _browserDriver.Current.Navigate().GoToUrl(url);
-
             _webDriverWait.Value.Until(_ => _browserDriver.Current.Url.Equals(url));
         }
 

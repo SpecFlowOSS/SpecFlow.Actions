@@ -10,11 +10,11 @@ namespace Example.Hooks
     [Binding]
     public class CalculatorHooks
     {
-        private readonly IDriverInteractions _driverInteractions;
+        private readonly IBrowserInteractions _browserInteractions;
 
-        public CalculatorHooks(IDriverInteractions driverInteractions)
+        public CalculatorHooks(IBrowserInteractions browserInteractions)
         {
-            _driverInteractions = driverInteractions;
+            _browserInteractions = browserInteractions;
         }
 
         ///<summary>
@@ -23,7 +23,7 @@ namespace Example.Hooks
         [BeforeScenario("Calculator")]
         public void BeforeScenario()
         {
-            var calculatorPageObject = new CalculatorPageObject(_driverInteractions);
+            var calculatorPageObject = new CalculatorPageObject(_browserInteractions);
             calculatorPageObject.EnsureCalculatorIsOpenAndReset();
         }
     }

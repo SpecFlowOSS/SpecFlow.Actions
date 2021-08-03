@@ -11,9 +11,9 @@ namespace Example.Steps
         //Page Object for Calculator
         private readonly CalculatorPageObject _calculatorPageObject;
 
-        public CalculatorStepDefinitions(IDriverInteractions driverInteractions)
+        public CalculatorStepDefinitions(IBrowserInteractions browserInteractions)
         {
-            _calculatorPageObject = new CalculatorPageObject(driverInteractions);
+            _calculatorPageObject = new CalculatorPageObject(browserInteractions);
         }
 
         [Given("the first number is (.*)")]
