@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sepcflow.Actions.Browserstack", "Sepcflow.Actions.Browserstack\Sepcflow.Actions.Browserstack.csproj", "{F6C1488E-CA8C-4358-B372-04C4AB6AC11F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Specflow.Actions.Browserstack", "Specflow.Actions.Browserstack\Specflow.Actions.Browserstack.csproj", "{F6C1488E-CA8C-4358-B372-04C4AB6AC11F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
