@@ -32,7 +32,8 @@ Example:
     ],
     "capabilities" : 
     [
-        {"some_capability": "the value"}
+        "some_capability": "the value",
+        "some_other_capability": "also a value"
     ],
     "defaultTimeout": 60,
     "pollingInterval": 5 
@@ -41,7 +42,7 @@ Example:
 ```
 
 ### browser
-Support values:
+Supported values:
 - chrome
 - firefox
 - internetexplorer
@@ -68,6 +69,27 @@ Available Helper Methods:
   Gets the current URL
 - `T? WaitUntil<T>(Func<T> getResult, Func<T, bool> isResultAccepted)`  
   Helper method to wait until the expected result is available on the UI
+  
+Usage:
+
+``` csharp
+[Binding]
+public class StepImplementation
+{
+    private IBrowserInteractions _browserInteractions;
+
+    public StepImplementation(IBrowserInteractions browserInteractions)
+    {
+        _browserInteractions = browserInteractions;
+    }
+
+    [Given("")]
+    public void SomeStep()
+    {
+        var currentUrl = _browserInteractions.GetUrl();
+    }
+}
+```
 
 ### BrowserDriver
 
@@ -77,6 +99,8 @@ This class gives you direct access to the WebDriver. Request an instance via con
 [Binding]
 public class StepImplementation
 {
+    private BrowserDriver _browserDriver;
+
     public StepImplementation(BrowserDriver browserDriver)
     {
         _browserDriver = browserDriver;
