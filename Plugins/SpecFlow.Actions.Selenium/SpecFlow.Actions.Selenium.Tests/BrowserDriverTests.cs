@@ -21,24 +21,9 @@ namespace SpecFlow.Actions.Selenium.Tests
             double? ISeleniumConfiguration.PollingInterval => throw new NotImplementedException();
         }
 
-        class MockDriverInitialiser : IDriverInitialiser
+        class MockDriverInitialiserResolver : IDriverInitialiserResolver
         {
-            public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
+            public IDriverInitialiser GetInitialiser(Browser browser)
             {
                 throw new NotImplementedException();
             }
@@ -48,7 +33,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             public Lazy<IWebDriver> CurrentWebDriverLazy => _currentWebDriverLazy;
 
-            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser) : base(seleniumConfiguration, driverInitialiser)
+            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiserResolver driverInitialiserResolver) : base(seleniumConfiguration, driverInitialiserResolver)
             {
             }
         }
@@ -56,7 +41,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_NotInstantiatedAfterCreation()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockDriverInitialiser());
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockDriverInitialiserResolver());
 
             target.CurrentWebDriverLazy.IsValueCreated.Should().BeFalse();
         }
@@ -64,7 +49,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_AfterAccessing_Instantiated()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration() { Browser = Browser.Noop }, new MockDriverInitialiser());
+            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration() { Browser = Browser.Noop }, new MockDriverInitialiserResolver());
 
             var webdriver = target.Current;
 

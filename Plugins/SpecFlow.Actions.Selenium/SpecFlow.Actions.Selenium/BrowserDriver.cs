@@ -9,14 +9,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IDriverInitialiser _driverInitialiser;
+        private readonly IDriverInitialiserResolver _driverInitialiserResolver;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiserResolver driverInitialiserResolver)
         {
             _seleniumConfiguration = seleniumConfiguration;
-            _driverInitialiser = driverInitialiser;
+            _driverInitialiserResolver = driverInitialiserResolver;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -31,15 +31,10 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            return _seleniumConfiguration.Browser switch
-            {
-                Browser.Chrome => _driverInitialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Firefox => _driverInitialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Edge => _driverInitialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.InternetExplorer => _driverInitialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Noop => new NoopWebdriver(),
-                _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
-            };
+            var resolvedType = _driverInitialiserResolver.GetInitialiser(_seleniumConfiguration.Browser);
+
+            return resolvedType.GetDriverInstance(_seleniumConfiguration.Capabilities,
+                _seleniumConfiguration.Arguments);
         }
 
         /// <summary>

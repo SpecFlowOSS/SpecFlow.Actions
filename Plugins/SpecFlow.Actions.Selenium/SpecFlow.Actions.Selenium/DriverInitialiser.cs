@@ -1,136 +1,29 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using BoDi;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public interface IDriverInitialiser
+    public interface IDriverInitialiserResolver
     {
-        IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
-        IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
-        IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
-        IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
+        IDriverInitialiser GetInitialiser(Browser browser);
     }
 
-    public class DriverInitialiser : IDriverInitialiser
+    public class DriverInitialiserResolver : IDriverInitialiserResolver
     {
-        private readonly Lazy<string?> _chromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
-        private readonly Lazy<string?> _edgeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("EDGE_WEBDRIVER_FILE_PATH"));
-        private readonly Lazy<string?> _firefoxWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("FIREFOX_WEBDRIVER_FILE_PATH"));
-        private readonly Lazy<string?> _internetExplorerWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
+        private readonly IObjectContainer _container;
 
-        //TODO: Should these be internal as to not be called externally by the consuming project???
-        /// <summary>
-        /// Gets the Chrome driver with the desired arguments and/or capabilities
-        /// </summary>
-        /// <param name="capabilities"></param>
-        /// <param name="args"></param>
-        public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
+        public DriverInitialiserResolver(IObjectContainer container)
         {
-            var options = new ChromeOptions();
+            _container = container;
 
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddArguments(args);
-            }
-
-            return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
-                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options)
-                : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options);
+            _container.RegisterTypeAs<EdgeDriverInitialiser, IDriverInitialiser>(Browser.Firefox.ToString());
+            _container.RegisterTypeAs<FirefoxDriverInitialiser, IDriverInitialiser>(Browser.Firefox.ToString());
+            _container.RegisterTypeAs<ChromeDriverInitialiser, IDriverInitialiser>(Browser.Chrome.ToString());
+            _container.RegisterTypeAs<InternetExplorerDriverInitialiser, IDriverInitialiser>(Browser.InternetExplorer.ToString());
         }
 
-        /// <summary>
-        /// Gets the Firefox driver with the desired arguments and/or capabilities
-        /// </summary>
-        /// <param name="capabilities"></param>
-        /// <param name="args"></param>
-        public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
+        public IDriverInitialiser GetInitialiser(Browser browser)
         {
-            var options = new FirefoxOptions();
-
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddArguments(args);
-            }
-
-            return string.IsNullOrWhiteSpace(_firefoxWebDriverFilePath.Value)
-                ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options)
-                : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(_firefoxWebDriverFilePath.Value), options);
-        }
-
-        /// <summary>
-        /// Gets the Internet Explorer driver with the desired arguments and/or capabilities
-        /// </summary>
-        /// <param name="capabilities"></param>
-        /// <param name="args"></param>
-        public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new InternetExplorerOptions();
-
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddAdditionalCapability("args", args!.ToList());
-            }
-
-            return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value)
-                ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options)
-                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(_internetExplorerWebDriverFilePath.Value), options);
-        }
-
-        /// <summary>
-        /// Gets the Edge driver with the desired arguments and/or capabilities
-        /// </summary>
-        /// <param name="capabilities"></param>
-        /// <param name="args"></param>
-        public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new EdgeOptions();
-
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            if (args != null && args?.Length != 0)
-            {
-                options.AddAdditionalCapability("args", args!.ToList());
-            }
-
-            return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)
-                ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options)
-                : new EdgeDriver(EdgeDriverService.CreateDefaultService(_edgeWebDriverFilePath.Value), options);
+            return _container.Resolve<IDriverInitialiser>(browser.ToString());
         }
     }
 }
