@@ -54,7 +54,6 @@ namespace SpecFlow.Actions.Selenium
         public void GoToUrl(string url)
         {
             _browserDriver.Current.Navigate().GoToUrl(url);
-            _webDriverWait.Value.Until(_ => _browserDriver.Current.Url.Equals(url));
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace SpecFlow.Actions.Selenium
             T? Condition(IWebDriver driver)
             {
                 var result = getResult();
-                return isResultAccepted(result) ? result : default(T);
+                return isResultAccepted(result) ? result : default;
             }
 
             return _webDriverWait.Value.Until(Condition);

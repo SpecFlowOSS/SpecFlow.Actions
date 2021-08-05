@@ -33,6 +33,7 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+
       - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
 
       - name: Create the package
