@@ -1,7 +1,10 @@
-﻿Feature: Show Install Page at first start
+﻿Feature: First Startup
 
 
-Scenario: Test
+Scenario: Installation Page is shown
+
 	Given a new installation of WordPress
+
 	When the user first visits
-	Then the user is preseted the installation start page
+
+	Then the user is presented the installation start page

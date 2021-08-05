@@ -1,5 +1,9 @@
 {
+  "selenium":
+  {
+    "browser": "chrome" 
+  },
   "docker": {
-    "file": "../../../../docker-compose.yml"
-  } 
+    "file": "..\\..\\..\\..\\docker-compose.yml"
+  }
 }

@@ -7,15 +7,15 @@ namespace SpecFlow.Actions.Docker
     public class Hooks
     {
         [BeforeTestRun(Order = int.MinValue)]
-        public static void DockerComposeUp()
+        public static void DockerComposeUp(IDockerHandling dockerHandling)
         {
-            DockerHandling.DockerComposeUp();
+            dockerHandling.DockerComposeUp();
         }
 
         [AfterTestRun(Order = int.MaxValue)]
-        public static void DockerComposeDown()
+        public static void DockerComposeDown(IDockerHandling dockerHandling)
         {
-            DockerHandling.DockerComposeDown();
+            dockerHandling.DockerComposeDown();
         }
     }
 }

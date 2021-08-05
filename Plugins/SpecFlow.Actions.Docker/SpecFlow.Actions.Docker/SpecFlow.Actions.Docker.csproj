@@ -8,8 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SpecFlow" Version="3.9.8" />
-    <PackageReference Include="Ductus.FluentDocker" Version="2.10.6"/>
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="Ductus.FluentDocker" Version="2.10.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

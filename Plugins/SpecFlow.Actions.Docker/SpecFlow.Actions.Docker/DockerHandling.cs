@@ -1,43 +1,59 @@
 ﻿using Ductus.FluentDocker.Builders;
 using Ductus.FluentDocker.Services;
+using System;
 using System.IO;
-using System.Linq;
 
 namespace SpecFlow.Actions.Docker
 {
-    public class DockerHandling
+    public interface IDockerHandling
     {
-        private static ICompositeService? _compositeService;
+        void DockerComposeUp();
+        void DockerComposeDown();
+    }
 
-        public static void DockerComposeUp()
+    public class DockerHandling : IDockerHandling
+    {
+        private readonly DockerConfiguration _dockerConfiguration;
+        private ICompositeService? _compositeService;
+
+        public DockerHandling(DockerConfiguration dockerConfiguration)
         {
-            var dockerComposeFileName = FindDockerComposeFile();
+            _dockerConfiguration = dockerConfiguration;
+        }
+
+        public void DockerComposeUp()
+        {
+            var dockerConfigurationFile = Path.Combine(Environment.CurrentDirectory, _dockerConfiguration.File);
+
+            if (!File.Exists(dockerConfigurationFile))
+            {
+                throw new DockerConfigurationFileNotFound(dockerConfigurationFile);
+            }
 
             _compositeService = new Builder()
                 .UseContainer()
                 .UseCompose()
-                .FromFile(dockerComposeFileName)
+                .FromFile(dockerConfigurationFile)
                 .RemoveAllImages()
                 .ForceRecreate()
                 .RemoveOrphans()
                 .Build()
                 .Start();
-
         }
 
         
-        public static void DockerComposeDown()
+        public void DockerComposeDown()
         {
             _compositeService?.Stop();
             _compositeService?.Dispose();
         }
+    }
 
-        private static string FindDockerComposeFile()
+    public class DockerConfigurationFileNotFound : Exception
+    {
+        public DockerConfigurationFileNotFound(string dockerConfigurationFile) :base($"The Docker configuration file at '{dockerConfigurationFile}' wasn't found")
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
-            var root = Path.Combine(currentDirectory, "..", "..", "..", "..", "..");
-
-            return Directory.EnumerateFiles(root, "docker-compose.yml", SearchOption.AllDirectories).First();
+            
         }
     }
 }

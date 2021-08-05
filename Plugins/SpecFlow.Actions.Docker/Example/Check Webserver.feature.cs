@@ -19,7 +19,7 @@ namespace Example
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ShowInstallPageAtFirstStartFeature : object, Xunit.IClassFixture<ShowInstallPageAtFirstStartFeature.FixtureData>, System.IDisposable
+    public partial class FirstStartupFeature : object, Xunit.IClassFixture<FirstStartupFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace Example
 #line 1 "Check Webserver.feature"
 #line hidden
         
-        public ShowInstallPageAtFirstStartFeature(ShowInstallPageAtFirstStartFeature.FixtureData fixtureData, Example_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FirstStartupFeature(FirstStartupFeature.FixtureData fixtureData, Example_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace Example
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "Show Install Page at first start", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "", "First Startup", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,14 +80,14 @@ namespace Example
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Test")]
-        [Xunit.TraitAttribute("FeatureTitle", "Show Install Page at first start")]
-        [Xunit.TraitAttribute("Description", "Test")]
-        public virtual void Test()
+        [Xunit.SkippableFactAttribute(DisplayName="Installation Page is shown")]
+        [Xunit.TraitAttribute("FeatureTitle", "First Startup")]
+        [Xunit.TraitAttribute("Description", "Installation Page is shown")]
+        public virtual void InstallationPageIsShown()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Installation Page is shown", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 4
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -108,14 +108,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
+#line 6
  testRunner.Given("a new installation of WordPress", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 6
+#line 8
  testRunner.When("the user first visits", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 7
- testRunner.Then("the user is preseted the installation start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 10
+ testRunner.Then("the user is presented the installation start page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -128,12 +128,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                ShowInstallPageAtFirstStartFeature.FeatureSetup();
+                FirstStartupFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ShowInstallPageAtFirstStartFeature.FeatureTearDown();
+                FirstStartupFeature.FeatureTearDown();
             }
         }
     }

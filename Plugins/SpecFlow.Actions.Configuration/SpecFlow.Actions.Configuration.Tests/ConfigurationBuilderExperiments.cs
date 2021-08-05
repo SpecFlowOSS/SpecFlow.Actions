@@ -10,10 +10,10 @@ using Xunit;
 
 namespace SpecFlow.Actions.Configuration.Tests
 {
-    public class UnitTest1
+    public class ConfigurationBuilderExperiments
     {
-        private string _baselineConfiguration = @"{ ""root_value"": ""value"", ""overwritten_in_overlay"":""No"", ""list"": [""rootentry""]}";
-        private string _overlayConfiguration = @"{""overlay_value"": ""othervalue"", ""overwritten_in_overlay"": ""Yes"", ""list"": [""overlayentry""]}";
+        private readonly string _baselineConfiguration = @"{ ""root_value"": ""value"", ""overwritten_in_overlay"":""No"", ""list"": [""rootentry""]}";
+        private readonly string _overlayConfiguration = @"{""overlay_value"": ""othervalue"", ""overwritten_in_overlay"": ""Yes"", ""list"": [""overlayentry""]}";
 
         private static IConfigurationRoot ParseConfiguration(string baseline, string overlay)
         {
