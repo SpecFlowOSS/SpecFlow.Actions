@@ -17,6 +17,8 @@ namespace SpecFlow.Actions.Selenium
         double? DefaultTimeout { get; }
 
         double? PollingInterval { get; }
+
+        string? TestPlatform { get; }
     }
 
     public class SeleniumConfiguration : ISeleniumConfiguration
@@ -45,6 +47,9 @@ namespace SpecFlow.Actions.Selenium
 
             [JsonInclude]
             public double? PollingInterval { get; private set; }
+
+            [JsonInclude]
+            public string? TestPlatform { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -104,5 +109,10 @@ namespace SpecFlow.Actions.Selenium
         /// The default polling interval used to configure the webdriver
         /// </summary>
         public double? PollingInterval => _specflowJsonPart.Value.Selenium.PollingInterval;
+
+        /// <summary>
+        /// The test platform to execute against
+        /// </summary>
+        public string TestPlatform => _specflowJsonPart.Value.Selenium.TestPlatform ?? "local";
     }
 }

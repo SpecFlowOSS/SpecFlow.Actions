@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="SpecFlow" Version="3.9.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
   </ItemGroup>
 
 </Project>

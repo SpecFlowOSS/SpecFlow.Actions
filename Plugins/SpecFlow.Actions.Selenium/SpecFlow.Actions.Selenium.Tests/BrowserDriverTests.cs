@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BoDi;
+using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using OpenQA.Selenium;
@@ -19,6 +20,8 @@ namespace SpecFlow.Actions.Selenium.Tests
             double? ISeleniumConfiguration.DefaultTimeout => throw new NotImplementedException();
 
             double? ISeleniumConfiguration.PollingInterval => throw new NotImplementedException();
+
+            string? ISeleniumConfiguration.TestPlatform => throw new NotImplementedException();
         }
 
         class MockDriverInitialiser : IDriverInitialiser
@@ -48,7 +51,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             public Lazy<IWebDriver> CurrentWebDriverLazy => _currentWebDriverLazy;
 
-            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser) : base(seleniumConfiguration, driverInitialiser)
+            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer) : base(seleniumConfiguration, objectContainer)
             {
             }
         }

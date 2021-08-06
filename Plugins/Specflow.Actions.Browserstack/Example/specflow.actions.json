@@ -6,6 +6,7 @@
       "--incognito"
     ],
     "defaultTimeout": 60,
-    "pollingInterval": 5
+    "pollingInterval": 5,
+    "testPlatform": "browserstack" 
   }
 }
