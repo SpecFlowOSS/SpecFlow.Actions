@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Moq;
 using SpecFlow.Actions.Configuration;
 using System;
 using System.Text.Json;
@@ -8,24 +9,12 @@ namespace SpecFlow.Actions.Selenium.Tests
 {
     public class SeleniumConfigurationTests
     {
-        private class MockSpecFlowActionJsonLoader : ISpecFlowActionJsonLoader
-        {
-            private readonly string _content;
-
-            public MockSpecFlowActionJsonLoader(string content)
-            {
-                _content = content;
-            }
-
-            public string Load()
-            {
-                return _content;
-            }
-        }
-
         private static SeleniumConfiguration GetSeleniumConfiguration(string specflowJsonContent)
         {
-            return new SeleniumConfiguration(new MockSpecFlowActionJsonLoader(specflowJsonContent));
+            var specflowActionJsonLoader = new Mock<ISpecFlowActionJsonLoader>();
+            specflowActionJsonLoader.Setup(m => m.Load()).Returns(specflowJsonContent);
+
+            return new SeleniumConfiguration(specflowActionJsonLoader.Object);
         }
 
         [Fact]
