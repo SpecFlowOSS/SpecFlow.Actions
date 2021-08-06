@@ -4,11 +4,6 @@ using SpecFlow.Actions.Configuration;
 
 namespace SpecFlow.Actions.Docker
 {
-    public interface IDockerConfiguration
-    {
-        string File { get; }
-    }
-
     public class DockerConfiguration : IDockerConfiguration
     {
         private readonly ISpecFlowActionsConfiguration _specFlowActionsConfiguration;

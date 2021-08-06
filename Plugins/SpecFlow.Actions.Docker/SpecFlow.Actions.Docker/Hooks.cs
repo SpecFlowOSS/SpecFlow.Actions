@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 namespace SpecFlow.Actions.Docker
 {
     [Binding]
-    public class Hooks
+    class Hooks
     {
         [BeforeTestRun(Order = int.MinValue)]
         public static void DockerComposeUp(IDockerHandling dockerHandling)

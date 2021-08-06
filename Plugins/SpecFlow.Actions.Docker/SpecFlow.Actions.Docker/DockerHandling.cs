@@ -5,13 +5,7 @@ using System.IO;
 
 namespace SpecFlow.Actions.Docker
 {
-    public interface IDockerHandling
-    {
-        void DockerComposeUp();
-        void DockerComposeDown();
-    }
-
-    public class DockerHandling : IDockerHandling
+    class DockerHandling : IDockerHandling
     {
         private readonly DockerConfiguration _dockerConfiguration;
         private ICompositeService? _compositeService;
@@ -46,14 +40,6 @@ namespace SpecFlow.Actions.Docker
         {
             _compositeService?.Stop();
             _compositeService?.Dispose();
-        }
-    }
-
-    public class DockerConfigurationFileNotFound : Exception
-    {
-        public DockerConfigurationFileNotFound(string dockerConfigurationFile) :base($"The Docker configuration file at '{dockerConfigurationFile}' wasn't found")
-        {
-            
         }
     }
 }
