@@ -1,5 +1,7 @@
-﻿using Specflow.Actions.Browserstack;
+﻿using OpenQA.Selenium;
+using Specflow.Actions.Browserstack;
 using SpecFlow.Actions.Selenium;
+using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -13,6 +15,29 @@ namespace Specflow.Actions.Browserstack
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
             runtimePluginEvents.CustomizeScenarioDependencies += RuntimePluginEvents_CustomizeScenarioDependencies;
+            runtimePluginEvents.CustomizeGlobalDependencies += RuntimePluginEvents_CustomizeGlobalDependencies;
+        }
+
+        private void RuntimePluginEvents_CustomizeGlobalDependencies(object sender, CustomizeGlobalDependenciesEventArgs e)
+        {
+            var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
+            runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
+        }
+
+        private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object sender, RuntimePluginAfterScenarioEventArgs e)
+        {
+            var scenarioContext = e.ObjectContainer.Resolve<ScenarioContext>();
+            var browserDriver = e.ObjectContainer.Resolve<BrowserDriver>();
+
+
+            if (scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
+            {
+                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \"Passed\"}}");
+            }
+            else
+            {
+                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \"Failed\"}}");
+            }
         }
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)

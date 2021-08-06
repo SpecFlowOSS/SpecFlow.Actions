@@ -8,8 +8,7 @@
       "os": "Windows",
       "os_version": "10",
       "resolution": "1920x1080",
-      "build": "Examples",
-      "name": "Test"
+      "build": "Examples"
     }
   }
 }

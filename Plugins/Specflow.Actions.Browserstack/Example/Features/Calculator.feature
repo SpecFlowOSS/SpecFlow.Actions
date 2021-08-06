@@ -24,3 +24,12 @@ Examples:
 	| 0            | 0             | 0               |
 	| -1           | 10            | 9               |
 	| 6            | 9             | 15              |
+
+
+Scenario: Failing add two numbers 
+	This is on purpose to show a failing scenario in Browserstack
+
+	Given the first number is 50
+	And the second number is 70
+	When the two numbers are added
+	Then the result should be 110
