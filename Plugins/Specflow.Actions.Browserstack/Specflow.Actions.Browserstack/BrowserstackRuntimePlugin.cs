@@ -29,14 +29,14 @@ namespace Specflow.Actions.Browserstack
             var scenarioContext = e.ObjectContainer.Resolve<ScenarioContext>();
             var browserDriver = e.ObjectContainer.Resolve<BrowserDriver>();
 
-
             if (scenarioContext.ScenarioExecutionStatus == ScenarioExecutionStatus.OK)
             {
-                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"passed\", \"reason\": \"Passed\"}}");
+
+                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript(BrowserstackTestResultExecutor.GetResultExecutor("passed"));
             }
             else
             {
-                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \"Failed\"}}");
+                ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript(BrowserstackTestResultExecutor.GetResultExecutor("failed", scenarioContext.TestError.Message));
             }
         }
 

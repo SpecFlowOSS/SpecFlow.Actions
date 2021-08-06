@@ -6,6 +6,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using SpecFlow.Actions.Selenium;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
@@ -31,7 +32,7 @@ namespace Specflow.Actions.Browserstack
 
             options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
             options.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
-            options.AddAdditionalCapability("name", _scenarioContext.ScenarioInfo.Title, true);
+            options.AddAdditionalCapability("name", GetScenarioTitle(), true);
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
@@ -52,7 +53,7 @@ namespace Specflow.Actions.Browserstack
 
             options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
             options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
-            options.AddAdditionalCapability("name", _scenarioContext.ScenarioInfo.Title);
+            options.AddAdditionalCapability("name", GetScenarioTitle());
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
@@ -61,7 +62,6 @@ namespace Specflow.Actions.Browserstack
                     options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
-            
 
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
@@ -72,7 +72,7 @@ namespace Specflow.Actions.Browserstack
 
             options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
             options.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
-            options.AddAdditionalCapability("name", _scenarioContext.ScenarioInfo.Title, true);
+            options.AddAdditionalCapability("name", GetScenarioTitle(), true);
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
@@ -82,7 +82,6 @@ namespace Specflow.Actions.Browserstack
                 }
             }
             
-
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 
@@ -92,7 +91,7 @@ namespace Specflow.Actions.Browserstack
 
             options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
             options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
-            options.AddAdditionalCapability("name", _scenarioContext.ScenarioInfo.Title);
+            options.AddAdditionalCapability("name", GetScenarioTitle());
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
@@ -102,8 +101,24 @@ namespace Specflow.Actions.Browserstack
                 }
             }
             
-
             return new RemoteWebDriver(_browserstackRemoteServer, options);
+        }
+
+        private string GetScenarioTitle()
+        {
+            var testName = _scenarioContext.ScenarioInfo.Title;
+
+            if (_scenarioContext.ScenarioInfo.Arguments.Count > 0)
+            {
+                testName += ": ";
+            }
+
+            foreach (DictionaryEntry argument in _scenarioContext.ScenarioInfo.Arguments)
+            {
+                testName += argument.Key + ":" + argument.Value + "; ";
+            }
+
+            return testName.Trim();
         }
     }
 }
