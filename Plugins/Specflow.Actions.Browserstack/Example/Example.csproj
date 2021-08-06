@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
+    <ProjectReference Include="..\Specflow.Actions.Browserstack\Specflow.Actions.Browserstack.csproj" />
   </ItemGroup>
 
   <ItemGroup>

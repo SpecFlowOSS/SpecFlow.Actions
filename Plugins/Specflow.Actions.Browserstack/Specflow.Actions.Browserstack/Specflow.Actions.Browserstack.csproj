@@ -1,16 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+		<AssemblyName>SpecFlow.Actions.Browserstack.SpecFlowPlugin</AssemblyName>
+		<PackageId>SpecFlow.Actions.Browserstack</PackageId>
+		<Product>SpecFlow.Actions.Browserstack</Product>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
-    <PackageReference Include="SpecFlow" Version="3.9.22" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+		<PackageReference Include="SpecFlow" Version="3.9.22" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
+	</ItemGroup>
 
 </Project>

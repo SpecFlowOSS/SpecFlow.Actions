@@ -13,7 +13,9 @@ namespace Specflow.Actions.Browserstack
     public class BrowserstackDriverInitialiser : IDriverInitialiser
     {
         private readonly Uri _browserstackRemoteServer;
-        private const string BrowserstackOptions = "bstack:option";
+
+        private static Lazy<string> BrowserstackUsername => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
+        private static Lazy<string> AccessKey => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
         public BrowserstackDriverInitialiser()
         {
@@ -24,34 +26,78 @@ namespace Specflow.Actions.Browserstack
         {
             var options = new ChromeOptions();
 
-            options.AddAdditionalCapability(BrowserstackOptions, capabilities);
+            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
+            options.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
 
-            return new RemoteWebDriver(_browserstackRemoteServer, options);
+            if (capabilities?.Count != 0 && capabilities != null)
+            {
+                foreach (var capability1 in capabilities)
+                {
+                    options.AddAdditionalCapability(capability1.Key, capability1.Value, true);
+                }
+            }
+
+            var capability = options;
+
+            return new RemoteWebDriver(_browserstackRemoteServer, capability);
         }
 
         public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            var options = new EdgeOptions();
+            var options1 = new EdgeOptions();
 
-            options.AddAdditionalCapability(BrowserstackOptions, capabilities);
+            options1.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
+            options1.AddAdditionalCapability("browserstack.key", AccessKey.Value);
+
+            if (capabilities?.Count != 0 && capabilities != null)
+            {
+                foreach (var capability in capabilities)
+                {
+                    options1.AddAdditionalCapability(capability.Key, capability.Value);
+                }
+            }
+
+            var options = options1;
 
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 
         public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            var options = new FirefoxOptions();
+            var options1 = new FirefoxOptions();
 
-            options.AddAdditionalCapability(BrowserstackOptions, capabilities);
+            options1.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
+            options1.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
+
+            if (capabilities?.Count != 0 && capabilities != null)
+            {
+                foreach (var capability in capabilities)
+                {
+                    options1.AddAdditionalCapability(capability.Key, capability.Value, true);
+                }
+            }
+
+            var options = options1;
 
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 
         public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            var options = new InternetExplorerOptions();
+            var options1 = new InternetExplorerOptions();
 
-            options.AddAdditionalCapability(BrowserstackOptions, capabilities);
+            options1.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
+            options1.AddAdditionalCapability("browserstack.key", AccessKey.Value);
+
+            if (capabilities?.Count != 0 && capabilities != null)
+            {
+                foreach (var capability in capabilities)
+                {
+                    options1.AddAdditionalCapability(capability.Key, capability.Value);
+                }
+            }
+
+            var options = options1;
 
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }

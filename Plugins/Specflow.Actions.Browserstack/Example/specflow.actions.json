@@ -3,19 +3,13 @@
     "defaultTimeout": 60,
     "pollingInterval": 5,
     "testPlatform": "browserstack",
-    "browser": "chrome",
+    "browser": "edge",
     "capabilities": {
       "os": "Windows",
-      "osVersion": "10",
+      "os_version": "10",
       "resolution": "1920x1080",
-      "projectName": "Specflow.Actions.Browserstack",
-      "buildName": "Examples",
-      "sessionName": "Test",
-      "local": "false",
-      "debug": "true",
-      "networkLogs": "true",
-      "browserstack.user": "USERNAME",
-      "browserstack.key": "ACCESS_KEY"
+      "build": "Examples",
+      "name": "Test"
     }
   }
 }

@@ -7,7 +7,7 @@ using TechTalk.SpecFlow.UnitTestProvider;
 
 namespace Specflow.Actions.Browserstack
 {
-    public class BrowserstackRuntimePlugin
+    public class BrowserstackRuntimePlugin : IRuntimePlugin
     {
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
