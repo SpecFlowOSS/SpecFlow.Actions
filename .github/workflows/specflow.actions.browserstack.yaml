@@ -20,6 +20,7 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    environment: Browserstack
     env:
         DOTNET_NOLOGO: true
     steps:
@@ -33,7 +34,10 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln
-      - run: dotnet test Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln --filter Category!=failing
+        env:
+          BROWSERSTACK_USERNAME: ${{secrets.BROWSERSTACK_USERNAME}}
+          BROWSERSTACK_ACCESS_KEY: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
 
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln

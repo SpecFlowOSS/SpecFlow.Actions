@@ -26,6 +26,7 @@ Examples:
 	| 6            | 9             | 15              |
 
 
+@failing
 Scenario: Failing add two numbers 
 	This is on purpose to show a failing scenario in Browserstack
 
