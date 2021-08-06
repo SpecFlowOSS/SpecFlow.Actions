@@ -18,7 +18,7 @@ This SpecFlow.Actions will help you by using Selenium together with SpecFlow. It
 
 ## Configuration
 
-You can configure this plugin via the  `specflow.action.json`.
+You can configure this plugin via the  `specflow.actions.json`.
 
 Example:
 

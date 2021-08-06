@@ -16,7 +16,7 @@
   <Target Name="CopySpecFlowActionJsonToOutput" >
 
     <PropertyGroup>
-      <SpecFlowActionJson>specflow.action.json</SpecFlowActionJson>
+      <SpecFlowActionJson>specflow.actions.json</SpecFlowActionJson>
     </PropertyGroup>
 
     <ItemGroup Condition="Exists($(SpecFlowActionJson))">
