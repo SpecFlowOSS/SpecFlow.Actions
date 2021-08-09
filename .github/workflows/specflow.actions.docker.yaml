@@ -34,7 +34,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln
 
-      - run: dotnet test Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln -f net5.0
 
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln
