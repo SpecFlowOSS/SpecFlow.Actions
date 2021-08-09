@@ -30,11 +30,10 @@ Example:
       "--start-maximized",
       "--incognito"
     ],
-    "capabilities" : 
-    [
-        "some_capability": "the value",
-        "some_other_capability": "also a value"
-    ],
+    "capabilities" : { 
+      "some_capability": "the value",
+      "some_other_capability": "also a value"
+    },
     "defaultTimeout": 60,
     "pollingInterval": 5 
   }
