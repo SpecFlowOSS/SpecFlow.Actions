@@ -1,7 +1,11 @@
 {
   "selenium":
   {
-    "browser": "chrome" 
+    "browser": "chrome",
+    "arguments":[
+      "headless",
+      "--window-size=1920,1080"
+    ]
   },
   "docker": {
     "file": "../../../../docker-compose.yml"
