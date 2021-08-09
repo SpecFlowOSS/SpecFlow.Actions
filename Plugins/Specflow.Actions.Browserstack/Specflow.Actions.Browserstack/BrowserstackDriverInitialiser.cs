@@ -36,15 +36,13 @@ namespace Specflow.Actions.Browserstack
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
-                foreach (var capability1 in capabilities)
+                foreach (var capability in capabilities)
                 {
-                    options.AddAdditionalCapability(capability1.Key, capability1.Value, true);
+                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
                 }
             }
 
-            var capability = options;
-
-            return new RemoteWebDriver(_browserstackRemoteServer, capability);
+            return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 
         public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
