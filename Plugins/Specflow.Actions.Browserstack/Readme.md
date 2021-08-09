@@ -37,12 +37,17 @@ Example:
 }
 ```
 
+### testPlatform
+Supported values:
+- `local` - default value if no value is provided. Will initialise the webdriver on the local machine.
+- `browserstack` - Will initialise a remote webdriver instance to execute against Browserstack.
+
 ### browser
 Supported values:
-- chrome
-- firefox
-- internetexplorer
-- edge
+- `chrome`
+- `firefox`
+- `internetexplorer`
+- `edge`
 
 ### capabilities
 See https://www.browserstack.com/automate/capabilities

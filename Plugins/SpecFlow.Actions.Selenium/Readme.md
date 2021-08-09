@@ -42,10 +42,10 @@ Example:
 
 ### browser
 Supported values:
-- chrome
-- firefox
-- internetexplorer
-- edge
+- `chrome`
+- `firefox`
+- `internetexplorer`
+- `edge`
 
 ## How to use it
 
