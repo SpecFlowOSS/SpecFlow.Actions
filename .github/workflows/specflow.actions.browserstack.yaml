@@ -1,0 +1,74 @@
+name: SpecFlow.Actions.Browserstack
+
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/specflow.actions.browserstack.yaml'
+      - 'Plugins/SpecFlow.Actions.Browserstack/**'
+      - 'Plugins/*'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/specflow.actions.browserstack.yaml'
+      - 'Plugins/SpecFlow.Actions.Browserstack/**'
+      - 'Plugins/*'
+
+
+jobs:
+  build:
+    runs-on: windows-latest
+    environment: Browserstack
+    env:
+        DOTNET_NOLOGO: true
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # Authenticates packages to push to GPR
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.x' 
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - run: dotnet build Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln --filter Category!=failing
+        env:
+          BROWSERSTACK_USERNAME: ${{secrets.BROWSERSTACK_USERNAME}}
+          BROWSERSTACK_ACCESS_KEY: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
+
+      - name: Create the package
+        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack.sln
+
+      - name: Upload NuGet Package to Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: NuGet-Package
+          path: Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack/bin/Release/**/*.nupkg
+            
+
+  release:
+    runs-on: windows-latest
+    env: 
+      DOTNET_NOLOGO: true
+    needs: build
+    environment: NuGet.org
+    if: github.ref == 'refs/heads/main'
+    steps:
+      # Authenticates packages to push to nuget.org.
+      # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: NuGet-Package
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+      - name: Publish the package to nuget.org
+        shell: pwsh
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}
+        run: dotnet nuget push "*.nupkg" -k "$env:NUGET_AUTH_TOKEN" -s "https://api.nuget.org/v3/index.json"
+        

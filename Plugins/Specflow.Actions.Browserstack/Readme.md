@@ -1,8 +1,8 @@
-# SpecFlow.Actions.Selenium
+# SpecFlow.Actions.Browserstack
 
-[![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.Selenium)](https://www.nuget.org/packages/SpecFlow.Actions.Selenium/)
+[![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.Browserstack)](https://www.nuget.org/packages/SpecFlow.Actions.Browserstack/)
 
-This SpecFlow.Action will help you use Selenium together with SpecFlow. It handles the lifetime of your browser and provides easy configuration and helper methods to interact with Selenium.
+This SpecFlow.Action will help you use Browserstack and Selenium together with SpecFlow. Being an extension of `SpecFlow.Actions.Selenium`, It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
 
 ## Included Features
 
@@ -13,8 +13,6 @@ This SpecFlow.Action will help you use Selenium together with SpecFlow. It handl
         - Edge
         - Internet Explorer
 - Configuration via `specflow.actions.json`
-- Helper Methods for WebDriver
-- Helper Extension Methods for WebElement
 
 ## Configuration
 
@@ -25,20 +23,24 @@ Example:
 ``` json
 {
   "selenium": {
-    "browser": "chrome",
-    "arguments": [
-      "--start-maximized",
-      "--incognito"
-    ],
-    "capabilities" : { 
-      "some_capability": "the value",
-      "some_other_capability": "also a value"
-    },
     "defaultTimeout": 60,
-    "pollingInterval": 5 
+    "pollingInterval": 5,
+    "testPlatform": "browserstack",
+    "browser": "edge",
+    "capabilities": {
+      "os": "Windows",
+      "os_version": "10",
+      "resolution": "1920x1080",
+      "build": "Examples"
+    }
   }
 }
 ```
+
+### testPlatform
+Supported values:
+- `local` - default value if no value is provided. Will initialise the webdriver on the local machine.
+- `browserstack` - Will initialise a remote webdriver instance to execute against Browserstack.
 
 ### browser
 Supported values:
@@ -47,10 +49,15 @@ Supported values:
 - `internetexplorer`
 - `edge`
 
+### capabilities
+See https://www.browserstack.com/automate/capabilities
+
 ## How to use it
 
 The browser is started automatically when you try to use the WebDriver the first time.  
 It is closed after the scenario ends.
+
+The test result and (in case of failure) reason is sent to browserstack automatically during the test execution.
 
 ### BrowserInteractions
 
@@ -150,6 +157,6 @@ Available Helper Methods:
 
 ## How to get it
 
-Add the latest version of the `SpecFlow.Actions.Selenium` NuGet Package to your project.
+Add the latest version of the `SpecFlow.Actions.Browserstack` NuGet Package to your project.
 
-Latest version: [![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.Selenium)](https://www.nuget.org/packages/SpecFlow.Actions.Selenium/)
+Latest version: [![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.Browserstack)](https://www.nuget.org/packages/SpecFlow.Actions.Browserstack/)
