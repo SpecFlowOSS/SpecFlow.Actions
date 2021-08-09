@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net461</TargetFrameworks>
+    <RootNamespace>SpecFlow.Actions.BoaConstrictor</RootNamespace>
+    <AssemblyName>SpecFlow.Actions.BoaConstrictor.SpecFlowPlugin</AssemblyName>
+    <PackageId>SpecFlow.Actions.BoaConstrictor</PackageId>
+    <Product>SpecFlow.Actions.BoaConstrictor</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Boa.Constrictor" Version="1.2.2" />
+    <PackageReference Include="SpecFlow" Version="3.9.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net461</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Boa.Constrictor" Version="1.2.2" />
+    <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
+    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.*" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.*" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+
+
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.4300" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Drivers\" />
+    <Folder Include="Hooks\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="specflow.actions.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+
+</Project>
