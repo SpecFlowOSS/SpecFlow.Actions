@@ -1,5 +1,4 @@
-﻿using BoDi;
-using OpenQA.Selenium;
+﻿using Microsoft.Playwright;
 using System;
 
 namespace SpecFlow.Actions.Playwright
@@ -9,39 +8,37 @@ namespace SpecFlow.Actions.Playwright
     /// </summary>
     public class BrowserDriver : IDisposable
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IObjectContainer _objectContainer;
-        protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
+        private readonly IPlaywrightConfiguration _playwrightConfiguration;
+        private readonly IDriverInitialiser _driverInitialiser;
+        protected readonly Lazy<IBrowser> _currentBrowserLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer)
+        public BrowserDriver(IPlaywrightConfiguration playwrightConfiguration, IDriverInitialiser driverInitialiser)
         {
-            _seleniumConfiguration = seleniumConfiguration;
-            _objectContainer = objectContainer;
-            _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
+            _playwrightConfiguration = playwrightConfiguration;
+            _driverInitialiser = driverInitialiser;
+            _currentBrowserLazy = new Lazy<IBrowser>(CreateWebDriver);
         }
 
         /// <summary>
         /// The current Selenium IWebDriver instance
         /// </summary>
-        public IWebDriver Current => _currentWebDriverLazy.Value;
+        public IBrowser Current => _currentBrowserLazy.Value;
 
         /// <summary>
         /// Creates the Selenium web driver (opens a browser)
         /// </summary>
         /// <returns></returns>
-        private IWebDriver CreateWebDriver()
+        private IBrowser CreateWebDriver()
         {
-            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.TestPlatform);
-
-            return _seleniumConfiguration.Browser switch
+            return _playwrightConfiguration.Browser switch
             {
-                Browser.Chrome => initialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Firefox => initialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Edge => initialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.InternetExplorer => initialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
+                Browser.Chrome => _driverInitialiser.GetChromeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
+                Browser.Firefox => _driverInitialiser.GetFirefoxDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
+                Browser.Edge => _driverInitialiser.GetEdgeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
+                Browser.Chromium => _driverInitialiser.GetChromiumDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
                 Browser.Noop => new NoopWebdriver(),
-                _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
+                _ => throw new NotImplementedException($"Support for browser {_playwrightConfiguration.Browser} is not implemented yet"),
             };
         }
 
@@ -55,9 +52,9 @@ namespace SpecFlow.Actions.Playwright
                 return;
             }
 
-            if (_currentWebDriverLazy.IsValueCreated)
+            if (_currentBrowserLazy.IsValueCreated)
             {
-                Current.Quit();
+                Current.CloseAsync();
             }
 
             _isDisposed = true;

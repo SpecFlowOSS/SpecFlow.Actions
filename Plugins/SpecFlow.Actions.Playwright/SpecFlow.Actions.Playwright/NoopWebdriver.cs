@@ -1,54 +1,38 @@
-﻿using OpenQA.Selenium;
-using System.Collections.ObjectModel;
+﻿using Microsoft.Playwright;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SpecFlow.Actions.Playwright
 {
-    public class NoopWebdriver : IWebDriver
+    public class NoopWebdriver : IBrowser
     {
-        public IWebElement FindElement(By @by)
+        public IReadOnlyList<IBrowserContext> Contexts => throw new NotImplementedException();
+
+        public bool IsConnected => throw new NotImplementedException();
+
+        public string Version => throw new NotImplementedException();
+
+        public event EventHandler<IBrowser> Disconnected = null!;
+
+        public Task CloseAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public ReadOnlyCollection<IWebElement> FindElements(By @by)
+        public ValueTask DisposeAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void Dispose()
+        public Task<IBrowserContext> NewContextAsync(BrowserNewContextOptions? options = null)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public void Close()
+        public Task<IPage> NewPageAsync(BrowserNewPageOptions? options = null)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
-
-        public void Quit()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IOptions Manage()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public INavigation Navigate()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public ITargetLocator SwitchTo()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public string? Url { get; set; }
-        public string? Title { get; }
-        public string? PageSource { get; }
-        public string? CurrentWindowHandle { get; }
-        public ReadOnlyCollection<string>? WindowHandles { get; }
     }
 }

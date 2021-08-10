@@ -1,5 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using Microsoft.Playwright;
 using SpecFlow.Actions.Playwright;
+using System.Threading.Tasks;
 
 namespace Example.PageObjects
 {
@@ -8,49 +9,50 @@ namespace Example.PageObjects
     /// </summary>
     public class CalculatorPageObject : CalculatorElementLocators
     {
-        private readonly IBrowserInteractions _browserInteractions;
+        private readonly IBrowser _browser;
+        private readonly IPage _page;
 
-        private IWebElement FirstNumber => _browserInteractions.WaitAndReturnElement(FirstNumberFieldLocator);
-        private IWebElement SecondNumber => _browserInteractions.WaitAndReturnElement(SecondNumberFieldLocator);
-        private IWebElement AddButton => _browserInteractions.WaitAndReturnElement(AddButtonLocator);
-        private IWebElement Result => _browserInteractions.WaitAndReturnElement(ResultLabelLocator);
-        private IWebElement ResetButton => _browserInteractions.WaitAndReturnElement(ResetButtonLocator);
-
-        public CalculatorPageObject(IBrowserInteractions browserInteractions)
+        public CalculatorPageObject(IBrowser browser, BrowserNewPageOptions? browserNewPageOptions = null)
         {
-            _browserInteractions = browserInteractions;
+            _browser = browser;
+            _page = browser.NewPageAsync(browserNewPageOptions).Result;
         }
 
-        public void EnterFirstNumber(string number)
+        public async Task GoToPage()
         {
-            //Enter text
-            FirstNumber.SendKeysWithClear(number);
+            await _page.GotoAsync(CalculatorUrl);
         }
 
-        public void EnterSecondNumber(string number)
+        public async Task EnterFirstNumberAsync(string number)
         {
             //Enter text
-            SecondNumber.SendKeysWithClear(number);
+            await FirstNumberFieldSelector.SendKeysAsync(_page, number);
         }
 
-        public void ClickAdd()
+        public async Task EnterSecondNumberAsync(string number)
+        {
+            //Enter text
+            await SecondNumberFieldSelector.SendKeysAsync(_page, number);
+        }
+
+        public async Task ClickAddAsync()
         {
             //Click the add button
-            AddButton.ClickWithRetry();
+            await AddButtonSelector.ClickAsync(_page);
         }
 
-        public void EnsureCalculatorIsOpenAndReset()
+        public async Task EnsureCalculatorIsOpenAndResetAsync()
         {
             //Open the calculator page in the browser if not opened yet
-            if (_browserInteractions.GetUrl() != CalculatorUrl)
+            if (_page.Url != CalculatorUrl)
             {
-                _browserInteractions.GoToUrl(CalculatorUrl);
+                await GoToPage();
             }
             //Otherwise reset the calculator by clicking the reset button
             else
             {
                 //Click the rest button
-                ResetButton.ClickWithRetry();
+                await ResetButtonSelector.ClickAsync(_page);
 
                 //Wait until the result is empty again
                 WaitForEmptyResult();
@@ -59,18 +61,19 @@ namespace Example.PageObjects
 
         public string? WaitForNonEmptyResult()
         {
+            _page.WaitForSelectorAsync(ResultLabelSelector, new PageWaitForSelectorOptions{State = } )
             //Wait for the result to be not empty
-            return _browserInteractions.WaitUntil(
-                () => Result.GetAttribute("value"),
-                result => !string.IsNullOrEmpty(result));
+            //return _browserInteractions.WaitUntil(
+            //    () => Result.GetAttribute("value"),
+            //    result => !string.IsNullOrEmpty(result));
         }
 
         public string? WaitForEmptyResult()
         {
-            //Wait for the result to be empty
-            return _browserInteractions.WaitUntil(
-                () => Result.GetAttribute("value"),
-                result => result == string.Empty);
+            ////Wait for the result to be empty
+            //return _browserInteractions.WaitUntil(
+            //    () => Result.GetAttribute("value"),
+            //    result => result == string.Empty);
         }
     }
 }

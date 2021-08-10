@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.*" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.*" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />

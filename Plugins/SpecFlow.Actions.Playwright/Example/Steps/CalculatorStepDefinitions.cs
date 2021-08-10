@@ -20,21 +20,21 @@ namespace Example.Steps
         public void GivenTheFirstNumberIs(int number)
         {
             //delegate to Page Object
-            _calculatorPageObject.EnterFirstNumber(number.ToString());
+            _calculatorPageObject.EnterFirstNumberAsync(number.ToString());
         }
 
         [Given("the second number is (.*)")]
         public void GivenTheSecondNumberIs(int number)
         {
             //delegate to Page Object
-            _calculatorPageObject.EnterSecondNumber(number.ToString());
+            _calculatorPageObject.EnterSecondNumberAsync(number.ToString());
         }
 
         [When("the two numbers are added")]
         public void WhenTheTwoNumbersAreAdded()
         {
             //delegate to Page Object
-            _calculatorPageObject.ClickAdd();
+            _calculatorPageObject.ClickAddAsync();
         }
 
         [Then("the result should be (.*)")]

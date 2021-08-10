@@ -2,11 +2,11 @@
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(SeleniumRuntimePlugin))]
+[assembly:RuntimePlugin(typeof(PlaywrightRuntimePlugin))]
 
 namespace SpecFlow.Actions.Playwright
 {
-    public class SeleniumRuntimePlugin : IRuntimePlugin
+    public class PlaywrightRuntimePlugin : IRuntimePlugin
     {
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
@@ -16,9 +16,8 @@ namespace SpecFlow.Actions.Playwright
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>("local");
-            e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
+            e.ObjectContainer.RegisterTypeAs<PlaywrightConfiguration, IPlaywrightConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace Example.PageObjects
+﻿namespace Example.PageObjects
 {
     public class CalculatorElementLocators
     {
@@ -8,10 +6,10 @@ namespace Example.PageObjects
         private protected const string CalculatorUrl = "https://specflowoss.github.io/Calculator-Demo/Calculator.html";
 
         //Finding elements by ID
-        private protected By FirstNumberFieldLocator => By.Id("first-number");
-        private protected By SecondNumberFieldLocator => By.Id("second-number");
-        private protected By AddButtonLocator => By.Id("add-button");
-        private protected By ResultLabelLocator => By.Id("result");
-        private protected By ResetButtonLocator => By.Id("reset-button");
+        private protected string FirstNumberFieldSelector => "#first-number";
+        private protected string SecondNumberFieldSelector => "#second-number";
+        private protected string AddButtonSelector => "#add-button";
+        private protected string ResultLabelSelector => "#result";
+        private protected string ResetButtonSelector => "#reset-button";
     }
 }

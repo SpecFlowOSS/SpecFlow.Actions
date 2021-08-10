@@ -24,7 +24,7 @@ namespace Example.Hooks
         public void BeforeScenario()
         {
             var calculatorPageObject = new CalculatorPageObject(_browserInteractions);
-            calculatorPageObject.EnsureCalculatorIsOpenAndReset();
+            calculatorPageObject.EnsureCalculatorIsOpenAndResetAsync();
         }
     }
 }
