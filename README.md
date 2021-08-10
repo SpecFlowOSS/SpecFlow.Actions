@@ -12,4 +12,4 @@ You can find a list of all Code Snippets [here](./CodeSnippets/Readme.md).
 ## 2. Plugins
 For more complex problems, there will be dedicated plugins for SpecFlow that provide more functionalities and integrate effortlessly into SpecFlow and its features.
 
-You can find a list of all Plugins [here](./Plugins/Readme.md).
+You can find a list of all Plugins [here](./Plugins/README.md).

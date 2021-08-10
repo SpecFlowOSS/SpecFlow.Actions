@@ -1,25 +1,25 @@
-name: SpecFlow.Actions.Selenium
+name: SpecFlow.Actions.Docker
 
 on: 
   push:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.selenium.yaml'
-      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - '.github/workflows/specflow.actions.docker.yaml'
+      - 'Plugins/SpecFlow.Actions.Docker/**'
       - 'Plugins/*'
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.selenium.yaml'
-      - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - '.github/workflows/specflow.actions.docker.yaml'
+      - 'Plugins/SpecFlow.Actions.Docker/**'
       - 'Plugins/*'
 
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
         DOTNET_NOLOGO: true
     steps:
@@ -32,18 +32,18 @@ jobs:
           dotnet-version: '5.0.x' 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+      - run: dotnet build Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln
 
-      - run: dotnet test Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+      - run: dotnet test Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln -f net5.0
 
       - name: Create the package
-        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium.sln
+        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker.sln
 
       - name: Upload NuGet Package to Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: NuGet-Package
-          path: Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg
+          path: Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker/bin/Release/**/*.nupkg
             
 
   release:
