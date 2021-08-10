@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Browserstack", "Browserstac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specflow.Actions.Browserstack", "Specflow.Actions.Browserstack\Specflow.Actions.Browserstack\Specflow.Actions.Browserstack.csproj", "{9CCC96A4-22A6-46AF-8885-4B831DDA0C71}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Specflow.Actions.Browserstack\Example\Example.csproj", "{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{9CCC96A4-22A6-46AF-8885-4B831DDA0C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CCC96A4-22A6-46AF-8885-4B831DDA0C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CCC96A4-22A6-46AF-8885-4B831DDA0C71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{3DB1953A-35EB-4CFB-B989-FE9CF7EFF650} = {742074B7-55BC-4270-910E-C0D372F55ADB}
 		{32C0E74F-65FF-4CD0-9AF1-A915109AF088} = {D6FFB660-2A29-452D-B704-A5783DB80607}
 		{9CCC96A4-22A6-46AF-8885-4B831DDA0C71} = {063E01A2-05BD-4926-AF3C-C9B11985A1B0}
+		{2FFC9DA2-BB5A-4821-AC70-8E43DEE4668C} = {063E01A2-05BD-4926-AF3C-C9B11985A1B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C77D596F-1752-43EB-8984-FB53D4DAF102}

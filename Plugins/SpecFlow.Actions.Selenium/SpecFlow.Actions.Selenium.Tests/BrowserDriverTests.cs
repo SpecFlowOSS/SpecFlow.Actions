@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BoDi;
+using System;
 using FluentAssertions;
+using Moq;
 using OpenQA.Selenium;
 using Xunit;
 
@@ -8,47 +9,11 @@ namespace SpecFlow.Actions.Selenium.Tests
 {
     public class BrowserDriverTests
     {
-        class MockSeleniumConfiguration : ISeleniumConfiguration
-        {
-            public Browser Browser { get; set; }
-
-            public string[]? Arguments { get; set; }
-
-            public Dictionary<string, string>? Capabilities { get; set; }
-
-            double? ISeleniumConfiguration.DefaultTimeout => throw new NotImplementedException();
-
-            double? ISeleniumConfiguration.PollingInterval => throw new NotImplementedException();
-        }
-
-        class MockDriverInitialiser : IDriverInitialiser
-        {
-            public IWebDriver GetChromeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public class BrowserDriverAccessor : BrowserDriver
         {
             public Lazy<IWebDriver> CurrentWebDriverLazy => _currentWebDriverLazy;
 
-            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IDriverInitialiser driverInitialiser) : base(seleniumConfiguration, driverInitialiser)
+            public BrowserDriverAccessor(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer) : base(seleniumConfiguration, objectContainer)
             {
             }
         }
@@ -56,7 +21,10 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_NotInstantiatedAfterCreation()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration(), new MockDriverInitialiser());
+            var seleniumConfigurationMock = new Mock<ISeleniumConfiguration>();
+            var objectContainerMock = new Mock<IObjectContainer>();
+
+            var target = new BrowserDriverAccessor(seleniumConfigurationMock.Object, objectContainerMock.Object);
 
             target.CurrentWebDriverLazy.IsValueCreated.Should().BeFalse();
         }
@@ -64,7 +32,13 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Current_AfterAccessing_Instantiated()
         {
-            var target = new BrowserDriverAccessor(new MockSeleniumConfiguration() { Browser = Browser.Noop }, new MockDriverInitialiser());
+            var seleniumConfigurationMock = new Mock<ISeleniumConfiguration>();
+            seleniumConfigurationMock.Setup(m => m.Browser).Returns(Browser.Noop);
+
+            var objectContainerMock = new Mock<IObjectContainer>();
+
+            var target = new BrowserDriverAccessor(seleniumConfigurationMock.Object, objectContainerMock.Object);
+
 
             var webdriver = target.Current;
 

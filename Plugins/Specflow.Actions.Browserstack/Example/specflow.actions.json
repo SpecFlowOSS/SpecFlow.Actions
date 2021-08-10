@@ -1,0 +1,14 @@
+{
+  "selenium": {
+    "defaultTimeout": 60,
+    "pollingInterval": 5,
+    "testPlatform": "browserstack",
+    "browser": "edge",
+    "capabilities": {
+      "os": "Windows",
+      "os_version": "10",
+      "resolution": "1920x1080",
+      "build": "Examples"
+    }
+  }
+}
