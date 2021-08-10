@@ -1,16 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <AssemblyName>SpecFlow.Actions.Selenium.SpecFlowPlugin</AssemblyName>
-    <PackageId>SpecFlow.Actions.Selenium</PackageId>
-    <Product>SpecFlow.Actions.Selenium</Product>
+    <AssemblyName>SpecFlow.Actions.Docker.SpecFlowPlugin</AssemblyName>
+    <PackageId>SpecFlow.Actions.Docker</PackageId>
+    <Product>SpecFlow.Actions.Docker</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="SpecFlow" Version="3.9.*" />
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="Ductus.FluentDocker" Version="2.10.7" />
   </ItemGroup>
 
   <ItemGroup>

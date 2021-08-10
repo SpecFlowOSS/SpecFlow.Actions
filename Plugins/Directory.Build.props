@@ -10,10 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231" PrivateAssets="all"/>
-    <None Include="$(MSBuildThisFileDirectory)/../LICENSE" Pack="true" PackagePath=""/>
-    <None Include="$(MSBuildThisFileDirectory)/specflow-icon.png" Pack="true" PackagePath="images" />
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.4.231" PrivateAssets="all" Condition="'$(MSBuildProjectExtension)' != '.dcproj'"/>
+    <None Include="$(MSBuildThisFileDirectory)/../LICENSE" Pack="true" PackagePath="" Condition="'$(MSBuildProjectExtension)' != '.dcproj'"/>
+    <None Include="$(MSBuildThisFileDirectory)/specflow-icon.png" Pack="true" PackagePath="images" Condition="'$(MSBuildProjectExtension)' != '.dcproj'"/>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" Condition="'$(MSBuildProjectExtension)' != '.dcproj'">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
