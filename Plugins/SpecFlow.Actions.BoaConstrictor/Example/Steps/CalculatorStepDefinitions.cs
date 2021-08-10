@@ -10,7 +10,6 @@ namespace Example.Steps
     public sealed class CalculatorStepDefinitions
     {
         private readonly Actor _actor;
-
         
         public CalculatorStepDefinitions(Actor actor)
         {

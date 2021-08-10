@@ -31,7 +31,6 @@ namespace SpecFlow.Actions.BoaConstrictor
                 return actor;
             });
 
-
             e.ObjectContainer.RegisterFactoryAs<IActor>((container) => container.Resolve<Actor>());
         }
     }

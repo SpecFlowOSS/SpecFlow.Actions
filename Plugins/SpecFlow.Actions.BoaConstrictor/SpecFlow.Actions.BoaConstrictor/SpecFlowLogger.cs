@@ -14,7 +14,6 @@ namespace SpecFlow.Actions.BoaConstrictor
             _specFlowOutputHelper = specFlowOutputHelper;
         }
 
-
         public override void Close()
         {
             
