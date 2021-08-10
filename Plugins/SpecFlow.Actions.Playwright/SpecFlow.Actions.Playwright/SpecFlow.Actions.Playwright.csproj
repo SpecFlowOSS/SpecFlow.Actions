@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+	  <AssemblyName>SpecFlow.Actions.Playwright.SpecFlowPlugin</AssemblyName>
+	  <PackageId>SpecFlow.Actions.Playwright</PackageId>
+	  <Product>SpecFlow.Actions.Playwright</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+  </ItemGroup>
+
+</Project>
