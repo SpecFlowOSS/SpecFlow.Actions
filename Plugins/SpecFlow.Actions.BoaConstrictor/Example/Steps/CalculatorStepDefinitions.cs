@@ -54,7 +54,7 @@ namespace Example.Steps
         [Then("the result should be (.*)")]
         public void ThenTheResultShouldBe(int expectedResult)
         {
-            var actualResult = _actor.WaitsUntil(HtmlAttribute.Of(CalculatorElementLocators.ResultLabelLocator, "value"), IsNot<string?>.Condition(IsNullOrWhitespaceCondition.Value()));
+            var actualResult = _actor.WaitsUntil(HtmlAttribute.Of(CalculatorElementLocators.ResultLabelLocator, "value"), IsNot<string?>.Condition(IsNullOrWhitespace.Value()));
 
             actualResult.Should().Be(expectedResult.ToString());
         }
