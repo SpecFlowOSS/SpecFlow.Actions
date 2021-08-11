@@ -2,7 +2,7 @@
 
 [![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.Browserstack)](https://www.nuget.org/packages/SpecFlow.Actions.Browserstack/)
 
-This SpecFlow.Action will help you use Browserstack and Selenium together with SpecFlow. As an extension of `SpecFlow.Actions.Selenium`, It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
+This SpecFlow.Action will help you use Browserstack and Selenium together with SpecFlow. As an extension of [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium), It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
 
 ## Included Features
 
