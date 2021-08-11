@@ -34,10 +34,10 @@ namespace SpecFlow.Actions.Playwright
         {
             return _playwrightConfiguration.Browser switch
             {
-                Browser.Chrome => await _driverInitialiser.GetChromeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
-                Browser.Firefox => await _driverInitialiser.GetFirefoxDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
-                Browser.Edge => await _driverInitialiser.GetEdgeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
-                Browser.Chromium => await _driverInitialiser.GetChromiumDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
+                Browser.Chrome => await _driverInitialiser.GetChromeDriverAsync(_playwrightConfiguration.Arguments, _playwrightConfiguration.DefaultTimeout, _playwrightConfiguration.Headless),
+                Browser.Firefox => await _driverInitialiser.GetFirefoxDriverAsync(_playwrightConfiguration.Arguments, _playwrightConfiguration.DefaultTimeout, _playwrightConfiguration.Headless),
+                Browser.Edge => await _driverInitialiser.GetEdgeDriverAsync(_playwrightConfiguration.Arguments, _playwrightConfiguration.DefaultTimeout, _playwrightConfiguration.Headless),
+                Browser.Chromium => await _driverInitialiser.GetChromiumDriverAsync(_playwrightConfiguration.Arguments, _playwrightConfiguration.DefaultTimeout, _playwrightConfiguration.Headless),
                 //Browser.Noop => new NoopWebdriver(),
                 _ => throw new NotImplementedException($"Support for browser {_playwrightConfiguration.Browser} is not implemented yet"),
             };

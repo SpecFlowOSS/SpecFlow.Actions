@@ -1,6 +1,5 @@
 ﻿using SpecFlow.Actions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,11 +11,9 @@ namespace SpecFlow.Actions.Playwright
 
         string[]? Arguments { get; }
 
-        Dictionary<string, string>? Capabilities { get; }
+        float? DefaultTimeout { get; }
 
-        double? DefaultTimeout { get; }
-
-        double? PollingInterval { get; }
+        bool? Headless { get; }
     }
 
     public class PlaywrightConfiguration : IPlaywrightConfiguration
@@ -38,16 +35,10 @@ namespace SpecFlow.Actions.Playwright
             public string[]? Arguments { get; private set; }
 
             [JsonInclude]
-            public Dictionary<string, string>? Capabilities { get; private set; }
+            public float? DefaultTimeout { get; private set; }
 
             [JsonInclude]
-            public double? DefaultTimeout { get; private set; }
-
-            [JsonInclude]
-            public double? PollingInterval { get; private set; }
-
-            [JsonInclude]
-            public string? TestPlatform { get; private set; }
+            public bool? Headless { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -94,23 +85,13 @@ namespace SpecFlow.Actions.Playwright
         public string[]? Arguments => _specflowJsonPart.Value.Playwright.Arguments;
 
         /// <summary>
-        /// Capabilities used to configure the webdriver
+        /// The default timeout used to configure the webdriver
         /// </summary>
-        public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Playwright.Capabilities;
+        public float? DefaultTimeout => _specflowJsonPart.Value.Playwright.DefaultTimeout;
 
         /// <summary>
         /// The default timeout used to configure the webdriver
         /// </summary>
-        public double? DefaultTimeout => _specflowJsonPart.Value.Playwright.DefaultTimeout;
-
-        /// <summary>
-        /// The default polling interval used to configure the webdriver
-        /// </summary>
-        public double? PollingInterval => _specflowJsonPart.Value.Playwright.PollingInterval;
-
-        /// <summary>
-        /// The test platform to execute against
-        /// </summary>
-        public string TestPlatform => _specflowJsonPart.Value.Playwright.TestPlatform ?? "local";
+        public bool? Headless => _specflowJsonPart.Value.Playwright.Headless;
     }
 }

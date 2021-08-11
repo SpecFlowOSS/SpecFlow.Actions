@@ -1,7 +1,7 @@
 {
   "playwright": {
-    "browser": "Chrome",
+    "browser": "edge",
     "defaultTimeout": 60,
-    "pollingInterval": 5
+    "headless": false
   }
 }
