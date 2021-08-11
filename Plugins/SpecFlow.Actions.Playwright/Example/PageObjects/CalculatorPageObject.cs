@@ -1,6 +1,8 @@
 ﻿using Microsoft.Playwright;
 using SpecFlow.Actions.Playwright;
+using System.Threading;
 using System.Threading.Tasks;
+using TechTalk.SpecFlow.Plugins;
 
 namespace Example.PageObjects
 {
@@ -67,8 +69,7 @@ namespace Example.PageObjects
 
         public async Task<string?> WaitForNonEmptyResultAsync()
         {
-            await (await _page).WaitForFunctionAsync($"document.querySelector('{ResultLabelSelector}').value != '0' ");
-            return await (await _page).GetAttributeAsync(ResultLabelSelector, "value");
+            return await (await _page).InputValueAsync(ResultLabelSelector);
         }
 
         //public string? WaitForEmptyResult()
