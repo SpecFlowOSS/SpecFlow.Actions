@@ -40,7 +40,7 @@ Example:
 }
 ```
 
-### browser
+### Browser
 Supported values:
 - `chrome`
 - `firefox`
