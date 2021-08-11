@@ -24,7 +24,8 @@ namespace SpecFlow.Actions.Playwright
             var options = new BrowserTypeLaunchOptions
             {
                 Args = args,
-                Channel = "chrome"
+                Channel = "chrome",
+                Headless = false
             };
 
             var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
@@ -77,7 +78,8 @@ namespace SpecFlow.Actions.Playwright
         {
             var options = new BrowserTypeLaunchOptions
             {
-                Args = args
+                Args = args,
+                Headless = false
             };
 
             var playwright = await Microsoft.Playwright.Playwright.CreateAsync();

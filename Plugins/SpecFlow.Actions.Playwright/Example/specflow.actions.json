@@ -1,10 +1,6 @@
 {
-  "selenium": {
-    "browser": "chrome",
-    "arguments": [
-      "--start-maximized",
-      "--incognito"
-    ],
+  "playwright": {
+    "browser": "Chrome",
     "defaultTimeout": 60,
     "pollingInterval": 5
   }

@@ -1,6 +1,6 @@
 ﻿using Example.PageObjects;
 using FluentAssertions;
-using SpecFlow.Actions.Playwright;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace Example.Steps
@@ -11,37 +11,37 @@ namespace Example.Steps
         //Page Object for Calculator
         private readonly CalculatorPageObject _calculatorPageObject;
 
-        public CalculatorStepDefinitions(IBrowserInteractions browserInteractions)
+        public CalculatorStepDefinitions(CalculatorPageObject calculatorPageObject)
         {
-            _calculatorPageObject = new CalculatorPageObject(browserInteractions);
+            _calculatorPageObject = calculatorPageObject;
         }
 
         [Given("the first number is (.*)")]
-        public void GivenTheFirstNumberIs(int number)
+        public async Task GivenTheFirstNumberIsAsync(int number)
         {
             //delegate to Page Object
-            _calculatorPageObject.EnterFirstNumberAsync(number.ToString());
+            await _calculatorPageObject.EnterFirstNumberAsync(number.ToString());
         }
 
         [Given("the second number is (.*)")]
-        public void GivenTheSecondNumberIs(int number)
+        public async Task GivenTheSecondNumberIsAsync(int number)
         {
             //delegate to Page Object
-            _calculatorPageObject.EnterSecondNumberAsync(number.ToString());
+            await _calculatorPageObject.EnterSecondNumberAsync(number.ToString());
         }
 
         [When("the two numbers are added")]
-        public void WhenTheTwoNumbersAreAdded()
+        public async Task WhenTheTwoNumbersAreAddedAsync()
         {
             //delegate to Page Object
-            _calculatorPageObject.ClickAddAsync();
+            await _calculatorPageObject.ClickAddAsync();
         }
 
         [Then("the result should be (.*)")]
-        public void ThenTheResultShouldBe(int expectedResult)
+        public async Task ThenTheResultShouldBeAsync(int expectedResult)
         {
             //delegate to Page Object
-            var actualResult = _calculatorPageObject.WaitForNonEmptyResult();
+            var actualResult = await _calculatorPageObject.WaitForNonEmptyResultAsync();
 
             actualResult.Should().Be(expectedResult.ToString());
         }

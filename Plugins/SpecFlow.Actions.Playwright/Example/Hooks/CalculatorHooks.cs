@@ -1,5 +1,4 @@
 ﻿using Example.PageObjects;
-using SpecFlow.Actions.Playwright;
 using TechTalk.SpecFlow;
 
 namespace Example.Hooks
@@ -10,21 +9,13 @@ namespace Example.Hooks
     [Binding]
     public class CalculatorHooks
     {
-        private readonly IBrowserInteractions _browserInteractions;
-
-        public CalculatorHooks(IBrowserInteractions browserInteractions)
-        {
-            _browserInteractions = browserInteractions;
-        }
-
         ///<summary>
         ///  Reset the calculator before each scenario tagged with "Calculator"
         /// </summary>
         [BeforeScenario("Calculator")]
-        public void BeforeScenario()
+        public async void BeforeScenarioAsync(CalculatorPageObject calculatorPageObject)
         {
-            var calculatorPageObject = new CalculatorPageObject(_browserInteractions);
-            calculatorPageObject.EnsureCalculatorIsOpenAndResetAsync();
+            await calculatorPageObject.EnsureCalculatorIsOpenAndResetAsync();
         }
     }
 }

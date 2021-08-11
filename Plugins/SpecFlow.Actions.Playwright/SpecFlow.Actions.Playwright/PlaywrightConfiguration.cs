@@ -26,10 +26,10 @@ namespace SpecFlow.Actions.Playwright
         private class SpecFlowActionJson
         {
             [JsonInclude]
-            public SeleniumSpecFlowJsonPart Playwright { get; private set; } = new SeleniumSpecFlowJsonPart();
+            public PlaywrightSpecFlowJsonPart Playwright { get; private set; } = new PlaywrightSpecFlowJsonPart();
         }
 
-        private class SeleniumSpecFlowJsonPart
+        private class PlaywrightSpecFlowJsonPart
         {
             [JsonInclude]
             public Browser Browser { get; private set; }

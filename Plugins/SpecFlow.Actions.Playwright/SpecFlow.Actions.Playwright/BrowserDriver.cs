@@ -1,5 +1,6 @@
 ﻿using Microsoft.Playwright;
 using System;
+using System.Threading.Tasks;
 
 namespace SpecFlow.Actions.Playwright
 {
@@ -10,34 +11,34 @@ namespace SpecFlow.Actions.Playwright
     {
         private readonly IPlaywrightConfiguration _playwrightConfiguration;
         private readonly IDriverInitialiser _driverInitialiser;
-        protected readonly Lazy<IBrowser> _currentBrowserLazy;
+        protected readonly AsyncLazy<IBrowser> _currentBrowserLazy;
         protected bool _isDisposed;
 
         public BrowserDriver(IPlaywrightConfiguration playwrightConfiguration, IDriverInitialiser driverInitialiser)
         {
             _playwrightConfiguration = playwrightConfiguration;
             _driverInitialiser = driverInitialiser;
-            _currentBrowserLazy = new Lazy<IBrowser>(CreateWebDriver);
+            _currentBrowserLazy = new AsyncLazy<IBrowser>(CreateWebDriverAsync);
         }
 
         /// <summary>
         /// The current Selenium IWebDriver instance
         /// </summary>
-        public IBrowser Current => _currentBrowserLazy.Value;
+        public Task<IBrowser> Current => _currentBrowserLazy.Value;
 
         /// <summary>
         /// Creates the Selenium web driver (opens a browser)
         /// </summary>
         /// <returns></returns>
-        private IBrowser CreateWebDriver()
+        private async Task<IBrowser> CreateWebDriverAsync()
         {
             return _playwrightConfiguration.Browser switch
             {
-                Browser.Chrome => _driverInitialiser.GetChromeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
-                Browser.Firefox => _driverInitialiser.GetFirefoxDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
-                Browser.Edge => _driverInitialiser.GetEdgeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
-                Browser.Chromium => _driverInitialiser.GetChromiumDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments).Result,
-                Browser.Noop => new NoopWebdriver(),
+                Browser.Chrome => await _driverInitialiser.GetChromeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
+                Browser.Firefox => await _driverInitialiser.GetFirefoxDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
+                Browser.Edge => await _driverInitialiser.GetEdgeDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
+                Browser.Chromium => await _driverInitialiser.GetChromiumDriverAsync(_playwrightConfiguration.Capabilities, _playwrightConfiguration.Arguments),
+                //Browser.Noop => new NoopWebdriver(),
                 _ => throw new NotImplementedException($"Support for browser {_playwrightConfiguration.Browser} is not implemented yet"),
             };
         }
@@ -54,7 +55,11 @@ namespace SpecFlow.Actions.Playwright
 
             if (_currentBrowserLazy.IsValueCreated)
             {
-                Current.CloseAsync();
+                Task.Run(async delegate
+                {
+                    await (await Current).CloseAsync();
+                    await (await Current).DisposeAsync();
+                });
             }
 
             _isDisposed = true;

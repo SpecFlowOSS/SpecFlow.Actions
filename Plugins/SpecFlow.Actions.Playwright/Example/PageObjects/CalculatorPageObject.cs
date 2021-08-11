@@ -9,42 +9,48 @@ namespace Example.PageObjects
     /// </summary>
     public class CalculatorPageObject : CalculatorElementLocators
     {
-        private readonly IBrowser _browser;
-        private readonly IPage _page;
+        private readonly Task<IBrowser> _browser;
+        private readonly Task<IPage> _page;
 
-        public CalculatorPageObject(IBrowser browser, BrowserNewPageOptions? browserNewPageOptions = null)
+        public CalculatorPageObject(BrowserDriver browserDriver)
         {
-            _browser = browser;
-            _page = browser.NewPageAsync(browserNewPageOptions).Result;
+            _browser = browserDriver.Current;
+            _page = CreatePageAsync();
+
+        }
+
+        private async Task<IPage> CreatePageAsync()
+        {
+            return await (await _browser).NewPageAsync();
         }
 
         public async Task GoToPage()
         {
-            await _page.GotoAsync(CalculatorUrl);
+            await (await _page).GotoAsync(CalculatorUrl);
         }
 
         public async Task EnterFirstNumberAsync(string number)
         {
             //Enter text
-            await FirstNumberFieldSelector.SendKeysAsync(_page, number);
+            await FirstNumberFieldSelector.SendKeysAsync(await _page, number);
         }
 
         public async Task EnterSecondNumberAsync(string number)
         {
             //Enter text
-            await SecondNumberFieldSelector.SendKeysAsync(_page, number);
+            await SecondNumberFieldSelector.SendKeysAsync(await _page, number);
         }
 
         public async Task ClickAddAsync()
         {
             //Click the add button
-            await AddButtonSelector.ClickAsync(_page);
+            await AddButtonSelector.ClickAsync(await _page);
         }
 
         public async Task EnsureCalculatorIsOpenAndResetAsync()
         {
             //Open the calculator page in the browser if not opened yet
-            if (_page.Url != CalculatorUrl)
+            if ((await _page).Url != CalculatorUrl)
             {
                 await GoToPage();
             }
@@ -52,28 +58,25 @@ namespace Example.PageObjects
             else
             {
                 //Click the rest button
-                await ResetButtonSelector.ClickAsync(_page);
+                await ResetButtonSelector.ClickAsync(await _page);
 
                 //Wait until the result is empty again
-                WaitForEmptyResult();
+                //WaitForEmptyResult();
             }
         }
 
-        public string? WaitForNonEmptyResult()
+        public async Task<string?> WaitForNonEmptyResultAsync()
         {
-            _page.WaitForSelectorAsync(ResultLabelSelector, new PageWaitForSelectorOptions{State = } )
-            //Wait for the result to be not empty
-            //return _browserInteractions.WaitUntil(
-            //    () => Result.GetAttribute("value"),
-            //    result => !string.IsNullOrEmpty(result));
+            await (await _page).WaitForFunctionAsync($"document.querySelector('{ResultLabelSelector}').value != '0' ");
+            return await (await _page).GetAttributeAsync(ResultLabelSelector, "value");
         }
 
-        public string? WaitForEmptyResult()
-        {
-            ////Wait for the result to be empty
-            //return _browserInteractions.WaitUntil(
-            //    () => Result.GetAttribute("value"),
-            //    result => result == string.Empty);
-        }
+        //public string? WaitForEmptyResult()
+        //{
+        //    //Wait for the result to be empty
+        //    return _browserInteractions.WaitUntil(
+        //        () => Result.GetAttribute("value"),
+        //        result => result == string.Empty);
+        //}
     }
 }

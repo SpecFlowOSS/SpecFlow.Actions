@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Playwright" Version="1.13.0" />
-    <PackageReference Include="SpecFlow" Version="3.9.8" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
 
