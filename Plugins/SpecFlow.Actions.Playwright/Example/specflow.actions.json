@@ -1,0 +1,7 @@
+{
+  "playwright": {
+    "browser": "edge",
+    "defaultTimeout": 60,
+    "headless": false
+  }
+}
