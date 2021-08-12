@@ -9,14 +9,15 @@ namespace Example.PageObjects
     /// </summary>
     public class CalculatorPageObject
     {
+        // The page URL
         private protected const string CalculatorUrl = "https://specflowoss.github.io/Calculator-Demo/Calculator.html";
 
         //Finding elements by ID
-        public string FirstNumberFieldSelector => "#first-number";
-        public string SecondNumberFieldSelector => "#second-number";
-        public string AddButtonSelector => "#add-button";
-        public string ResultLabelSelector => "#result";
-        public string ResetButtonSelector => "#reset-button";
+        private static string FirstNumberFieldSelector => "#first-number";
+        private static string SecondNumberFieldSelector => "#second-number";
+        private static string AddButtonSelector => "#add-button";
+        private static string ResultLabelSelector => "#result";
+        private static string ResetButtonSelector => "#reset-button";
 
         private readonly Task<IPage> _page;
 
@@ -27,11 +28,13 @@ namespace Example.PageObjects
 
         private async Task<IPage> CreatePageAsync(Task<IBrowser> browser)
         {
+            // Creates a new page instance
             return await (await browser).NewPageAsync();
         }
 
         public async Task GoToPage()
         {
+            // Opens the calculator page
             await (await _page).GotoAsync(CalculatorUrl);
         }
 
@@ -73,12 +76,16 @@ namespace Example.PageObjects
 
         public async Task<string?> WaitForNonEmptyResultAsync()
         {
+            // Waits for the ResultLabelSelector value to be !== ""
             await ResultLabelSelector.WaitForNonEmptyValue(await _page);
+
+            // Gets the value attribute of the ResultLabelSelector
             return await ResultLabelSelector.GetValueAttributeAsync(await _page);
         }
 
         public async Task WaitForEmptyResultAsync()
         {
+            // Waits for the ResultLabelSelector value to be === ""
             await ResultLabelSelector.WaitForEmptyValue(await _page);
         }
     }

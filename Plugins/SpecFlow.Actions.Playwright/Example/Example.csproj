@@ -16,7 +16,6 @@
     </PackageReference>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
 
-
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.4300" />
   </ItemGroup>
 
@@ -33,6 +32,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 
 </Project>

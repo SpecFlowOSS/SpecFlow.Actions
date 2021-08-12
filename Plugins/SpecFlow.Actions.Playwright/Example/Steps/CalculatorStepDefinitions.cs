@@ -17,17 +17,17 @@ namespace Example.Steps
         }
 
         [Given("the first number is (.*)")]
-        public async Task GivenTheFirstNumberIsAsync(int number)
+        public async Task GivenTheFirstNumberIsAsync(string value)
         {
             //delegate to Page Object
-            await _calculatorPageObject.EnterFirstNumberAsync(number.ToString());
+            await _calculatorPageObject.EnterFirstNumberAsync(value);
         }
 
         [Given("the second number is (.*)")]
-        public async Task GivenTheSecondNumberIsAsync(int number)
+        public async Task GivenTheSecondNumberIsAsync(string value)
         {
             //delegate to Page Object
-            await _calculatorPageObject.EnterSecondNumberAsync(number.ToString());
+            await _calculatorPageObject.EnterSecondNumberAsync(value);
         }
 
         [When("the two numbers are added")]
@@ -38,12 +38,12 @@ namespace Example.Steps
         }
 
         [Then("the result should be (.*)")]
-        public async Task ThenTheResultShouldBeAsync(int expectedResult)
+        public async Task ThenTheResultShouldBeAsync(string value)
         {
             //delegate to Page Object
             var actualResult = await _calculatorPageObject.WaitForNonEmptyResultAsync();
 
-            actualResult.Should().Be(expectedResult.ToString());
+            actualResult.Should().Be(value);
         }
     }
 }
