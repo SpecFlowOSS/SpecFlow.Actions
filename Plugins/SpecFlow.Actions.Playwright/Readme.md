@@ -4,7 +4,7 @@
 
 ## Summary
 
-This SpecFlow.Action will help you use [Playwright](https://playwright.dev/) together with SpecFlow. It handles the initialisation and lifetime of your browser, provides some extension methods to work with your page selectors and a configuration that makes it easy to set up the browser instance.
+This SpecFlow.Action will help you use [Playwright](https://playwright.dev/) together with SpecFlow. It handles the initialisation and lifetime of your browser, provides methods to work with your page selectors and a configuration that makes it easy to set up the browser instance.
 
 ### Setup
 
@@ -23,8 +23,6 @@ You will need to read through the [setup process for Playwright](https://playwri
 ## Configuration
 
 You can configure this plugin via the  `specflow.actions.json`.
-
-Example:
 
 ``` json
 {
@@ -59,22 +57,33 @@ The browser is started automatically when you try to use the browser instance fo
 ### Page object
 
 ``` csharp
-[Binding]
-public class SomePageObjectClass
+public class BasePage
 {
-    // Used to interact with the selectors
-    private readonly Task<IPage> _page;
+    public readonly Task<IPage> _page;
 
-    //BrowserDriver resolved automatically
-    public SomePageObjectClass(BrowserDriver browserDriver)
+    // BrowserDriver resolved automatically
+    public BasePage(BrowserDriver browserDriver)
     {
+        // Assignes the page instance
         _page = CreatePageAsync(browserDriver.Current);
     }
 
     private async Task<IPage> CreatePageAsync(Task<IBrowser> browser)
     {
-        // Creates a new page instance from the browser driver
+        // Creates a new page instance
         return await (await browser).NewPageAsync();
+    }
+}
+
+public class SomePageObjectClass : BasePage
+{
+    // Used to interact with the selectors
+    private Interactions _interactions;
+
+    public CalculatorPageObject(BrowserDriver browserDriver) : base(browserDriver)
+    {
+        // Creates the Interactions instance using the page object
+        _interactions = new Interactions(_page);
     }
 
     public async Task FillOutSomeInput(string str)
@@ -91,9 +100,9 @@ public class SomePageObjectClass
 [Binding]
 public sealed class CalculatorStepDefinitions
 {
-    //SomePageObjectClass resolved automatically
     private readonly SomePageObjectClass _somePageObjectClass;
 
+    //SomePageObjectClass resolved automatically
     public CalculatorStepDefinitions(SomePageObjectClass somePageObjectClass)
     {
         _somePageObjectClass = somePageObjectClass;
@@ -107,37 +116,39 @@ public sealed class CalculatorStepDefinitions
 }
 ```
 
-### SelectorExtensions
+### Interactions
 
-This static class has extension methods to perform browser interactions
+This class has methods to perform browser interactions per page instance
 
 Available Helper Methods:
 
 ```csharp
+/// Navigates to the specified URL
+public async Task GoToUrl(string url)
+
 /// Sends a string to the specified selector
-public static async Task SendTextAsync(this string selector, IPage page, string keys, PageFillOptions? pageFillOptions = null)
+public async Task SendTextAsync(string selector, string keys, PageFillOptions? pageFillOptions = null)
 
 /// Sends individual keystrokes to the specified selector
-public static async Task SendKeystrokesAsync(this string selector, IPage page, string keys, PageTypeOptions? pageTypeOptions = null)
+public async Task SendKeystrokesAsync(string selector, string keys, PageTypeOptions? pageTypeOptions = null)
 
 /// Sends a click to an element
-public static async Task ClickAsync(this string selector, IPage page, PageClickOptions? pageClickOptions = null)
+public async Task ClickAsync(string selector, PageClickOptions? pageClickOptions = null)
 
 /// Gets the value attribute of an element
-public static async Task<string?> GetValueAttributeAsync(this string selector, IPage page, PageInputValueOptions? pageInputValueOptions = null)
+public async Task<string?> GetValueAttributeAsync(string selector, PageInputValueOptions? pageInputValueOptions = null)
 
 /// Waits for the value attribute of an element to not be empty
-public static async Task WaitForNonEmptyValue(this string selector, IPage page)
+public async Task WaitForNonEmptyValue(string selector)
 
 /// Waits for the value attribute of an element to be empty
-public static async Task WaitForEmptyValue(this string selector, IPage page)
+public async Task WaitForEmptyValue(string selector)
 
 /// Selects the option from a select element by its value
-public static async Task SelectDropdownOptionAsync(this string selector, IPage page, string value, PageSelectOptionOptions? pageSelectOptionOptions = null)
+public async Task SelectDropdownOptionAsync(string selector, string value, PageSelectOptionOptions? pageSelectOptionOptions = null)
 
 /// Selects the option from a select element by its index
-public static async Task SelectDropdownOptionAsync(this string selector, IPage page, int index, PageSelectOptionOptions? pageSelectOptionOptions = null)
-
+public async Task SelectDropdownOptionAsync(string selector, int index, PageSelectOptionOptions? pageSelectOptionOptions = null)
 ```
 
 ## How to get it
