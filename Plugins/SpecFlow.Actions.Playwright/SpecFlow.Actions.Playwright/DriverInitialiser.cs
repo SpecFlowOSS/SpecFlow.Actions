@@ -42,7 +42,7 @@ namespace SpecFlow.Actions.Playwright
 
         public async Task<IBrowser> GetChromiumDriverAsync(string[]? args, float? timeout = 30, bool? headless = true)
         {
-            var options = new BrowserTypeLaunchOptions { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless};
+            var options = new BrowserTypeLaunchOptions { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless };
 
             var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
@@ -51,7 +51,7 @@ namespace SpecFlow.Actions.Playwright
 
         private static float? ToMilliseconds(float? seconds)
         {
-            return seconds * 10000;
+            return seconds * 1000;
         }
     }
 }

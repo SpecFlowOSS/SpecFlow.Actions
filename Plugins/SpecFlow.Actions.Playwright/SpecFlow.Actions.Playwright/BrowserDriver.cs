@@ -18,19 +18,19 @@ namespace SpecFlow.Actions.Playwright
         {
             _playwrightConfiguration = playwrightConfiguration;
             _driverInitialiser = driverInitialiser;
-            _currentBrowserLazy = new AsyncLazy<IBrowser>(CreateWebDriverAsync);
+            _currentBrowserLazy = new AsyncLazy<IBrowser>(CreatePlaywrightAsync);
         }
 
         /// <summary>
-        /// The current Selenium IWebDriver instance
+        /// The current Playwright instance
         /// </summary>
         public Task<IBrowser> Current => _currentBrowserLazy.Value;
 
         /// <summary>
-        /// Creates the Selenium web driver (opens a browser)
+        /// Creates a new instance of Playwright (opens a browser)
         /// </summary>
         /// <returns></returns>
-        private async Task<IBrowser> CreateWebDriverAsync()
+        private async Task<IBrowser> CreatePlaywrightAsync()
         {
             return _playwrightConfiguration.Browser switch
             {
@@ -43,7 +43,7 @@ namespace SpecFlow.Actions.Playwright
         }
 
         /// <summary>
-        /// Disposes the Selenium web driver (closing the browser)
+        /// Disposes the Playwright instance (closing the browser)
         /// </summary>
         public void Dispose()
         {
