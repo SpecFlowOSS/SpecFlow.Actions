@@ -43,7 +43,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: NuGet-Package
-          path: Plugins/SpecFlow.Actions.Playwright/SpecFlow.Actions.Playwright/bin/Release/**/*.nupkg
+          path:  |
+            Plugins/SpecFlow.Actions.Playwright/SpecFlow.Actions.Playwright/bin/Release/**/*.nupkg
+            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
             
 
   release:

@@ -43,7 +43,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: NuGet-Package
-          path: Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker/bin/Release/**/*.nupkg
+          path:  | 
+            Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker/bin/Release/**/*.nupkg
+            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
+
             
 
   release:
