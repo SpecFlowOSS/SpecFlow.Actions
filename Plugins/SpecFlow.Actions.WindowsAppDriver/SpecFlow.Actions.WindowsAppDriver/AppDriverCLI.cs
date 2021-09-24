@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace SpecFlow.Actions.WindowsAppDriver
 {
-    public class AppDriverCli : IDisposable
+    public class AppDriverCli : IAppDriverCli
     {
         private readonly IWindowsAppDriverConfiguration _windowsAppDriverConfiguration;
 

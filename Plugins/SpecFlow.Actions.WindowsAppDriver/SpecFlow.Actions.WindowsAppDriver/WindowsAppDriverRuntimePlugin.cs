@@ -17,6 +17,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<WindowsAppDriverConfiguration, IWindowsAppDriverConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<AppDriverCli, IAppDriverCli>();
         }
     }
 }

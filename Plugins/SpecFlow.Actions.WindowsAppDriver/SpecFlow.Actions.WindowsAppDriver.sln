@@ -12,10 +12,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Configurat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{FFE6B794-EA8B-4E7D-80FE-FB81D70A5915}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{3C2FD80E-B785-4EDD-86E5-564F2BAE30BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator.Specs", "SpecFlowCalculator.Specs\SpecFlowCalculator.Specs.csproj", "{1E096909-A12A-470F-83C8-1C32DCCF2109}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,14 +26,6 @@ Global
 		{707DE81C-B2A0-4B98-B53E-062D5520070B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{707DE81C-B2A0-4B98-B53E-062D5520070B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{707DE81C-B2A0-4B98-B53E-062D5520070B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C2FD80E-B785-4EDD-86E5-564F2BAE30BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C2FD80E-B785-4EDD-86E5-564F2BAE30BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C2FD80E-B785-4EDD-86E5-564F2BAE30BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C2FD80E-B785-4EDD-86E5-564F2BAE30BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E096909-A12A-470F-83C8-1C32DCCF2109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E096909-A12A-470F-83C8-1C32DCCF2109}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E096909-A12A-470F-83C8-1C32DCCF2109}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E096909-A12A-470F-83C8-1C32DCCF2109}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

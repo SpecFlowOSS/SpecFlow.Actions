@@ -1,8 +1,0 @@
-{
-  "WindowsAppDriver": {
-    "WindowsAppDriverPath": "C:\\Program Files\\Windows Application Driver\\WinAppDriver.exe",
-    "Capabiltiies": {
-      "app": "C:\\Users\\jorwe\\source\\repos\\SpecFlow.Actions\\Plugins\\SpecFlow.Actions.WindowsAppDriver\\SpecFlowCalculator\\bin\\Debug\\netcoreapp3.1\\SpecFlowCalculator.exe"
-    }
-  } 
-}
