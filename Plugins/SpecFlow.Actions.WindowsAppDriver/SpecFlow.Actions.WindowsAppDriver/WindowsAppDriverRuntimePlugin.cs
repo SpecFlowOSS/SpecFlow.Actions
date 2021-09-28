@@ -6,7 +6,7 @@ using TechTalk.SpecFlow.UnitTestProvider;
 [assembly: RuntimePlugin(typeof(WindowsAppDriverRuntimePlugin))]
 namespace SpecFlow.Actions.WindowsAppDriver
 {
-    class WindowsAppDriverRuntimePlugin : IRuntimePlugin
+    public class WindowsAppDriverRuntimePlugin : IRuntimePlugin
     {
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
