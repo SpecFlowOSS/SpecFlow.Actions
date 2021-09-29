@@ -25,7 +25,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
         {
             _appDriverProcess = Process.Start((
                 _windowsAppDriverConfiguration.WindowsAppDriverPath 
-                ?? Environment.GetEnvironmentVariable("WINDOWS_APP_DRIVER_FILE_PATH")) 
+                ?? Environment.GetEnvironmentVariable("WINDOWS_APP_DRIVER_EXECUTABLE_PATH")) 
                 ?? throw new InvalidOperationException(Error));
         }
 
