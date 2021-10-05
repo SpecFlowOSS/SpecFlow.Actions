@@ -2,7 +2,6 @@
   "windowsAppDriver": {
     "capabilities": {
       "app": "../SpecFlowCalculator/bin/Debug/net5.0-windows/SpecFlowCalculator.exe"
-    } //,
-    //"WindowsAppDriverPath": "REQUIRED FOR LOCAL EXECUTION UNLESS YOU SPECIFY THE ENVIRONMENT VARIABLE {WINDOWS_APP_DRIVER_EXECUTABLE_PATH}"
-  } 
+    }
+  }
 }
