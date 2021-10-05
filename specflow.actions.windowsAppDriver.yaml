@@ -3,13 +3,18 @@ trigger:
 
 pool:
   vmImage: windows-latest
-  dotnet-version: '5.x'
 
 steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk'
+  inputs:
+    packageType: sdk
+    version: 5.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'Plugins/SpecFlow.Actions.WindowsAppDriver/*.csproj'
+    projects: '*/Plugins/SpecFlow.Actions.WindowsAppDriver/*.csproj'
 - task: Windows Application Driver@0
   inputs:
     OperationType: 'Start'
