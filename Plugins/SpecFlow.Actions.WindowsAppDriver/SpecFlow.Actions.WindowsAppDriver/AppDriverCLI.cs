@@ -6,9 +6,6 @@ namespace SpecFlow.Actions.WindowsAppDriver
 {
     public class AppDriverCli : IAppDriverCli
     {
-        private const string Error = 
-            "There was an issue launching WindowsAppDriver.exe, please make sure the correct file path is included in Specflow.Actions.json or that the 'WINDOWS_APP_DRIVER_FILE_PATH' variable is defined";
-
         private readonly IWindowsAppDriverConfiguration _windowsAppDriverConfiguration;
 
         private Process? _appDriverProcess;
@@ -23,10 +20,13 @@ namespace SpecFlow.Actions.WindowsAppDriver
         /// </summary>
         public void Start()
         {
-            _appDriverProcess = Process.Start((
-                _windowsAppDriverConfiguration.WindowsAppDriverPath 
-                ?? Environment.GetEnvironmentVariable("WINDOWS_APP_DRIVER_EXECUTABLE_PATH")) 
-                ?? throw new InvalidOperationException(Error));
+            var path = _windowsAppDriverConfiguration.WindowsAppDriverPath ??
+                       Environment.GetEnvironmentVariable("WINDOWS_APP_DRIVER_EXECUTABLE_PATH") ?? null;
+
+            if (path != null)
+            {
+                _appDriverProcess = Process.Start(path); 
+            }
         }
 
         /// <summary>
