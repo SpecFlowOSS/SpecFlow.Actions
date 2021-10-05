@@ -5,21 +5,37 @@ pool:
   vmImage: windows-latest
 
 steps:
+- task: UseDotNet@2
+  displayName: Install .NET
+  inputs:
+      version: 5.x
 - task: DotNetCoreCLI@2
   displayName: 'Build'
   inputs:
     command: 'build'
     projects: '**/SpecFlow.Actions.WindowsAppDriver/**/*.csproj'
-- task: Windows Application Driver@0
-  displayName: 'Start WinAppDriver'
-  inputs:
-    OperationType: 'Start'
-    AgentResolution: '1080p'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '**/SpecFlow.Actions.WindowsAppDriver/**/*.csproj'
-- task: Windows Application Driver@0
-  displayName: 'Stop WinAppDriver'
-  inputs:
-    OperationType: 'Stop'
+# - task: Windows Application Driver@0
+#   displayName: 'Start WinAppDriver'
+#   inputs:
+#     OperationType: 'Start'
+#     AgentResolution: '1080p'
+# - task: DotNetCoreCLI@2
+#   displayName: 'Test'
+#   inputs:
+#     command: 'test'
+#     projects: '**/SpecFlow.Actions.WindowsAppDriver/**/*.csproj'
+# - task: Windows Application Driver@0
+#   displayName: 'Stop WinAppDriver'
+#   inputs:
+#     OperationType: 'Stop'
+
+# - task: NuGetPackager@0
+#   displayName: Create the package
+#   inputs:
+#       configurationToPack: 'Release'
+#       searchPattern: '**/SpecFlow.Actions.WindowsAppDriver.csproj'
+# - task: PublishBuildArtifacts@1
+#   displayName: NuGet Package
+#   inputs:
+#       PathtoPublish:
+      
