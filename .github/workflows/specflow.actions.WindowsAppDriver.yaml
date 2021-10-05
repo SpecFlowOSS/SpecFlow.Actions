@@ -1,73 +1,29 @@
 name: SpecFlow.Actions.WindowsAppDriver
 
-on: 
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/specflow.actions.WindowsAppDriver.yaml'
-      - 'Plugins/specflow.actions.WindowsAppDriver/**'
-      - 'Plugins/*'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - '.github/workflows/specflow.actions.specflow.actions.WindowsAppDriver.yaml'
-      - 'Plugins/SpecFlow.Actions.WindowsAppDriver/**'
-      - 'Plugins/*'
+trigger:
+  - main
 
+pool:
+  vmImage: 'windows-latest'
 
-jobs:
-  build:
-    runs-on: windows-latest
-    env:
-        DOTNET_NOLOGO: true
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      # Authenticates packages to push to GPR
-      - uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '5.0.x' 
-        env:
-          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver.sln
+workspace:
+  clean: 'all'
 
-      - run: dotnet test Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver.sln
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'Plugins/specflow.actions.WindowsAppDriver/*.csproj'
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Start'
+    AgentResolution: '1080p'
 
-      - name: Create the package
-        run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver.sln
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'Plugins/specflow.actions.WindowsAppDriver/*.csproj'
 
-      - name: Upload NuGet Package to Artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: NuGet-Package
-          path:  |
-            Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver/bin/Release/**/*.nupkg
-            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
-            
-
-  release:
-    runs-on: windows-latest
-    env: 
-      DOTNET_NOLOGO: true
-    needs: build
-    environment: NuGet.org
-    if: github.ref == 'refs/heads/main'
-    steps:
-      # Authenticates packages to push to nuget.org.
-      # It's only the way to push a package to nuget.org feed for macOS/Linux machines due to API key config store limitations.
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: NuGet-Package
-      - uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-      - name: Publish the package to nuget.org
-        shell: pwsh
-        env:
-          NUGET_AUTH_TOKEN: ${{ secrets.SPECFLOW_ACTIONS_NUGET_TOKEN }}
-        run: dotnet nuget push "**/*.nupkg" -k "$env:NUGET_AUTH_TOKEN" -s "https://api.nuget.org/v3/index.json" --skip-duplicate
-        
+- task: Windows Application Driver@0
+  inputs:
+    OperationType: 'Stop'
