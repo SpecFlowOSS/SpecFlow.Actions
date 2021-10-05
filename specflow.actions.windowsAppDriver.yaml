@@ -1,0 +1,11 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: 'SpecFlow.Actions\Plugins\SpecFlow.Actions.WindowsAppDriver\**'
