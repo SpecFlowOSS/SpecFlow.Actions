@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+	  <AssemblyName>SpecFlow.Actions.WindowsAppDriver.SpecFlowPlugin</AssemblyName>
+	  <PackageId>SpecFlow.Actions.WindowsAppDriver</PackageId>
+	  <Product>SpecFlow.Actions.WindowsAppDriver</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Appium.WebDriver" Version="4.3.1" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj" />
+  </ItemGroup>
+</Project>
