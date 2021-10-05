@@ -15,10 +15,10 @@ steps:
   inputs:
     OperationType: 'Start'
     AgentResolution: '1080p'
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: 'test'
-#     projects: '**/Plugins/SpecFlow.Actions.WindowsAppDriver/*.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '**/SpecFlow.Actions.WindowsAppDriver/**/*.csproj'
 - task: Windows Application Driver@0
   displayName: 'Stop WinAppDriver'
   inputs:
