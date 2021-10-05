@@ -14,7 +14,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '*/Plugins/SpecFlow.Actions.WindowsAppDriver/*.csproj'
+    projects: '**/Plugins/SpecFlow.Actions.WindowsAppDriver/*.csproj'
 - task: Windows Application Driver@0
   inputs:
     OperationType: 'Start'
