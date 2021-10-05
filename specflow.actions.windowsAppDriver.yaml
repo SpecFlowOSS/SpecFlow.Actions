@@ -8,4 +8,4 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'SpecFlow.Actions\Plugins\SpecFlow.Actions.WindowsAppDriver\**'
+    projects: 'SpecFlow.Actions.WindowsAppDriver.csproj'
