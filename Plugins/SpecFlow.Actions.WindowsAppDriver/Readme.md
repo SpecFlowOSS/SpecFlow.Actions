@@ -57,7 +57,7 @@ The path to the Windows App Drive CLI is **not required**, so if the configurati
 
 ## How to use it
 
-1. Inject the ```AppDriver``` class into another class using constructor/parameter injection inside of your test project. This will give you access to the current instance of the AppDriver. The lifetime of this object is handled and disposed once no longer required.
+1. Inject the ```AppDriver``` class into your consuming class using constructor/parameter injection inside of your test project. This will give you access to the current instance of the AppDriver. The lifetime of this object is handled and disposed once no longer required.
 
     ```csharp
     public class CalculatorFormElements
