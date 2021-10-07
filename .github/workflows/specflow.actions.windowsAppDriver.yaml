@@ -5,14 +5,14 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.WindowsAppDriver.yaml'
+      - '.github/workflows/specflow.actions.windowsAppDriver.yaml'
       - 'Plugins/specflow.actions.WindowsAppDriver/**'
       - 'Plugins/*'
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/specflow.actions.specflow.actions.WindowsAppDriver.yaml'
+      - '.github/workflows/specflow.actions.windowsAppDriver.yaml'
       - 'Plugins/SpecFlow.Actions.WindowsAppDriver/**'
       - 'Plugins/*'
 
