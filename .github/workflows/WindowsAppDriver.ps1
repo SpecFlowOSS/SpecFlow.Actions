@@ -6,4 +6,6 @@ Invoke-WebRequest $windowsApplicationDriverPath -OutFile WindowsApplicationDrive
 
 Start-Process msiexec.exe -Wait -argumentList "/i WindowsApplicationDriver_1.2.1.msi /quiet"
 
-Start-Process "Program Files (x86)\Windows Application Driver\WinAppDriver.exe"
+$file = get-childitem (Get-Location) -Filter *.exe -recurse | where {$_.Name -ccontains "WinAppDriver.exe"}
+
+Start-Process $file.FullName
