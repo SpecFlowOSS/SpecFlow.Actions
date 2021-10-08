@@ -1,4 +1,4 @@
-﻿$windowsApplicationDriverPath = "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi"
+$windowsApplicationDriverPath = "https://github.com/microsoft/WinAppDriver/releases/download/v1.2.1/WindowsApplicationDriver_1.2.1.msi"
 
 cd\
 
