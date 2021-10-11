@@ -39,6 +39,9 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
         }
 
         public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.WindowsAppDriver.Capabilities;
+
         public string? WindowsAppDriverPath => _specflowJsonPart.Value.WindowsAppDriver.WindowsAppDriverPath;
+
+        public bool? EnableScreenshots => _specflowJsonPart.Value.WindowsAppDriver.EnableScreenshots;
     }
 }
