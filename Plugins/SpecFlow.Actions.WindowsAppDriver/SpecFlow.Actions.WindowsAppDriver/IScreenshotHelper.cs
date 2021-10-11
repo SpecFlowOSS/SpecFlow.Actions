@@ -4,6 +4,6 @@ namespace SpecFlow.Actions.WindowsAppDriver
 {
     public interface IScreenshotHelper
     {
-        void TakeScreenshot(FeatureContext featureContext, ScenarioContext scenarioContext);
+        void TakeScreenshot(AppDriver appDriver, FeatureContext featureContext, ScenarioContext scenarioContext);
     }
 }

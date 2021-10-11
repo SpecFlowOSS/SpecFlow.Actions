@@ -34,8 +34,9 @@ namespace SpecFlow.Actions.WindowsAppDriver
         {
             var scenarioContext = e.ObjectContainer.Resolve<ScenarioContext>();
             var featureContext = e.ObjectContainer.Resolve<FeatureContext>();
+            var appDriver = e.ObjectContainer.Resolve<AppDriver>();
 
-            _screenshotHelper?.TakeScreenshot(featureContext, scenarioContext);
+            _screenshotHelper?.TakeScreenshot(appDriver, featureContext, scenarioContext);
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_BeforeTestRun(object sender, RuntimePluginBeforeTestRunEventArgs e)
