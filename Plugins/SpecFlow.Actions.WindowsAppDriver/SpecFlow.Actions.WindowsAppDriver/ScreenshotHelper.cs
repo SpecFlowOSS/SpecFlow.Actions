@@ -29,7 +29,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
                 }
 
                 var screenshot = _appDriver.Current.GetScreenshot();
-                screenshot.SaveAsFile(Path.Combine(path, $"{scenarioContext.StepContext.StepInfo.Text}-{scenarioContext.ScenarioExecutionStatus}.png")); 
+                screenshot.SaveAsFile(Path.Combine(path, $"{scenarioContext.StepContext.StepInfo.Text} ({scenarioContext.ScenarioExecutionStatus}).png")); 
             }
         }
     }
