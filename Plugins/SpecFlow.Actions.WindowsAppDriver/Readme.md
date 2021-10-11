@@ -46,7 +46,7 @@ Example:
 
 3. ```EnableScreenshots``` - If no value is provided, then this resolves to true. If you want to disable screenshots, then set the value to false. Screenshots will be taken after each step automatically using the following folder structure: ```\TestResults\Screenshots\{yyyy-MM-dd_Hmmss}\{Feature title}\{Scenario title}\{Step name} ({execution status}).png``` e.g.
 
-    ```path
+    ```text
     \TestResults\Screenshots\2021-10-11_171822\Calculator\Add two numbers\the first number is 50 (OK).png
     ```
 
