@@ -34,6 +34,8 @@ jobs:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver.sln
 
+      - run: dotnet test Plugins\SpecFlow.Actions.WindowsAppDriver\SpecFlow.Actions.WindowsAppDriver.Tests\SpecFlow.Actions.WindowsAppDriver.Tests.csproj
+
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver.sln
 
