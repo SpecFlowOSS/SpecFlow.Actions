@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A37BBFE6
 		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.WindowsAppDriver.Tests", "SpecFlow.Actions.WindowsAppDriver.Tests\SpecFlow.Actions.WindowsAppDriver.Tests.csproj", "{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{4D4DC82B-2965-4866-98DC-57D2ACC9CE37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4DC82B-2965-4866-98DC-57D2ACC9CE37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4DC82B-2965-4866-98DC-57D2ACC9CE37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
