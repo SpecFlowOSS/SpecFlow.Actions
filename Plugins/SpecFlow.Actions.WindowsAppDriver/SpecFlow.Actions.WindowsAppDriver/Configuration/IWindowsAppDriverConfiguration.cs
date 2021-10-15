@@ -7,5 +7,7 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
         Dictionary<string, string>? Capabilities { get; }
 
         string? WindowsAppDriverPath { get; }
+
+        bool? EnableScreenshots { get;  }
     }
 }

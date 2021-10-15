@@ -13,6 +13,7 @@ This SpecFlow.Action will help you use Windows App Driver together with SpecFlow
 
 - Lifetime handling of Windows App Driver and the application being tested
 - Configuration via `specflow.actions.json`
+- Automatic screenshot capture
 
 ## Configuration
 
@@ -26,7 +27,8 @@ Example:
     "capabilities": {
       "app": "../SpecFlowCalculator/bin/Debug/net5.0-windows/SpecFlowCalculator.exe"
     },
-    "WindowsAppDriverPath": "C:/Program Files/Windows Application Driver/WinAppDriver.exe"
+    "WindowsAppDriverPath": "C:/Program Files/Windows Application Driver/WinAppDriver.exe",
+    "EnableScreenshots": true
   }
 }
 ```
@@ -41,6 +43,12 @@ Example:
     ```
 
 2. ```WindowsAppDriverPath``` - The path to the Windows App Driver CLI (must be **absolute**, not relative)
+
+3. ```EnableScreenshots``` - If no value is provided, then this resolves to false. If you want to enable screenshots, then set the value to true. Screenshots will be taken after each step automatically using the following folder structure: ```\TestResults\Screenshots\{yyyy-MM-dd_Hmmss}\{Feature title}\{Scenario title}\{Step name} ({execution status}).png``` e.g.
+
+    ```text
+    \TestResults\Screenshots\2021-10-11_171822\Calculator\Add two numbers\the first number is 50 (OK).png
+    ```
 
 ### Important information
 
