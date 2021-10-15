@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.WindowsAppDriver.Configuration
 {
@@ -30,8 +29,6 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
             {
                 PropertyNameCaseInsensitive = true
             };
-
-            jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
             var specflowActionConfig = JsonSerializer.Deserialize<SpecFlowActionJson>(json, jsonSerializerOptions);
 
