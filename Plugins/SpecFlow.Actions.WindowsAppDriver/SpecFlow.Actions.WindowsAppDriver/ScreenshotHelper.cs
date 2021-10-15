@@ -15,7 +15,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
         public ScreenshotHelper(IWindowsAppDriverConfiguration windowsAppDriverConfiguration, ITestRunContext testRunContext)
         {
             _testRunContext = testRunContext;
-            _enabled = windowsAppDriverConfiguration.EnableScreenshots ?? true;
+            _enabled = windowsAppDriverConfiguration.EnableScreenshots ?? false;
         }
 
         public void TakeScreenshot(AppDriver appDriver, FeatureContext featureContext, ScenarioContext scenarioContext)
