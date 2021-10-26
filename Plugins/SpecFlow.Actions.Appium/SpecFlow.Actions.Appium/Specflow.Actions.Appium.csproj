@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+		<AssemblyName>SpecFlow.Actions.Appium.SpecFlowPlugin</AssemblyName>
+		<PackageId>SpecFlow.Actions.Appium</PackageId>
+		<Product>SpecFlow.Actions.Appium</Product>
+	</PropertyGroup>
+
+</Project>
