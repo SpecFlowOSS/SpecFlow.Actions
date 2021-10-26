@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31808.319
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Appium", "SpecFlow.Actions.Appium\SpecFlow.Actions.Appium.csproj", "{2911B688-54DB-4E76-AF22-FD2B10365C20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{E91929C3-8889-4AB4-A952-0FE8310B0EF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{E91929C3-8889-4AB4-A952-0FE8310B0EF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{D07E3678-4115-459A-8668-075E6786BC01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,12 @@ Global
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
