@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Appium.Android;
 using SpecFlow.Actions.Appium.Configuration;
 using System;
+using System.Linq;
 
 namespace SpecFlow.Actions.Appium
 {
@@ -18,22 +19,19 @@ namespace SpecFlow.Actions.Appium
             _appiumConfiguration = appiumConfiguration;
         }
 
-        public IWebDriver Resolve(string automationName)
+        // See https://github.com/appium/appium/blob/master/docs/en/drivers/mac.md some driver user automation name and some use platform name...
+        public IWebDriver Resolve()
         {
-            switch (automationName)
+            var automationName = _appiumConfiguration.Capabilities!.Single(cap => cap.Key.Equals("automationName")).Value;
+
+            return _appiumConfiguration.Capabilities!.Single(cap => cap.Key.Equals("automationName")).Value switch
             {
-                case "UiAutomator2":
-                    return _appiumConfiguration.LocalAppiumServerRequired
-                        ? new AndroidDriver<AndroidElement>(_appiumServer.Current, _driverOptions.Current, TimeSpan.FromSeconds(_appiumConfiguration.Timeout ?? 30))
-                        : new AndroidDriver<AndroidElement>(_appiumConfiguration.ServerAddress, _driverOptions.Current, TimeSpan.FromSeconds(_appiumConfiguration.Timeout ?? 30));
-                case "XCUITest":
-                case "Espresso":
-                case "Windows":
-                case "Mac":
-                    throw new NotImplementedException($"There is no implementation yet for {automationName}");
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(automationName), automationName, null);
-            }
+                "UiAutomator2" => _appiumConfiguration.LocalAppiumServerRequired
+                                       ? new AndroidDriver<AndroidElement>(_appiumServer.Current, _driverOptions.Current, TimeSpan.FromSeconds(_appiumConfiguration.Timeout ?? 30))
+                                       : new AndroidDriver<AndroidElement>(_appiumConfiguration.ServerAddress, _driverOptions.Current, TimeSpan.FromSeconds(_appiumConfiguration.Timeout ?? 30)),
+                "XCUITest" or "Espresso" or "Windows" or "Mac" => throw new NotImplementedException($"There is no implementation yet for {automationName}"),
+                _ => throw new ArgumentOutOfRangeException(nameof(automationName), automationName, null),
+            };
         }
     }
 }

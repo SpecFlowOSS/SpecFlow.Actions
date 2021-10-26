@@ -28,7 +28,6 @@ namespace SpecFlow.Actions.Appium.Configuration
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
-
             };
 
             var specflowActionConfig = JsonSerializer.Deserialize<SpecFlowActionJson>(json, jsonSerializerOptions);

@@ -1,29 +1,24 @@
 ﻿using OpenQA.Selenium;
-using SpecFlow.Actions.Appium.Configuration;
 using System;
-using System.Linq;
 
 namespace SpecFlow.Actions.Appium
 {
     public class AppDriver : IAppDriver
     {
-        private readonly IAppiumConfiguration _appiumConfiguration;
         private readonly IDriverResolver _driverResolver;
         private readonly Lazy<IWebDriver> _lazyAndroidDriver;
 
         public IWebDriver Current => _lazyAndroidDriver.Value;
 
-        internal AppDriver(IDriverResolver driverResolver, IAppiumConfiguration appiumConfiguration)
+        internal AppDriver(IDriverResolver driverResolver)
         {
             _driverResolver = driverResolver;
-            _appiumConfiguration = appiumConfiguration;
-
             _lazyAndroidDriver = new Lazy<IWebDriver>(GetDriver);
         }
 
         private IWebDriver GetDriver()
         {
-            return _driverResolver.Resolve(_appiumConfiguration.Capabilities!.Single(cap => cap.Key.Equals("automationName")).Value);
+            return _driverResolver.Resolve();
         }
 
         public void Dispose()

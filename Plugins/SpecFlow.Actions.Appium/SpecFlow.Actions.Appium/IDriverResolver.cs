@@ -4,6 +4,6 @@ namespace SpecFlow.Actions.Appium
 {
     internal interface IDriverResolver
     {
-        IWebDriver Resolve(string automationName);
+        IWebDriver Resolve();
     }
 }
