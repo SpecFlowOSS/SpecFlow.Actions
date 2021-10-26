@@ -4,11 +4,8 @@ namespace Example.App
 {
     public class CalculatorActions : CalculatorFormElements
     {
-        private readonly AppDriver _appDriver;
-
         public CalculatorActions(AppDriver appDriver) : base(appDriver)
         {
-            _appDriver = appDriver;
         }
 
         public void EnterFirstNumber(string number)

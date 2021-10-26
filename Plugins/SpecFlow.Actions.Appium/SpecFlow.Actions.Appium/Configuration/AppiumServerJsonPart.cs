@@ -5,8 +5,10 @@ namespace SpecFlow.Actions.Appium.Configuration
 {
     public class AppiumServerJsonPart
     {
-        [JsonInclude] public bool? LocalAppiumServerRequired { get; set; }
+        [JsonInclude]
+        public bool? LocalAppiumServerRequired { get; set; }
 
-        [JsonInclude] public Uri? ServerAddress { get; set; }
+        [JsonInclude]
+        public Uri? ServerAddress { get; set; }
     }
 }

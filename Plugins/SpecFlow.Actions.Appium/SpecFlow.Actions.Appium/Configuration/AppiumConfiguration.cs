@@ -28,6 +28,7 @@ namespace SpecFlow.Actions.Appium.Configuration
             var jsonSerializerOptions = new JsonSerializerOptions()
             {
                 PropertyNameCaseInsensitive = true
+
             };
 
             var specflowActionConfig = JsonSerializer.Deserialize<SpecFlowActionJson>(json, jsonSerializerOptions);
@@ -36,6 +37,8 @@ namespace SpecFlow.Actions.Appium.Configuration
         }
 
         public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Appium.Capabilities;
+
+        public int? Timeout => _specflowJsonPart.Value.Appium.Timeout;
 
         public bool LocalAppiumServerRequired => _specflowJsonPart.Value.AppiumServer.LocalAppiumServerRequired ?? true;
 

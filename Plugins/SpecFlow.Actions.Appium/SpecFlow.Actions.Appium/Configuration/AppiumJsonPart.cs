@@ -7,5 +7,8 @@ namespace SpecFlow.Actions.Appium.Configuration
     {
         [JsonInclude]
         public Dictionary<string, string>? Capabilities { get; set; }
+
+        [JsonInclude]
+        public int? Timeout { get; set; }
     }
 }

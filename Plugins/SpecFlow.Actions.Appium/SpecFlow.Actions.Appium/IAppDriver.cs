@@ -1,10 +1,10 @@
-﻿using OpenQA.Selenium.Appium.Android;
+﻿using OpenQA.Selenium;
 using System;
 
 namespace SpecFlow.Actions.Appium
 {
     public interface IAppDriver : IDisposable
     {
-        AndroidDriver<AndroidElement> Current { get; }
+        IWebDriver Current { get; }
     }
 }

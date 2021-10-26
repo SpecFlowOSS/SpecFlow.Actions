@@ -7,6 +7,8 @@ namespace SpecFlow.Actions.Appium.Configuration
     {
         Dictionary<string, string>? Capabilities { get; }
 
+        int? Timeout { get; }
+
         bool LocalAppiumServerRequired { get; }
 
         Uri? ServerAddress { get; }

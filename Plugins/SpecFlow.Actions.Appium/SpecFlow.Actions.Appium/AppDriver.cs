@@ -1,32 +1,29 @@
-﻿using OpenQA.Selenium.Appium.Android;
+﻿using OpenQA.Selenium;
 using SpecFlow.Actions.Appium.Configuration;
 using System;
+using System.Linq;
 
 namespace SpecFlow.Actions.Appium
 {
     public class AppDriver : IAppDriver
     {
-        private readonly IAppiumServer _appiumServer;
-        private readonly IDriverOptions _driverOptions;
         private readonly IAppiumConfiguration _appiumConfiguration;
-        private readonly Lazy<AndroidDriver<AndroidElement>> _lazyAndroidDriver;
+        private readonly IDriverResolver _driverResolver;
+        private readonly Lazy<IWebDriver> _lazyAndroidDriver;
 
-        public AndroidDriver<AndroidElement> Current => _lazyAndroidDriver.Value;
+        public IWebDriver Current => _lazyAndroidDriver.Value;
 
-        internal AppDriver(IAppiumServer appiumServer, IDriverOptions driverOptions, IAppiumConfiguration appiumConfiguration)
+        internal AppDriver(IDriverResolver driverResolver, IAppiumConfiguration appiumConfiguration)
         {
-            _appiumServer = appiumServer;
-            _driverOptions = driverOptions;
+            _driverResolver = driverResolver;
             _appiumConfiguration = appiumConfiguration;
 
-            _lazyAndroidDriver = new Lazy<AndroidDriver<AndroidElement>>(GetDriver);
+            _lazyAndroidDriver = new Lazy<IWebDriver>(GetDriver);
         }
 
-        private AndroidDriver<AndroidElement> GetDriver()
+        private IWebDriver GetDriver()
         {
-            return _appiumConfiguration.LocalAppiumServerRequired 
-                ? new AndroidDriver<AndroidElement>(_appiumServer.Current, _driverOptions.Current) 
-                : new AndroidDriver<AndroidElement>(_appiumConfiguration.ServerAddress, _driverOptions.Current);
+            return _driverResolver.Resolve(_appiumConfiguration.Capabilities!.Single(cap => cap.Key.Equals("automationName")).Value);
         }
 
         public void Dispose()
