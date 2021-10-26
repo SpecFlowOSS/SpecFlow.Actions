@@ -7,4 +7,8 @@
 		<Product>SpecFlow.Actions.Appium</Product>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="SpecFlow" Version="3.9.22" />
+	</ItemGroup>
+
 </Project>
