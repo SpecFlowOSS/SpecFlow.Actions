@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Appium", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.csproj", "{E91929C3-8889-4AB4-A952-0FE8310B0EF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{D07E3678-4115-459A-8668-075E6786BC01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{8D78C7BB-1577-4416-A678-0693D4EDEFCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +23,12 @@ Global
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E91929C3-8889-4AB4-A952-0FE8310B0EF4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D07E3678-4115-459A-8668-075E6786BC01}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
