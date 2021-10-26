@@ -20,6 +20,14 @@ namespace SpecFlow.Actions.Appium
             e.ObjectContainer.RegisterTypeAs<AppiumServer, IAppiumServer>();
             e.ObjectContainer.RegisterTypeAs<DriverOptions, IDriverOptions>();
             e.ObjectContainer.RegisterTypeAs<AppDriver, IAppDriver>();
+
+            var configuration = e.ObjectContainer.Resolve<AppiumConfiguration>();
+            var server = e.ObjectContainer.Resolve<AppiumServer>();
+
+            if (configuration.LocalAppiumServerRequired)
+            {
+                server.Current.Start();
+            }
         }
     }
 }

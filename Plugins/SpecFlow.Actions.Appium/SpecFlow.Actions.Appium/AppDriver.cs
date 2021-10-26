@@ -8,6 +8,7 @@ namespace SpecFlow.Actions.Appium
     {
         private readonly IAppiumServer _appiumServer;
         private readonly IDriverOptions _driverOptions;
+        private readonly IAppiumConfiguration _appiumConfiguration;
         private readonly Lazy<AndroidDriver<AndroidElement>> _lazyAndroidDriver;
 
         public AndroidDriver<AndroidElement> Current => _lazyAndroidDriver.Value;
@@ -16,18 +17,16 @@ namespace SpecFlow.Actions.Appium
         {
             _appiumServer = appiumServer;
             _driverOptions = driverOptions;
-
-            if (appiumConfiguration.LocalAppiumServerRequired)
-            {
-                appiumServer.Current.Start();
-            }
+            _appiumConfiguration = appiumConfiguration;
 
             _lazyAndroidDriver = new Lazy<AndroidDriver<AndroidElement>>(GetDriver);
         }
 
         private AndroidDriver<AndroidElement> GetDriver()
         {
-            return new AndroidDriver<AndroidElement>(_appiumServer.Current, _driverOptions.Current);
+            return _appiumConfiguration.LocalAppiumServerRequired 
+                ? new AndroidDriver<AndroidElement>(_appiumServer.Current, _driverOptions.Current) 
+                : new AndroidDriver<AndroidElement>(_appiumConfiguration.ServerAddress, _driverOptions.Current);
         }
 
         public void Dispose()

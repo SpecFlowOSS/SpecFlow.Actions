@@ -37,6 +37,8 @@ namespace SpecFlow.Actions.Appium.Configuration
 
         public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Appium.Capabilities;
 
-        public bool LocalAppiumServerRequired => _specflowJsonPart.Value.AppiumServer.LocalAppiumServerRequired;
+        public bool LocalAppiumServerRequired => _specflowJsonPart.Value.AppiumServer.LocalAppiumServerRequired ?? true;
+
+        public Uri? ServerAddress => _specflowJsonPart.Value.AppiumServer.ServerAddress;
     }
 }

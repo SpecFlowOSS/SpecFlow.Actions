@@ -5,9 +5,10 @@
       "avd": "pixel_3a_xl_r_11_0_-_api_30",
       "appPackage": "com.companyname.specflowcalculator",
       "appActivity": "crc6451aad8f0eac5360f.MainActivity"
-    },
-    "AppiumServer": {
-      "LocalServerRequired": true
-    } 
+    }
+  },
+  "AppiumServer": {
+    "LocalAppiumServerRequired": false,
+    "ServerAddress": "http://localhost:4723/wd/hub"
   }
 }
