@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "Example\Example.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlowCalculator\SpecFlowCalculator.csproj", "{8D78C7BB-1577-4416-A678-0693D4EDEFCF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{1C4CFCC8-1B3F-4BA9-B974-9D9F289A2884}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Configuration", "..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj", "{B5CF27F4-0553-4D99-8D96-630EB589804C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +33,16 @@ Global
 		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D78C7BB-1577-4416-A678-0693D4EDEFCF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B5CF27F4-0553-4D99-8D96-630EB589804C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CF27F4-0553-4D99-8D96-630EB589804C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CF27F4-0553-4D99-8D96-630EB589804C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CF27F4-0553-4D99-8D96-630EB589804C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B5CF27F4-0553-4D99-8D96-630EB589804C} = {1C4CFCC8-1B3F-4BA9-B974-9D9F289A2884}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75BC1A56-4407-4852-8A15-53C13B256988}

@@ -1,5 +1,5 @@
 ﻿using SpecFlow.Actions.Appium;
-using System;
+using SpecFlow.Actions.Appium.Configuration;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -16,7 +16,10 @@ namespace SpecFlow.Actions.Appium
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            throw new NotImplementedException();
+            e.ObjectContainer.RegisterTypeAs<AppiumConfiguration, IAppiumConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<AppiumServer, IAppiumServer>();
+            e.ObjectContainer.RegisterTypeAs<DriverOptions, IDriverOptions>();
+            e.ObjectContainer.RegisterTypeAs<AppDriver, IAppDriver>();
         }
     }
 }

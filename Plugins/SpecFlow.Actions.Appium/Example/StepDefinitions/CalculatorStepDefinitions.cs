@@ -1,46 +1,61 @@
-﻿using TechTalk.SpecFlow;
+﻿using Example.App;
+using FluentAssertions;
+using TechTalk.SpecFlow;
 
 namespace Example.StepDefinitions
 {
     [Binding]
     public sealed class CalculatorStepDefinitions
     {
-        // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+        private readonly CalculatorActions _calculatorActions;
+
+        public CalculatorStepDefinitions(CalculatorActions calculatorActions)
+        {
+            _calculatorActions = calculatorActions;
+        }
 
         [Given("the first number is (.*)")]
         public void GivenTheFirstNumberIs(int number)
         {
-            //TODO: implement arrange (precondition) logic
-            // For storing and retrieving scenario-specific data see https://go.specflow.org/doc-sharingdata
-            // To use the multiline text or the table argument of the scenario,
-            // additional string/Table parameters can be defined on the step definition
-            // method. 
-
-            throw new PendingStepException();
+            _calculatorActions.EnterFirstNumber(number.ToString());
         }
 
         [Given("the second number is (.*)")]
         public void GivenTheSecondNumberIs(int number)
         {
-            //TODO: implement arrange (precondition) logic
-
-            throw new PendingStepException();
+            _calculatorActions.EnterSecondNumber(number.ToString());
         }
 
         [When("the two numbers are added")]
         public void WhenTheTwoNumbersAreAdded()
         {
-            //TODO: implement act (action) logic
+            _calculatorActions.ClickAdd();
+        }
 
-            throw new PendingStepException();
+        [When(@"the two numbers are subtracted")]
+        public void WhenTheTwoNumbersAreSubtracted()
+        {
+            _calculatorActions.ClickSubtract();
+        }
+
+        [When(@"the two numbers are multiplied")]
+        public void WhenTheTwoNumbersAreMultiplied()
+        {
+            _calculatorActions.ClickMultiply();
+        }
+
+        [When(@"the two numbers are divided")]
+        public void WhenTheTwoNumbersAreDivided()
+        {
+            _calculatorActions.ClickDivide();
         }
 
         [Then("the result should be (.*)")]
         public void ThenTheResultShouldBe(int result)
         {
-            //TODO: implement assert (verification) logic
+            var actualResult = int.Parse(_calculatorActions.GetResult());
 
-            throw new PendingStepException();
+            result.Should().Be(actualResult);
         }
     }
 }
