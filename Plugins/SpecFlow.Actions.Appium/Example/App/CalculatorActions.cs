@@ -1,10 +1,10 @@
-﻿using SpecFlow.Actions.Appium;
+﻿using SpecFlow.Actions.Appium.Drivers;
 
 namespace Example.App
 {
     public class CalculatorActions : CalculatorFormElements
     {
-        public CalculatorActions(AppDriver appDriver) : base(appDriver)
+        public CalculatorActions(AndroidAppDriver androidAppDriver) : base(androidAppDriver)
         {
         }
 

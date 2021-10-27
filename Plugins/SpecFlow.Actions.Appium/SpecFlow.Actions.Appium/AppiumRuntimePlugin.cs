@@ -19,8 +19,7 @@ namespace SpecFlow.Actions.Appium
             e.ObjectContainer.RegisterTypeAs<AppiumConfiguration, IAppiumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<AppiumServer, IAppiumServer>();
             e.ObjectContainer.RegisterTypeAs<DriverOptions, IDriverOptions>();
-            e.ObjectContainer.RegisterTypeAs<DriverResolver, IDriverResolver>();
-            e.ObjectContainer.RegisterTypeAs<AppDriver, IAppDriver>();
+            e.ObjectContainer.RegisterTypeAs<DriverFactory, IDriverFactory>();
 
             var configuration = e.ObjectContainer.Resolve<AppiumConfiguration>();
             var server = e.ObjectContainer.Resolve<AppiumServer>();

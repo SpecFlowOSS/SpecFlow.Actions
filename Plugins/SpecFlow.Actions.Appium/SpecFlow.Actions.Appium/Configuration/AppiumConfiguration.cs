@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace SpecFlow.Actions.Appium.Configuration
 {
-    internal class AppiumConfiguration : IAppiumConfiguration
+    public class AppiumConfiguration : IAppiumConfiguration
     {
         private readonly ISpecFlowActionJsonLoader _specFlowActionJsonLoader;
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;

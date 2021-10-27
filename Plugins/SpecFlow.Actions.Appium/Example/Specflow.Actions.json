@@ -6,5 +6,9 @@
       "appPackage": "com.companyname.specflowcalculator",
       "appActivity": "crc6451aad8f0eac5360f.MainActivity"
     }
-  }
+  },
+  "AppiumServer": {
+    "LocalAppiumServerRequired": false,
+    "ServerAddress": "http://localhost:4723/wd/hub"
+  } 
 }

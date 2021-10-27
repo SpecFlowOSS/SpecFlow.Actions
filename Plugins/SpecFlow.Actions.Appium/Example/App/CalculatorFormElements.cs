@@ -1,36 +1,36 @@
 ﻿using OpenQA.Selenium.Appium.Android;
-using SpecFlow.Actions.Appium;
+using SpecFlow.Actions.Appium.Drivers;
 
 namespace Example.App
 {
     public class CalculatorFormElements
     {
-        private readonly AndroidDriver<AndroidElement> _androidDriver;
+        private readonly AndroidAppDriver _androidAppDriver;
 
-        public CalculatorFormElements(AppDriver appDriver)
+        public CalculatorFormElements(AndroidAppDriver androidAppDriver)
         {
-            _androidDriver = (AndroidDriver<AndroidElement>)appDriver.Current;
+            _androidAppDriver = androidAppDriver;
         }
 
         public AndroidElement FirstNumberTextBox =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/firstNumberTextBox");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/firstNumberTextBox");
 
         public AndroidElement SecondNumberTextBox =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/secondNumberTextBox");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/secondNumberTextBox");
 
         public AndroidElement AddButton =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/addButton");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/addButton");
 
         public AndroidElement SubtractButton =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/subtractButton");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/subtractButton");
 
         public AndroidElement MultiplyButton =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/multiplyButton");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/multiplyButton");
 
         public AndroidElement DivideButton =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/divideButton");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/divideButton");
 
         public AndroidElement ResultTextBox =>
-            _androidDriver.FindElementById("com.companyname.specflowcalculator:id/resultTextBox");
+            _androidAppDriver.Current.FindElementById("com.companyname.specflowcalculator:id/resultTextBox");
     }
 }
