@@ -18,13 +18,13 @@ namespace SpecFlow.Actions.WindowsAppDriver.Tests
         }
 
         [Fact]
-        public void Capabilities_IsNull_If_Json_IsEmpty()
+        public void Capabilities_IsEmpty_If_Json_IsEmpty()
         {
             var specflowJsonContent = string.Empty;
 
             var appDriverConfiguration = GetAppDriverConfiguration(specflowJsonContent);
 
-            appDriverConfiguration.Capabilities.Should().BeNull();
+            appDriverConfiguration.Capabilities.Should().BeEmpty();
         }
 
         [Fact]

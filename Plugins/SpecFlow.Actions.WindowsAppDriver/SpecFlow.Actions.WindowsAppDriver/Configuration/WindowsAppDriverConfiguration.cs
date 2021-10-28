@@ -1,4 +1,5 @@
-﻿using SpecFlow.Actions.Configuration;
+﻿using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
+using SpecFlow.Actions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -35,7 +36,7 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
             return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
-        public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.WindowsAppDriver.Capabilities;
+        public Dictionary<string, string> Capabilities => _specflowJsonPart.Value.WindowsAppDriver.Capabilities;
 
         public string? WindowsAppDriverPath => _specflowJsonPart.Value.WindowsAppDriver.WindowsAppDriverPath;
 

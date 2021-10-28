@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace SpecFlow.Actions.Appium.Configuration
+namespace SpecFlow.Actions.Appium.Configuration.Appium
 {
     public class AppiumConfiguration : IAppiumConfiguration
     {
@@ -35,7 +35,7 @@ namespace SpecFlow.Actions.Appium.Configuration
             return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
-        public Dictionary<string, string>? Capabilities => _specflowJsonPart.Value.Appium.Capabilities;
+        public Dictionary<string, string> Capabilities => _specflowJsonPart.Value.Appium.Capabilities;
 
         public int? Timeout => _specflowJsonPart.Value.Appium.Timeout;
 

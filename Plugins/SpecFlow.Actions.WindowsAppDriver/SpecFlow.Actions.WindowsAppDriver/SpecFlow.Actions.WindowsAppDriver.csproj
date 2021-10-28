@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Appium\SpecFlow.Actions.Appium\SpecFlow.Actions.Appium.csproj" />
     <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj" />
   </ItemGroup>
 </Project>

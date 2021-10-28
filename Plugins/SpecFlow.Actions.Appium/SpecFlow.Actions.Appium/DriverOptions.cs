@@ -1,6 +1,5 @@
-﻿using Castle.Core.Internal;
-using OpenQA.Selenium.Appium;
-using SpecFlow.Actions.Appium.Configuration;
+﻿using OpenQA.Selenium.Appium;
+using SpecFlow.Actions.Appium.Configuration.Appium;
 using System;
 
 namespace SpecFlow.Actions.Appium
@@ -23,12 +22,7 @@ namespace SpecFlow.Actions.Appium
         {
             var options = new AppiumOptions();
 
-            if (_appiumConfiguration.Capabilities.IsNullOrEmpty())
-            {
-                throw new Exception("Capabilities must be provided to launch the Appium driver. please refer to the Appium documentation");
-            }
-
-            foreach (var capability in _appiumConfiguration.Capabilities!)
+            foreach (var capability in _appiumConfiguration.Capabilities)
             {
                 options.AddAdditionalCapability(capability.Key, capability.Value);
             }

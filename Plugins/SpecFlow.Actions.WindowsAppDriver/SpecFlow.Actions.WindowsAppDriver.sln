@@ -24,7 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{A37BBFE6
 		..\version.json = ..\version.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlow.Actions.WindowsAppDriver.Tests", "SpecFlow.Actions.WindowsAppDriver.Tests\SpecFlow.Actions.WindowsAppDriver.Tests.csproj", "{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.WindowsAppDriver.Tests", "SpecFlow.Actions.WindowsAppDriver.Tests\SpecFlow.Actions.WindowsAppDriver.Tests.csproj", "{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Appium", "..\SpecFlow.Actions.Appium\SpecFlow.Actions.Appium\SpecFlow.Actions.Appium.csproj", "{D9BC1967-5937-4769-9D2E-A2360F9575F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,12 +54,17 @@ Global
 		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F82494D8-FEB5-4D54-A262-0B3A41B6CF34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9BC1967-5937-4769-9D2E-A2360F9575F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9BC1967-5937-4769-9D2E-A2360F9575F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9BC1967-5937-4769-9D2E-A2360F9575F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9BC1967-5937-4769-9D2E-A2360F9575F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{707DE81C-B2A0-4B98-B53E-062D5520070B} = {FFE6B794-EA8B-4E7D-80FE-FB81D70A5915}
+		{D9BC1967-5937-4769-9D2E-A2360F9575F5} = {FFE6B794-EA8B-4E7D-80FE-FB81D70A5915}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28FCB1F5-0452-42E2-8A0A-CCE1B8E2A376}

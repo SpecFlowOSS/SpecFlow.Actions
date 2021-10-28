@@ -2,7 +2,7 @@
 
 namespace SpecFlow.Actions.Appium
 {
-    internal interface IDriverOptions
+    public interface IDriverOptions
     {
         AppiumOptions Current { get; }
     }

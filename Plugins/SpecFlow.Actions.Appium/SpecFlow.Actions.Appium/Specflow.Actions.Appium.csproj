@@ -8,6 +8,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Configuration\Appium\AppiumConfiguration.cs" />
+	  <Compile Remove="Configuration\Appium\AppiumJsonPart.cs" />
+	  <Compile Remove="Configuration\Appium\AppiumServerJsonPart.cs" />
+	  <Compile Remove="Configuration\Appium\SpecFlowActionJson.cs" />
+	  <Compile Remove="DriverOptions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <PackageReference Include="Appium.WebDriver" Version="4.3.1" />
 	  <PackageReference Include="SpecFlow" Version="3.9.22" />
 	</ItemGroup>
