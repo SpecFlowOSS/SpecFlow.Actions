@@ -5,48 +5,63 @@ namespace SpecFlow.Actions.Playwright
 {
     public interface IDriverInitialiser
     {
-        Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true);
-        Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true);
-        Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true);
-        Task<IBrowser> GetChromiumDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true);
+        Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true);
+        Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true);
+        Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true);
+        Task<IBrowser> GetChromiumDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true);
+        Task<IBrowser> GetWebKitDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true);
     }
 
     public class DriverInitialiser : IDriverInitialiser
     {
-        public async Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true)
+        public const float DEFAULT_TIMEOUT = 30f;
+
+        public async Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
         {
-            var options = new BrowserTypeLaunchOptions { Args = args, Channel = "chrome", Timeout = ToMilliseconds(timeout), Headless = headless };
+            var options = GetOptions(args, timeout, headless);
+            options.Channel = "chrome";
 
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-
-            return await playwright.Chromium.LaunchAsync(options);
+            return await GetBrowserAsync(BrowserType.Chromium, options);
         }
 
-        public async Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true)
+        public async Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
         {
-            var options = new BrowserTypeLaunchOptions { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless };
+            var options = GetOptions(args, timeout, headless);
 
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-
-            return await playwright.Firefox.LaunchAsync(options);
+            return await GetBrowserAsync(BrowserType.Firefox, options);
         }
 
-        public async Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = 30, bool? headless = true)
+        public async Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
         {
-            var options = new BrowserTypeLaunchOptions { Args = args, Channel = "msedge", Timeout = ToMilliseconds(timeout), Headless = headless };
+            var options = GetOptions(args, timeout, headless);
+            options.Channel = "msedge";
 
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
-
-            return await playwright.Chromium.LaunchAsync(options);
+            return await GetBrowserAsync(BrowserType.Chromium, options);
         }
 
-        public async Task<IBrowser> GetChromiumDriverAsync(string[]? args, float? timeout = 30, bool? headless = true)
+        public async Task<IBrowser> GetChromiumDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
         {
-            var options = new BrowserTypeLaunchOptions { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless };
+            var options = GetOptions(args, timeout, headless);
 
+            return await GetBrowserAsync(BrowserType.Chromium, options);
+        }
+
+        public async Task<IBrowser> GetWebKitDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
+        {
+            var options = GetOptions(args, timeout, headless);
+
+            return await GetBrowserAsync(BrowserType.Webkit, options);
+        }
+
+        private BrowserTypeLaunchOptions GetOptions(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true)
+            => new()
+            { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless };
+
+        private async Task<IBrowser> GetBrowserAsync(string browserType, BrowserTypeLaunchOptions options)
+        {
             var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-            return await playwright.Chromium.LaunchAsync(options);
+            return await playwright[browserType].LaunchAsync(options);
         }
 
         private static float? ToMilliseconds(float? seconds)

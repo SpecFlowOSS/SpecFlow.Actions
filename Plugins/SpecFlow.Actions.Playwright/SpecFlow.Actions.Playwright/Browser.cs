@@ -7,5 +7,6 @@
         Firefox = 2,
         Edge = 3,
         Chrome = 5,
+        Webkit = 6
     }
 }
