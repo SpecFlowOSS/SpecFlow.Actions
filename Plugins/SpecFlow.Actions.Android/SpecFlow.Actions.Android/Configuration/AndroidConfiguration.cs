@@ -1,16 +1,17 @@
-﻿using SpecFlow.Actions.Configuration;
+﻿using SpecFlow.Actions.Appium.Configuration.Android;
+using SpecFlow.Actions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
-namespace SpecFlow.Actions.Appium.Configuration.Appium
+namespace SpecFlow.Actions.Android.Configuration
 {
-    public class AppiumConfiguration : IAppiumConfiguration
+    public class AndroidConfiguration : IAndroidConfiguration
     {
         private readonly ISpecFlowActionJsonLoader _specFlowActionJsonLoader;
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
 
-        internal AppiumConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
+        public AndroidConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
             _specFlowActionJsonLoader = specFlowActionJsonLoader;
             _specflowJsonPart = new Lazy<SpecFlowActionJson>(LoadSpecFlowJson);
@@ -35,9 +36,9 @@ namespace SpecFlow.Actions.Appium.Configuration.Appium
             return specflowActionConfig ?? new SpecFlowActionJson();
         }
 
-        public Dictionary<string, string> Capabilities => _specflowJsonPart.Value.Appium.Capabilities;
+        public Dictionary<string, string> Capabilities => _specflowJsonPart.Value.Android.Capabilities;
 
-        public int? Timeout => _specflowJsonPart.Value.Appium.Timeout;
+        public int? Timeout => _specflowJsonPart.Value.Android.Timeout;
 
         public bool LocalAppiumServerRequired => _specflowJsonPart.Value.AppiumServer.LocalAppiumServerRequired ?? true;
 

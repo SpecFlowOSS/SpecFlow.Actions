@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace SpecFlow.Actions.Appium.Configuration.Appium
+namespace SpecFlow.Actions.Android.Configuration
 {
     public class AppiumServerJsonPart
     {

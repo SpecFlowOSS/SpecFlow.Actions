@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SpecFlow.Actions.Appium\SpecFlow.Actions.Appium.csproj" />
+    <ProjectReference Include="..\SpecFlow.Actions.Android\SpecFlow.Actions.Android.csproj" />
   </ItemGroup>
 
 </Project>

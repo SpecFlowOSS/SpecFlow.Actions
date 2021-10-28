@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium.Appium.Android;
-using SpecFlow.Actions.Appium.Drivers;
+using SpecFlow.Actions.Android.Driver;
 
 namespace Example.App
 {

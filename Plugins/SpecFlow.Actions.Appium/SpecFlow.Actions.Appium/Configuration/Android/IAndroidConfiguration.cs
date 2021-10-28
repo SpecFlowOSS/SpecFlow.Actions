@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SpecFlow.Actions.Appium.Configuration.Appium
+namespace SpecFlow.Actions.Appium.Configuration.Android
 {
-    public interface IAppiumConfiguration
+    public interface IAndroidConfiguration
     {
         Dictionary<string, string> Capabilities { get; }
 

@@ -8,10 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Configuration\Appium\AppiumConfiguration.cs" />
-	  <Compile Remove="Configuration\Appium\AppiumJsonPart.cs" />
-	  <Compile Remove="Configuration\Appium\AppiumServerJsonPart.cs" />
-	  <Compile Remove="Configuration\Appium\SpecFlowActionJson.cs" />
+	  <Compile Remove="Configuration\Android\AppiumConfiguration.cs" />
+	  <Compile Remove="Configuration\Android\AppiumJsonPart.cs" />
+	  <Compile Remove="Configuration\Android\AppiumServerJsonPart.cs" />
+	  <Compile Remove="Configuration\Android\SpecFlowActionJson.cs" />
 	  <Compile Remove="DriverOptions.cs" />
 	</ItemGroup>
 

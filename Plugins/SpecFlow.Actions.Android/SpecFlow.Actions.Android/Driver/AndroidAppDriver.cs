@@ -1,20 +1,22 @@
 ﻿using OpenQA.Selenium.Appium.Android;
-using SpecFlow.Actions.Appium.Configuration.Appium;
+using SpecFlow.Actions.Appium.Configuration.Android;
+using SpecFlow.Actions.Appium.Driver;
+using SpecFlow.Actions.Appium.Server;
 using System;
 
-namespace SpecFlow.Actions.Appium.Drivers
+namespace SpecFlow.Actions.Android.Driver
 {
     public class AndroidAppDriver : IDisposable
     {
         private readonly IDriverFactory _driverFactory;
         private readonly IAppiumServer _appiumServer;
         private readonly IDriverOptions _driverOptions;
-        private readonly IAppiumConfiguration _appiumConfiguration;
+        private readonly IAndroidConfiguration _appiumConfiguration;
         private readonly Lazy<AndroidDriver<AndroidElement>> _lazyAndroidDriver;
 
         public AndroidDriver<AndroidElement> Current => _lazyAndroidDriver.Value;
 
-        internal AndroidAppDriver(IDriverFactory driverFactory, IAppiumServer appiumServer, IDriverOptions driverOptions, IAppiumConfiguration appiumConfiguration)
+        internal AndroidAppDriver(IDriverFactory driverFactory, IAppiumServer appiumServer, IDriverOptions driverOptions, IAndroidConfiguration appiumConfiguration)
         {
             _driverFactory = driverFactory;
             _appiumServer = appiumServer;

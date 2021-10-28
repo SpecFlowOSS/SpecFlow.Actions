@@ -1,5 +1,6 @@
 ﻿using SpecFlow.Actions.Appium;
 using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
+using SpecFlow.Actions.Appium.Driver;
 using SpecFlow.Actions.WindowsAppDriver;
 using SpecFlow.Actions.WindowsAppDriver.Configuration;
 using TechTalk.SpecFlow;

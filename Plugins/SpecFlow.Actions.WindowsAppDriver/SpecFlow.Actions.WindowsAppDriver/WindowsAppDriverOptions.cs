@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium.Appium;
 using SpecFlow.Actions.Appium;
 using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
+using SpecFlow.Actions.Appium.Driver;
 using System;
 using System.IO;
 

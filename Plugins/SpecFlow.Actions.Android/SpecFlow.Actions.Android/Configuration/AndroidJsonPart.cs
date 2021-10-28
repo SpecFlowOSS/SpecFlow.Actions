@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace SpecFlow.Actions.Appium.Configuration.Appium
+namespace SpecFlow.Actions.Android.Configuration
 {
-    public class AppiumJsonPart
+    public class AndroidJsonPart
     {
         [JsonInclude] public Dictionary<string, string> Capabilities { get; set; } = new();
 
-        [JsonInclude]
-        public int? Timeout { get; set; }
+        [JsonInclude] public int? Timeout { get; set; }
     }
 }

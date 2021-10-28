@@ -1,11 +1,12 @@
 ﻿using OpenQA.Selenium.Appium.Service;
+using SpecFlow.Actions.Appium.Server;
 using System;
 
-namespace SpecFlow.Actions.Appium
+namespace SpecFlow.Actions.Android.Server
 {
     internal class AppiumServer : IAppiumServer
     {
-        private readonly Lazy<AppiumLocalService> _appiumLocalServiceLazy = new Lazy<AppiumLocalService>(new AppiumServiceBuilder().UsingAnyFreePort().Build);
+        private readonly Lazy<AppiumLocalService> _appiumLocalServiceLazy = new(new AppiumServiceBuilder().UsingAnyFreePort().Build);
 
         public AppiumLocalService Current => _appiumLocalServiceLazy.Value;
 
