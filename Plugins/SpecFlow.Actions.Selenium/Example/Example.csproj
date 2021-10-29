@@ -20,7 +20,7 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
 
 
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.4300" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="95.0.4638.5400" />
   </ItemGroup>
 
   <ItemGroup>
