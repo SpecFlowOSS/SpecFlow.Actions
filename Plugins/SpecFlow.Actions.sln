@@ -55,6 +55,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "SpecFlow.Actions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowCalculator", "SpecFlow.Actions.Android\SpecFlowCalculator\SpecFlowCalculator.csproj", "{93E3220C-1472-4B0C-8933-A3521E1B14D9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BoaConstrictor", "BoaConstrictor", "{0B231A01-2C1F-4289-BCF5-A2BAF5944931}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.BoaConstrictor", "SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor.csproj", "{0E4C1118-560C-4D8D-846A-0B5CD293406E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "SpecFlow.Actions.BoaConstrictor\Example\Example.csproj", "{3F701699-4430-4E4A-A887-79F6855E5EAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{1F6AED49-8FBA-4970-9D0C-A0B07A86C15C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Docker", "SpecFlow.Actions.Docker\SpecFlow.Actions.Docker\SpecFlow.Actions.Docker.csproj", "{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "SpecFlow.Actions.Docker\Example\Example.csproj", "{8762520E-0212-4CF0-8CC1-FC7D38C58F20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +135,22 @@ Global
 		{93E3220C-1472-4B0C-8933-A3521E1B14D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93E3220C-1472-4B0C-8933-A3521E1B14D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{93E3220C-1472-4B0C-8933-A3521E1B14D9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0E4C1118-560C-4D8D-846A-0B5CD293406E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4C1118-560C-4D8D-846A-0B5CD293406E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4C1118-560C-4D8D-846A-0B5CD293406E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4C1118-560C-4D8D-846A-0B5CD293406E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F701699-4430-4E4A-A887-79F6855E5EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F701699-4430-4E4A-A887-79F6855E5EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F701699-4430-4E4A-A887-79F6855E5EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F701699-4430-4E4A-A887-79F6855E5EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8762520E-0212-4CF0-8CC1-FC7D38C58F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8762520E-0212-4CF0-8CC1-FC7D38C58F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8762520E-0212-4CF0-8CC1-FC7D38C58F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8762520E-0212-4CF0-8CC1-FC7D38C58F20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,6 +171,10 @@ Global
 		{FDF6E98C-BB36-4273-9237-D95045057F17} = {271F04B8-884A-4B3A-9255-578EE15D90AD}
 		{394B15CA-9A93-4593-BA07-7B92CEA165E8} = {271F04B8-884A-4B3A-9255-578EE15D90AD}
 		{93E3220C-1472-4B0C-8933-A3521E1B14D9} = {271F04B8-884A-4B3A-9255-578EE15D90AD}
+		{0E4C1118-560C-4D8D-846A-0B5CD293406E} = {0B231A01-2C1F-4289-BCF5-A2BAF5944931}
+		{3F701699-4430-4E4A-A887-79F6855E5EAA} = {0B231A01-2C1F-4289-BCF5-A2BAF5944931}
+		{F0F8AC15-A1D1-4768-AADB-70B8D8535ECA} = {1F6AED49-8FBA-4970-9D0C-A0B07A86C15C}
+		{8762520E-0212-4CF0-8CC1-FC7D38C58F20} = {1F6AED49-8FBA-4970-9D0C-A0B07A86C15C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C77D596F-1752-43EB-8984-FB53D4DAF102}

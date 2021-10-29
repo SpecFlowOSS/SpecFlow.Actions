@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="specflow.actions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="specflow.actions.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Boa.Constrictor" Version="1.2.3" />
     <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
@@ -21,7 +31,7 @@
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
 
 
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="92.0.4515.4300" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.6100" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,12 +41,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="specflow.actions.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 
