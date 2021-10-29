@@ -35,8 +35,12 @@ jobs:
           
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1.0.3
-          
-      - run: msbuild.exe Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln   
+        
+      - name: Nuget Restore SpecFlow.Actions.Android.sln
+        run: nuget restore Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
+      
+      - name: MSBuild SpecFlow.Actions.Android.sln
+        run: msbuild.exe Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln   
             
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
