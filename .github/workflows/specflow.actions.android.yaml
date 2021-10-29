@@ -1,4 +1,4 @@
-name: SpecFlow.Actions.android
+name: SpecFlow.Actions.Android
 
 on: 
   push:
@@ -32,7 +32,7 @@ jobs:
           dotnet-version: '5.0.x' 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: dotnet build Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
+      - run: dotnet build
           path:  | 
             Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android\SpecFlow.Actions.Android.csproj
             Plugins\SpecFlow.Actions.Android\Example\Example.csproj
