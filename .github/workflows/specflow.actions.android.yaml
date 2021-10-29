@@ -33,7 +33,10 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
           
-      - run: dotnet build Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln   
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1.0.3
+          
+      - run: msbuild.exe Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln   
             
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
