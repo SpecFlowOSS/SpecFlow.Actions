@@ -32,6 +32,11 @@ jobs:
           dotnet-version: '5.0.x'
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1.0.3
+
+      - run: nuget restore Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
                
       - run: dotnet msbuild Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android.sln 
             
