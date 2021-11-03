@@ -43,7 +43,7 @@ jobs:
         run: msbuild.exe Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln  
             
       - name: Create the package
-        run: dotnet pack --configuration Release Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android.sln
+        run: dotnet pack --no-dependencies --configuration Release Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android.sln
 
       - name: Upload NuGet Package to Artifacts
         uses: actions/upload-artifact@v2
