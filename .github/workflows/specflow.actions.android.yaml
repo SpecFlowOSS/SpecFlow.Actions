@@ -29,21 +29,14 @@ jobs:
       # Authenticates packages to push to GPR
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.x' 
+          dotnet-version: 6.x
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          
-      - name: setup-msbuild
-        uses: microsoft/setup-msbuild@v1.0.3
-        
-      - name: Nuget Restore SpecFlow.Actions.Android.sln
-        run: nuget restore Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln
-      
-      - name: MSBuild SpecFlow.Actions.Android.sln
-        run: msbuild.exe Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android.sln   
+               
+      - run: dotnet build Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android.sln 
             
       - name: Create the package
-        run: dotnet pack --configuration Release Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android\SpecFlow.Actions.Android.csproj
+        run: dotnet pack --configuration Release Plugins\SpecFlow.Actions.Android\SpecFlow.Actions.Android.sln
 
       - name: Upload NuGet Package to Artifacts
         uses: actions/upload-artifact@v2
@@ -70,7 +63,7 @@ jobs:
           name: NuGet-Package
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 6.x
       - name: Publish the package to nuget.org
         shell: pwsh
         env:
