@@ -5,10 +5,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Specflow.Actions.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Include="Specflow.Actions.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
@@ -20,11 +16,6 @@
 		<PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.22" />
 		<PackageReference Include="SpecRun.SpecFlow" Version="3.9.7" />
 		<PackageReference Include="FluentAssertions" Version="5.10.3" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Drivers\" />
-		<Folder Include="Hooks\" />
 	</ItemGroup>
 
 	<ItemGroup>

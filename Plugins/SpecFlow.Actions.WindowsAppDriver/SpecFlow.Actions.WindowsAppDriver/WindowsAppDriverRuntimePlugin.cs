@@ -1,4 +1,7 @@
-﻿using SpecFlow.Actions.WindowsAppDriver;
+﻿using SpecFlow.Actions.Appium;
+using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
+using SpecFlow.Actions.Appium.Driver;
+using SpecFlow.Actions.WindowsAppDriver;
 using SpecFlow.Actions.WindowsAppDriver.Configuration;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
@@ -26,6 +29,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
             runtimePluginTestExecutionLifecycleEventEmitter.AfterStep += RuntimePluginTestExecutionLifecycleEventEmitter_AfterStep;
 
             e.ObjectContainer.RegisterTypeAs<WindowsAppDriverConfiguration, IWindowsAppDriverConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<WindowsAppDriverOptions, IDriverOptions>();
             e.ObjectContainer.RegisterTypeAs<AppDriverCli, IAppDriverCli>();
             e.ObjectContainer.RegisterTypeAs<ScreenshotHelper, IScreenshotHelper>();
         }

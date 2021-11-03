@@ -1,4 +1,4 @@
-﻿using SpecFlow.Actions.WindowsAppDriver.Configuration;
+﻿using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
 using System;
 using System.Diagnostics;
 

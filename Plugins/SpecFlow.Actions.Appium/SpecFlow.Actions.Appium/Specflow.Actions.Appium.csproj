@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+		<AssemblyName>SpecFlow.Actions.Appium.SpecFlowPlugin</AssemblyName>
+		<PackageId>SpecFlow.Actions.Appium</PackageId>
+		<Product>SpecFlow.Actions.Appium</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Configuration\Android\AppiumConfiguration.cs" />
+	  <Compile Remove="Configuration\Android\AppiumJsonPart.cs" />
+	  <Compile Remove="Configuration\Android\AppiumServerJsonPart.cs" />
+	  <Compile Remove="Configuration\Android\SpecFlowActionJson.cs" />
+	  <Compile Remove="DriverOptions.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Appium.WebDriver" Version="4.3.1" />
+	  <PackageReference Include="SpecFlow" Version="3.9.22" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj" />
+	</ItemGroup>
+
+</Project>

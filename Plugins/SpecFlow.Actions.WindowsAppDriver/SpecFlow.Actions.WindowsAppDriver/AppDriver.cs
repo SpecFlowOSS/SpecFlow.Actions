@@ -1,23 +1,26 @@
-﻿using OpenQA.Selenium.Appium;
-using OpenQA.Selenium.Appium.Windows;
-using SpecFlow.Actions.WindowsAppDriver.Configuration;
+﻿using OpenQA.Selenium.Appium.Windows;
+using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
+using SpecFlow.Actions.Appium.Driver;
 using System;
-using System.IO;
 
 namespace SpecFlow.Actions.WindowsAppDriver
 {
     public class AppDriver : IDisposable
     {
         private readonly IWindowsAppDriverConfiguration _windowsAppDriverConfiguration;
+        private readonly IDriverFactory _driverFactory;
+        private readonly IDriverOptions _driverOptions;
 
-        private const string DriverUrl = "http://127.0.0.1:4723/";
+        private readonly Uri _driverUri = new("http://127.0.0.1:4723/");
 
         private readonly Lazy<WindowsDriver<WindowsElement>> _lazyDriver;
         private bool _isDisposed;
 
-        public AppDriver(IWindowsAppDriverConfiguration windowsAppDriverConfiguration)
+        public AppDriver(IWindowsAppDriverConfiguration windowsAppDriverConfiguration, IDriverFactory driverFactory, IDriverOptions driverOptions)
         {
             _windowsAppDriverConfiguration = windowsAppDriverConfiguration;
+            _driverFactory = driverFactory;
+            _driverOptions = driverOptions;
             _lazyDriver = new Lazy<WindowsDriver<WindowsElement>>(CreateAppDriver);
         }
 
@@ -31,27 +34,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
         /// </summary>
         private WindowsDriver<WindowsElement> CreateAppDriver()
         {
-            var options = new AppiumOptions();
-
-            var appFilePath = Environment.GetEnvironmentVariable("TEST_SUBJECT_FILE_PATH");
-
-            if (appFilePath != null)
-            {
-                options.AddAdditionalCapability("app", appFilePath);
-            }
-
-            if (_windowsAppDriverConfiguration.Capabilities != null)
-            {
-                foreach (var capability in _windowsAppDriverConfiguration.Capabilities)
-                {
-                    if (string.Equals(capability.Key, "app", StringComparison.OrdinalIgnoreCase))
-                    {
-                        options.AddAdditionalCapability(capability.Key, Path.Combine(Directory.GetCurrentDirectory(), capability.Value)); 
-                    }
-                }
-            }
-
-            return new WindowsDriver<WindowsElement>(new Uri(DriverUrl), options);
+            return _driverFactory.GetWindowsAppDriver(_windowsAppDriverConfiguration, _driverOptions, _driverUri);
         }
 
         /// <summary>
