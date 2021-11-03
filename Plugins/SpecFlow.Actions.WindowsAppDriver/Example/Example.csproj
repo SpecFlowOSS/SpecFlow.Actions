@@ -5,23 +5,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Drivers\**" />
-	  <Compile Remove="Hooks\**" />
-	  <EmbeddedResource Remove="Drivers\**" />
-	  <EmbeddedResource Remove="Hooks\**" />
-	  <None Remove="Drivers\**" />
-	  <None Remove="Hooks\**" />
-	  <SpecFlowFeatureFiles Remove="Drivers\**" />
-	  <SpecFlowFeatureFiles Remove="Hooks\**" />
-	  <SpecFlowObsoleteCodeBehindFiles Remove="Drivers\**" />
-	  <SpecFlowObsoleteCodeBehindFiles Remove="Hooks\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Specflow.Actions.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Content Include="Specflow.Actions.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
