@@ -14,6 +14,8 @@ namespace SpecFlow.Actions.Playwright
         float? DefaultTimeout { get; }
 
         bool? Headless { get; }
+
+        float? SlowMo { get; }
     }
 
     public class PlaywrightConfiguration : IPlaywrightConfiguration
@@ -39,6 +41,9 @@ namespace SpecFlow.Actions.Playwright
 
             [JsonInclude]
             public bool? Headless { get; private set; }
+
+            [JsonInclude]
+            public float? SlowMo { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -65,7 +70,7 @@ namespace SpecFlow.Actions.Playwright
         }
 
         /// <summary>
-        /// Provides the configuration details for the webdriver instance
+        /// Provides the configuration details for the Playwright instance
         /// </summary>
         /// <param name="specFlowActionJsonLoader"></param>
         public PlaywrightConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
@@ -77,21 +82,26 @@ namespace SpecFlow.Actions.Playwright
         /// <summary>
         /// The browser specified in the configuration
         /// </summary>
-        public Browser Browser => _specflowJsonPart.Value.Playwright.Browser; 
+        public Browser Browser => _specflowJsonPart.Value.Playwright.Browser;
 
         /// <summary>
-        /// Arguments used to configure the webdriver
+        /// Additional arguments used when launching the browser
         /// </summary>
         public string[]? Arguments => _specflowJsonPart.Value.Playwright.Arguments;
 
         /// <summary>
-        /// The default timeout used to configure the webdriver
+        /// The default timeout used to configure the browser
         /// </summary>
         public float? DefaultTimeout => _specflowJsonPart.Value.Playwright.DefaultTimeout;
 
         /// <summary>
-        /// The default timeout used to configure the webdriver
+        /// Whether the browser should launch headless
         /// </summary>
         public bool? Headless => _specflowJsonPart.Value.Playwright.Headless;
+
+        /// <summary>
+        /// How many miliseconds elapse between every action 
+        /// </summary>
+        public float? SlowMo => _specflowJsonPart.Value.Playwright.SlowMo;
     }
 }
