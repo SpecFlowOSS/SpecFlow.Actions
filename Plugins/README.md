@@ -12,7 +12,7 @@ Libraries that are consumed by other plugins and not *nessasarily* intended for 
 
 ## Main Plugins
 
-Libraries created to make intergating with popular tools easier. intended for direct install into your project.
+Libraries created to make integrating with popular tools easier. intended for direct install into your project.
 
 - [SpecFlow.Actions.BoaConstrictor](./SpecFlow.Actions.BoaConstrictor)
 - [Specflow.Actions.Browserstack](./Specflow.Actions.Browserstack)
