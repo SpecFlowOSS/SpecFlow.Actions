@@ -19,8 +19,8 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
 
-    <PackageReference Include="SpecFlow.xUnit" Version="3.9.22" />
-    <PackageReference Include="SpecFlow.Tools.MSBuild.Generation" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.xUnit" Version="3.9.40" />
+    <PackageReference Include="SpecFlow.Tools.MSBuild.Generation" Version="3.9.40" />
   </ItemGroup>
 
   <ItemGroup>
