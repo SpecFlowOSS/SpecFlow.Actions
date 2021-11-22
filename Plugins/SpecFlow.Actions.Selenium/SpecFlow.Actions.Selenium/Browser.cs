@@ -7,6 +7,7 @@
         Firefox = 2,
         Edge = 3,
         InternetExplorer = 4,
-        Noop = 5
+        Safari = 5,
+        Noop = 6
     }
 }

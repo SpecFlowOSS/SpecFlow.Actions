@@ -15,6 +15,7 @@ namespace SpecFlow.Actions.Selenium
         IWebDriver GetEdgeDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
         IWebDriver GetFirefoxDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
         IWebDriver GetInternetExplorerDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
+        IWebDriver GetSafariDriver(Dictionary<string, string>? capabilities = null, string[]? args = null);
     }
 
     public class DriverInitialiser : IDriverInitialiser
@@ -131,6 +132,12 @@ namespace SpecFlow.Actions.Selenium
             return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)
                 ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options)
                 : new EdgeDriver(EdgeDriverService.CreateDefaultService(_edgeWebDriverFilePath.Value), options);
+        }
+
+        public IWebDriver GetSafariDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)
+        {
+            // Can't be tested without a mac.
+            throw new NotImplementedException();
         }
     }
 }
