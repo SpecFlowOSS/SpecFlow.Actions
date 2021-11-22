@@ -4,6 +4,7 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
+using OpenQA.Selenium.Safari;
 using SpecFlow.Actions.Selenium;
 using System;
 using System.Collections;
@@ -99,6 +100,25 @@ namespace Specflow.Actions.Browserstack
                 }
             }
             
+            return new RemoteWebDriver(_browserstackRemoteServer, options);
+        }
+
+        public IWebDriver GetSafariDriver(Dictionary<string, string>? capabilities = null, string[]? args = null) 
+        {
+            var options = new SafariOptions();
+
+            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
+            options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
+            options.AddAdditionalCapability("name", GetScenarioTitle());
+
+            if (capabilities?.Count != 0 && capabilities != null)
+            {
+                foreach (var capability in capabilities)
+                {
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
+                }
+            }
+
             return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 

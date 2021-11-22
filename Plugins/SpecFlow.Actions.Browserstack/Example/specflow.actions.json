@@ -3,10 +3,10 @@
     "defaultTimeout": 60,
     "pollingInterval": 5,
     "testPlatform": "browserstack",
-    "browser": "edge",
+    "browser": "Safari",
     "capabilities": {
-      "os": "Windows",
-      "os_version": "10",
+      "os": "OS X",
+      "os_version": "Monterey",
       "resolution": "1920x1080",
       "build": "Examples"
     }
