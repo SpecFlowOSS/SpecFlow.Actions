@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
 using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Factories;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
@@ -42,7 +43,7 @@ namespace Specflow.Actions.Browserstack
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<BrowserstackDriverInitialiser, IDriverInitialiser>("browserstack");
+            e.ObjectContainer.RegisterTypeAs<RemoteDriverFactory, IDriverFactory>("browserstack");
         }
     }
 }

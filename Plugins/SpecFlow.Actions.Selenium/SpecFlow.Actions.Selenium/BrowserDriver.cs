@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.Helpers;
 using SpecFlow.Actions.Selenium.Factories;
+using BoDi;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -12,14 +13,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IDriverFactory _driverFactory;
+        private readonly IObjectContainer _objectContainer;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverFactory driverFactory)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer)
         {
             _seleniumConfiguration = seleniumConfiguration;
-            _driverFactory = driverFactory;
+            _objectContainer = objectContainer;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -34,7 +35,9 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            return _driverFactory.GetDriver(
+            var driverFactory = _objectContainer.Resolve<IDriverFactory>(_seleniumConfiguration.TestPlatform);
+
+            return driverFactory.GetDriver(
                 TargetHelper.GetNextTarget(
                     _seleniumConfiguration.Targets));
         }

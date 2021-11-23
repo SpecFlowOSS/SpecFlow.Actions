@@ -3,12 +3,34 @@
     "defaultTimeout": 60,
     "pollingInterval": 5,
     "testPlatform": "browserstack",
-    "browser": "Safari",
-    "capabilities": {
-      "os": "OS X",
-      "os_version": "Monterey",
-      "resolution": "1920x1080",
-      "build": "Examples"
-    }
+    "Targets": [
+      {
+        "browser": "Safari",
+        "capabilities": {
+          "os": "OS X",
+          "os_version": "Monterey",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "edge",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "chrome",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      }
+    ]
   }
 }

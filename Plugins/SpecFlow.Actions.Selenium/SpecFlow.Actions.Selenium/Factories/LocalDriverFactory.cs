@@ -20,6 +20,7 @@ namespace SpecFlow.Actions.Selenium.Factories
                 Browser.Noop => new Noop(),
                 _ => throw new NotImplementedException($"Support for browser {targetConfiguration.Browser} is not implemented yet"),
             };
+
             return selectedBrowser.GetDriver(targetConfiguration.Capabilities, targetConfiguration.Arguments);
         }
     }
