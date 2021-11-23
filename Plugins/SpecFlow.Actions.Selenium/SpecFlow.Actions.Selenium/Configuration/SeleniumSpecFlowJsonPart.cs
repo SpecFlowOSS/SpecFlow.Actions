@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.Selenium.Configuration
 {
@@ -15,6 +14,6 @@ namespace SpecFlow.Actions.Selenium.Configuration
         public string? TestPlatform { get; private set; }
 
         [JsonInclude]
-        public List<Target>? Targets { get; private set; }
+        public TargetConfiguration[] Targets { get; private set; } = new TargetConfiguration[0];
     }
 }

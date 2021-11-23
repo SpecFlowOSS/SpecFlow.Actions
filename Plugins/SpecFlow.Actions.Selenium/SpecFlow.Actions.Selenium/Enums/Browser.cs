@@ -1,4 +1,4 @@
-﻿namespace SpecFlow.Actions.Selenium
+﻿namespace SpecFlow.Actions.Selenium.Enums
 {
     public enum Browser
     {

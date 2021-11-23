@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using SpecFlow.Actions.Selenium.Enums;
+using System.Collections.Generic;
 
 namespace SpecFlow.Actions.Selenium.Configuration
 {
-    public interface ITarget
+    public interface ITargetConfiguration
     {
         Browser Browser { get; set; }
 

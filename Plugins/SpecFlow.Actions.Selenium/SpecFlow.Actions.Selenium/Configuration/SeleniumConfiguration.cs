@@ -1,6 +1,5 @@
 ﻿using SpecFlow.Actions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -62,6 +61,6 @@ namespace SpecFlow.Actions.Selenium.Configuration
         /// <summary>
         /// The targets (browsers) for the tests
         /// </summary>
-        public List<Target> Targets => _specflowJsonPart.Value.Selenium.Targets ?? new List<Target>();
+        public TargetConfiguration[] Targets => _specflowJsonPart.Value.Selenium.Targets;
     }
 }

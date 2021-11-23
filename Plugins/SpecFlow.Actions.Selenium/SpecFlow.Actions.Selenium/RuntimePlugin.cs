@@ -1,5 +1,6 @@
 ﻿using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.Factories;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -18,7 +19,7 @@ namespace SpecFlow.Actions.Selenium
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>("local");
+            e.ObjectContainer.RegisterTypeAs<LocalDriverFactory, IDriverFactory>();
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
         }
     }

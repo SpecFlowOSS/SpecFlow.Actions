@@ -4,16 +4,7 @@
     "pollingInterval": 5,
     "Targets": [
       {
-        "Browser": "chrome"
-      },
-      {
         "Browser": "firefox"
-      },
-      {
-        "Browser": "edge"
-      },
-      {
-        "Browser": "internetExplorer"
       }
     ]
   }

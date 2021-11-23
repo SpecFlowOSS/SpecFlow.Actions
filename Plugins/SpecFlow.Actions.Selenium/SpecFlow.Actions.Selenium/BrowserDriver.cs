@@ -1,8 +1,8 @@
-﻿using BoDi;
-using System;
+﻿using System;
 using OpenQA.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
-using System.Collections.Generic;
+using SpecFlow.Actions.Selenium.Helpers;
+using SpecFlow.Actions.Selenium.Factories;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -12,16 +12,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IObjectContainer _objectContainer;
-        private readonly Random _random;
+        private readonly IDriverFactory _browserFactory;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverFactory browserFactory)
         {
             _seleniumConfiguration = seleniumConfiguration;
-            _objectContainer = objectContainer;
-            _random = new Random();
+            _browserFactory = browserFactory;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -36,26 +34,9 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.TestPlatform);
-
-            var nextTarget = GetNextTarget(_seleniumConfiguration.Targets);
-
-            return nextTarget.Browser switch
-            {
-                Browser.Chrome => initialiser.GetChromeDriver(nextTarget.Capabilities, nextTarget.Arguments),
-                Browser.Firefox => initialiser.GetFirefoxDriver(nextTarget.Capabilities, nextTarget.Arguments),
-                Browser.Edge => initialiser.GetEdgeDriver(nextTarget.Capabilities, nextTarget.Arguments),
-                Browser.InternetExplorer => initialiser.GetInternetExplorerDriver(nextTarget.Capabilities, nextTarget.Arguments),
-                Browser.Safari => initialiser.GetSafariDriver(nextTarget.Capabilities, nextTarget.Arguments),
-                Browser.Noop => new NoopWebdriver(),
-                _ => throw new NotImplementedException($"Support for browser {nextTarget.Browser} is not implemented yet"),
-            };
-        }
-
-        // Gets the next target configuration randomly
-        private ITarget GetNextTarget(List<Target> targets)
-        {
-            return targets[_random.Next(0, targets.Count)];
+            return _browserFactory.GetDriver(
+                TargetHelper.GetNextTarget(
+                    _seleniumConfiguration.Targets));
         }
 
         /// <summary>

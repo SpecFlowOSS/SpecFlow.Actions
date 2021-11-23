@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using SpecFlow.Actions.Selenium.Enums;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.Selenium.Configuration
 {
-    public class Target : ITarget
+    public class TargetConfiguration : ITargetConfiguration
     {
         [JsonInclude]
         public Browser Browser { get; set; }
