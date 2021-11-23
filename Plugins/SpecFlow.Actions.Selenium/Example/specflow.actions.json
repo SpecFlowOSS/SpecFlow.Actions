@@ -1,10 +1,11 @@
 {
   "selenium": {
-    "defaultTimeout": 60,
-    "pollingInterval": 5,
     "Targets": [
       {
         "Browser": "firefox"
+      },
+      {
+        "Browser": "chrome"
       }
     ]
   }

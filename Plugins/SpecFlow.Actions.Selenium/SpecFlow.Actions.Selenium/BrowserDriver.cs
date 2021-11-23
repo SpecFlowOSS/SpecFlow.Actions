@@ -12,14 +12,14 @@ namespace SpecFlow.Actions.Selenium
     public class BrowserDriver : IDisposable
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IDriverFactory _browserFactory;
+        private readonly IDriverFactory _driverFactory;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverFactory browserFactory)
+        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IDriverFactory driverFactory)
         {
             _seleniumConfiguration = seleniumConfiguration;
-            _browserFactory = browserFactory;
+            _driverFactory = driverFactory;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -34,7 +34,7 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            return _browserFactory.GetDriver(
+            return _driverFactory.GetDriver(
                 TargetHelper.GetNextTarget(
                     _seleniumConfiguration.Targets));
         }

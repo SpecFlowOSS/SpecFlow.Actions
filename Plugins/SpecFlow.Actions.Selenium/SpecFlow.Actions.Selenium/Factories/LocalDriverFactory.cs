@@ -17,6 +17,7 @@ namespace SpecFlow.Actions.Selenium.Factories
                 Browser.Edge => new Edge(),
                 Browser.InternetExplorer => new InternetExplorer(),
                 Browser.Safari => new Safari(),
+                Browser.Noop => new Noop(),
                 _ => throw new NotImplementedException($"Support for browser {targetConfiguration.Browser} is not implemented yet"),
             };
             return selectedBrowser.GetDriver(targetConfiguration.Capabilities, targetConfiguration.Arguments);
