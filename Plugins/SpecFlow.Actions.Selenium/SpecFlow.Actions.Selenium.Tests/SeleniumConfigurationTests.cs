@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using SpecFlow.Actions.Configuration;
+using SpecFlow.Actions.Selenium.Configuration;
 using System;
 using System.Text.Json;
 using Xunit;

@@ -1,11 +1,20 @@
 {
   "selenium": {
-    "browser": "chrome",
-    "arguments": [
-      "--start-maximized",
-      "--incognito"
-    ],
     "defaultTimeout": 60,
-    "pollingInterval": 5
+    "pollingInterval": 5,
+    "Targets": [
+      {
+        "Browser": "chrome"
+      },
+      {
+        "Browser": "firefox"
+      },
+      {
+        "Browser": "edge"
+      },
+      {
+        "Browser": "internetExplorer"
+      }
+    ]
   }
 }

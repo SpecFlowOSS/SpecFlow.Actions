@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SpecFlow.Actions.Selenium.Configuration;
 using System;
 using System.Collections.Generic;
 

@@ -4,6 +4,7 @@ using FluentAssertions;
 using Moq;
 using OpenQA.Selenium;
 using Xunit;
+using SpecFlow.Actions.Selenium.Configuration;
 
 namespace SpecFlow.Actions.Selenium.Tests
 {

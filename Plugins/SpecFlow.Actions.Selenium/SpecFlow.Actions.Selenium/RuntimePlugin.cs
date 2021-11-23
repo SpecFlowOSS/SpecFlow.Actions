@@ -1,8 +1,9 @@
 ﻿using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(SeleniumRuntimePlugin))]
+[assembly: RuntimePlugin(typeof(SeleniumRuntimePlugin))]
 
 namespace SpecFlow.Actions.Selenium
 {
