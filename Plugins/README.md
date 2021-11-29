@@ -15,7 +15,7 @@ Libraries that are consumed by other plugins and not *nessasarily* intended for 
 Libraries created to make integrating with popular tools easier. intended for direct install into your project.
 
 - [SpecFlow.Actions.BoaConstrictor](./SpecFlow.Actions.BoaConstrictor)
-- [Specflow.Actions.Browserstack](./Specflow.Actions.BrowserStack)
+- [Specflow.Actions.Browserstack](./SpecFlow.Actions.Browserstack)
 - [SpecFlow.Actions.Docker](./SpecFlow.Actions.Docker)
 - [SpecFlow.Actions.Selenium](./SpecFlow.Actions.Selenium/)
 - [SpecFlow.Actions.Playwright](./SpecFlow.Actions.Playwright/)
