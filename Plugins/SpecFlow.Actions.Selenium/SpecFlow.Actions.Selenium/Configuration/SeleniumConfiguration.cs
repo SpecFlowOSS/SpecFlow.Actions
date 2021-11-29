@@ -61,6 +61,6 @@ namespace SpecFlow.Actions.Selenium.Configuration
         /// <summary>
         /// The targets (browsers) for the tests
         /// </summary>
-        public TargetConfiguration[] Targets => _specflowJsonPart.Value.Selenium.Targets;
+        public BrowserConfiguration[] BrowserConfigurations => _specflowJsonPart.Value.Selenium.BrowserConfigurations;
     }
 }

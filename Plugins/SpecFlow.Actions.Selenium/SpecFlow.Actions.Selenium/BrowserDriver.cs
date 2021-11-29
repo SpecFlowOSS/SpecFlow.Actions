@@ -38,8 +38,8 @@ namespace SpecFlow.Actions.Selenium
             var driverFactory = _objectContainer.Resolve<IDriverFactory>(_seleniumConfiguration.TestPlatform);
 
             return driverFactory.GetDriver(
-                TargetHelper.GetNextTarget(
-                    _seleniumConfiguration.Targets));
+                BrowserConfigurationHelper.GetRandomConfiguration(
+                    _seleniumConfiguration.BrowserConfigurations));
         }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SpecFlow.Actions.Selenium.Configuration
 {
-    public interface ITargetConfiguration
+    public interface IBrowserConfiguration
     {
         Browser Browser { get; set; }
 

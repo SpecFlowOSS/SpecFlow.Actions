@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.Selenium.Configuration
 {
-    public class TargetConfiguration : ITargetConfiguration
+    public class BrowserConfiguration : IBrowserConfiguration
     {
         [JsonInclude]
         public Browser Browser { get; set; }

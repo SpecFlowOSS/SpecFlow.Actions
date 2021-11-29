@@ -8,7 +8,7 @@ namespace SpecFlow.Actions.Selenium.Factories
 {
     public class LocalDriverFactory : IDriverFactory
     {
-        public IWebDriver GetDriver(ITargetConfiguration targetConfiguration)
+        public IWebDriver GetDriver(IBrowserConfiguration targetConfiguration)
         {
             IBrowser selectedBrowser = targetConfiguration.Browser switch
             {

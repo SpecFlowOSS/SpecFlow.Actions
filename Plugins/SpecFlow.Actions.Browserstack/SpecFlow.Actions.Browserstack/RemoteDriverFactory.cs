@@ -18,7 +18,7 @@ namespace Specflow.Actions.Browserstack
             _scenarioContext = scenarioContext;
         }
 
-        public IWebDriver GetDriver(ITargetConfiguration targetConfiguration)
+        public IWebDriver GetDriver(IBrowserConfiguration targetConfiguration)
         {
             IBrowser selectedBrowser = targetConfiguration.Browser switch
             {

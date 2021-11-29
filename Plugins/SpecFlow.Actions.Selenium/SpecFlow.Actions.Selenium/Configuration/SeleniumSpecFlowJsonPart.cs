@@ -14,6 +14,6 @@ namespace SpecFlow.Actions.Selenium.Configuration
         public string? TestPlatform { get; private set; }
 
         [JsonInclude]
-        public TargetConfiguration[] Targets { get; private set; } = new TargetConfiguration[0];
+        public BrowserConfiguration[] BrowserConfigurations { get; private set; } = new BrowserConfiguration[0];
     }
 }

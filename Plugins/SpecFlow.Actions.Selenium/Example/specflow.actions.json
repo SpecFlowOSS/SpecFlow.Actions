@@ -1,11 +1,14 @@
 {
   "selenium": {
-    "Targets": [
+    "BrowserConfigurations": [
       {
         "Browser": "firefox"
       },
       {
         "Browser": "chrome"
+      },
+      {
+        "Browser": "edge"
       }
     ]
   }

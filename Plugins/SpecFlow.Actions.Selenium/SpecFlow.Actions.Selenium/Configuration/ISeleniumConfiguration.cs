@@ -2,7 +2,7 @@
 {
     public interface ISeleniumConfiguration
     {
-        TargetConfiguration[] Targets { get; }
+        BrowserConfiguration[] BrowserConfigurations { get; }
 
         double? DefaultTimeout { get; }
 

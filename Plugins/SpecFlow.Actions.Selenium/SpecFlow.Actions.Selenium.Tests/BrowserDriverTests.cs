@@ -37,8 +37,8 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             var seleniumConfigurationMock = new Mock<ISeleniumConfiguration>();
             seleniumConfigurationMock
-                .Setup(x => x.Targets)
-                .Returns(new TargetConfiguration[] { new TargetConfiguration { Browser = Browser.Noop } });
+                .Setup(x => x.BrowserConfigurations)
+                .Returns(new BrowserConfiguration[] { new BrowserConfiguration { Browser = Browser.Noop } });
 
             seleniumConfigurationMock
                 .Setup(x => x.TestPlatform)

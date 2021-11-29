@@ -26,7 +26,7 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets.Should().BeEmpty();
+            seleniumConfiguration.BrowserConfigurations.Should().BeEmpty();
         }
 
         [Fact]
@@ -36,7 +36,7 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets.Should().BeEmpty();
+            seleniumConfiguration.BrowserConfigurations.Should().BeEmpty();
         }
 
         [Fact]
@@ -46,17 +46,17 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets.Should().BeEmpty();
+            seleniumConfiguration.BrowserConfigurations.Should().BeEmpty();
         }
 
         [Fact]
         public void Browser_SeleniumNodeExists_BrowserSet_ReturnsValue()
         {
-            var specflowJsonContent = @"{ ""Selenium"": { ""Targets"": [ { ""Browser"":""Chrome"" } ] } }";
+            var specflowJsonContent = @"{ ""Selenium"": { ""BrowserConfigurations"": [ { ""Browser"":""Chrome"" } ] } }";
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets[0].Browser.Should().Be(Browser.Chrome);
+            seleniumConfiguration.BrowserConfigurations[0].Browser.Should().Be(Browser.Chrome);
         }
 
         [Fact]
@@ -64,10 +64,10 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             Browser GetBrowser(SeleniumConfiguration seleniumConfiguration)
             {
-                return seleniumConfiguration.Targets[0].Browser;
+                return seleniumConfiguration.BrowserConfigurations[0].Browser;
             }
 
-            var specflowJsonContent = @"{ ""selenium"": { ""targets"": [ { ""browser"":""NoMatchingBrowser"" } ] } }";
+            var specflowJsonContent = @"{ ""selenium"": { ""BrowserConfigurations"": [ { ""browser"":""NoMatchingBrowser"" } ] } }";
 
             Action action = () => GetBrowser(GetSeleniumConfiguration(specflowJsonContent));
 
@@ -77,42 +77,42 @@ namespace SpecFlow.Actions.Selenium.Tests
         [Fact]
         public void Browser_SeleniumNodeExists_BrowserSet_LowerCase_ReturnsValue()
         {
-            var specflowJsonContent = @"{ ""selenium"": { ""targets"": [ { ""browser"":""Chrome"" } ] } }";
+            var specflowJsonContent = @"{ ""selenium"": { ""browserconfigurations"": [ { ""browser"":""Chrome"" } ] } }";
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets[0].Browser.Should().Be(Browser.Chrome);
+            seleniumConfiguration.BrowserConfigurations[0].Browser.Should().Be(Browser.Chrome);
         }
 
         [Fact]
         public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsNotSet_ArgumentsReturnsNull()
         {
-            var specflowJsonContent = @"{ ""selenium"": { ""targets"": [ { ""browser"":""Chrome"" } ] } }";
+            var specflowJsonContent = @"{ ""selenium"": { ""BrowserConfigurations"": [ { ""browser"":""Chrome"" } ] } }";
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets[0].Arguments.Should().BeNull();
+            seleniumConfiguration.BrowserConfigurations[0].Arguments.Should().BeNull();
         }
 
         [Fact]
         public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsNotSet_ArgumentsReturnsEmpty()
         {
-            var specflowJsonContent = @"{ ""selenium"": { ""targets"": [ { ""browser"":""Chrome"", ""arguments"": [] } ] } }";
+            var specflowJsonContent = @"{ ""selenium"": { ""BrowserConfigurations"": [ { ""browser"":""Chrome"", ""arguments"": [] } ] } }";
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets[0].Arguments.Should().BeEmpty();
+            seleniumConfiguration.BrowserConfigurations[0].Arguments.Should().BeEmpty();
         }
 
         [Fact]
         public void Arguments_SeleniumNodeExists_BrowserNodeExists_ArgumentsSet_ReturnsValue()
         {
             var specflowJsonContent =
-                @"{ ""selenium"": { ""targets"": [ { ""browser"":""Chrome"", ""arguments"": [ ""--argument-one"", ""--argument-two"" ] } ] } }";
+                @"{ ""selenium"": { ""BrowserConfigurations"": [ { ""browser"":""Chrome"", ""arguments"": [ ""--argument-one"", ""--argument-two"" ] } ] } }";
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Targets[0].Arguments.Should().Equal("--argument-one", "--argument-two");
+            seleniumConfiguration.BrowserConfigurations[0].Arguments.Should().Equal("--argument-one", "--argument-two");
         }
     }
 }

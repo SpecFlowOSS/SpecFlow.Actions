@@ -5,6 +5,6 @@ namespace SpecFlow.Actions.Selenium.Factories
 {
     public interface IDriverFactory
     {
-        IWebDriver GetDriver(ITargetConfiguration targetConfiguration);
+        IWebDriver GetDriver(IBrowserConfiguration targetConfiguration);
     }
 }

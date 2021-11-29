@@ -3,7 +3,7 @@
     "defaultTimeout": 60,
     "pollingInterval": 5,
     "testPlatform": "browserstack",
-    "Targets": [
+    "browserConfigurations": [
       {
         "browser": "Safari",
         "capabilities": {
@@ -14,7 +14,16 @@
         }
       },
       {
-        "browser": "edge",
+        "browser": "Chrome",
+        "capabilities": {
+          "os": "OS X",
+          "os_version": "Monterey",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "internetExplorer",
         "capabilities": {
           "os": "Windows",
           "os_version": "10",
@@ -23,10 +32,55 @@
         }
       },
       {
-        "browser": "chrome",
+        "browser": "Edge",
         "capabilities": {
           "os": "Windows",
           "os_version": "10",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "Edge",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "11",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "Chrome",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "Chrome",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "11",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "Firefox",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "10",
+          "resolution": "1920x1080",
+          "build": "Examples"
+        }
+      },
+      {
+        "browser": "Firefox",
+        "capabilities": {
+          "os": "Windows",
+          "os_version": "11",
           "resolution": "1920x1080",
           "build": "Examples"
         }
