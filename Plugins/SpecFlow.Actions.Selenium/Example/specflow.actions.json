@@ -2,13 +2,7 @@
   "selenium": {
     "BrowserConfigurations": [
       {
-        "Browser": "firefox"
-      },
-      {
         "Browser": "chrome"
-      },
-      {
-        "Browser": "edge"
       }
     ]
   }
