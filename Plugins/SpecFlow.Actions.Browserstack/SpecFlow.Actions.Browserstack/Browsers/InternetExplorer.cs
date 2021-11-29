@@ -20,15 +20,15 @@ namespace SpecFlow.Actions.Browserstack.Browsers
         {
             var options = new InternetExplorerOptions();
 
-            options.AddAdditionalCapability("browserstack.user", BrowserStack.Username.Value);
-            options.AddAdditionalCapability("browserstack.key", BrowserStack.AccessKey.Value);
-            options.AddAdditionalCapability("name", BrowserStack.GetTestName(_scenarioContext));
+            options.AddAdditionalCapability("browserstack.user", BrowserStack.Username.Value, true);
+            options.AddAdditionalCapability("browserstack.key", BrowserStack.AccessKey.Value, true);
+            options.AddAdditionalCapability("name", BrowserStack.GetTestName(_scenarioContext), true);
 
             if (capabilities?.Count != 0 && capabilities != null)
             {
                 foreach (var capability in capabilities)
                 {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
+                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
                 }
             }
 
