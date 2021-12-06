@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace SpecFlow.Actions.Playwright
 {
     /// <summary>
-    /// Manages a browser instance using Selenium
+    /// Manages a browser instance using Playwright
     /// </summary>
     public class BrowserDriver : IDisposable
     {
