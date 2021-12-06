@@ -43,7 +43,7 @@ namespace SpecFlow.Actions.Selenium
                 }
             }
 
-            if (args != null && args?.Length != 0)
+            if (args != null && args.Length != 0)
             {
                 options.AddArguments(args);
             }
@@ -70,7 +70,7 @@ namespace SpecFlow.Actions.Selenium
                 }
             }
 
-            if (args != null && args?.Length != 0)
+            if (args != null && args.Length != 0)
             {
                 options.AddArguments(args);
             }
@@ -97,9 +97,9 @@ namespace SpecFlow.Actions.Selenium
                 }
             }
 
-            if (args != null && args?.Length != 0)
+            if (args != null && args.Length != 0)
             {
-                options.AddAdditionalCapability("args", args!.ToList());
+                options.AddAdditionalCapability("args", args.ToList());
             }
 
             return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value)
@@ -124,9 +124,9 @@ namespace SpecFlow.Actions.Selenium
                 }
             }
 
-            if (args != null && args?.Length != 0)
+            if (args != null && args.Length != 0)
             {
-                options.AddAdditionalCapability("args", args!.ToList());
+                options.AddAdditionalCapability("args", args.ToList());
             }
 
             return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)

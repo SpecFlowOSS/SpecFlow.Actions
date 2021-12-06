@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace SpecFlow.Actions.Selenium
         /// <param name="retryCount"></param>
         public static void ClickWithRetry(this IWebElement webElement, int retryCount = 3)
         {
-            var count = 0;
+            const int count = 0;
             Exception? exception = null;
 
             while (count < retryCount)
@@ -34,6 +34,7 @@ namespace SpecFlow.Actions.Selenium
                 try
                 {
                     webElement.Click();
+
                     return;
                 }
                 catch (ElementClickInterceptedException e)
@@ -41,7 +42,7 @@ namespace SpecFlow.Actions.Selenium
                     exception = e;
                     Console.WriteLine($"Note: The web element \"{webElement}\" click attempt was intercepted");
                     retryCount++;
-                } 
+                }
             }
 
             throw new Exception($"Unable to click {webElement} after {retryCount} attempt(s)", exception);
@@ -162,6 +163,20 @@ namespace SpecFlow.Actions.Selenium
         public static IEnumerable<IWebElement> WhereElementsHavePropertyValue(this IEnumerable<IWebElement> webElements, string propertyName, string value)
         {
             return webElements.Where(element => element.GetProperty(propertyName).Equals(value));
+        }
+
+        /// <summary>
+        /// Move the mouse to the specific element. Scroll element into viewport and return the web element.
+        /// </summary>
+        /// <param name="webElement"></param>
+        /// <param name="driver"></param>
+        /// <returns></returns>
+        public static IWebElement MoveToElement(this IWebElement webElement, IWebDriver driver)
+        {
+            var actions = new OpenQA.Selenium.Interactions.Actions(driver);
+            actions.MoveToElement(webElement).Build().Perform();
+
+            return webElement;
         }
     }
 }

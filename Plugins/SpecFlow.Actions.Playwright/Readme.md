@@ -139,6 +139,9 @@ Available Helper Methods:
 /// Navigates to the specified URL
 public async Task GoToUrl(string url)
 
+/// Gets the current URL
+public async Task<string?> GetUrl()
+
 /// Sends a string to the specified selector
 public async Task SendTextAsync(string selector, string keys, PageFillOptions? pageFillOptions = null)
 
