@@ -22,6 +22,15 @@ namespace SpecFlow.Actions.Playwright
         }
 
         /// <summary>
+        /// Gets the current URL
+        /// </summary>
+        /// <returns></returns>
+        public async Task<string?> GetUrl()
+        {
+            return (await _page).Url;
+        }
+
+        /// <summary>
         /// Sends a string to the specified selector
         /// </summary>
         /// <param name="selector"></param>
