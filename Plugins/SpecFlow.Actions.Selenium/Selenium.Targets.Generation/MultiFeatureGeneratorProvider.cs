@@ -1,4 +1,5 @@
 ﻿using BoDi;
+using SpecFlow.Actions.Selenium;
 using System.Collections.Generic;
 using TechTalk.SpecFlow.Configuration;
 using TechTalk.SpecFlow.Generator.CodeDom;
@@ -13,21 +14,14 @@ namespace Selenium.Targets.Generation
     {
         private readonly MultiFeatureGenerator _multiFeatureGenerator;
 
-        public MultiFeatureGeneratorProvider(IObjectContainer container)
+        public MultiFeatureGeneratorProvider(IObjectContainer container, SeleniumTargetsConfiguration seleniumTargetsConfiguration)
         {
-            var list = new List<string>();
+            var featureGenerators = new List<KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>>();
 
-            for (int i = 0; i < 20; i++)
-            {
-                list.Add($"Generated_Feature_{i}");
-            }
-
-            var featureGenerators = new List<KeyValuePair<string, IFeatureGenerator>>();
-
-            foreach (var combination in list)
+            foreach (var seleniumSpecFlowJson in seleniumTargetsConfiguration.Selenium)
             {
                 var combinationFeatureGenerator = new UnitTestFeatureGenerator(container.Resolve<IUnitTestGeneratorProvider>(), container.Resolve<CodeDomHelper>(), container.Resolve<SpecFlowConfiguration>(), container.Resolve<IDecoratorRegistry>());
-                featureGenerators.Add(new KeyValuePair<string, IFeatureGenerator>(combination, combinationFeatureGenerator));
+                featureGenerators.Add(new KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>(seleniumSpecFlowJson, combinationFeatureGenerator));
             }
 
             _multiFeatureGenerator = new MultiFeatureGenerator(featureGenerators, new UnitTestFeatureGenerator(container.Resolve<IUnitTestGeneratorProvider>(), container.Resolve<CodeDomHelper>(), container.Resolve<SpecFlowConfiguration>(), container.Resolve<IDecoratorRegistry>()));

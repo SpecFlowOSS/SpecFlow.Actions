@@ -8,4 +8,8 @@
 		<PackageReference Include="SpecFlow.CustomPlugin" Version="3.9.40" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
+	</ItemGroup>
+
 </Project>

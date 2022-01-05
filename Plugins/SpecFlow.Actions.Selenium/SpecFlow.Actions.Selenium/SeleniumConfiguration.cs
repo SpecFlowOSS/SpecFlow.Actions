@@ -6,51 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public interface ISeleniumConfiguration
-    {
-        Browser Browser { get; }
-
-        string[]? Arguments { get; }
-
-        Dictionary<string, string>? Capabilities { get; }
-
-        double? DefaultTimeout { get; }
-
-        double? PollingInterval { get; }
-
-        string? TestPlatform { get; }
-    }
-
-    public class SeleniumConfiguration : ISeleniumConfiguration
+    public partial class SeleniumConfiguration : ISeleniumConfiguration
     {
         private readonly ISpecFlowActionJsonLoader _specFlowActionJsonLoader;
-
-        private class SpecFlowActionJson
-        {
-            [JsonInclude]
-            public SeleniumSpecFlowJsonPart Selenium { get; private set; } = new SeleniumSpecFlowJsonPart();
-        }
-
-        private class SeleniumSpecFlowJsonPart
-        {
-            [JsonInclude]
-            public Browser Browser { get; private set; }
-
-            [JsonInclude]
-            public string[]? Arguments { get; private set; }
-
-            [JsonInclude]
-            public Dictionary<string, string>? Capabilities { get; private set; }
-
-            [JsonInclude]
-            public double? DefaultTimeout { get; private set; }
-
-            [JsonInclude]
-            public double? PollingInterval { get; private set; }
-
-            [JsonInclude]
-            public string? TestPlatform { get; private set; }
-        }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpecFlow.Actions.Selenium;
+using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,11 @@ namespace Selenium.Targets.Generation
     {
         private readonly IFeatureGenerator _defaultFeatureGenerator;
 
-        private readonly KeyValuePair<string, IFeatureGenerator>[] _featureGenerators;
+        private readonly KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>[] _featureGenerators;
 
         private readonly List<string> _unitTestProviderTags = new List<string> { "xunit", "mstest", "nunit3" };
 
-        public MultiFeatureGenerator(IEnumerable<KeyValuePair<string, IFeatureGenerator>> featureGenerators, IFeatureGenerator defaultFeatureGenerator)
+        public MultiFeatureGenerator(IEnumerable<KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>> featureGenerators, IFeatureGenerator defaultFeatureGenerator)
         {
             _defaultFeatureGenerator = defaultFeatureGenerator;
             _featureGenerators = featureGenerators.ToArray();
@@ -26,7 +27,7 @@ namespace Selenium.Targets.Generation
             {
                 if (featureGenerator.Value is UnitTestFeatureGenerator unitTestFeatureGenerator)
                 {
-                    unitTestFeatureGenerator.TestClassNameFormat += $"_{featureGenerator.Key}";
+                    unitTestFeatureGenerator.TestClassNameFormat += $"_{featureGenerator.Key.Browser}";
                 }
             }
         }
