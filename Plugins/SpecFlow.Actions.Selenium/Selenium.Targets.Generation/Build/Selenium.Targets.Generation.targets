@@ -1,0 +1,7 @@
+﻿<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_TargetGeneratorPluginFramework>
+		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_TargetGeneratorPluginFramework>
+		<_TargetGeneratorPluginPath>$(MSBuildThisFileDirectory)\$(_TargetGeneratorPluginFramework)\Selenium.Targets.Generation.SpecFlowPlugin.dll</_TargetGeneratorPluginPath>
+	</PropertyGroup>
+</Project>

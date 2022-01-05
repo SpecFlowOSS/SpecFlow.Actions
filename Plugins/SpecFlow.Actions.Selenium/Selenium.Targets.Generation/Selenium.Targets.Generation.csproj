@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
 	  <TargetFrameworks>net471;netcoreapp2.1</TargetFrameworks>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <NuspecFile>$(MSBuildThisFileDirectory)Selenium.Targets.Generation.nuspec</NuspecFile>
+	  <AssemblyName>Selenium.Targets.Generation.SpecFlowPlugin</AssemblyName>
   </PropertyGroup>
 
 	<ItemGroup>
