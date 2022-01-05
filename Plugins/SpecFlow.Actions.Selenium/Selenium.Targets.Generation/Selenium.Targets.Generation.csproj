@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+	  <TargetFrameworks>net471;netcoreapp2.1</TargetFrameworks>
   </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="SpecFlow.CustomPlugin" Version="3.9.40" />
+	</ItemGroup>
 
 </Project>
