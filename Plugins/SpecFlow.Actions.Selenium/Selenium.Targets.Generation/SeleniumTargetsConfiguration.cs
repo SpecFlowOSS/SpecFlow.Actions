@@ -1,6 +1,7 @@
 ﻿using SpecFlow.Actions.Configuration;
 using SpecFlow.Actions.Selenium;
 using System;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -11,23 +12,24 @@ namespace Selenium.Targets.Generation
         private readonly ISpecFlowActionJsonLoader _specFlowActionJsonLoader;
 
         [JsonInclude]
-        private readonly Lazy<SeleniumSpecFlowJsonPart[]> _seleniumSpecFlowJsonParts;
+        private readonly Lazy<SpecFlowActionsTargets> _specFlowActionsTargetsJson;
 
         public SeleniumTargetsConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
+            Debugger.Launch();
             _specFlowActionJsonLoader = specFlowActionJsonLoader;
-            _seleniumSpecFlowJsonParts = new Lazy<SeleniumSpecFlowJsonPart[]>(LoadSpecFlowJson);
+            _specFlowActionsTargetsJson = new Lazy<SpecFlowActionsTargets>(LoadSpecFlowJson);
         }
 
-        public SeleniumSpecFlowJsonPart[] Selenium => _seleniumSpecFlowJsonParts.Value;
+        public SpecFlowActionsTargets Targets => _specFlowActionsTargetsJson.Value;
 
-        private SeleniumSpecFlowJsonPart[] LoadSpecFlowJson()
+        private SpecFlowActionsTargets LoadSpecFlowJson()
         {
             var json = _specFlowActionJsonLoader.Load();
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                return Array.Empty<SeleniumSpecFlowJsonPart>();
+                return new SpecFlowActionsTargets();
             }
 
             var jsonSerializerOptions = new JsonSerializerOptions()
@@ -37,9 +39,9 @@ namespace Selenium.Targets.Generation
 
             jsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 
-            var specflowActionConfig = JsonSerializer.Deserialize<SeleniumSpecFlowJsonPart[]>(json, jsonSerializerOptions);
+            var specflowActionConfig = JsonSerializer.Deserialize<SpecFlowActionsTargets>(json, jsonSerializerOptions);
 
-            return specflowActionConfig ?? Array.Empty<SeleniumSpecFlowJsonPart>();
+            return specflowActionConfig ?? new SpecFlowActionsTargets();
         }
     }
 }

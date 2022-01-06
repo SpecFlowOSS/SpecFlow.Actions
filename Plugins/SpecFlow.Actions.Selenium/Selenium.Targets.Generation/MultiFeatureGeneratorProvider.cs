@@ -18,7 +18,7 @@ namespace Selenium.Targets.Generation
         {
             var featureGenerators = new List<KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>>();
 
-            foreach (var seleniumSpecFlowJson in seleniumTargetsConfiguration.Selenium)
+            foreach (var seleniumSpecFlowJson in seleniumTargetsConfiguration.Targets.Selenium)
             {
                 var combinationFeatureGenerator = new UnitTestFeatureGenerator(container.Resolve<IUnitTestGeneratorProvider>(), container.Resolve<CodeDomHelper>(), container.Resolve<SpecFlowConfiguration>(), container.Resolve<IDecoratorRegistry>());
                 featureGenerators.Add(new KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>(seleniumSpecFlowJson, combinationFeatureGenerator));

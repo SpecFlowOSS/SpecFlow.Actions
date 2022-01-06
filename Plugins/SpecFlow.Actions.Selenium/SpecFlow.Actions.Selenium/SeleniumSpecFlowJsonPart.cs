@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public record SeleniumSpecFlowJsonPart()
+    public class SeleniumSpecFlowJsonPart
     {
         [JsonInclude]
         public Browser Browser { get; private set; }
