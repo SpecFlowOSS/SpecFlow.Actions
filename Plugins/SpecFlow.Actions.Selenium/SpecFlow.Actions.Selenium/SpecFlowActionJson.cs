@@ -2,12 +2,9 @@
 
 namespace SpecFlow.Actions.Selenium
 {
-    public partial class SeleniumConfiguration
+    internal class SpecFlowActionJson
     {
-        private class SpecFlowActionJson
-        {
-            [JsonInclude]
-            public SeleniumSpecFlowJsonPart Selenium { get; private set; } = new SeleniumSpecFlowJsonPart();
-        }
+        [JsonInclude]
+        public SeleniumSpecFlowJsonPart Selenium { get; private set; } = new SeleniumSpecFlowJsonPart();
     }
 }

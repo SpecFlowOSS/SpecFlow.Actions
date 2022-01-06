@@ -1,7 +1,5 @@
 ﻿using SpecFlow.Actions.Configuration;
-using SpecFlow.Actions.Selenium;
 using System;
-using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -16,7 +14,6 @@ namespace Selenium.Targets.Generation
 
         public SeleniumTargetsConfiguration(ISpecFlowActionJsonLoader specFlowActionJsonLoader)
         {
-            Debugger.Launch();
             _specFlowActionJsonLoader = specFlowActionJsonLoader;
             _specFlowActionsTargetsJson = new Lazy<SpecFlowActionsTargets>(LoadSpecFlowJson);
         }

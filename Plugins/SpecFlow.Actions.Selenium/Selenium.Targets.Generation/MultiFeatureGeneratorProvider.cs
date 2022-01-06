@@ -24,7 +24,7 @@ namespace Selenium.Targets.Generation
                 featureGenerators.Add(new KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>(seleniumSpecFlowJson, combinationFeatureGenerator));
             }
 
-            _multiFeatureGenerator = new MultiFeatureGenerator(featureGenerators, new UnitTestFeatureGenerator(container.Resolve<IUnitTestGeneratorProvider>(), container.Resolve<CodeDomHelper>(), container.Resolve<SpecFlowConfiguration>(), container.Resolve<IDecoratorRegistry>()));
+            _multiFeatureGenerator = new MultiFeatureGenerator(featureGenerators);
         }
 
         public bool CanGenerate(SpecFlowDocument specFlowDocument)
