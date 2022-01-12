@@ -1,9 +1,5 @@
-﻿using SpecFlow.Actions.Selenium;
-using System.CodeDom;
+﻿using System.CodeDom;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using TechTalk.SpecFlow.Generator.Generation;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Parser;
 
@@ -11,19 +7,11 @@ namespace Selenium.Targets.Generation
 {
     internal class MultiFeatureGenerator : IFeatureGenerator
     {
-        private readonly KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>[] _featureGenerators;
+        private readonly List<IFeatureGenerator> _featureGenerators;
 
-        public MultiFeatureGenerator(IEnumerable<KeyValuePair<SeleniumSpecFlowJsonPart, IFeatureGenerator>> featureGenerators)
+        public MultiFeatureGenerator(List<IFeatureGenerator> featureGenerators)
         {
-            _featureGenerators = featureGenerators.ToArray();
-
-            foreach (var featureGenerator in _featureGenerators)
-            {
-                if (featureGenerator.Value is UnitTestFeatureGenerator unitTestFeatureGenerator)
-                {
-                    unitTestFeatureGenerator.TestClassNameFormat += $"_{featureGenerator.Key.Browser}";
-                }
-            }
+            _featureGenerators = featureGenerators;
         }
 
         public CodeNamespace GenerateUnitTestFixture(SpecFlowDocument specFlowDocument, string testClassName, string targetNamespace)
@@ -32,7 +20,7 @@ namespace Selenium.Targets.Generation
 
             foreach (var featureGenerator in _featureGenerators)
             {
-                var featureGeneratorResult = featureGenerator.Value.GenerateUnitTestFixture(specFlowDocument, testClassName, targetNamespace);
+                var featureGeneratorResult = featureGenerator.GenerateUnitTestFixture(specFlowDocument, testClassName, targetNamespace);
 
                 if (result == null)
                 {
