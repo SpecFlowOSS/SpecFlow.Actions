@@ -1,0 +1,35 @@
+﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<BuildDependsOn>
+			CopySpecFlowActionJsonToOutput;
+			$(BuildDependsOn)
+		</BuildDependsOn>
+		<CleanDependsOn>
+			$(CleanDependsOn)
+		</CleanDependsOn>
+		<RebuildDependsOn>
+			CopySpecFlowActionJsonToOutput;
+			$(RebuildDependsOn)
+		</RebuildDependsOn>
+	</PropertyGroup>
+
+	<Target Name="CopySpecFlowActionJsonToOutput" >
+		<PropertyGroup>
+			<SpecFlowActionJson>specflow.actions.json</SpecFlowActionJson>
+		</PropertyGroup>
+
+		<ItemGroup Condition="Exists($(SpecFlowActionJson))">
+			<None Include="$(SpecFlowActionJson)" CopyToOutputDirectory="PreserveNewest" />
+		</ItemGroup>
+	</Target>
+
+	<PropertyGroup>
+		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_TargetGeneratorPluginFramework>
+		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_TargetGeneratorPluginFramework>
+		<_TargetGeneratorPluginPath>$(MSBuildThisFileDirectory)\$(_TargetGeneratorPluginFramework)\SpecFlow.Actions.Configuration.Generation.dll</_TargetGeneratorPluginPath>
+
+		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' ">netcoreapp2.1</_SeleniumRuntimePluginFramework>
+		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">net471</_SeleniumRuntimePluginFramework>
+		<_SeleniumRuntimePluginPath>$(MSBuildThisFileDirectory)\..\lib\$(_SeleniumRuntimePluginFramework)\SpecFlow.Actions.Configuration.Generation.dll</_SeleniumRuntimePluginPath>
+	</PropertyGroup>
+</Project>

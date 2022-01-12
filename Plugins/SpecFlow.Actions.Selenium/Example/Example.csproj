@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\Build\SpecFlow.Actions.Configuration.props" />
+
   <PropertyGroup>
     <TargetFrameworks>net5.0;net471</TargetFrameworks>
   </PropertyGroup>
@@ -32,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Selenium.Targets.Generation\Selenium.Targets.Generation.csproj" />
+    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj" />
     <ProjectReference Include="..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
   </ItemGroup>
 
@@ -40,6 +42,16 @@
     <None Update="specflow.actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <PropertyGroup>
+	  <_SpecFlow_GeneratorPlugin Condition=" '$(MSBuildRuntimeType)' == 'Core'">netstandard2.0</_SpecFlow_GeneratorPlugin>
+	  <_SpecFlow_GeneratorPlugin Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_SpecFlow_GeneratorPlugin>
+	  <_SpecFlow_GeneratorPluginPath>$(MSBuildThisFileDirectory)..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\bin\$(Configuration)\$(_SpecFlow_GeneratorPlugin)\SpecFlow.Actions.Configuration.Generation.SpecFlowPlugin.dll</_SpecFlow_GeneratorPluginPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <SpecFlowGeneratorPlugins Include="$(_SpecFlow_GeneratorPluginPath)" />
   </ItemGroup>
 
 

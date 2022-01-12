@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>SpecFlow.Actions.Configuration.SpecFlowPlugin</AssemblyName>
-    <PackageId>SpecFlow.Actions.Configuration</PackageId>
     <Product>SpecFlow.Actions.Configuration</Product>
   </PropertyGroup>
 
