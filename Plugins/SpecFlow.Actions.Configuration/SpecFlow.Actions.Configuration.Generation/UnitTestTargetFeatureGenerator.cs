@@ -10,11 +10,14 @@ namespace Selenium.Targets.Generation
 {
     internal class UnitTestTargetFeatureGenerator : UnitTestFeatureGeneratorBase
     {
+        private readonly string _target;
+
         public UnitTestTargetFeatureGenerator(IUnitTestGeneratorProvider testGeneratorProvider,
             CodeDomHelper codeDomHelper, SpecFlowConfiguration specFlowConfiguration,
             IDecoratorRegistry decoratorRegistry, string target)
             : base(testGeneratorProvider, codeDomHelper, specFlowConfiguration, decoratorRegistry)
         {
+            _target = target;
             //base.TestClassNameFormat += $"_{_seleniumSpecFlowJsonPart.Browser}";
             base.TestClassNameFormat += $"_{target.Replace(".", "_")}";
         }
@@ -30,7 +33,7 @@ namespace Selenium.Targets.Generation
 
             //scenarioInitializeMethod.Statements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("ISeleniumConfiguration config"), new CodeVariableReferenceExpression($"new SeleniumConfiguration {{ Browser = {GetBrowserType(_seleniumSpecFlowJsonPart.Browser)} }}")));
             //scenarioInitializeMethod.Statements.Add(new CodeAssignStatement(new CodeVariableReferenceExpression("BrowserDriver browserDriver"), new CodeVariableReferenceExpression("new BrowserDriver(config, testRunner.ScenarioContext.ScenarioContainer)")));
-            //scenarioInitializeMethod.Statements.Add(new CodeVariableReferenceExpression("testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<BrowserDriver>(browserDriver)"));
+            scenarioInitializeMethod.Statements.Add(new CodeSnippetStatement($"\t\t\ttestRunner.ScenarioContext[\"__SpecFlowActionsConfigurationTarget\"] = \"{_target}\";"));
         }
 
         //private string GetBrowserType(Browser browser) 

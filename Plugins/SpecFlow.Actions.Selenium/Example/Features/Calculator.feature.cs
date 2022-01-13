@@ -70,6 +70,7 @@ Link to a feature: [Calculator](CalculatorSelenium.Specs/Features/Calculator.fea
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+			testRunner.ScenarioContext["__SpecFlowActionsConfigurationTarget"] = "chrome";
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
@@ -251,6 +252,7 @@ Link to a feature: [Calculator](CalculatorSelenium.Specs/Features/Calculator.fea
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+			testRunner.ScenarioContext["__SpecFlowActionsConfigurationTarget"] = "edge";
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
@@ -432,6 +434,7 @@ Link to a feature: [Calculator](CalculatorSelenium.Specs/Features/Calculator.fea
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+			testRunner.ScenarioContext["__SpecFlowActionsConfigurationTarget"] = "firefox";
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
