@@ -10,11 +10,13 @@ namespace Selenium.Targets.Generation
 {
     internal class UnitTestTargetFeatureGenerator : UnitTestFeatureGeneratorBase
     {
-        public UnitTestTargetFeatureGenerator(IUnitTestGeneratorProvider testGeneratorProvider, CodeDomHelper codeDomHelper, SpecFlowConfiguration specFlowConfiguration, IDecoratorRegistry decoratorRegistry)
+        public UnitTestTargetFeatureGenerator(IUnitTestGeneratorProvider testGeneratorProvider,
+            CodeDomHelper codeDomHelper, SpecFlowConfiguration specFlowConfiguration,
+            IDecoratorRegistry decoratorRegistry, string target)
             : base(testGeneratorProvider, codeDomHelper, specFlowConfiguration, decoratorRegistry)
         {
             //base.TestClassNameFormat += $"_{_seleniumSpecFlowJsonPart.Browser}";
-            base.TestClassNameFormat += $"_does_it_work";
+            base.TestClassNameFormat += $"_{target.Replace(".", "_")}";
         }
 
         internal override void SetupScenarioInitializeMethod(TestClassGenerationContext generationContext)

@@ -39,6 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="specflow.actions.chrome.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="specflow.actions.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

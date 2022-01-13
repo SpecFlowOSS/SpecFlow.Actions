@@ -1,31 +1,10 @@
 {
-  "selenium": [
-    {
-      "browser": "chrome",
-      "arguments": [
-        "--start-maximized",
-        "--incognito"
-      ],
-      "defaultTimeout": 60,
-      "pollingInterval": 5
-    },
-    {
-      "browser": "chrome",
-      "arguments": [
-        "--start-maximized",
-        "--incognito"
-      ],
-      "defaultTimeout": 60,
-      "pollingInterval": 5
-    },
-    {
-      "browser": "chrome",
-      "arguments": [
-        "--start-maximized",
-        "--incognito"
-      ],
-      "defaultTimeout": 60,
-      "pollingInterval": 5
-    }
-  ]
+  "selenium": {
+    "arguments": [
+      "--start-maximized",
+      "--incognito"
+    ],
+    "defaultTimeout": 60,
+    "pollingInterval": 5
+  }
 }

@@ -20,6 +20,7 @@ namespace Selenium.Targets.Generation
             e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLoader, ISpecFlowActionJsonLoader>();
             e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLocator, ISpecFlowActionJsonLocator>();
             e.ObjectContainer.RegisterTypeAs<MultiFeatureGeneratorProvider, IFeatureGeneratorProvider>();
+            e.ObjectContainer.RegisterTypeAs<TargetIdentifier, ITargetIdentifier>();
         }
     }
 }
