@@ -6,9 +6,9 @@ namespace SpecFlow.Actions.Selenium
     {
         Browser Browser { get; }
 
-        string[]? Arguments { get; }
+        string[] Arguments { get; }
 
-        Dictionary<string, string>? Capabilities { get; }
+        Dictionary<string, string> Capabilities { get; }
 
         double? DefaultTimeout { get; }
 

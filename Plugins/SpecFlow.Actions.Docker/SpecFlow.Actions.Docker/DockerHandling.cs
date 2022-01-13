@@ -17,6 +17,11 @@ namespace SpecFlow.Actions.Docker
 
         public void DockerComposeUp()
         {
+            if (_dockerConfiguration.File is null)
+            {
+                throw new DockerConfigurationFileNotFound();
+            }
+
             var dockerConfigurationFile = Path.Combine(Environment.CurrentDirectory, _dockerConfiguration.File);
 
             if (!File.Exists(dockerConfigurationFile))
