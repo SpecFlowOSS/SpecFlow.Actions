@@ -19,7 +19,8 @@
 		</PropertyGroup>
 
 		<ItemGroup Condition="Exists($(SpecFlowActionJson))">
-			<None Include="$(SpecFlowActionJson)" CopyToOutputDirectory="PreserveNewest" />
+			<None Include="specflow.actions.json" CopyToOutputDirectory="Always" />
+			<None Include="specflow.actions.*.json" CopyToOutputDirectory="Always" />
 		</ItemGroup>
 	</Target>
 

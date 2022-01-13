@@ -20,14 +20,14 @@ namespace SpecFlow.Actions.Configuration
 
         private void RuntimePluginEvents_RegisterGlobalDependencies(object sender, RegisterGlobalDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLocator, ISpecFlowActionJsonLocator>();
-            e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLoader, ISpecFlowActionJsonLoader>();
-            e.ObjectContainer.RegisterTypeAs<SpecFlowActionsConfiguration, ISpecFlowActionsConfiguration>();
+            
         }
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            
+            e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLocator, ISpecFlowActionJsonLocator>();
+            e.ObjectContainer.RegisterTypeAs<SpecFlowActionJsonLoader, ISpecFlowActionJsonLoader>();
+            e.ObjectContainer.RegisterTypeAs<SpecFlowActionsConfiguration, ISpecFlowActionsConfiguration>();
         }
     }
 }

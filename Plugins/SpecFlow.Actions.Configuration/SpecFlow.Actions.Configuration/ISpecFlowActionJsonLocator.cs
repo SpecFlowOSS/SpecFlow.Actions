@@ -3,5 +3,6 @@
     public interface ISpecFlowActionJsonLocator
     {
         string? GetFilePath();
+        string? GetTargetFilePath(string targetName);
     }
 }

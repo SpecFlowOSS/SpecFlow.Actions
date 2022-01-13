@@ -32,10 +32,12 @@ namespace SpecFlow.Actions.Configuration
         private IConfigurationRoot LoadConfiguration()
         {
             var specflowActionJsonContent = _specFlowActionJsonLoader.Load();
+            var specflowActionTargetJsonContent = _specFlowActionJsonLoader.LoadTarget();
 
             IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
 
             configurationBuilder = configurationBuilder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(specflowActionJsonContent)));
+            configurationBuilder = configurationBuilder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(specflowActionTargetJsonContent)));
             return configurationBuilder.Build();
         }
 
