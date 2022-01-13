@@ -9,7 +9,7 @@ using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Generator.UnitTestProvider;
 using TechTalk.SpecFlow.Parser;
 
-namespace Selenium.Targets.Generation
+namespace SpecFlow.Actions.Configuration.Generation
 {
     internal class MultiFeatureGeneratorProvider : IFeatureGeneratorProvider
     {

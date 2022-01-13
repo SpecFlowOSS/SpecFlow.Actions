@@ -14,7 +14,7 @@ using TechTalk.SpecFlow.Generator.UnitTestProvider;
 using TechTalk.SpecFlow.Parser;
 using TechTalk.SpecFlow.Tracing;
 
-namespace Selenium.Targets.Generation
+namespace SpecFlow.Actions.Configuration.Generation
 {
     public abstract class UnitTestFeatureGeneratorBase : IFeatureGenerator
     {
@@ -48,10 +48,10 @@ namespace Selenium.Targets.Generation
 
         public CodeNamespace GenerateUnitTestFixture(SpecFlowDocument document, string testClassName, string targetNamespace)
         {
-            CodeNamespace codeNamespace = CreateNamespace(targetNamespace);
-            SpecFlowFeature specFlowFeature = document.SpecFlowFeature;
-            testClassName = (testClassName ?? string.Format(TestClassNameFormat, specFlowFeature.Name.ToIdentifier()));
-            TestClassGenerationContext generationContext = CreateTestClassStructure(codeNamespace, testClassName, document);
+            var codeNamespace = CreateNamespace(targetNamespace);
+            var specFlowFeature = document.SpecFlowFeature;
+            testClassName = testClassName ?? string.Format(TestClassNameFormat, specFlowFeature.Name.ToIdentifier());
+            var generationContext = CreateTestClassStructure(codeNamespace, testClassName, document);
             SetupTestClass(generationContext);
             SetupTestClassInitializeMethod(generationContext);
             SetupTestClassCleanupMethod(generationContext);
@@ -68,14 +68,14 @@ namespace Selenium.Targets.Generation
 
         private TestClassGenerationContext CreateTestClassStructure(CodeNamespace codeNamespace, string testClassName, SpecFlowDocument document)
         {
-            CodeTypeDeclaration codeTypeDeclaration = _codeDomHelper.CreateGeneratedTypeDeclaration(testClassName);
+            var codeTypeDeclaration = _codeDomHelper.CreateGeneratedTypeDeclaration(testClassName);
             codeNamespace.Types.Add(codeTypeDeclaration);
             return new TestClassGenerationContext(_testGeneratorProvider, document, codeNamespace, codeTypeDeclaration, DeclareTestRunnerMember(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), _codeDomHelper.CreateMethod(codeTypeDeclaration), document.SpecFlowFeature.HasFeatureBackground() ? _codeDomHelper.CreateMethod(codeTypeDeclaration) : null, _testGeneratorProvider.GetTraits().HasFlag(UnitTestGeneratorTraits.RowTests) && _specFlowConfiguration.AllowRowTests);
         }
 
         private CodeNamespace CreateNamespace(string targetNamespace)
         {
-            targetNamespace = (targetNamespace ?? "SpecFlowTests");
+            targetNamespace = targetNamespace ?? "SpecFlowTests";
             if (!targetNamespace.StartsWith("global", StringComparison.CurrentCultureIgnoreCase) && _codeDomHelper.TargetLanguage == CodeDomProviderLanguage.VB)
             {
                 targetNamespace = "GlobalVBNetNamespace." + targetNamespace;
@@ -95,10 +95,10 @@ namespace Selenium.Targets.Generation
 
         private void SetupScenarioCleanupMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod scenarioCleanupMethod = generationContext.ScenarioCleanupMethod;
+            var scenarioCleanupMethod = generationContext.ScenarioCleanupMethod;
             scenarioCleanupMethod.Attributes = MemberAttributes.Public;
             scenarioCleanupMethod.Name = "ScenarioCleanup";
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             scenarioCleanupMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "CollectScenarioErrors"));
         }
 
@@ -108,31 +108,31 @@ namespace Selenium.Targets.Generation
             generationContext.TestClass.TypeAttributes |= TypeAttributes.Public;
             _linePragmaHandler.AddLinePragmaInitial(generationContext.TestClass, generationContext.Document.SourceFilePath);
             _testGeneratorProvider.SetTestClass(generationContext, generationContext.Feature.Name, generationContext.Feature.Description);
-            _decoratorRegistry.DecorateTestClass(generationContext, out List<string> unprocessedTags);
+            _decoratorRegistry.DecorateTestClass(generationContext, out var unprocessedTags);
             if (unprocessedTags.Any())
             {
                 _testGeneratorProvider.SetTestClassCategories(generationContext, unprocessedTags);
             }
 
-            CodeMemberField codeMemberField = new CodeMemberField(typeof(string[]), "_featureTags");
+            var codeMemberField = new CodeMemberField(typeof(string[]), "_featureTags");
             codeMemberField.InitExpression = _scenarioPartHelper.GetStringArrayExpression(generationContext.Feature.Tags);
             generationContext.TestClass.Members.Add(codeMemberField);
         }
 
         private CodeMemberField DeclareTestRunnerMember(CodeTypeDeclaration type)
         {
-            CodeMemberField codeMemberField = new CodeMemberField(typeof(ITestRunner), "testRunner");
+            var codeMemberField = new CodeMemberField(typeof(ITestRunner), "testRunner");
             type.Members.Add(codeMemberField);
             return codeMemberField;
         }
 
         private void SetupTestClassInitializeMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod testClassInitializeMethod = generationContext.TestClassInitializeMethod;
+            var testClassInitializeMethod = generationContext.TestClassInitializeMethod;
             testClassInitializeMethod.Attributes = MemberAttributes.Public;
             testClassInitializeMethod.Name = "FeatureSetup";
             _testGeneratorProvider.SetTestClassInitializeMethod(generationContext);
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             CodeExpression[] array2;
             if (!_testGeneratorProvider.GetTraits().HasFlag(UnitTestGeneratorTraits.ParallelExecution))
             {
@@ -148,7 +148,7 @@ namespace Selenium.Targets.Generation
                 array2 = new CodeExpression[0];
             }
 
-            CodeExpression[] parameters = array2;
+            var parameters = array2;
             testClassInitializeMethod.Statements.Add(new CodeAssignStatement(testRunnerExpression, new CodeMethodInvokeExpression(new CodeTypeReferenceExpression(typeof(TestRunnerManager)), "GetTestRunner", parameters)));
             testClassInitializeMethod.Statements.Add(new CodeVariableDeclarationStatement(typeof(FeatureInfo), "featureInfo", new CodeObjectCreateExpression(typeof(FeatureInfo), new CodeObjectCreateExpression(typeof(CultureInfo), new CodePrimitiveExpression(generationContext.Feature.Language)), new CodePrimitiveExpression(generationContext.Document.DocumentLocation?.FeatureFolderPath), new CodePrimitiveExpression(generationContext.Feature.Name), new CodePrimitiveExpression(generationContext.Feature.Description), new CodeFieldReferenceExpression(new CodeTypeReferenceExpression("ProgrammingLanguage"), _codeDomHelper.TargetLanguage.ToString()), _scenarioPartHelper.GetStringArrayExpression(generationContext.Feature.Tags))));
             testClassInitializeMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "OnFeatureStart", new CodeVariableReferenceExpression("featureInfo")));
@@ -156,18 +156,18 @@ namespace Selenium.Targets.Generation
 
         private void SetupTestClassCleanupMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod testClassCleanupMethod = generationContext.TestClassCleanupMethod;
+            var testClassCleanupMethod = generationContext.TestClassCleanupMethod;
             testClassCleanupMethod.Attributes = MemberAttributes.Public;
             testClassCleanupMethod.Name = "FeatureTearDown";
             _testGeneratorProvider.SetTestClassCleanupMethod(generationContext);
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             testClassCleanupMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "OnFeatureEnd"));
             testClassCleanupMethod.Statements.Add(new CodeAssignStatement(testRunnerExpression, new CodePrimitiveExpression(null)));
         }
 
         private void SetupTestInitializeMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod testInitializeMethod = generationContext.TestInitializeMethod;
+            var testInitializeMethod = generationContext.TestInitializeMethod;
             testInitializeMethod.Attributes = MemberAttributes.Public;
             testInitializeMethod.Name = "TestInitialize";
             _testGeneratorProvider.SetTestInitializeMethod(generationContext);
@@ -175,30 +175,30 @@ namespace Selenium.Targets.Generation
 
         private void SetupTestCleanupMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod testCleanupMethod = generationContext.TestCleanupMethod;
+            var testCleanupMethod = generationContext.TestCleanupMethod;
             testCleanupMethod.Attributes = MemberAttributes.Public;
             testCleanupMethod.Name = "TestTearDown";
             _testGeneratorProvider.SetTestCleanupMethod(generationContext);
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             testCleanupMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "OnScenarioEnd"));
         }
 
         internal virtual void SetupScenarioInitializeMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod scenarioInitializeMethod = generationContext.ScenarioInitializeMethod;
+            var scenarioInitializeMethod = generationContext.ScenarioInitializeMethod;
             scenarioInitializeMethod.Attributes = MemberAttributes.Public;
             scenarioInitializeMethod.Name = "ScenarioInitialize";
             scenarioInitializeMethod.Parameters.Add(new CodeParameterDeclarationExpression(typeof(ScenarioInfo), "scenarioInfo"));
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             scenarioInitializeMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "OnScenarioInitialize", new CodeVariableReferenceExpression("scenarioInfo")));
         }
 
         private void SetupScenarioStartMethod(TestClassGenerationContext generationContext)
         {
-            CodeMemberMethod scenarioStartMethod = generationContext.ScenarioStartMethod;
+            var scenarioStartMethod = generationContext.ScenarioStartMethod;
             scenarioStartMethod.Attributes = MemberAttributes.Public;
             scenarioStartMethod.Name = "ScenarioStart";
-            CodeExpression testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
+            var testRunnerExpression = _scenarioPartHelper.GetTestRunnerExpression();
             scenarioStartMethod.Statements.Add(new CodeMethodInvokeExpression(testRunnerExpression, "OnScenarioStart"));
         }
     }

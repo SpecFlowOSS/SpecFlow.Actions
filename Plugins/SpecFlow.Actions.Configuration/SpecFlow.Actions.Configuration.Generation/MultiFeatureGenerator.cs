@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Parser;
 
-namespace Selenium.Targets.Generation
+namespace SpecFlow.Actions.Configuration.Generation
 {
     internal class MultiFeatureGenerator : IFeatureGenerator
     {
