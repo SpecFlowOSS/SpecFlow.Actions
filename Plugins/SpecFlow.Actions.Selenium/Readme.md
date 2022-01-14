@@ -41,11 +41,41 @@ Example:
 ```
 
 ### browser
+
 Supported values:
+
 - `chrome`
 - `firefox`
 - `internetexplorer`
 - `edge`
+
+### Multiple target configurations
+
+This plugin supports tagreting of multiple configurations at runtime. For each configuration you provide, a class will be generated in your feature's code behind file when you build the project. This means that for any given test, the test will be executed against each target.
+
+Example:
+
+```specflow.actions.chrome.json```
+
+``` json
+{
+  "selenium": {
+    "browser": "chrome"
+  }
+}
+```
+
+```specflow.actions.firefox.json```
+
+``` json
+{
+  "selenium": {
+    "browser": "firefox"
+  }
+}
+```
+
+For the example shown above, all tests will execute against both Chrome and Firefox. The configuration format of these targets follows the same structure as if you provide a single config in ```specflow.actions.json```
 
 ## How to use it
 
