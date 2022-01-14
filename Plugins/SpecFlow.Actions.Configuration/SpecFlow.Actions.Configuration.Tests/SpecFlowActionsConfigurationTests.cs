@@ -2,7 +2,6 @@
 
 using FluentAssertions;
 using Moq;
-using System;
 using Xunit;
 
 namespace SpecFlow.Actions.Configuration.Tests
@@ -17,6 +16,7 @@ namespace SpecFlow.Actions.Configuration.Tests
 
             var specflowActionJsonLoaderMock = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoaderMock.Setup(m => m.Load()).Returns(content);
+            specflowActionJsonLoaderMock.Setup(m => m.LoadTarget()).Returns(content);
 
             var specFlowActionsConfiguration = new SpecFlowActionsConfiguration(specflowActionJsonLoaderMock.Object);
 
@@ -34,6 +34,7 @@ namespace SpecFlow.Actions.Configuration.Tests
 
             var specflowActionJsonLoaderMock = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoaderMock.Setup(m => m.Load()).Returns(content);
+            specflowActionJsonLoaderMock.Setup(m => m.LoadTarget()).Returns(content);
 
             var specFlowActionsConfiguration = new SpecFlowActionsConfiguration(specflowActionJsonLoaderMock.Object);
 

@@ -1,5 +1,4 @@
 ﻿using BoDi;
-using SpecFlow.Actions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow.Configuration;

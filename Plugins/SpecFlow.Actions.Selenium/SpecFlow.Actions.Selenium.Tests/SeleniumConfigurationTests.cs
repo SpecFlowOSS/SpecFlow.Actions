@@ -13,6 +13,7 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             var specflowActionJsonLoader = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoader.Setup(m => m.Load()).Returns(specflowJsonContent);
+            specflowActionJsonLoader.Setup(m => m.LoadTarget()).Returns(specflowJsonContent);
 
             return new SeleniumConfiguration(new SpecFlowActionsConfiguration(specflowActionJsonLoader.Object));
         }
