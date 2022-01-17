@@ -2,7 +2,6 @@
 
   <PropertyGroup>
 	  <TargetFrameworks>net471;netcoreapp2.1</TargetFrameworks>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.Configuration.Generation.nuspec</NuspecFile>
 	  <AssemblyName>SpecFlow.Actions.Configuration.Generation.SpecFlowPlugin</AssemblyName>
   </PropertyGroup>
