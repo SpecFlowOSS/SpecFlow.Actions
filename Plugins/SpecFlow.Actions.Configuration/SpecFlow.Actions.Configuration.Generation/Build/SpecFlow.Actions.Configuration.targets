@@ -31,6 +31,6 @@
 
 		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' ">netcoreapp2.1</_SeleniumRuntimePluginFramework>
 		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">net471</_SeleniumRuntimePluginFramework>
-		<_SeleniumRuntimePluginPath>$(MSBuildThisFileDirectory)\..\lib\$(_SeleniumRuntimePluginFramework)\SpecFlow.Actions.Configuration.Generation.dll</_SeleniumRuntimePluginPath>
+		<_SeleniumRuntimePluginPath>$(MSBuildThisFileDirectory)\..\lib\$(_SeleniumRuntimePluginFramework)\SpecFlow.Actions.Configuration.dll</_SeleniumRuntimePluginPath>
 	</PropertyGroup>
 </Project>
