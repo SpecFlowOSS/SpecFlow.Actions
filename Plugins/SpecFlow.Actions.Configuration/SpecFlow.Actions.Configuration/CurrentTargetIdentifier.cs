@@ -1,26 +1,27 @@
 ﻿using TechTalk.SpecFlow;
 
-namespace SpecFlow.Actions.Configuration;
-
-public class CurrentTargetIdentifier
+namespace SpecFlow.Actions.Configuration
 {
-    private readonly ScenarioContext _scenarioContext;
-
-    public CurrentTargetIdentifier(ScenarioContext scenarioContext)
+    public class CurrentTargetIdentifier
     {
-        _scenarioContext = scenarioContext;
-    }
+        private readonly ScenarioContext _scenarioContext;
 
-    public string? Name
-    {
-        get
+        public CurrentTargetIdentifier(ScenarioContext scenarioContext)
         {
-            if (_scenarioContext.ContainsKey("__SpecFlowActionsConfigurationTarget"))
-            {
-                return (string)_scenarioContext["__SpecFlowActionsConfigurationTarget"];
-            }
+            _scenarioContext = scenarioContext;
+        }
 
-            return null;
+        public string? Name
+        {
+            get
+            {
+                if (_scenarioContext.ContainsKey("__SpecFlowActionsConfigurationTarget"))
+                {
+                    return (string)_scenarioContext["__SpecFlowActionsConfigurationTarget"];
+                }
+
+                return null;
+            }
         }
     }
 }
