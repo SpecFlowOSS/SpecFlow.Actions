@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Browserstack", "SpecFlow.Actions.Browserstack\SpecFlow.Actions.Browserstack.csproj", "{F6C1488E-CA8C-4358-B372-04C4AB6AC11F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00BF8B27-52CE-47E9-B525-1DB856B2EB26} = {00BF8B27-52CE-47E9-B525-1DB856B2EB26}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{E1B7B44C-90D6-4A48-A5D8-59B0CFFAE89E}"
 EndProject
