@@ -4,7 +4,7 @@
       "--start-maximized",
       "--incognito"
     ],
-    "defaultTimeout": 60,
+    "defaultTimeout": 120,
     "pollingInterval": 5
   }
 }
