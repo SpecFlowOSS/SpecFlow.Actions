@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj" />
     <ProjectReference Include="..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
   </ItemGroup>
 
