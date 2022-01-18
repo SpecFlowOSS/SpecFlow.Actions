@@ -1,9 +1,9 @@
-﻿using Example.PageObjects;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Specflow.Actions.Browserstack.IntegrationTests.PageObjects;
 using SpecFlow.Actions.Selenium;
 using TechTalk.SpecFlow;
 
-namespace Example.Steps
+namespace Specflow.Actions.Browserstack.IntegrationTests.Steps
 {
     [Binding]
     public sealed class CalculatorStepDefinitions

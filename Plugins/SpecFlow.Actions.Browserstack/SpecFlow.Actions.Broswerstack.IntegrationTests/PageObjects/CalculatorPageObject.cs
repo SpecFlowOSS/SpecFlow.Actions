@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SpecFlow.Actions.Selenium;
 
-namespace Example.PageObjects
+namespace Specflow.Actions.Browserstack.IntegrationTests.PageObjects
 {
     /// <summary>
     /// Calculator Page Object

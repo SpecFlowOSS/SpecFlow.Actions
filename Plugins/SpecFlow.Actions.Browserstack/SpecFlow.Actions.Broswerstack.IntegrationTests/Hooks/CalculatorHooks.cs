@@ -1,8 +1,8 @@
-﻿using Example.PageObjects;
+﻿using Specflow.Actions.Browserstack.IntegrationTests.PageObjects;
 using SpecFlow.Actions.Selenium;
 using TechTalk.SpecFlow;
 
-namespace Example.Hooks
+namespace Specflow.Actions.Browserstack.IntegrationTests.Hooks
 {
     /// <summary>
     /// Calculator related hooks

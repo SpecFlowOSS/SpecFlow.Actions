@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Example
+namespace SpecFlow.Actions.Docker.IntegrationTests
 {
     using TechTalk.SpecFlow;
     using System;
@@ -31,7 +31,7 @@ namespace Example
 #line 1 "Check Webserver.feature"
 #line hidden
         
-        public FirstStartupFeature(FirstStartupFeature.FixtureData fixtureData, Example_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FirstStartupFeature(FirstStartupFeature.FixtureData fixtureData, SpecFlow_Actions_Docker_IntegrationTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();

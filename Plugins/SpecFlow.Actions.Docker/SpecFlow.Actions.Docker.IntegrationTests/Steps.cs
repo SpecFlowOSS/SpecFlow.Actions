@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using TechTalk.SpecFlow;
 
-namespace Example
+namespace SpecFlow.Actions.Docker.IntegrationTests
 {
     [Binding]
     public class Steps

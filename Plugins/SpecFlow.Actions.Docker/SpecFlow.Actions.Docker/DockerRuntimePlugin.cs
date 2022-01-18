@@ -13,23 +13,16 @@ namespace SpecFlow.Actions.Docker
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
-            runtimePluginEvents.RegisterGlobalDependencies += RuntimePluginEvents_RegisterGlobalDependencies;
-            runtimePluginEvents.CustomizeGlobalDependencies += RuntimePluginEvents_CustomizeGlobalDependencies;            
+            runtimePluginEvents.CustomizeScenarioDependencies += RuntimePluginEvents_CustomizeScenarioDependencies;
         }
 
-        private void RuntimePluginEvents_RegisterGlobalDependencies(object sender, RegisterGlobalDependenciesEventArgs e)
+        private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<DockerHandling, IDockerHandling>();
             e.ObjectContainer.RegisterTypeAs<DockerConfiguration, IDockerConfiguration>();
-        }
 
-        private void RuntimePluginEvents_CustomizeGlobalDependencies(object sender,
-            CustomizeGlobalDependenciesEventArgs e)
-        {
             var specFlowConfiguration = e.ObjectContainer.Resolve<SpecFlowConfiguration>();
             specFlowConfiguration.AdditionalStepAssemblies.Add("SpecFlow.Actions.Docker.SpecFlowPlugin");
         }
-
-
     }
 }

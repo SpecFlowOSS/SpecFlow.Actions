@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace Example.PageObjects
+namespace Specflow.Actions.Browserstack.IntegrationTests.PageObjects
 {
     public class CalculatorElementLocators
     {
