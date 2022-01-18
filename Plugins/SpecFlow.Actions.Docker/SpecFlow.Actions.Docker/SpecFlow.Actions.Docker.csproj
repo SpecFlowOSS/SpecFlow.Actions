@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="SpecFlow" Version="3.9.*" />
-    <PackageReference Include="Ductus.FluentDocker" Version="2.10.7" />
+    <PackageReference Include="Ductus.FluentDocker" Version="2.10.44" />
   </ItemGroup>
 
   <ItemGroup>
