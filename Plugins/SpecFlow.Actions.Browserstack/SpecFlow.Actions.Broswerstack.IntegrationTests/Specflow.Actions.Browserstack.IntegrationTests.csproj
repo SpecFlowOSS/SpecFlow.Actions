@@ -59,5 +59,8 @@
 		<SpecFlowGeneratorPlugins Include="$(_SpecFlow_GeneratorPluginPath)" />
 	</ItemGroup>
 
+	<Target Name="BuildDependencies" BeforeTargets="PreBuildEvent;BeforeUpdateFeatureFilesInProject" AfterTargets="PreBuild">
+		<MSBuild Projects="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj" Properties="TargetFramework=$(_SpecFlow_GeneratorPlugin)" />
+	</Target>
 
 </Project>
