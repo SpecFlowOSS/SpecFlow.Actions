@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Selenium.Configuration
 {
     public class SeleniumConfiguration : ISeleniumConfiguration
     {
@@ -25,7 +25,7 @@ namespace SpecFlow.Actions.Selenium
         /// <summary>
         /// Arguments used to configure the webdriver
         /// </summary>
-        public string[] Arguments => _specFlowActionsConfiguration.GetArray("selenium:arguments") ?? new string[]{};
+        public string[] Arguments => _specFlowActionsConfiguration.GetArray("selenium:arguments") ?? new string[] { };
 
         /// <summary>
         /// Capabilities used to configure the webdriver

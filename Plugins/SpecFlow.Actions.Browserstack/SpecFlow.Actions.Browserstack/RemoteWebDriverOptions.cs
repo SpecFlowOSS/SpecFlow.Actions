@@ -1,17 +1,14 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
-using OpenQA.Selenium.Safari;
-using SpecFlow.Actions.Selenium;
+﻿using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Browserstack
 {
-    public class RemoteWebDriverOptions : IDriverOptions
+    public class RemoteWebDriverOptions : IWebDriverOptions
     {
         private readonly ScenarioContext _scenarioContext;
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
@@ -22,91 +19,27 @@ namespace SpecFlow.Actions.Browserstack
             _scenarioContext = scenarioContext;
         }
 
-        public ChromeOptions Chrome(Dictionary<string, string>? capabilities = null, string[]? args = null)
+        public IOptionsWrapper GetOptions(Browser browser, Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            var options = new ChromeOptions();
-
-            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
-            options.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
-            options.AddAdditionalCapability("name", GetScenarioTitle(), true);
-
-            if (capabilities?.Count != 0 && capabilities != null)
+            IOptionsWrapper options = browser switch
             {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
-                }
+                Browser.Chrome => new ChromeOptionsWrapper(),
+                Browser.Firefox => new FirefoxOptionsWrapper(),
+                Browser.Edge => new EdgeOptionsWrapper(),
+                Browser.InternetExplorer => new InternetExplorerOptionsWrapper(),
+                Browser.Safari => new SafariOptionsWrapper(),
+                _ => throw new ArgumentOutOfRangeException(nameof(browser), browser, null),
+            };
+
+            if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
+            {
+                options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
+                options.AddAdditionalCapability("browserstack.key", AccessKey.Value); 
             }
 
-            return options;
-        }
-
-        public EdgeOptions Edge(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new EdgeOptions();
-
-            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
-            options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
             options.AddAdditionalCapability("name", GetScenarioTitle());
 
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            return options;
-        }
-
-        public FirefoxOptions Firefox(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new FirefoxOptions();
-
-            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value, true);
-            options.AddAdditionalCapability("browserstack.key", AccessKey.Value, true);
-            options.AddAdditionalCapability("name", GetScenarioTitle(), true);
-
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
-                }
-            }
-
-            return options;
-        }
-
-        public InternetExplorerOptions InternetExplorer(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new InternetExplorerOptions();
-
-            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
-            options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
-            options.AddAdditionalCapability("name", GetScenarioTitle());
-
-            if (capabilities?.Count != 0 && capabilities != null)
-            {
-                foreach (var capability in capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            return options;
-        }
-
-        public SafariOptions Safari(Dictionary<string, string>? capabilities = null, string[]? args = null)
-        {
-            var options = new SafariOptions();
-
-            options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
-            options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
-            options.AddAdditionalCapability("name", GetScenarioTitle());
-
-            if (capabilities?.Count != 0 && capabilities != null)
+            if (capabilities.Any() && capabilities is not null)
             {
                 foreach (var capability in capabilities)
                 {

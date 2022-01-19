@@ -1,6 +1,7 @@
 ﻿using BoDi;
 using System;
 using OpenQA.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
 
 namespace SpecFlow.Actions.Selenium
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Selenium.Configuration
 {
     public interface ISeleniumConfiguration
     {
@@ -14,6 +14,6 @@ namespace SpecFlow.Actions.Selenium
 
         double? PollingInterval { get; }
 
-        string? TestPlatform { get; }
+        string TestPlatform { get; }
     }
 }

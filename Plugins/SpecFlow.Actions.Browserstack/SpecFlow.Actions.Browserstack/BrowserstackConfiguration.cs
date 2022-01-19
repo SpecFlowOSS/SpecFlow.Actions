@@ -1,5 +1,5 @@
 ﻿using SpecFlow.Actions.Configuration;
-using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
 using System.Collections.Generic;
 
 namespace SpecFlow.Actions.Browserstack

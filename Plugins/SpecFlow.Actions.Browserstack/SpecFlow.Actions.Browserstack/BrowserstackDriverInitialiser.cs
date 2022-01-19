@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Remote;
 using SpecFlow.Actions.Browserstack;
 using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 using System.Collections.Generic;
 
@@ -9,28 +10,20 @@ namespace Specflow.Actions.Browserstack
 {
     public class BrowserstackDriverInitialiser : IDriverInitialiser
     {
-        private readonly RemoteWebDriverOptions _remoteWebDriverOptions;
+        private readonly IWebDriverOptions _optionsInitialiser;
         private Uri _browserstackRemoteUri;
 
-        public BrowserstackDriverInitialiser(RemoteWebDriverOptions remoteWebDriverOptions)
+        public BrowserstackDriverInitialiser(RemoteWebDriverOptions optionsInitialiser)
         {
-            _remoteWebDriverOptions = remoteWebDriverOptions;
-            _browserstackRemoteUri = new("https://hub-cloud.browserstack.com/wd/hub/");
+            _optionsInitialiser = optionsInitialiser;
+            _browserstackRemoteUri = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
         }
 
         public IWebDriver Initialise(Browser browser, Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            var caps = browser switch
-            {
-                Browser.Chrome => _remoteWebDriverOptions.Chrome(capabilities).ToCapabilities(),
-                Browser.Firefox => _remoteWebDriverOptions.Firefox(capabilities).ToCapabilities(),
-                Browser.Edge => _remoteWebDriverOptions.Edge(capabilities).ToCapabilities(),
-                Browser.InternetExplorer => _remoteWebDriverOptions.InternetExplorer(capabilities).ToCapabilities(),
-                Browser.Safari => _remoteWebDriverOptions.Safari(capabilities).ToCapabilities(),
-                _ => throw new ArgumentOutOfRangeException(nameof(browser), browser, null),
-            };
+            var options = _optionsInitialiser.GetOptions(browser, capabilities, args);
 
-            return new RemoteWebDriver(_browserstackRemoteUri, caps);
+            return new RemoteWebDriver(_browserstackRemoteUri, options.GetCapabilities());
         }
     }
 }

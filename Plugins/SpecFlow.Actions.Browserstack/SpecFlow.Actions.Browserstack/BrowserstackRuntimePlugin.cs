@@ -2,11 +2,13 @@
 using Specflow.Actions.Browserstack;
 using SpecFlow.Actions.Browserstack;
 using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(BrowserstackRuntimePlugin))]
+[assembly: RuntimePlugin(typeof(BrowserstackRuntimePlugin))]
 
 namespace Specflow.Actions.Browserstack
 {
@@ -46,7 +48,6 @@ namespace Specflow.Actions.Browserstack
             e.ObjectContainer.RegisterTypeAs<BrowserstackDriverInitialiser, IDriverInitialiser>("browserstack");
             e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
             e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<RemoteWebDriverOptions, IDriverOptions>();
         }
     }
 }

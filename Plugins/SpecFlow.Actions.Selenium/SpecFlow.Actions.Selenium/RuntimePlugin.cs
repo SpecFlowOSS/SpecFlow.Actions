@@ -1,8 +1,10 @@
 ﻿using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(SeleniumRuntimePlugin))]
+[assembly: RuntimePlugin(typeof(SeleniumRuntimePlugin))]
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -14,12 +16,13 @@ namespace SpecFlow.Actions.Selenium
             runtimePluginEvents.CustomizeScenarioDependencies += RuntimePluginEvents_CustomizeScenarioDependencies;  
         }
 
-        private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
+        private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<LocalDriverInitialiser, IDriverInitialiser>("local");
+            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>("local");
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            e.ObjectContainer.RegisterTypeAs<LocalDriverOptions, IDriverOptions>();
+            e.ObjectContainer.RegisterTypeAs<LocalDriverOptions, IWebDriverOptions>();
+            e.ObjectContainer.RegisterTypeAs<DriverFactory, IDriverFactory>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using SpecFlow.Actions.Selenium.DriverOptions;
 
 namespace SpecFlow.Actions.Selenium
 {
