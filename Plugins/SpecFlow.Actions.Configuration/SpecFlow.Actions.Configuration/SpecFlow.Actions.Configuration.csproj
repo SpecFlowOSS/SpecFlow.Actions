@@ -13,8 +13,4 @@
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.4.240" />
-  </ItemGroup>
-
 </Project>
