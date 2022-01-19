@@ -5,6 +5,7 @@
     <AssemblyName>SpecFlow.Actions.Selenium.SpecFlowPlugin</AssemblyName>
     <PackageId>SpecFlow.Actions.Selenium</PackageId>
     <Product>SpecFlow.Actions.Selenium</Product>
+    <NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.Selenium.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>
