@@ -17,8 +17,9 @@ namespace SpecFlow.Actions.Selenium
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>("local");
+            e.ObjectContainer.RegisterTypeAs<LocalDriverInitialiser, IDriverInitialiser>("local");
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
+            e.ObjectContainer.RegisterTypeAs<LocalDriverOptions, IDriverOptions>();
         }
     }
 }

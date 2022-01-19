@@ -9,6 +9,9 @@
       "os_version": "Monterey",
       "resolution": "1920x1080",
       "build": "Examples"
-    }
+    },
+    "browserstacklocalcapabilities": {
+      "forcelocal" : true 
+    } 
   }
 }

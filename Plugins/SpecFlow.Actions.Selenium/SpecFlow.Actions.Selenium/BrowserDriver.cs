@@ -34,16 +34,8 @@ namespace SpecFlow.Actions.Selenium
         {
             var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.TestPlatform);
 
-            return _seleniumConfiguration.Browser switch
-            {
-                Browser.Chrome => initialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Firefox => initialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Edge => initialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.InternetExplorer => initialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Safari => initialiser.GetSafariDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Noop => new NoopWebdriver(),
-                _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
-            };
+            return initialiser.Initialise(_seleniumConfiguration.Browser, _seleniumConfiguration.Capabilities,
+                _seleniumConfiguration.Arguments);
         }
 
         /// <summary>

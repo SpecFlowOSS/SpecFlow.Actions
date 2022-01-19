@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public partial class SeleniumConfiguration : ISeleniumConfiguration
+    public class SeleniumConfiguration : ISeleniumConfiguration
     {
         private readonly ISpecFlowActionsConfiguration _specFlowActionsConfiguration;
 
