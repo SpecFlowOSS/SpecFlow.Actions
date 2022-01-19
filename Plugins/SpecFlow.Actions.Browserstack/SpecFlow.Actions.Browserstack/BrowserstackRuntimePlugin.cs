@@ -18,13 +18,13 @@ namespace Specflow.Actions.Browserstack
             runtimePluginEvents.CustomizeGlobalDependencies += RuntimePluginEvents_CustomizeGlobalDependencies;
         }
 
-        private void RuntimePluginEvents_CustomizeGlobalDependencies(object sender, CustomizeGlobalDependenciesEventArgs e)
+        private void RuntimePluginEvents_CustomizeGlobalDependencies(object? sender, CustomizeGlobalDependenciesEventArgs e)
         {
             var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
             runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
         }
 
-        private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object sender, RuntimePluginAfterScenarioEventArgs e)
+        private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
         {
             var scenarioContext = e.ObjectContainer.Resolve<ScenarioContext>();
             var browserDriver = e.ObjectContainer.Resolve<BrowserDriver>();
@@ -40,7 +40,7 @@ namespace Specflow.Actions.Browserstack
             }
         }
 
-        private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
+        private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<BrowserstackDriverInitialiser, IDriverInitialiser>("browserstack");
         }

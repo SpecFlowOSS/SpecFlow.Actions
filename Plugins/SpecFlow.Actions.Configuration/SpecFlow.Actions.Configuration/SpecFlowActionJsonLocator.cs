@@ -19,20 +19,23 @@ namespace SpecFlow.Actions.Configuration
 
         private string? GetFilePathToConfigurationFile(string configurationFileName)
         {
-            var specflowJsonFileInAppDomainBaseDirectory =
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurationFileName);
-
-            if (File.Exists(specflowJsonFileInAppDomainBaseDirectory))
+            if (AppDomain.CurrentDomain.BaseDirectory is not null)
             {
-                return specflowJsonFileInAppDomainBaseDirectory;
-            }
+                var specflowJsonFileInAppDomainBaseDirectory =
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurationFileName);
 
-            var specflowJsonFileTwoDirectoriesUp =
-                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", configurationFileName);
+                if (File.Exists(specflowJsonFileInAppDomainBaseDirectory))
+                {
+                    return specflowJsonFileInAppDomainBaseDirectory;
+                }
 
-            if (File.Exists(specflowJsonFileTwoDirectoriesUp))
-            {
-                return specflowJsonFileTwoDirectoriesUp;
+                var specflowJsonFileTwoDirectoriesUp =
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", configurationFileName);
+
+                if (File.Exists(specflowJsonFileTwoDirectoriesUp))
+                {
+                    return specflowJsonFileTwoDirectoriesUp;
+                }
             }
 
             var specflowJsonFileInCurrentDirectory = Path.Combine(Environment.CurrentDirectory, configurationFileName);

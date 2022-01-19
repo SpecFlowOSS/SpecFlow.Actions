@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+	  <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
 	  <AssemblyName>SpecFlow.Actions.Android.SpecFlowPlugin</AssemblyName>
 	  <PackageId>SpecFlow.Actions.Android</PackageId>
 	  <Product>SpecFlow.Actions.Android</Product>

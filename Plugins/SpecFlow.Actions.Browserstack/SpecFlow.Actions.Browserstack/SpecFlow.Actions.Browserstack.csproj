@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+		<TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
 		<AssemblyName>SpecFlow.Actions.Browserstack.SpecFlowPlugin</AssemblyName>
 		<PackageId>SpecFlow.Actions.Browserstack</PackageId>
 		<Product>SpecFlow.Actions.Browserstack</Product>
