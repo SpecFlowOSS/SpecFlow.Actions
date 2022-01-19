@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
     <AssemblyName>SpecFlow.Actions.Selenium.SpecFlowPlugin</AssemblyName>
     <PackageId>SpecFlow.Actions.Selenium</PackageId>
     <Product>SpecFlow.Actions.Selenium</Product>
+    <NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.Selenium.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.csproj" />
+    <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj"/>
   </ItemGroup>
 
 </Project>

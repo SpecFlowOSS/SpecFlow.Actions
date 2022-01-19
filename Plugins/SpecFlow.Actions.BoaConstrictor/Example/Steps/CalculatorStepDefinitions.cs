@@ -1,6 +1,5 @@
 ﻿using Boa.Constrictor.Screenplay;
 using Boa.Constrictor.WebDriver;
-using Example.PageObjects;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 

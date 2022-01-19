@@ -13,18 +13,9 @@ namespace SpecFlow.Actions.Selenium.Tests
         {
             var specflowActionJsonLoader = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoader.Setup(m => m.Load()).Returns(specflowJsonContent);
+            specflowActionJsonLoader.Setup(m => m.LoadTarget()).Returns(specflowJsonContent);
 
-            return new SeleniumConfiguration(specflowActionJsonLoader.Object);
-        }
-
-        [Fact]
-        public void Browser_NoSpecFlowJsonContent_ReturnsNone()
-        {
-            var specflowJsonContent = string.Empty;
-
-            var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
-
-            seleniumConfiguration.Browser.Should().Be(Browser.None);
+            return new SeleniumConfiguration(new SpecFlowActionsConfiguration(specflowActionJsonLoader.Object));
         }
 
         [Fact]
@@ -69,7 +60,7 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             Action action = () => GetBrowser(GetSeleniumConfiguration(specflowJsonContent));
 
-            action.Should().Throw<JsonException>();
+            action.Should().Throw<ArgumentException>();
         }
 
         [Fact]
@@ -89,7 +80,7 @@ namespace SpecFlow.Actions.Selenium.Tests
 
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
-            seleniumConfiguration.Arguments.Should().BeNull();
+            seleniumConfiguration.Arguments.Should().BeEmpty();
         }
 
         [Fact]
@@ -111,6 +102,19 @@ namespace SpecFlow.Actions.Selenium.Tests
             var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
 
             seleniumConfiguration.Arguments.Should().Equal("--argument-one", "--argument-two");
+        }
+
+
+        [Fact]
+        public void Arguments_SeleniumNodeExists_BrowserNodeExists_CapabilitiesSet_ReturnsValue()
+        {
+            var specflowJsonContent =
+                @"{ ""selenium"": { ""browser"":""Chrome"", ""capabilities"" : { ""some_capability"": ""the value"", ""some_other_capability"": ""also a value"" }} }";
+
+            var seleniumConfiguration = GetSeleniumConfiguration(specflowJsonContent);
+
+            seleniumConfiguration.Capabilities["some_capability"].Should().Be("the value");
+            seleniumConfiguration.Capabilities["some_other_capability"].Should().Be("also a value");
         }
     }
 }

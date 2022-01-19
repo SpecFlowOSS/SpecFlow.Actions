@@ -49,6 +49,52 @@ Supported values:
 - `internetexplorer`
 - `edge`
 
+### Multiple target configurations
+
+This plugin supports tagreting of multiple configurations at runtime. For each configuration you provide, a class will be generated in your feature's code behind file when you build the project. This means that for any given test, the test will be executed against each target.
+
+Example:
+
+```specflow.actions.osxmoterey.safari.json```
+
+``` json
+{
+  "selenium": {
+    "defaultTimeout": 60,
+    "pollingInterval": 5,
+    "testPlatform": "browserstack",
+    "browser": "Safari",
+    "capabilities": {
+      "os": "OS X",
+      "os_version": "Monterey",
+      "resolution": "1920x1080",
+      "build": "OS_X_Monterey.Safari"
+    }
+  }
+}
+```
+
+```specflow.actions.windows11.chrome.json```
+
+``` json
+{
+  "selenium": {
+    "defaultTimeout": 60,
+    "pollingInterval": 5,
+    "testPlatform": "browserstack",
+    "browser": "Chrome",
+    "capabilities": {
+      "os": "Windows",
+      "os_version": "11",
+      "resolution": "1920x1080",
+      "build": "Windows_11.Chrome"
+    }
+  }
+}
+```
+
+For the example shown above, all tests will execute against both Safari and Chrome. The configuration format of these targets follows the same structure as if you provide a single config in ```specflow.actions.json```
+
 ### capabilities
 See https://www.browserstack.com/automate/capabilities
 

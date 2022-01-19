@@ -18,8 +18,8 @@ namespace Specflow.Actions.Browserstack
         private readonly ScenarioContext _scenarioContext;
         private readonly Uri _browserstackRemoteServer;
 
-        private static Lazy<string> BrowserstackUsername => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
-        private static Lazy<string> AccessKey => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
+        private static Lazy<string?> BrowserstackUsername => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
+        private static Lazy<string?> AccessKey => new (() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
         public BrowserstackDriverInitialiser(ScenarioContext scenarioContext)
         {

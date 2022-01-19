@@ -2,7 +2,6 @@
 
 using FluentAssertions;
 using Moq;
-using System;
 using Xunit;
 
 namespace SpecFlow.Actions.Configuration.Tests
@@ -17,6 +16,7 @@ namespace SpecFlow.Actions.Configuration.Tests
 
             var specflowActionJsonLoaderMock = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoaderMock.Setup(m => m.Load()).Returns(content);
+            specflowActionJsonLoaderMock.Setup(m => m.LoadTarget()).Returns(content);
 
             var specFlowActionsConfiguration = new SpecFlowActionsConfiguration(specflowActionJsonLoaderMock.Object);
 
@@ -27,19 +27,20 @@ namespace SpecFlow.Actions.Configuration.Tests
 
 
         [Fact]
-        public void Get_PathNotExists_ThrowsException()
+        public void Get_PathNotExists_ReturnsNull()
         {
             var content = @"{""parent"": { ""child"": ""value"" }}";
 
 
             var specflowActionJsonLoaderMock = new Mock<ISpecFlowActionJsonLoader>();
             specflowActionJsonLoaderMock.Setup(m => m.Load()).Returns(content);
+            specflowActionJsonLoaderMock.Setup(m => m.LoadTarget()).Returns(content);
 
             var specFlowActionsConfiguration = new SpecFlowActionsConfiguration(specflowActionJsonLoaderMock.Object);
 
-            Func<string?> func = () => specFlowActionsConfiguration.Get("parent:the-other-child");
+            var actualValue = specFlowActionsConfiguration.Get("parent:the-other-child");
 
-            func.Should().Throw<ConfigurationValueNotFoundException>().WithMessage("No configuration value found for path parent:the-other-child");
+            actualValue.Should().BeNull();
         }
     }
 }

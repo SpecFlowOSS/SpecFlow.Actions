@@ -9,21 +9,36 @@ namespace SpecFlow.Actions.Configuration
 
         public string? GetFilePath()
         {
-            var specflowJsonFileInAppDomainBaseDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, JsonConfigurationFileName);
+            return GetFilePathToConfigurationFile(JsonConfigurationFileName);
+        }
 
-            if (File.Exists(specflowJsonFileInAppDomainBaseDirectory))
+        public string? GetTargetFilePath(string? targetName)
+        {
+            return GetFilePathToConfigurationFile($"specflow.actions.{targetName}.json");
+        }
+
+        private string? GetFilePathToConfigurationFile(string configurationFileName)
+        {
+            if (AppDomain.CurrentDomain.BaseDirectory is not null)
             {
-                return specflowJsonFileInAppDomainBaseDirectory;
+                var specflowJsonFileInAppDomainBaseDirectory =
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configurationFileName);
+
+                if (File.Exists(specflowJsonFileInAppDomainBaseDirectory))
+                {
+                    return specflowJsonFileInAppDomainBaseDirectory;
+                }
+
+                var specflowJsonFileTwoDirectoriesUp =
+                    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", configurationFileName);
+
+                if (File.Exists(specflowJsonFileTwoDirectoriesUp))
+                {
+                    return specflowJsonFileTwoDirectoriesUp;
+                }
             }
 
-            var specflowJsonFileTwoDirectoriesUp = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", JsonConfigurationFileName);
-
-            if (File.Exists(specflowJsonFileTwoDirectoriesUp))
-            {
-                return specflowJsonFileTwoDirectoriesUp;
-            }
-
-            var specflowJsonFileInCurrentDirectory = Path.Combine(Environment.CurrentDirectory, JsonConfigurationFileName);
+            var specflowJsonFileInCurrentDirectory = Path.Combine(Environment.CurrentDirectory, configurationFileName);
 
             if (File.Exists(specflowJsonFileInCurrentDirectory))
             {

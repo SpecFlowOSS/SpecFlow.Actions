@@ -1,0 +1,11 @@
+{
+  "selenium": {
+    "arguments": [
+      "--start-maximized",
+      "--incognito",
+      "--headless"
+    ],
+    "defaultTimeout": 120,
+    "pollingInterval": 5
+  }
+}

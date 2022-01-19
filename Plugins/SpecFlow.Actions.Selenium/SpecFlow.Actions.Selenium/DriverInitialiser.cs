@@ -49,8 +49,8 @@ namespace SpecFlow.Actions.Selenium
             }
 
             return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
-                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options)
-                : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options);
+                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))
+                : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options, TimeSpan.FromSeconds(120));
         }
 
         /// <summary>
@@ -75,9 +75,11 @@ namespace SpecFlow.Actions.Selenium
                 options.AddArguments(args);
             }
 
+            
+
             return string.IsNullOrWhiteSpace(_firefoxWebDriverFilePath.Value)
-                ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options)
-                : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(_firefoxWebDriverFilePath.Value), options);
+                ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))
+                : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(_firefoxWebDriverFilePath.Value), options, TimeSpan.FromSeconds(120));
         }
 
         /// <summary>
@@ -103,8 +105,8 @@ namespace SpecFlow.Actions.Selenium
             }
 
             return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value)
-                ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options)
-                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(_internetExplorerWebDriverFilePath.Value), options);
+                ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))
+                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(_internetExplorerWebDriverFilePath.Value), options, TimeSpan.FromSeconds(120));
         }
 
         /// <summary>
@@ -130,8 +132,8 @@ namespace SpecFlow.Actions.Selenium
             }
 
             return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)
-                ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options)
-                : new EdgeDriver(EdgeDriverService.CreateDefaultService(_edgeWebDriverFilePath.Value), options);
+                ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))
+                : new EdgeDriver(EdgeDriverService.CreateDefaultService(_edgeWebDriverFilePath.Value), options, TimeSpan.FromSeconds(120));
         }
 
         public IWebDriver GetSafariDriver(Dictionary<string, string>? capabilities = null, string[]? args = null)

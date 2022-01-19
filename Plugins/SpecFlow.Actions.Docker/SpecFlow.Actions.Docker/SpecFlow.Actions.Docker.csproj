@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
     <AssemblyName>SpecFlow.Actions.Docker.SpecFlowPlugin</AssemblyName>
     <PackageId>SpecFlow.Actions.Docker</PackageId>
     <Product>SpecFlow.Actions.Docker</Product>
@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="SpecFlow" Version="3.9.*" />
-    <PackageReference Include="Ductus.FluentDocker" Version="2.10.7" />
+    <PackageReference Include="Ductus.FluentDocker" Version="2.10.44" />
   </ItemGroup>
 
   <ItemGroup>

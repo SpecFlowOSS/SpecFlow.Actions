@@ -1,47 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net5.0;net461</TargetFrameworks>
-  </PropertyGroup>
+	<Import Project="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\Build\SpecFlow.Actions.Configuration.props" />
 
-  <ItemGroup>
-    <None Remove="specflow.actions.json" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net471</TargetFrameworks>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="specflow.actions.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="specflow.actions.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Boa.Constrictor" Version="1.2.3" />
-    <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
-    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.*" />
-    <PackageReference Include="SpecFlow.xUnit" Version="3.*" />
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-    <PackageReference Include="xunit" Version="2.4.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+	<ItemGroup>
+		<Content Include="specflow.actions.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Boa.Constrictor" Version="1.2.3" />
+		<PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+		<PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
+		<PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
+		<PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.*" />
+		<PackageReference Include="SpecFlow.xUnit" Version="3.*" />
+		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
+		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="FluentAssertions" Version="5.10.3" />
 
 
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.6100" />
-  </ItemGroup>
+		<PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="97.0.4692.7100" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Drivers\" />
-    <Folder Include="Hooks\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Drivers\" />
+		<Folder Include="Hooks\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SpecFlow.Actions.BoaConstrictor\SpecFlow.Actions.BoaConstrictor.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<_SpecFlow_GeneratorPlugin Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_SpecFlow_GeneratorPlugin>
+		<_SpecFlow_GeneratorPlugin Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_SpecFlow_GeneratorPlugin>
+		<_SpecFlow_GeneratorPluginPath>$(MSBuildThisFileDirectory)..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\bin\$(Configuration)\$(_SpecFlow_GeneratorPlugin)\SpecFlow.Actions.Configuration.Generation.SpecFlowPlugin.dll</_SpecFlow_GeneratorPluginPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SpecFlowGeneratorPlugins Include="$(_SpecFlow_GeneratorPluginPath)" />
+	</ItemGroup>
+
+
+	<Target Name="BuildDependencies" BeforeTargets="PreBuildEvent;BeforeUpdateFeatureFilesInProject" AfterTargets="PreBuild">
+		<MSBuild Projects="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj" Properties="TargetFramework=$(_SpecFlow_GeneratorPlugin)" />
+	</Target>
 
 
 </Project>

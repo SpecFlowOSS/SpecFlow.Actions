@@ -13,6 +13,6 @@ namespace SpecFlow.Actions.Docker
             _specFlowActionsConfiguration = specFlowActionsConfiguration;
         }
 
-        public string File => _specFlowActionsConfiguration.Get("docker:file");
+        public string? File => _specFlowActionsConfiguration.Get("docker:file");
     }
 }

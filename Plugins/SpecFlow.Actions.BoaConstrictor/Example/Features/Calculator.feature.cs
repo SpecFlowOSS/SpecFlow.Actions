@@ -20,13 +20,15 @@ namespace Example.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Xunit.TraitAttribute("Category", "Calculator")]
+    [Xunit.TraitAttribute("Category", "Boa")]
     public partial class CalculatorFeature : object, Xunit.IClassFixture<CalculatorFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = new string[] {
-                "Calculator"};
+                "Calculator",
+                "Boa"};
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
@@ -47,7 +49,8 @@ Simple calculator for adding **two** numbers
 
 Link to a feature: [Calculator](CalculatorSelenium.Specs/Features/Calculator.feature)
 ***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", ProgrammingLanguage.CSharp, new string[] {
-                        "Calculator"});
+                        "Calculator",
+                        "Boa"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

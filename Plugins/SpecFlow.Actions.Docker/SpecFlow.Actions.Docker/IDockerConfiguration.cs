@@ -2,6 +2,6 @@
 {
     interface IDockerConfiguration
     {
-        string File { get; }
+        string? File { get; }
     }
 }

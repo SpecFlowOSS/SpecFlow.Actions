@@ -1,19 +1,18 @@
-﻿using System;
-using TechTalk.SpecFlow;
+﻿using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Docker
 {
     [Binding]
     class Hooks
     {
-        [BeforeTestRun(Order = int.MinValue)]
-        public static void DockerComposeUp(IDockerHandling dockerHandling)
+        [BeforeScenario(Order = int.MinValue)]
+        public void DockerComposeUp(IDockerHandling dockerHandling)
         {
             dockerHandling.DockerComposeUp();
         }
 
-        [AfterTestRun(Order = int.MaxValue)]
-        public static void DockerComposeDown(IDockerHandling dockerHandling)
+        [AfterScenario(Order = int.MaxValue)]
+        public void DockerComposeDown(IDockerHandling dockerHandling)
         {
             dockerHandling.DockerComposeDown();
         }

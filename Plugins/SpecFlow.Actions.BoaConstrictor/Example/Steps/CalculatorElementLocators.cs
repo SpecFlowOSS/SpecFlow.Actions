@@ -3,7 +3,7 @@ using Boa.Constrictor;
 using Boa.Constrictor.WebDriver;
 using static Boa.Constrictor.WebDriver.WebLocator;
 
-namespace Example.PageObjects
+namespace Example.Steps
 {
     public class CalculatorElementLocators
     {
@@ -12,7 +12,7 @@ namespace Example.PageObjects
         public static IWebLocator FirstNumberFieldLocator => L("First number", By.Id("first-number"));
         public static IWebLocator SecondNumberFieldLocator => L("second-number", By.Id("second-number"));
         public static IWebLocator AddButtonLocator => L("add-button", By.Id("add-button"));
-        public static IWebLocator ResultLabelLocator => L("result",By.Id("result"));
-        public static IWebLocator ResetButtonLocator => L("reset",By.Id("reset-button"));
+        public static IWebLocator ResultLabelLocator => L("result", By.Id("result"));
+        public static IWebLocator ResetButtonLocator => L("reset", By.Id("reset-button"));
     }
 }

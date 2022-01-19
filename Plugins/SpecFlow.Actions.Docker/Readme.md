@@ -6,8 +6,8 @@ This SpecFlow.Actions will help you by using Docker together with SpecFlow.
 
 ## Included Features
 
-- Start Docker containers from Dockerfile/docker-compose.yml at the start of the test run
-- Stop Docker containers from Dockerfile/docker-compose.yml at the start of the test run
+- Start Docker containers from Dockerfile/docker-compose.yml at the start of the test scenario.
+- Stop Docker containers from Dockerfile/docker-compose.yml at the start of the test scenario.
 
 ## Configuration
 
@@ -28,7 +28,7 @@ Example:
 Add the NuGet- package to you project and specify the path to your Dockerfile/docker-compose.yml.  
 Check that the `specflow.actions.yml` is set to `Copy Always` in `Copy to Output directory`.
 
-After that, the containers are getting started and shutdown when a test run starts and end.    
+After that, the containers are started and shutdown when a test scenario starts and ends.
 
 ## How to get it
 
