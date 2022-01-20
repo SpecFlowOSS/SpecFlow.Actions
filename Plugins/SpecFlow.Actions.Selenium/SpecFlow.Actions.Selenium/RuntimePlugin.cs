@@ -10,6 +10,8 @@ namespace SpecFlow.Actions.Selenium
 {
     public class SeleniumRuntimePlugin : IRuntimePlugin
     {
+        private const string Local = "local";
+
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
@@ -19,9 +21,10 @@ namespace SpecFlow.Actions.Selenium
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>("local");
+            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>(Local);
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            e.ObjectContainer.RegisterTypeAs<LocalDriverOptions, IWebDriverOptions>();
+            e.ObjectContainer.RegisterTypeAs<WebDriverOptions, IWebDriverOptions>();
+            e.ObjectContainer.RegisterTypeAs<LocalOptionsConfigurator, IOptionsConfigurator>(Local);
             e.ObjectContainer.RegisterTypeAs<DriverFactory, IDriverFactory>();
         }
     }

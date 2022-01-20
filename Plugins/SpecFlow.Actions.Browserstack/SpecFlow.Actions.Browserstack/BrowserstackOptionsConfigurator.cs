@@ -8,33 +8,23 @@ using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Browserstack
 {
-    public class RemoteWebDriverOptions : IWebDriverOptions
+    internal class BrowserstackOptionsConfigurator : IOptionsConfigurator
     {
         private readonly ScenarioContext _scenarioContext;
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
         private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
-        public RemoteWebDriverOptions(ScenarioContext scenarioContext)
+        public BrowserstackOptionsConfigurator(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
         }
 
-        public IOptionsWrapper GetOptions(Browser browser, Dictionary<string, string>? capabilities = null, string[]? args = null)
+        public void Add(IOptionsWrapper options, Dictionary<string, string>? capabilities = null, string[]? args = null)
         {
-            IOptionsWrapper options = browser switch
-            {
-                Browser.Chrome => new ChromeOptionsWrapper(),
-                Browser.Firefox => new FirefoxOptionsWrapper(),
-                Browser.Edge => new EdgeOptionsWrapper(),
-                Browser.InternetExplorer => new InternetExplorerOptionsWrapper(),
-                Browser.Safari => new SafariOptionsWrapper(),
-                _ => throw new ArgumentOutOfRangeException(nameof(browser), browser, null),
-            };
-
             if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
             {
                 options.AddAdditionalCapability("browserstack.user", BrowserstackUsername.Value);
-                options.AddAdditionalCapability("browserstack.key", AccessKey.Value); 
+                options.AddAdditionalCapability("browserstack.key", AccessKey.Value);
             }
 
             options.AddAdditionalCapability("name", GetScenarioTitle());
@@ -46,8 +36,6 @@ namespace SpecFlow.Actions.Browserstack
                     options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
-
-            return options;
         }
 
         private string GetScenarioTitle()

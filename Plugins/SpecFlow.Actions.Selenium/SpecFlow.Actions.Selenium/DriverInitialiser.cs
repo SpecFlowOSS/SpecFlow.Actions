@@ -10,7 +10,7 @@ namespace SpecFlow.Actions.Selenium
         private readonly IWebDriverOptions _driverOptions;
         private readonly IDriverFactory _driverFactory;
 
-        public DriverInitialiser(LocalDriverOptions driverOptions, IDriverFactory driverFactory)
+        public DriverInitialiser(WebDriverOptions driverOptions, IDriverFactory driverFactory)
         {
             _driverOptions = driverOptions;
             _driverFactory = driverFactory;
