@@ -42,6 +42,8 @@ namespace SpecFlow.Actions.Selenium
 
                 return new ChromeDriverLocalInitialiser();
             });
+
+
         }
 
         private void RegisterLocalObjects(IObjectContainer objectContainer)

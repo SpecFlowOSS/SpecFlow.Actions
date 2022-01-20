@@ -23,11 +23,12 @@ namespace SpecFlow.Actions.Selenium.Driver
     {
         public IWebDriver Initialise()
         {
-            var options = _driverOptionsFactory.GetChromeOptions();
+            //var options = _driverOptionsFactory.GetChromeOptions();
 
-            return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
-                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-                : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+            //return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
+            //    ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
+            //    : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+            throw new NotImplementedException();
         }
     }
 }
