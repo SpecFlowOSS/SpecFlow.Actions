@@ -1,6 +1,6 @@
 ﻿using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
-using SpecFlow.Actions.Selenium.DriverOptions;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -10,8 +10,6 @@ namespace SpecFlow.Actions.Selenium
 {
     public class SeleniumRuntimePlugin : IRuntimePlugin
     {
-        private const string Local = "local";
-
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
@@ -21,11 +19,14 @@ namespace SpecFlow.Actions.Selenium
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<DriverInitialiser, IDriverInitialiser>(Local);
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            e.ObjectContainer.RegisterTypeAs<WebDriverOptions, IWebDriverOptions>();
-            e.ObjectContainer.RegisterTypeAs<LocalOptionsConfigurator, IOptionsConfigurator>(Local);
             e.ObjectContainer.RegisterTypeAs<DriverFactory, IDriverFactory>();
+            e.ObjectContainer.RegisterTypeAs<WebDriverOptionsFactory, IWebDriverOptionsFactory>();
+            e.ObjectContainer.RegisterTypeAs<LocalOptionsConfigurator, IOptionsConfigurator>();
+            e.ObjectContainer.RegisterTypeAs<ChromeDriverInitialiser, IDriverInitialiser>(Browser.Chrome.ToString());
+            e.ObjectContainer.RegisterTypeAs<EdgeDriverInitialiser, IDriverInitialiser>(Browser.Edge.ToString());
+            e.ObjectContainer.RegisterTypeAs<FirefoxDriverInitialiser, IDriverInitialiser>(Browser.Firefox.ToString());
+            e.ObjectContainer.RegisterTypeAs<InternetExplorerDriverInitialiser, IDriverInitialiser>(Browser.InternetExplorer.ToString());
         }
     }
 }

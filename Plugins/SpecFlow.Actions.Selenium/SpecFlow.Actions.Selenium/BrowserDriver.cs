@@ -10,15 +10,15 @@ namespace SpecFlow.Actions.Selenium
     /// </summary>
     public class BrowserDriver : IDisposable
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly IObjectContainer _objectContainer;
+        private readonly ISeleniumConfiguration _seleniumConfiguration;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer)
+        public BrowserDriver(IObjectContainer objectContainer, ISeleniumConfiguration seleniumConfiguration)
         {
-            _seleniumConfiguration = seleniumConfiguration;
             _objectContainer = objectContainer;
+            _seleniumConfiguration = seleniumConfiguration;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -33,10 +33,9 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.TestPlatform);
+            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.Browser.ToString());
 
-            return initialiser.Initialise(_seleniumConfiguration.Browser, _seleniumConfiguration.Capabilities,
-                _seleniumConfiguration.Arguments);
+            return initialiser.Initialise();
         }
 
         /// <summary>
