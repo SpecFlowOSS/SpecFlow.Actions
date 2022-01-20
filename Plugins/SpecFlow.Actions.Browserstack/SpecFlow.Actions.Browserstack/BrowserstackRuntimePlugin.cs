@@ -1,8 +1,10 @@
-﻿using OpenQA.Selenium;
+﻿using BoDi;
+using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
 using SpecFlow.Actions.Browserstack;
-using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.Driver;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
@@ -13,8 +15,6 @@ namespace Specflow.Actions.Browserstack
 {
     public class BrowserstackRuntimePlugin : IRuntimePlugin
     {
-        private const string Browserstack = "browserstack";
-
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
@@ -46,10 +46,21 @@ namespace Specflow.Actions.Browserstack
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<BrowserstackDriverInitialiser, IDriverInitialiser>(Browserstack);
             e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
             e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<BrowserstackOptionsConfigurator, IOptionsConfigurator>(Browserstack);
+
+            RegisterBrowserstackObjects(e.ObjectContainer);
+        }
+
+        private void RegisterBrowserstackObjects(IObjectContainer objectContainer)
+        {
+            var config = objectContainer.Resolve<ISeleniumConfiguration>();
+
+            if (config.TestPlatform.Equals("browserstack"))
+            {
+                objectContainer.RegisterTypeAs<BrowserstackDriverFactory, IDriverFactory>();
+                objectContainer.RegisterTypeAs<BrowserstackOptionsConfigurator, IOptionsConfigurator>();
+            }
         }
     }
 }

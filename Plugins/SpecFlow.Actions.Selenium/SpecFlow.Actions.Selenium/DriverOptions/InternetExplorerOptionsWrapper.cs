@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.IE;
+﻿using OpenQA.Selenium.IE;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
@@ -24,11 +23,6 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
         public void AddArguments(params string[] argumentsToAdd)
         {
             throw new System.NotImplementedException("InternetExplorerOptions does not implement method AddArguments()");
-        }
-
-        public ICapabilities GetCapabilities()
-        {
-            return _internetExplorerOptions.ToCapabilities();
         }
     }
 }

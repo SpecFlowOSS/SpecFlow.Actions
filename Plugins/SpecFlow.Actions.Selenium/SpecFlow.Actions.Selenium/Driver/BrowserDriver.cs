@@ -3,7 +3,7 @@ using System;
 using OpenQA.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Selenium.Driver
 {
     /// <summary>
     /// Manages a browser instance using Selenium

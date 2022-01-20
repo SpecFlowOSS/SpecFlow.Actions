@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-namespace SpecFlow.Actions.Selenium;
+namespace SpecFlow.Actions.Selenium.Driver;
 
 public interface IDriverInitialiser
 {

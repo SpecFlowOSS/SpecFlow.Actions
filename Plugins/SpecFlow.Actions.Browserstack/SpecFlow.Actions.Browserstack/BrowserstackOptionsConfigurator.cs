@@ -1,8 +1,7 @@
-﻿using SpecFlow.Actions.Selenium;
+﻿using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TechTalk.SpecFlow;
 
@@ -10,16 +9,19 @@ namespace SpecFlow.Actions.Browserstack
 {
     internal class BrowserstackOptionsConfigurator : IOptionsConfigurator
     {
+        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly ScenarioContext _scenarioContext;
+
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
         private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
-        public BrowserstackOptionsConfigurator(ScenarioContext scenarioContext)
+        public BrowserstackOptionsConfigurator(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext)
         {
+            _seleniumConfiguration = seleniumConfiguration;
             _scenarioContext = scenarioContext;
         }
 
-        public void Add(IOptionsWrapper options, Dictionary<string, string>? capabilities = null, string[]? args = null)
+        public void Add(IOptionsWrapper options)
         {
             if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
             {
@@ -29,9 +31,9 @@ namespace SpecFlow.Actions.Browserstack
 
             options.AddAdditionalCapability("name", GetScenarioTitle());
 
-            if (capabilities.Any() && capabilities is not null)
+            if (_seleniumConfiguration.Capabilities.Any() && _seleniumConfiguration.Capabilities is not null)
             {
-                foreach (var capability in capabilities)
+                foreach (var capability in _seleniumConfiguration.Capabilities)
                 {
                     options.AddAdditionalCapability(capability.Key, capability.Value);
                 }

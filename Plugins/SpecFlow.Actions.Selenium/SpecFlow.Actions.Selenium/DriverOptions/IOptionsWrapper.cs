@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-namespace SpecFlow.Actions.Selenium.DriverOptions
+﻿namespace SpecFlow.Actions.Selenium.DriverOptions
 {
     public interface IOptionsWrapper
     {
@@ -11,7 +9,5 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
         void AddAdditionalCapability(string capabilityName, object capabilityValue);
 
         void AddArguments(params string[] argumentsToAdd);
-
-        ICapabilities GetCapabilities();
     }
 }

@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
+﻿using OpenQA.Selenium.Firefox;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
@@ -24,11 +23,6 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
         public void AddArguments(params string[] argumentsToAdd)
         {
             _firefoxOptions.AddArguments(argumentsToAdd);
-        }
-
-        public ICapabilities GetCapabilities()
-        {
-            return _firefoxOptions.ToCapabilities();
         }
     }
 }

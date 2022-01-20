@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Safari;
+﻿using OpenQA.Selenium.Safari;
 using System;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
@@ -25,11 +24,6 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
         public void AddArguments(params string[] argumentsToAdd)
         {
             throw new NotImplementedException("SafariOptions does not implement method AddArguments()");
-        }
-
-        public ICapabilities GetCapabilities()
-        {
-            return _safariOptions.ToCapabilities();
         }
     }
 }
