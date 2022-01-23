@@ -21,7 +21,7 @@ namespace SpecFlow.Actions.Browserstack
             _scenarioContext = scenarioContext;
         }
 
-        public void Add(IOptionsWrapper options)
+        public void Add(IDriverOptions options)
         {
             if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
             {

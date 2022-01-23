@@ -2,7 +2,7 @@
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class ChromeDriverOptions : IOptionsWrapper
+    public class ChromeDriverOptions : IDriverOptions
     {
         private readonly ChromeOptions _chromeOptions;
 

@@ -49,7 +49,6 @@ namespace Specflow.Actions.Browserstack
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
-            e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
 
             RegisterInitialisers(e.ObjectContainer);
         }
@@ -62,7 +61,7 @@ namespace Specflow.Actions.Browserstack
                 var scenarioContext = container.Resolve<ScenarioContext>();
                 IOptionsConfigurator optionsConfigurator = new BrowserstackOptionsConfigurator(config, scenarioContext);
 
-                IOptionsWrapper options = config.Browser switch
+                IDriverOptions options = config.Browser switch
                 {
                     Browser.Chrome => new ChromeDriverOptions(),
                     Browser.Firefox => new FirefoxDriverOptions(),
@@ -77,4 +76,3 @@ namespace Specflow.Actions.Browserstack
         }
     }
 }
-

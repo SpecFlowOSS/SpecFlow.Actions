@@ -1,6 +1,6 @@
 ﻿namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public interface IOptionsWrapper
+    public interface IDriverOptions
     {
         dynamic Value { get; }
 

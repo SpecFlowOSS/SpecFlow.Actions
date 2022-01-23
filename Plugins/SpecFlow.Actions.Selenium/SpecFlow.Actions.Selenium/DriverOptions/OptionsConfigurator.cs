@@ -12,7 +12,7 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
             _seleniumConfiguration = seleniumConfiguration;
         }
 
-        public void Add(IOptionsWrapper options)
+        public void Add(IDriverOptions options)
         {
             if (_seleniumConfiguration.Capabilities.Any())
             {

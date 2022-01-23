@@ -9,7 +9,7 @@ namespace SpecFlow.Actions.Selenium.Driver
     {
         private readonly IOptionsConfigurator _optionsConfigurator;
 
-        private static readonly Lazy<string?> _edgeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("EDGE_WEBDRIVER_FILE_PATH"));
+        private static readonly Lazy<string?> EdgeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("EDGE_WEBDRIVER_FILE_PATH"));
 
         public EdgeDriverInitialiser(IOptionsConfigurator optionsConfigurator)
         {
@@ -22,9 +22,9 @@ namespace SpecFlow.Actions.Selenium.Driver
 
             _optionsConfigurator.Add(options);
 
-            return string.IsNullOrWhiteSpace(_edgeWebDriverFilePath.Value)
+            return string.IsNullOrWhiteSpace(EdgeWebDriverFilePath.Value)
                 ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-                : new EdgeDriver(EdgeDriverService.CreateDefaultService(_edgeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+                : new EdgeDriver(EdgeDriverService.CreateDefaultService(EdgeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IOptionsConfigurator
     {
-        void Add(IOptionsWrapper optionsWrapper);
+        void Add(IDriverOptions optionsWrapper);
     }
 }

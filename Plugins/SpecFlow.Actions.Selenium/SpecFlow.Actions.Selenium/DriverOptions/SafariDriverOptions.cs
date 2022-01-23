@@ -3,7 +3,7 @@ using System;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class SafariDriverOptions : IOptionsWrapper
+    public class SafariDriverOptions : IDriverOptions
     {
         private readonly SafariOptions _safariOptions;
 

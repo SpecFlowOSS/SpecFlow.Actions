@@ -9,7 +9,7 @@ namespace SpecFlow.Actions.Selenium.Driver
     {
         private readonly IOptionsConfigurator _optionsConfigurator;
 
-        private static readonly Lazy<string?> _firefoxWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("FIREFOX_WEBDRIVER_FILE_PATH"));
+        private static readonly Lazy<string?> FirefoxWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("FIREFOX_WEBDRIVER_FILE_PATH"));
 
         public FirefoxDriverInitialiser(IOptionsConfigurator optionsConfigurator)
         {
@@ -22,9 +22,9 @@ namespace SpecFlow.Actions.Selenium.Driver
 
             _optionsConfigurator.Add(options);
 
-            return string.IsNullOrWhiteSpace(_firefoxWebDriverFilePath.Value)
+            return string.IsNullOrWhiteSpace(FirefoxWebDriverFilePath.Value)
                 ? new FirefoxDriver(FirefoxDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-                : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(_firefoxWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+                : new FirefoxDriver(FirefoxDriverService.CreateDefaultService(FirefoxWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SpecFlow.Actions.Selenium.Driver
     {
         private readonly IOptionsConfigurator _optionsConfigurator;
 
-        private static readonly Lazy<string?> _internetExplorerWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
+        private static readonly Lazy<string?> InternetExplorerWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
 
         public InternetExplorerDriverInitialiser(IOptionsConfigurator optionsConfigurator)
         {
@@ -22,9 +22,9 @@ namespace SpecFlow.Actions.Selenium.Driver
 
             _optionsConfigurator.Add(options);
 
-            return string.IsNullOrWhiteSpace(_internetExplorerWebDriverFilePath.Value)
+            return string.IsNullOrWhiteSpace(InternetExplorerWebDriverFilePath.Value)
                 ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(_internetExplorerWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(InternetExplorerWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
         }
     }
 }

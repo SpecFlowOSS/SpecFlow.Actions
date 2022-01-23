@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace SpecFlow.Actions.Selenium.Driver
+namespace SpecFlow.Actions.Selenium
 {
     public class NoopDriver : IWebDriver
     {

@@ -9,23 +9,20 @@ namespace Specflow.Actions.Browserstack;
 internal class BrowserstackDriverInitialiser: IDriverInitialiser
 {
     private readonly IOptionsConfigurator _optionsConfigurator;
-    private readonly IOptionsWrapper _optionsWrapper;
+    private readonly IDriverOptions _options;
     private readonly Uri _browserstackRemoteServer;
 
-    private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
-    private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
-
-    public BrowserstackDriverInitialiser(IOptionsConfigurator optionsConfigurator, IOptionsWrapper optionsWrapper)
+    public BrowserstackDriverInitialiser(IOptionsConfigurator optionsConfigurator, IDriverOptions options)
     {
         _optionsConfigurator = optionsConfigurator;
-        _optionsWrapper = optionsWrapper;
+        _options = options;
         _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
     }
 
     public IWebDriver Initialise()
     {
-        _optionsConfigurator.Add(_optionsWrapper);
+        _optionsConfigurator.Add(_options);
 
-        return new RemoteWebDriver(_browserstackRemoteServer, _optionsWrapper.Value);
+        return new RemoteWebDriver(_browserstackRemoteServer, _options.Value);
     }
 }

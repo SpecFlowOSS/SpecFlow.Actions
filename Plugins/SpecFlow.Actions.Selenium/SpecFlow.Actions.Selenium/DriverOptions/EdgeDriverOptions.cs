@@ -3,7 +3,7 @@ using System;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class EdgeDriverOptions : IOptionsWrapper
+    public class EdgeDriverOptions : IDriverOptions
     {
         private readonly EdgeOptions _edgeOptions;
 
