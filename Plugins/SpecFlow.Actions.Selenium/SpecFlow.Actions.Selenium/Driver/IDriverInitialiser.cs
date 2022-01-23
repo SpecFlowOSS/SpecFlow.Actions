@@ -1,8 +1,9 @@
 ﻿using OpenQA.Selenium;
 
-namespace SpecFlow.Actions.Selenium.Driver;
-
-public interface IDriverInitialiser
+namespace SpecFlow.Actions.Selenium.Driver
 {
-    IWebDriver Initialise();
+    public interface IDriverInitialiser
+    {
+        IWebDriver Initialise();
+    }
 }
