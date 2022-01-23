@@ -7,7 +7,6 @@ using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.Driver;
 using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
-using System.Diagnostics;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
@@ -52,96 +51,29 @@ namespace Specflow.Actions.Browserstack
             e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
             e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
 
-            RegisterBrowserstackObjects(e.ObjectContainer);
+            RegisterInitialisers(e.ObjectContainer);
         }
 
-
-
-        private void RegisterBrowserstackObjects(IObjectContainer objectContainer)
+        private void RegisterInitialisers(IObjectContainer objectContainer)
         {
-            objectContainer.RegisterTypeAs<ChromeDriverLocalInitialiser_, IDriverInitialiser_>(Browser.Chrome.ToString());
-            //objectContainer.RegisterTypeAs<FirefoxDriverLocalInitialiser_, IDriverInitialiser_>(Browser.Edge.ToString());
-
-            //var instance = objectContainer.Resolve<IDriverInitialiser_>(Browser.Chrome.ToString());
-           // instance.Dump();
-
-            objectContainer.RegisterFactoryAs<IWebDriver>(container =>
+            objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
-                var config = container.Resolve<cfg>();
+                var config = container.Resolve<ISeleniumConfiguration>();
+                var scenarioContext = container.Resolve<ScenarioContext>();
+                IOptionsConfigurator optionsConfigurator = new BrowserstackOptionsConfigurator(config, scenarioContext);
 
-                switch (config.BrowserType)
+                IOptionsWrapper options = config.Browser switch
                 {
-                    case "Chrome":
-                        var options = _driverOptionsFactory.GetChromeOptions();
-                        return new ChromeDriverLocalInitialiser_(config, options);
-                    default:
-                        return new FirefoxDriverLocalInitialiser_();
-                }
+                    Browser.Chrome => new ChromeDriverOptions(),
+                    Browser.Firefox => new FirefoxDriverOptions(),
+                    Browser.Edge => new EdgeDriverOptions(),
+                    Browser.InternetExplorer => new InternetExplorerDriverOptions(),
+                    Browser.Safari => new SafariDriverOptions(),
+                    _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
+                };
+
+                return new BrowserstackDriverInitialiser(optionsConfigurator, options);
             });
-
-
-            var cfg = new cfg{BrowserType = "Firefox"};
-            objectContainer.RegisterInstanceAs(cfg);
-
-            var instance_ = objectContainer.Resolve<Consumer>();
-
-            cfg.BrowserType = "Chrome";
-
-            instance_ = objectContainer.Resolve<Consumer>();
-
-
-            var config = objectContainer.Resolve<ISeleniumConfiguration>();
-
-            if (config.TestPlatform.Equals("browserstack"))
-            {
-                objectContainer.RegisterTypeAs<BrowserstackDriverFactory, IDriverFactory>();
-                objectContainer.RegisterTypeAs<BrowserstackOptionsConfigurator, IOptionsConfigurator>();
-            }
-        }
-    }
-
-    class Consumer
-    {
-        private IDriverInitialiser_ initialiser;
-
-        public Consumer(IDriverInitialiser_ initialiser, cfg cfg)
-        {
-            this.initialiser = initialiser;
-        }
-    }
-
-
-    [DebuggerDisplay("{BrowserType}")]
-    class cfg
-    {
-        public string BrowserType { get; set; } = "Chrome";
-    }
-
-    interface IDriverInitialiser_
-    {
-        void Dump();
-    }
-
-    class ChromeDriverLocalInitialiser_ : IDriverInitialiser_
-    {
-        private cfg _cfg;
-
-        public ChromeDriverLocalInitialiser_(cfg cfg)
-        {
-            _cfg = cfg;
-        }
-
-        public void Dump()
-        {
-            throw new Exception($"I am {nameof(ChromeDriverLocalInitialiser_)}");
-        }
-    }
-
-    class FirefoxDriverLocalInitialiser_ : IDriverInitialiser_
-    {
-        public void Dump()
-        {
-            throw new Exception($"I am {nameof(FirefoxDriverLocalInitialiser_)}");
         }
     }
 }

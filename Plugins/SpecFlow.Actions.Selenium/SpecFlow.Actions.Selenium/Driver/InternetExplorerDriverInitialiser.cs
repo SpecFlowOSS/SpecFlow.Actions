@@ -5,7 +5,7 @@ using System;
 
 namespace SpecFlow.Actions.Selenium.Driver
 {
-    internal class InternetExplorerDriverInitialiser : IDriverInitialiser
+    public class InternetExplorerDriverInitialiser : IDriverInitialiser
     {
         private readonly IOptionsConfigurator _optionsConfigurator;
 

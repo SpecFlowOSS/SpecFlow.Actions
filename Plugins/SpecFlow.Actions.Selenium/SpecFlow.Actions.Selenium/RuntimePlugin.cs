@@ -23,9 +23,11 @@ namespace SpecFlow.Actions.Selenium
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            e.ObjectContainer.RegisterTypeAs<OptionsConfigurator, IOptionsConfigurator>();
 
-            RegisterInitialisers(e.ObjectContainer);
+            if (!e.ObjectContainer.IsRegistered<IDriverInitialiser>())
+            {
+                RegisterInitialisers(e.ObjectContainer); 
+            }
         }
 
         private void RegisterInitialisers(IObjectContainer objectContainer)
@@ -33,28 +35,16 @@ namespace SpecFlow.Actions.Selenium
             objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
-                var optionsConfigurator = container.Resolve<IOptionsConfigurator>();
+                IOptionsConfigurator optionsConfigurator = new OptionsConfigurator(config);
 
-                switch (config.Browser)
+                return config.Browser switch
                 {
-                    case Browser.Chrome:
-                        return new ChromeDriverInitialiser(optionsConfigurator);
-
-                    case Browser.Firefox:
-                        return new FirefoxDriverInitialiser(optionsConfigurator);
-
-                    case Browser.Edge:
-                        return new EdgeDriverInitialiser(optionsConfigurator);
-
-                    case Browser.InternetExplorer:
-                        return new InternetExplorerDriverInitialiser(optionsConfigurator);
-
-                    case Browser.None:
-                    case Browser.Safari:
-                    case Browser.Noop:
-                    default:
-                        throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented");
-                }
+                    Browser.Chrome => new ChromeDriverInitialiser(optionsConfigurator),
+                    Browser.Firefox => new FirefoxDriverInitialiser(optionsConfigurator),
+                    Browser.Edge => new EdgeDriverInitialiser(optionsConfigurator),
+                    Browser.InternetExplorer => new InternetExplorerDriverInitialiser(optionsConfigurator),
+                    _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
+                };
             });
         }
     }

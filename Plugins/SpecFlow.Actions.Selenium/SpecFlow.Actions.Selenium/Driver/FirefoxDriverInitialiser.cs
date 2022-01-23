@@ -5,7 +5,7 @@ using System;
 
 namespace SpecFlow.Actions.Selenium.Driver
 {
-    internal class FirefoxDriverInitialiser : IDriverInitialiser
+    public class FirefoxDriverInitialiser : IDriverInitialiser
     {
         private readonly IOptionsConfigurator _optionsConfigurator;
 
