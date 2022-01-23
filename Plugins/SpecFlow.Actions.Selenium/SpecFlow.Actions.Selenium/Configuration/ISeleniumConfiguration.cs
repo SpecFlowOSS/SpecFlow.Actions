@@ -13,7 +13,5 @@ namespace SpecFlow.Actions.Selenium.Configuration
         double? DefaultTimeout { get; }
 
         double? PollingInterval { get; }
-
-        string TestPlatform { get; }
     }
 }

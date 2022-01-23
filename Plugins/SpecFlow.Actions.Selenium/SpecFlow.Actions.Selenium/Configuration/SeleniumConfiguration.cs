@@ -42,10 +42,5 @@ namespace SpecFlow.Actions.Selenium.Configuration
         /// The default polling interval used to configure the webdriver
         /// </summary>
         public double? PollingInterval => _specFlowActionsConfiguration.GetDouble("selenium:pollinginterval");
-
-        /// <summary>
-        /// The test platform to execute against
-        /// </summary>
-        public string TestPlatform => _specFlowActionsConfiguration.Get("selenium:testplatform", "local");
     }
 }
