@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Specflow.Actions.Browserstack;
-
-internal class BrowserstackExecutor
+namespace Specflow.Actions.Browserstack
 {
-    [JsonPropertyName("action")]
-    public string? Action { get; set; }
 
-    [JsonPropertyName("arguments")]
-    public Arguments? Arguments { get; set; }
+    internal class BrowserstackExecutor
+    {
+        [JsonPropertyName("action")] public string? Action { get; set; }
+
+        [JsonPropertyName("arguments")] public Arguments? Arguments { get; set; }
+    }
 }
