@@ -2,11 +2,11 @@
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class FirefoxOptionsWrapper : IOptionsWrapper
+    public class FirefoxDriverOptions : IOptionsWrapper
     {
         private readonly FirefoxOptions _firefoxOptions;
 
-        public FirefoxOptionsWrapper()
+        public FirefoxDriverOptions()
         {
             _firefoxOptions = new FirefoxOptions();
         }

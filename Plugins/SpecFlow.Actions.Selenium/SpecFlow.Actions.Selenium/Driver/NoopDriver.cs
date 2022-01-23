@@ -1,9 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
 
-namespace SpecFlow.Actions.Selenium
+namespace SpecFlow.Actions.Selenium.Driver
 {
-    public class NoopWebdriver : IWebDriver
+    public class NoopDriver : IWebDriver
     {
         public IWebElement FindElement(By @by)
         {

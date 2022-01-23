@@ -3,18 +3,18 @@ using System.Linq;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class LocalOptionsConfigurator : IOptionsConfigurator
+    public class OptionsConfigurator : IOptionsConfigurator
     {
         private readonly ISeleniumConfiguration _seleniumConfiguration;
 
-        public LocalOptionsConfigurator(ISeleniumConfiguration seleniumConfiguration)
+        public OptionsConfigurator(ISeleniumConfiguration seleniumConfiguration)
         {
             _seleniumConfiguration = seleniumConfiguration;
         }
 
         public void Add(IOptionsWrapper options)
         {
-            if (_seleniumConfiguration.Capabilities.Any() && _seleniumConfiguration.Capabilities is not null)
+            if (_seleniumConfiguration.Capabilities.Any())
             {
                 foreach (var capability in _seleniumConfiguration.Capabilities)
                 {
@@ -24,14 +24,14 @@ namespace SpecFlow.Actions.Selenium.DriverOptions
 
             if (options.ImplementsArgs)
             {
-                if (_seleniumConfiguration.Arguments is not null && _seleniumConfiguration.Arguments.Any())
+                if (_seleniumConfiguration.Arguments.Any())
                 {
                     options.AddArguments(_seleniumConfiguration.Arguments);
                 }
             }
             else
             {
-                if (_seleniumConfiguration.Arguments is not null && _seleniumConfiguration.Arguments.Any())
+                if (_seleniumConfiguration.Arguments.Any())
                 {
                     options.AddAdditionalCapability("args", _seleniumConfiguration.Arguments.ToList());
                 }

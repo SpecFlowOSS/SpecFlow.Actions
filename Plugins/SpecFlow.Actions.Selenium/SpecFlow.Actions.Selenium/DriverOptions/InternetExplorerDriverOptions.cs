@@ -2,11 +2,11 @@
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class InternetExplorerOptionsWrapper : IOptionsWrapper
+    public class InternetExplorerDriverOptions : IOptionsWrapper
     {
         private readonly InternetExplorerOptions _internetExplorerOptions;
 
-        public InternetExplorerOptionsWrapper()
+        public InternetExplorerDriverOptions()
         {
             _internetExplorerOptions = new InternetExplorerOptions();
         }

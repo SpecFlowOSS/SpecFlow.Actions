@@ -1,34 +1,30 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 
 namespace SpecFlow.Actions.Selenium.Driver
 {
-    public class ChromeDriverInitialiser : IDriverInitialiser
+    public class ChromeDriverInitialiser : IDriverInitialiser 
     {
-        private readonly IDriverFactory _driverFactory;
+        private readonly IOptionsConfigurator _optionsConfigurator;
 
-        public ChromeDriverInitialiser(IDriverFactory driverFactory)
+        private static readonly Lazy<string?> ChromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
+
+        public ChromeDriverInitialiser(IOptionsConfigurator optionsConfigurator)
         {
-            _driverFactory = driverFactory;
+            _optionsConfigurator = optionsConfigurator;
         }
 
         public IWebDriver Initialise()
         {
-            return _driverFactory.GetChromeDriver();
-        }
-    }
+            var options = new ChromeDriverOptions();
 
-    public class ChromeDriverLocalInitialiser : IDriverInitialiser
-    {
-        public IWebDriver Initialise()
-        {
-            //var options = _driverOptionsFactory.GetChromeOptions();
+            _optionsConfigurator.Add(options);
 
-            //return string.IsNullOrWhiteSpace(_chromeWebDriverFilePath.Value)
-            //    ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-            //    : new ChromeDriver(ChromeDriverService.CreateDefaultService(_chromeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
-            throw new NotImplementedException();
+            return string.IsNullOrWhiteSpace(ChromeWebDriverFilePath.Value)
+                ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
+                : new ChromeDriver(ChromeDriverService.CreateDefaultService(ChromeWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
         }
     }
 }

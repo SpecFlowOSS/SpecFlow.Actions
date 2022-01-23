@@ -3,6 +3,7 @@ using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.Driver;
 using SpecFlow.Actions.Selenium.DriverOptions;
+using System;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -15,46 +16,46 @@ namespace SpecFlow.Actions.Selenium
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
-            runtimePluginEvents.CustomizeScenarioDependencies += RuntimePluginEvents_CustomizeScenarioDependencies;  
+            runtimePluginEvents.CustomizeScenarioDependencies += RuntimePluginEvents_CustomizeScenarioDependencies;
         }
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            e.ObjectContainer.RegisterTypeAs<WebDriverOptionsFactory, IWebDriverOptionsFactory>();
-            
+            e.ObjectContainer.RegisterTypeAs<OptionsConfigurator, IOptionsConfigurator>();
+
             RegisterInitialisers(e.ObjectContainer);
-            RegisterLocalObjects(e.ObjectContainer);
         }
 
         private void RegisterInitialisers(IObjectContainer objectContainer)
         {
-            objectContainer.RegisterTypeAs<ChromeDriverInitialiser, IDriverInitialiser>(Browser.Chrome.ToString());
-            objectContainer.RegisterTypeAs<EdgeDriverInitialiser, IDriverInitialiser>(Browser.Edge.ToString());
-            objectContainer.RegisterTypeAs<FirefoxDriverInitialiser, IDriverInitialiser>(Browser.Firefox.ToString());
-            objectContainer.RegisterTypeAs<InternetExplorerDriverInitialiser, IDriverInitialiser>(Browser.InternetExplorer.ToString());
-            objectContainer.RegisterTypeAs<SafariDriverInitialiser, IDriverInitialiser>(Browser.Safari.ToString());
-
-            objectContainer.RegisterFactoryAs(container =>
+            objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
+                var optionsConfigurator = container.Resolve<IOptionsConfigurator>();
 
-                return new ChromeDriverLocalInitialiser();
+                switch (config.Browser)
+                {
+                    case Browser.Chrome:
+                        return new ChromeDriverInitialiser(optionsConfigurator);
+
+                    case Browser.Firefox:
+                        return new FirefoxDriverInitialiser(optionsConfigurator);
+
+                    case Browser.Edge:
+                        return new EdgeDriverInitialiser(optionsConfigurator);
+
+                    case Browser.InternetExplorer:
+                        return new InternetExplorerDriverInitialiser(optionsConfigurator);
+
+                    case Browser.None:
+                    case Browser.Safari:
+                    case Browser.Noop:
+                    default:
+                        throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented");
+                }
             });
-
-
-        }
-
-        private void RegisterLocalObjects(IObjectContainer objectContainer)
-        {
-            var config = objectContainer.Resolve<ISeleniumConfiguration>();
-
-            if (config.TestPlatform.Equals("local"))
-            {
-                objectContainer.RegisterTypeAs<LocalDriverFactory, IDriverFactory>();
-                objectContainer.RegisterTypeAs<LocalOptionsConfigurator, IOptionsConfigurator>();
-            }
         }
     }
 }

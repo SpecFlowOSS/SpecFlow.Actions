@@ -1,7 +1,5 @@
-﻿using BoDi;
-using System;
+﻿using System;
 using OpenQA.Selenium;
-using SpecFlow.Actions.Selenium.Configuration;
 
 namespace SpecFlow.Actions.Selenium.Driver
 {
@@ -10,15 +8,13 @@ namespace SpecFlow.Actions.Selenium.Driver
     /// </summary>
     public class BrowserDriver : IDisposable
     {
-        private readonly IObjectContainer _objectContainer;
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
+        private readonly IDriverInitialiser _driverInitialiser;
         protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
         protected bool _isDisposed;
 
-        public BrowserDriver(IObjectContainer objectContainer, ISeleniumConfiguration seleniumConfiguration)
+        public BrowserDriver(IDriverInitialiser driverInitialiser)
         {
-            _objectContainer = objectContainer;
-            _seleniumConfiguration = seleniumConfiguration;
+            _driverInitialiser = driverInitialiser;
             _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
@@ -33,9 +29,7 @@ namespace SpecFlow.Actions.Selenium.Driver
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.Browser.ToString());
-
-            return initialiser.Initialise();
+            return _driverInitialiser.Initialise();
         }
 
         /// <summary>

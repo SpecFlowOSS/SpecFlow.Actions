@@ -3,11 +3,11 @@ using System;
 
 namespace SpecFlow.Actions.Selenium.DriverOptions
 {
-    public class EdgeOptionsWrapper : IOptionsWrapper
+    public class EdgeDriverOptions : IOptionsWrapper
     {
         private readonly EdgeOptions _edgeOptions;
 
-        public EdgeOptionsWrapper()
+        public EdgeDriverOptions()
         {
             _edgeOptions = new EdgeOptions();
         }
