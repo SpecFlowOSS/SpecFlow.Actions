@@ -17,16 +17,16 @@ namespace SpecFlow.Actions.Browserstack
         
         public void Start()
         {
-            _browserStackLocal = new Local();
-            _browserStackLocal.start(_configuration.BrowserstackLocalCapabilities.ToList());
+            if (_configuration.Capabilities.ContainsKey("local"))
+            {
+                _browserStackLocal = new Local();
+                _browserStackLocal.start(_configuration.BrowserstackLocalCapabilities.ToList());
+            }
         }
 
         public void Dispose()
         {
-            if (_browserStackLocal is not null && _browserStackLocal.isRunning())
-            {
-                _browserStackLocal.stop();
-            }
+            _browserStackLocal?.stop();
         }
     }
 }

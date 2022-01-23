@@ -17,6 +17,8 @@ namespace Specflow.Actions.Browserstack
 {
     public class BrowserstackRuntimePlugin : IRuntimePlugin
     {
+        private IBrowserstackLocalService? _browserstackLocalService;
+
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
@@ -25,9 +27,19 @@ namespace Specflow.Actions.Browserstack
         }
 
         private void RuntimePluginEvents_CustomizeGlobalDependencies(object? sender, CustomizeGlobalDependenciesEventArgs e)
-        {
+        { 
             var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
             runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
+            runtimePluginTestExecutionLifecycleEventEmitter.BeforeScenario += RuntimePluginTestExecutionLifecycleEventEmitter_BeforeScenario;
+
+            e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
+        }
+
+        private void RuntimePluginTestExecutionLifecycleEventEmitter_BeforeScenario(object sender, RuntimePluginBeforeScenarioEventArgs e)
+        {
+            _browserstackLocalService = e.ObjectContainer.Resolve<IBrowserstackLocalService>();
+
+            _browserstackLocalService.Start();
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
@@ -44,10 +56,13 @@ namespace Specflow.Actions.Browserstack
             {
                 ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript(BrowserstackTestResultExecutor.GetResultExecutor("failed", scenarioContext.TestError.Message));
             }
+
+            _browserstackLocalService?.Dispose();
         }
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
+            e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
             e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
 
             RegisterInitialisers(e.ObjectContainer);
