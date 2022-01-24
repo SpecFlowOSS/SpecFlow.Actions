@@ -2,7 +2,6 @@
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.Driver;
-using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
@@ -22,15 +21,11 @@ namespace SpecFlow.Actions.Selenium
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-
-            if (!e.ObjectContainer.IsRegistered<ISeleniumConfiguration>())
-            {
-                e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            }
+            e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
 
             if (!e.ObjectContainer.IsRegistered<IDriverInitialiser>())
             {
-                RegisterInitialisers(e.ObjectContainer); 
+                RegisterInitialisers(e.ObjectContainer);
             }
         }
 
@@ -39,14 +34,13 @@ namespace SpecFlow.Actions.Selenium
             objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
-                IOptionsConfigurator optionsConfigurator = new OptionsConfigurator(config);
 
                 return config.Browser switch
                 {
-                    Browser.Chrome => new ChromeDriverInitialiser(optionsConfigurator),
-                    Browser.Firefox => new FirefoxDriverInitialiser(optionsConfigurator),
-                    Browser.Edge => new EdgeDriverInitialiser(optionsConfigurator),
-                    Browser.InternetExplorer => new InternetExplorerDriverInitialiser(optionsConfigurator),
+                    Browser.Chrome => new ChromeDriverInitialiser(config),
+                    Browser.Firefox => new FirefoxDriverInitialiser(config),
+                    Browser.Edge => new EdgeDriverInitialiser(config),
+                    Browser.InternetExplorer => new InternetExplorerDriverInitialiser(config),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
             });

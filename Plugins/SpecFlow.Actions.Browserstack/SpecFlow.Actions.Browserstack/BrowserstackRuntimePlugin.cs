@@ -1,11 +1,10 @@
 ﻿using BoDi;
 using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
-using SpecFlow.Actions.Browserstack;
+using SpecFlow.Actions.Browserstack.Drivers;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.Driver;
-using SpecFlow.Actions.Selenium.DriverOptions;
 using System;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
@@ -17,8 +16,6 @@ namespace Specflow.Actions.Browserstack
 {
     public class BrowserstackRuntimePlugin : IRuntimePlugin
     {
-        private IBrowserstackLocalService? _browserstackLocalService;
-
         public void Initialize(RuntimePluginEvents runtimePluginEvents, RuntimePluginParameters runtimePluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
@@ -30,16 +27,6 @@ namespace Specflow.Actions.Browserstack
         { 
             var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
             runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
-            runtimePluginTestExecutionLifecycleEventEmitter.BeforeScenario += RuntimePluginTestExecutionLifecycleEventEmitter_BeforeScenario;
-
-            e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
-        }
-
-        private void RuntimePluginTestExecutionLifecycleEventEmitter_BeforeScenario(object sender, RuntimePluginBeforeScenarioEventArgs e)
-        {
-            _browserstackLocalService = e.ObjectContainer.Resolve<IBrowserstackLocalService>();
-
-            _browserstackLocalService.Start();
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
@@ -56,15 +43,10 @@ namespace Specflow.Actions.Browserstack
             {
                 ((IJavaScriptExecutor)browserDriver.Current).ExecuteScript(BrowserstackTestResultExecutor.GetResultExecutor("failed", scenarioContext.TestError.Message));
             }
-
-            _browserstackLocalService?.Dispose();
         }
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<BrowserstackLocalService, IBrowserstackLocalService>();
-
             RegisterInitialisers(e.ObjectContainer);
         }
 
@@ -74,19 +56,16 @@ namespace Specflow.Actions.Browserstack
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
                 var scenarioContext = container.Resolve<ScenarioContext>();
-                IOptionsConfigurator optionsConfigurator = new BrowserstackOptionsConfigurator(config, scenarioContext);
 
-                IDriverOptions options = config.Browser switch
+                return config.Browser switch
                 {
-                    Browser.Chrome => new ChromeDriverOptions(),
-                    Browser.Firefox => new FirefoxDriverOptions(),
-                    Browser.Edge => new EdgeDriverOptions(),
-                    Browser.InternetExplorer => new InternetExplorerDriverOptions(),
-                    Browser.Safari => new SafariDriverOptions(),
+                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(config, scenarioContext),
+                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(config, scenarioContext),
+                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(config,scenarioContext),
+                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(config, scenarioContext),
+                    Browser.Safari => new BrowserstackSafariDriverInitialiser(config, scenarioContext),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
-
-                return new BrowserstackDriverInitialiser(optionsConfigurator, options);
             });
         }
     }

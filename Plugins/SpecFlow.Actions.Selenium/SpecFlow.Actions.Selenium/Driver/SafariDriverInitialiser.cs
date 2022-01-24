@@ -1,30 +1,54 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Safari;
-using SpecFlow.Actions.Selenium.DriverOptions;
+using SpecFlow.Actions.Selenium.Configuration;
 using System;
+using System.Linq;
 
 namespace SpecFlow.Actions.Selenium.Driver
 {
-    internal class SafariDriverInitialiser : IDriverInitialiser
+    public class SafariDriverInitialiser : IDriverInitialiser
     {
-        private readonly IOptionsConfigurator _optionsConfigurator;
-
+        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private static readonly Lazy<string?> SafariWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("SAFARI_WEBDRIVER_FILE_PATH"));
 
-        public SafariDriverInitialiser(IOptionsConfigurator optionsConfigurator)
+        public SafariDriverInitialiser(ISeleniumConfiguration seleniumConfiguration)
         {
-            _optionsConfigurator = optionsConfigurator;
+            _seleniumConfiguration = seleniumConfiguration;
         }
 
         public IWebDriver Initialise()
         {
-            var options = new SafariDriverOptions();
+            var options = GetSafariOptions();
 
-            _optionsConfigurator.Add(options);
+            return GetDriver(options);
+        }
 
+        protected virtual IWebDriver GetDriver(SafariOptions options)
+        {
             return string.IsNullOrWhiteSpace(SafariWebDriverFilePath.Value)
-                ? new SafariDriver(SafariDriverService.CreateDefaultService(), options.Value, TimeSpan.FromSeconds(120))
-                : new SafariDriver(SafariDriverService.CreateDefaultService(SafariWebDriverFilePath.Value), options.Value, TimeSpan.FromSeconds(120));
+                ? new SafariDriver(SafariDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))
+                : new SafariDriver(SafariDriverService.CreateDefaultService(SafariWebDriverFilePath.Value), options,
+                    TimeSpan.FromSeconds(120));
+        }
+
+        protected virtual SafariOptions GetSafariOptions()
+        {
+            var options = new SafariOptions();
+
+            if (_seleniumConfiguration.Capabilities.Any())
+            {
+                foreach (var capability in _seleniumConfiguration.Capabilities)
+                {
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
+                }
+            }
+
+            if (_seleniumConfiguration.Arguments.Any())
+            {
+                options.AddAdditionalCapability("args", _seleniumConfiguration.Arguments.ToList());
+            }
+
+            return options;
         }
     }
 }
