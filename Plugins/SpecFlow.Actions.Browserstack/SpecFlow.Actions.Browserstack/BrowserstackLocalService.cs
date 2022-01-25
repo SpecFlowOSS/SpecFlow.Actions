@@ -7,7 +7,7 @@ namespace SpecFlow.Actions.Browserstack
     public class BrowserstackLocalService : IBrowserstackLocalService
     {
         private readonly BrowserstackConfiguration _configuration;
-        private Local _browserStackLocal;
+        private readonly Local _browserStackLocal;
 
         public BrowserstackLocalService(ISeleniumConfiguration configuration)
         {

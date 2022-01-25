@@ -1,10 +1,10 @@
 ﻿using BoDi;
 using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
-using SpecFlow.Actions.Browserstack.Drivers;
+using SpecFlow.Actions.Browserstack.DriverInitialisers;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
-using SpecFlow.Actions.Selenium.Driver;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;

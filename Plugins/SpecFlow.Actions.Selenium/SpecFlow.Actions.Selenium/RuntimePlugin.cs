@@ -1,7 +1,7 @@
 ﻿using BoDi;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
-using SpecFlow.Actions.Selenium.Driver;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
