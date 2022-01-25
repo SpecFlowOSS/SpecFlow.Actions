@@ -2,10 +2,10 @@
   "selenium": {
     "browser": "Chrome",
     "capabilities": {
-      "os": "Windows",
-      "os_version": "11",
+      "os": "OS X",
+      "os_version": "Sierra",
       "resolution": "1920x1080",
-      "build": "Windows_11.Chrome"
+      "build": "OS_X_Sierra.Chrome"
     }
   }
 }

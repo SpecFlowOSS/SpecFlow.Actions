@@ -14,6 +14,6 @@ namespace SpecFlow.Actions.Browserstack
         }
 
         public Dictionary<string, string> BrowserstackLocalCapabilities =>
-            _specFlowActionsConfiguration.GetDictionary("selenium:browserstacklocalcapabilities");
+            _specFlowActionsConfiguration.GetDictionary("selenium:browserstack:localcapabilities");
     }
 }

@@ -4,7 +4,7 @@ using SpecFlow.Actions.Selenium.Configuration;
 using System;
 using System.Linq;
 
-namespace SpecFlow.Actions.Selenium.Driver
+namespace SpecFlow.Actions.Selenium.DriverInitialisers
 {
     public class InternetExplorerDriverInitialiser : IDriverInitialiser
     {

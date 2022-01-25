@@ -1,7 +1,8 @@
 ﻿using System;
 using OpenQA.Selenium;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 
-namespace SpecFlow.Actions.Selenium.Driver
+namespace SpecFlow.Actions.Selenium
 {
     /// <summary>
     /// Manages a browser instance using Selenium

@@ -7,26 +7,22 @@ namespace SpecFlow.Actions.Browserstack
     public class BrowserstackLocalService : IBrowserstackLocalService
     {
         private readonly BrowserstackConfiguration _configuration;
+        private Local _browserStackLocal;
 
         public BrowserstackLocalService(ISeleniumConfiguration configuration)
         {
             _configuration = (BrowserstackConfiguration)configuration;
+            _browserStackLocal = new Local();
         }
-
-        private Local? _browserStackLocal;
         
         public void Start()
         {
-            if (_configuration.Capabilities.ContainsKey("local"))
-            {
-                _browserStackLocal = new Local();
-                _browserStackLocal.start(_configuration.BrowserstackLocalCapabilities.ToList());
-            }
+            _browserStackLocal.start(_configuration.BrowserstackLocalCapabilities.ToList());
         }
 
         public void Dispose()
         {
-            _browserStackLocal?.stop();
+            _browserStackLocal.stop();
         }
     }
 }

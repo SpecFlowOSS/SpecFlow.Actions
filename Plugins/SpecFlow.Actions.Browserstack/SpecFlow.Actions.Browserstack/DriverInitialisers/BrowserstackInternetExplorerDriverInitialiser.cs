@@ -1,15 +1,15 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
-using OpenQA.Selenium.Safari;
 using SpecFlow.Actions.Selenium.Configuration;
-using SpecFlow.Actions.Selenium.Driver;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using System.Collections;
 using TechTalk.SpecFlow;
 
-namespace SpecFlow.Actions.Browserstack.Drivers
+namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 {
-    internal class BrowserstackSafariDriverInitialiser : SafariDriverInitialiser
+    internal class BrowserstackInternetExplorerDriverInitialiser : InternetExplorerDriverInitialiser
     {
         private readonly ScenarioContext _scenarioContext;
         private readonly Uri _browserstackRemoteServer;
@@ -17,20 +17,15 @@ namespace SpecFlow.Actions.Browserstack.Drivers
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
         private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
-        public BrowserstackSafariDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
+        public BrowserstackInternetExplorerDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
         {
             _scenarioContext = scenarioContext;
             _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
         }
 
-        protected override IWebDriver GetDriver(SafariOptions options)
+        protected override InternetExplorerOptions GetInternetExplorerOptions()
         {
-            return new RemoteWebDriver(_browserstackRemoteServer, options);
-        }
-
-        protected override SafariOptions GetSafariOptions()
-        {
-            var options =  base.GetSafariOptions();
+            var options = base.GetInternetExplorerOptions();
 
             if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
             {
@@ -41,6 +36,11 @@ namespace SpecFlow.Actions.Browserstack.Drivers
             options.AddAdditionalCapability("name", GetScenarioTitle());
 
             return options;
+        }
+
+        protected override IWebDriver GetDriver(InternetExplorerOptions options)
+        {
+            return new RemoteWebDriver(_browserstackRemoteServer, options);
         }
 
         private string GetScenarioTitle()
