@@ -9,10 +9,10 @@ namespace SpecFlow.Actions.Configuration
 {
     public interface ISpecFlowActionsConfiguration
     {
-        string? Get(string path);
+        string Get(string path);
         string Get(string path, string defaultValue);
         double? GetDouble(string path);
-        string[]? GetArray(string path);
+        string[] GetArray(string path);
         Dictionary<string, string> GetDictionary(string path);
     }
 
@@ -41,7 +41,7 @@ namespace SpecFlow.Actions.Configuration
             return configurationBuilder.Build();
         }
 
-        public string? Get(string path)
+        public string Get(string path)
         {
             var configValue = _configuration.Value[path];
             return configValue;
@@ -70,7 +70,7 @@ namespace SpecFlow.Actions.Configuration
             return configValue;
         }
 
-        public string[]? GetArray(string path)
+        public string[] GetArray(string path)
         {
             return _configuration.Value.GetSection(path).Get<string[]>();
         }
