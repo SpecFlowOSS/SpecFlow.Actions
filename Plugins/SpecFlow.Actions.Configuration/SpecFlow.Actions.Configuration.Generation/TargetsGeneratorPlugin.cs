@@ -1,5 +1,4 @@
-﻿using SpecFlow.Actions.Configuration;
-using SpecFlow.Actions.Configuration.Generation;
+﻿using SpecFlow.Actions.Configuration.Generation;
 using TechTalk.SpecFlow.Generator.Plugins;
 using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Infrastructure;

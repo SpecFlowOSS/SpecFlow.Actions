@@ -1,23 +1,44 @@
-﻿using TechTalk.SpecFlow;
+﻿using BoDi;
+using System;
+using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Configuration
 {
     public class CurrentTargetIdentifier
     {
-        private readonly ScenarioContext _scenarioContext;
-
-        public CurrentTargetIdentifier(ScenarioContext scenarioContext)
+        private readonly ObjectContainer _objectContainer;
+        
+        public CurrentTargetIdentifier(ObjectContainer objectContainer)
         {
-            _scenarioContext = scenarioContext;
+            _objectContainer = objectContainer;
+            
         }
+
+        private ObjectContainer? Container
+        {
+            get
+            {
+                try
+                {
+                    return _objectContainer.Resolve<ObjectContainer>();
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
+
 
         public string? Name
         {
             get
             {
-                if (_scenarioContext.ContainsKey("__SpecFlowActionsConfigurationTarget"))
+                var scenarioContext = Container?.Resolve<ScenarioContext>();
+
+                if (scenarioContext is not null && scenarioContext.ContainsKey("__SpecFlowActionsConfigurationTarget"))
                 {
-                    return (string)_scenarioContext["__SpecFlowActionsConfigurationTarget"];
+                    return (string)scenarioContext["__SpecFlowActionsConfigurationTarget"];
                 }
 
                 return null;

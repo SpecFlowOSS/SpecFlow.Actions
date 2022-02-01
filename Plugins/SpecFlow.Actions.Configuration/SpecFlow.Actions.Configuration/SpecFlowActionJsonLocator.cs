@@ -12,7 +12,7 @@ namespace SpecFlow.Actions.Configuration
             return GetFilePathToConfigurationFile(JsonConfigurationFileName);
         }
 
-        public string? GetTargetFilePath(string? targetName)
+        public string? GetTargetFilePath(string targetName)
         {
             return GetFilePathToConfigurationFile($"specflow.actions.{targetName}.json");
         }
