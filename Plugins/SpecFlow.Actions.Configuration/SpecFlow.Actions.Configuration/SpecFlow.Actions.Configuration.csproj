@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
     <AssemblyName>SpecFlow.Actions.Configuration.SpecFlowPlugin</AssemblyName>
-    <Product>SpecFlow.Actions.Configuration</Product>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
