@@ -13,9 +13,13 @@
 		<dependencies>
 			<group targetFramework="net471">
 				<dependency id="SpecFlow" version="3.9.40"/>
+				<dependency id="Microsoft.Extensions.Configuration.Binder" version="6.0.0" />
+				<dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
 			</group>
 			<group targetFramework="netcoreapp2.1">
 				<dependency id="SpecFlow" version="3.9.40"/>
+				<dependency id="Microsoft.Extensions.Configuration.Binder" version="6.0.0" />
+				<dependency id="Microsoft.Extensions.Configuration.Json" version="6.0.0" />
 			</group>
 		</dependencies>
 	</metadata>
