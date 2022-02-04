@@ -35,7 +35,8 @@ You can configure this plugin via the  `specflow.actions.json`.
     ],
     "defaultTimeout": 60,
     "headless": false,
-    "slowmo": 100
+    "slowmo": 100,
+    "traceDir": "traces"
   }
 }
 ```
@@ -62,6 +63,11 @@ Whether the browser should run in headless mode or not.
 ### slowmo
 
 Optional. Expressed in miliseconds. If present, will reflect Playwright's slowmo functionality, which determines the time between each individual actions are made, like clicking or typing.
+
+### traceDir
+
+Optional. If [specified](https://playwright.dev/docs/api/class-browsertype#browser-type-launch-option-traces-dir), traces are saved into this directory. 
+See also [record traces](https://playwright.dev/dotnet/docs/trace-viewer#recording-a-trace).
 
 ## How to use it
 
