@@ -52,7 +52,7 @@ jobs:
           path:  |
             Plugins/SpecFlow.Actions.Android/SpecFlow.Actions.Android/bin/Release/**/*.nupkg
             Plugins/SpecFlow.Actions.Appium/SpecFlow.Actions.Appium/bin/Release/**/*.nupkg
-            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
+            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.Generation/bin/Release/**/*.nupkg
             
   release:
     runs-on: windows-latest
