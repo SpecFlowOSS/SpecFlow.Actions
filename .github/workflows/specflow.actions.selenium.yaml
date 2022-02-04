@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/specflow.actions.selenium.yaml'
       - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
   pull_request:
     branches:
@@ -14,6 +15,7 @@ on:
     paths:
       - '.github/workflows/specflow.actions.selenium.yaml'
       - 'Plugins/SpecFlow.Actions.Selenium/**'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
 
 
