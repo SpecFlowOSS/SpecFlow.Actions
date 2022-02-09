@@ -16,6 +16,8 @@ namespace SpecFlow.Actions.Playwright
         bool? Headless { get; }
 
         float? SlowMo { get; }
+        
+        string? TraceDir { get; }
     }
 
     public class PlaywrightConfiguration : IPlaywrightConfiguration
@@ -44,6 +46,9 @@ namespace SpecFlow.Actions.Playwright
 
             [JsonInclude]
             public float? SlowMo { get; private set; }
+
+            [JsonInclude]
+            public string? TraceDir { get; private set; }
         }
 
         private readonly Lazy<SpecFlowActionJson> _specflowJsonPart;
@@ -103,5 +108,10 @@ namespace SpecFlow.Actions.Playwright
         /// How many miliseconds elapse between every action 
         /// </summary>
         public float? SlowMo => _specflowJsonPart.Value.Playwright.SlowMo;
+
+        /// <summary>
+        /// If specified, traces are saved into this directory 
+        /// </summary>
+        public string? TraceDir => _specflowJsonPart.Value.Playwright.TraceDir;
     }
 }

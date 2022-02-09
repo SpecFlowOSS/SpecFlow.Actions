@@ -4,6 +4,8 @@
 
 This SpecFlow.Action will help you use Selenium together with SpecFlow. It handles the lifetime of your browser and provides easy configuration and helper methods to interact with Selenium.
 
+An example can be found [here](https://github.com/SpecFlowOSS/SpecFlow-Examples/tree/master/Actions/SeleniumExample).
+
 ## Included Features
 
 - Lifetime handling of Browser
@@ -12,6 +14,7 @@ This SpecFlow.Action will help you use Selenium together with SpecFlow. It handl
         - Firefox
         - Edge
         - Internet Explorer
+        - Safari
 - Configuration via `specflow.actions.json`
 - Helper Methods for WebDriver
 - Helper Extension Methods for WebElement
@@ -48,6 +51,7 @@ Supported values:
 - `firefox`
 - `internetexplorer`
 - `edge`
+- `safari`
 
 ### Multiple target configurations
 

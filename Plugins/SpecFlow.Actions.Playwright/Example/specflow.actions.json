@@ -2,6 +2,7 @@
   "playwright": {
     "browser": "chrome",
     "defaultTimeout": 60,
-    "headless": false
+    "headless": false,
+    "traceDir": "traces"
   }
 }

@@ -7,6 +7,7 @@ on:
     paths:
       - '.github/workflows/specflow.actions.docker.yaml'
       - 'Plugins/SpecFlow.Actions.Docker/**'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
   pull_request:
     branches:
@@ -14,6 +15,7 @@ on:
     paths:
       - '.github/workflows/specflow.actions.docker.yaml'
       - 'Plugins/SpecFlow.Actions.Docker/**'
+      - 'Plugins/SpecFlow.Actions.Configuration/**'
       - 'Plugins/*'
 
 
@@ -45,7 +47,7 @@ jobs:
           name: NuGet-Package
           path:  | 
             Plugins/SpecFlow.Actions.Docker/SpecFlow.Actions.Docker/bin/Release/**/*.nupkg
-            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
+            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.Generation/bin/Release/**/*.nupkg
 
             
 

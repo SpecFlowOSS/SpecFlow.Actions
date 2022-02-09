@@ -49,7 +49,7 @@ jobs:
           path:  |
             Plugins/SpecFlow.Actions.Browserstack/SpecFlow.Actions.Browserstack/bin/Release/**/*.nupkg
             Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg
-            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration/bin/Release/**/*.nupkg
+            Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.Generation/bin/Release/**/*.nupkg
             
 
   release:
