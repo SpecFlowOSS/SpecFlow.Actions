@@ -23,6 +23,21 @@ namespace SpecFlow.Actions.Browserstack.DriverInitialisers
         {
             _scenarioContext = scenarioContext;
             _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
+
+            if (((BrowserstackConfiguration)seleniumConfiguration).BrowserstackLocalRequired)
+            {
+                StartBrowserstackLocal();
+            }
+        }
+
+        private static void StartBrowserstackLocal()
+        {
+            var bsLocalInstance = BrowserstackLocalService.GetInstance();
+
+            if (!bsLocalInstance.isRunning())
+            {
+                //bsLocalInstance.start(((BrowserstackConfiguration)configuration).BrowserstackLocalCapabilities.ToList());
+            }
         }
 
         protected override IWebDriver GetDriver(ChromeOptions options)

@@ -1,28 +1,30 @@
 ﻿using BrowserStack;
-using SpecFlow.Actions.Selenium.Configuration;
-using System.Linq;
 
 namespace SpecFlow.Actions.Browserstack
 {
-    public class BrowserstackLocalService : IBrowserstackLocalService
+    public class BrowserstackLocalService
     {
-        private readonly BrowserstackConfiguration _configuration;
-        private readonly Local _browserStackLocal;
+        private static Local? _instance;
+        private static readonly object Lock = new();
 
-        public BrowserstackLocalService(ISeleniumConfiguration configuration)
+        private BrowserstackLocalService()
         {
-            _configuration = (BrowserstackConfiguration)configuration;
-            _browserStackLocal = new Local();
-        }
-        
-        public void Start()
-        {
-            _browserStackLocal.start(_configuration.BrowserstackLocalCapabilities.ToList());
+            // Private constructor for singleton instance
         }
 
-        public void Dispose()
+        public static Local GetInstance()
         {
-            _browserStackLocal.stop();
+            if (_instance is not null)
+            {
+                return _instance;
+            }
+
+            lock (Lock)
+            {
+                _instance ??= new Local();
+            }
+
+            return _instance;
         }
     }
 }

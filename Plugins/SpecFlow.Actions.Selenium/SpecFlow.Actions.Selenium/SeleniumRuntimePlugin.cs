@@ -20,13 +20,17 @@ namespace SpecFlow.Actions.Selenium
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>();
-            e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
-            
+            if (!e.ObjectContainer.IsRegistered<ISeleniumConfiguration>())
+            {
+                e.ObjectContainer.RegisterTypeAs<SeleniumConfiguration, ISeleniumConfiguration>(); 
+            }
+
             if (!e.ObjectContainer.IsRegistered<IDriverInitialiser>())
             {
                 RegisterInitialisers(e.ObjectContainer);
             }
+
+            e.ObjectContainer.RegisterTypeAs<BrowserInteractions, IBrowserInteractions>();
         }
 
         private void RegisterInitialisers(IObjectContainer objectContainer)

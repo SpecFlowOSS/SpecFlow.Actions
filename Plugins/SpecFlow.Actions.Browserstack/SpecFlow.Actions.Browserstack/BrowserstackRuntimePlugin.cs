@@ -1,11 +1,13 @@
 ﻿using BoDi;
 using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
+using SpecFlow.Actions.Browserstack;
 using SpecFlow.Actions.Browserstack.DriverInitialisers;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
+using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
@@ -47,6 +49,7 @@ namespace Specflow.Actions.Browserstack
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
+            e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
             RegisterInitialisers(e.ObjectContainer);
         }
 

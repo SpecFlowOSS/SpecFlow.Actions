@@ -8,12 +8,12 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
 {
     public class ChromeDriverInitialiser : IDriverInitialiser
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
+        private readonly ISeleniumConfiguration _browserstackConfiguration;
         private static readonly Lazy<string?> ChromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
 
-        public ChromeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration)
+        public ChromeDriverInitialiser(ISeleniumConfiguration browserstackConfiguration)
         {
-            _seleniumConfiguration = seleniumConfiguration;
+            _browserstackConfiguration = browserstackConfiguration;
         }
 
         public IWebDriver Initialise()
@@ -26,17 +26,17 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         {
             var options = new ChromeOptions();
 
-            if (_seleniumConfiguration.Capabilities.Any())
+            if (_browserstackConfiguration.Capabilities.Any())
             {
-                foreach (var capability in _seleniumConfiguration.Capabilities)
+                foreach (var capability in _browserstackConfiguration.Capabilities)
                 {
                     options.AddAdditionalCapability(capability.Key, capability.Value, true);
                 }
             }
 
-            if (_seleniumConfiguration.Arguments.Any())
+            if (_browserstackConfiguration.Arguments.Any())
             {
-                options.AddArguments(_seleniumConfiguration.Arguments);
+                options.AddArguments(_browserstackConfiguration.Arguments);
             }
 
             return options;
