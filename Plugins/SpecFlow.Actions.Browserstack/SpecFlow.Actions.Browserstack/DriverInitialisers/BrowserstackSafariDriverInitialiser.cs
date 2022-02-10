@@ -5,14 +5,12 @@ using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using System.Collections;
-using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 {
     internal class BrowserstackSafariDriverInitialiser : SafariDriverInitialiser
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly ScenarioContext _scenarioContext;
         private readonly Uri _browserstackRemoteServer;
 
@@ -21,20 +19,8 @@ namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 
         public BrowserstackSafariDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
         {
-            _seleniumConfiguration = seleniumConfiguration;
             _scenarioContext = scenarioContext;
             _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
-
-            if (((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalRequired)
-            {
-                StartBrowserstackLocal();
-            }
-        }
-
-        private void StartBrowserstackLocal()
-        {
-            BrowserstackLocalService.Start(
-                ((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalCapabilities.ToList());
         }
 
         protected override IWebDriver GetDriver(SafariOptions options)

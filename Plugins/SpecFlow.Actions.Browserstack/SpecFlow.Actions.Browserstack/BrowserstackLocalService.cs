@@ -1,38 +1,19 @@
 ﻿using BrowserStack;
+using System;
 using System.Collections.Generic;
 
 namespace SpecFlow.Actions.Browserstack
 {
     public class BrowserstackLocalService
     {
-        private static Local? _instance;
         private static bool _isRunning = false;
-        private static readonly object InstanceLock = new();
         private static readonly object StartLock = new();
 
-        private static Local BrowserstackLocal
-        {
-            get => GetInstance();
-            set => _instance = value;
-        }
+        private static Lazy<Local>? _browserstackLocal;
 
         private BrowserstackLocalService()
         {
-        }
-
-        private static Local GetInstance()
-        {
-            if (_instance is not null)
-            {
-                return _instance;
-            }
-
-            lock (InstanceLock)
-            {
-                _instance ??= new Local();
-            }
-
-            return _instance;
+            _browserstackLocal = new Lazy<Local>(() => new Local());
         }
 
         public static void Start(List<KeyValuePair<string, string>> capabilities)
@@ -46,9 +27,17 @@ namespace SpecFlow.Actions.Browserstack
             {
                 if (!_isRunning)
                 {
-                    //BrowserstackLocal.start(capabilities);
+                    _browserstackLocal?.Value.start(capabilities);
                     _isRunning = true;
                 }
+            }
+        }
+
+        public static void Stop()
+        {
+            if (_isRunning)
+            {
+                _browserstackLocal?.Value.stop(); 
             }
         }
     }

@@ -29,6 +29,12 @@ namespace Specflow.Actions.Browserstack
         { 
             var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
             runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
+            runtimePluginTestExecutionLifecycleEventEmitter.AfterTestRun += RuntimePluginTestExecutionLifecycleEventEmitter_AfterTestRun;
+        }
+
+        private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterTestRun(object sender, RuntimePluginAfterTestRunEventArgs e)
+        {
+            BrowserstackLocalService.Stop();
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
@@ -58,6 +64,13 @@ namespace Specflow.Actions.Browserstack
             objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
+
+                if (((BrowserstackConfiguration)config).BrowserstackLocalRequired)
+                {
+                    BrowserstackLocalService.Start(
+                        ((BrowserstackConfiguration)config).BrowserstackLocalCapabilities.ToList());
+                }
+
                 var scenarioContext = container.Resolve<ScenarioContext>();
 
                 return config.Browser switch
