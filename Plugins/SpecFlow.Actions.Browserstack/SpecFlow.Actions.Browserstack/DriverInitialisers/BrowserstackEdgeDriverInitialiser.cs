@@ -5,12 +5,14 @@ using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using System.Collections;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 {
     internal class BrowserstackEdgeDriverInitialiser : EdgeDriverInitialiser
     {
+        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly ScenarioContext _scenarioContext;
 
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
@@ -20,8 +22,20 @@ namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 
         public BrowserstackEdgeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
         {
+            _seleniumConfiguration = seleniumConfiguration;
             _scenarioContext = scenarioContext;
             _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
+
+            if (((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalRequired)
+            {
+                StartBrowserstackLocal();
+            }
+        }        
+        
+        private void StartBrowserstackLocal()
+        {
+            BrowserstackLocalService.Start(
+                ((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalCapabilities.ToList());
         }
 
         protected override EdgeOptions GetEdgeOptions()

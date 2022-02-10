@@ -5,6 +5,7 @@ using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using System.Collections;
+using System.Linq;
 using TechTalk.SpecFlow;
 
 namespace SpecFlow.Actions.Browserstack.DriverInitialisers
@@ -12,6 +13,7 @@ namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 
     internal class BrowserstackChromeDriverInitialiser : ChromeDriverInitialiser
     {
+        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private readonly ScenarioContext _scenarioContext;
         private static Lazy<string?> BrowserstackUsername => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
         private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
@@ -21,23 +23,20 @@ namespace SpecFlow.Actions.Browserstack.DriverInitialisers
 
         public BrowserstackChromeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
         {
+            _seleniumConfiguration = seleniumConfiguration;
             _scenarioContext = scenarioContext;
             _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
 
-            if (((BrowserstackConfiguration)seleniumConfiguration).BrowserstackLocalRequired)
+            if (((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalRequired)
             {
                 StartBrowserstackLocal();
             }
         }
 
-        private static void StartBrowserstackLocal()
+        private void StartBrowserstackLocal()
         {
-            var bsLocalInstance = BrowserstackLocalService.GetInstance();
-
-            if (!bsLocalInstance.isRunning())
-            {
-                //bsLocalInstance.start(((BrowserstackConfiguration)configuration).BrowserstackLocalCapabilities.ToList());
-            }
+            BrowserstackLocalService.Start(
+                ((BrowserstackConfiguration)_seleniumConfiguration).BrowserstackLocalCapabilities.ToList());
         }
 
         protected override IWebDriver GetDriver(ChromeOptions options)
