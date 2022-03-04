@@ -1,14 +1,12 @@
 {
   "selenium": {
-    "defaultTimeout": 60,
-    "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "Safari",
     "capabilities": {
       "os": "OS X",
       "os_version": "Monterey",
       "resolution": "1920x1080",
-      "build": "OS_X_Monterey.Safari"
+      "build": "OS_X_Monterey.Safari",
+      "browserstack.local": "true"
     }
   }
 }

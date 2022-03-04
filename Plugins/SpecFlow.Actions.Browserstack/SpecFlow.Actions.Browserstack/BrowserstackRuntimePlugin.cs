@@ -1,11 +1,18 @@
-﻿using OpenQA.Selenium;
+﻿using BoDi;
+using OpenQA.Selenium;
 using Specflow.Actions.Browserstack;
+using SpecFlow.Actions.Browserstack;
+using SpecFlow.Actions.Browserstack.DriverInitialisers;
 using SpecFlow.Actions.Selenium;
+using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
+using System;
+using System.Linq;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(BrowserstackRuntimePlugin))]
+[assembly: RuntimePlugin(typeof(BrowserstackRuntimePlugin))]
 
 namespace Specflow.Actions.Browserstack
 {
@@ -19,9 +26,15 @@ namespace Specflow.Actions.Browserstack
         }
 
         private void RuntimePluginEvents_CustomizeGlobalDependencies(object? sender, CustomizeGlobalDependenciesEventArgs e)
-        {
+        { 
             var runtimePluginTestExecutionLifecycleEventEmitter = e.ObjectContainer.Resolve<RuntimePluginTestExecutionLifecycleEvents>();
             runtimePluginTestExecutionLifecycleEventEmitter.AfterScenario += RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario;
+            runtimePluginTestExecutionLifecycleEventEmitter.AfterTestRun += RuntimePluginTestExecutionLifecycleEventEmitter_AfterTestRun;
+        }
+
+        private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterTestRun(object sender, RuntimePluginAfterTestRunEventArgs e)
+        {
+            BrowserstackLocalService.Stop();
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
@@ -42,7 +55,34 @@ namespace Specflow.Actions.Browserstack
 
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
-            e.ObjectContainer.RegisterTypeAs<BrowserstackDriverInitialiser, IDriverInitialiser>("browserstack");
+            e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
+            RegisterInitialisers(e.ObjectContainer);
+        }
+
+        private void RegisterInitialisers(IObjectContainer objectContainer)
+        {
+            objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
+            {
+                var config = container.Resolve<ISeleniumConfiguration>();
+
+                if (((BrowserstackConfiguration)config).BrowserstackLocalRequired)
+                {
+                    BrowserstackLocalService.Start(
+                        ((BrowserstackConfiguration)config).BrowserstackLocalCapabilities.ToList());
+                }
+
+                var scenarioContext = container.Resolve<ScenarioContext>();
+
+                return config.Browser switch
+                {
+                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(config, scenarioContext),
+                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(config, scenarioContext),
+                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(config,scenarioContext),
+                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(config, scenarioContext),
+                    Browser.Safari => new BrowserstackSafariDriverInitialiser(config, scenarioContext),
+                    _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
+                };
+            });
         }
     }
 }

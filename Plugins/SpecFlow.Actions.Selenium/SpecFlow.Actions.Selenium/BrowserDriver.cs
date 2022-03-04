@@ -1,6 +1,6 @@
-﻿using BoDi;
-using System;
+﻿using System;
 using OpenQA.Selenium;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 
 namespace SpecFlow.Actions.Selenium
 {
@@ -9,22 +9,21 @@ namespace SpecFlow.Actions.Selenium
     /// </summary>
     public class BrowserDriver : IDisposable
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private readonly IObjectContainer _objectContainer;
-        protected readonly Lazy<IWebDriver> _currentWebDriverLazy;
-        protected bool _isDisposed;
+        private readonly IDriverInitialiser _driverInitialiser;
 
-        public BrowserDriver(ISeleniumConfiguration seleniumConfiguration, IObjectContainer objectContainer)
+        protected readonly Lazy<IWebDriver> CurrentWebDriverLazy;
+        protected bool IsDisposed;
+
+        public BrowserDriver(IDriverInitialiser driverInitialiser)
         {
-            _seleniumConfiguration = seleniumConfiguration;
-            _objectContainer = objectContainer;
-            _currentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
+            _driverInitialiser = driverInitialiser;
+            CurrentWebDriverLazy = new Lazy<IWebDriver>(CreateWebDriver);
         }
 
         /// <summary>
         /// The current Selenium IWebDriver instance
         /// </summary>
-        public IWebDriver Current => _currentWebDriverLazy.Value;
+        public IWebDriver Current => CurrentWebDriverLazy.Value;
 
         /// <summary>
         /// Creates the Selenium web driver (opens a browser)
@@ -32,18 +31,7 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         private IWebDriver CreateWebDriver()
         {
-            var initialiser = _objectContainer.Resolve<IDriverInitialiser>(_seleniumConfiguration.TestPlatform);
-
-            return _seleniumConfiguration.Browser switch
-            {
-                Browser.Chrome => initialiser.GetChromeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Firefox => initialiser.GetFirefoxDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Edge => initialiser.GetEdgeDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.InternetExplorer => initialiser.GetInternetExplorerDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Safari => initialiser.GetSafariDriver(_seleniumConfiguration.Capabilities, _seleniumConfiguration.Arguments),
-                Browser.Noop => new NoopWebdriver(),
-                _ => throw new NotImplementedException($"Support for browser {_seleniumConfiguration.Browser} is not implemented yet"),
-            };
+            return _driverInitialiser.Initialise();
         }
 
         /// <summary>
@@ -51,17 +39,17 @@ namespace SpecFlow.Actions.Selenium
         /// </summary>
         public void Dispose()
         {
-            if (_isDisposed)
+            if (IsDisposed)
             {
                 return;
             }
 
-            if (_currentWebDriverLazy.IsValueCreated)
+            if (CurrentWebDriverLazy.IsValueCreated)
             {
                 Current.Quit();
             }
 
-            _isDisposed = true;
+            IsDisposed = true;
         }
     }
 }

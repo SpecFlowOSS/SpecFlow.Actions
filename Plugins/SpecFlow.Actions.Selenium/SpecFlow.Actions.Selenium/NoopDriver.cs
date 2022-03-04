@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 
 namespace SpecFlow.Actions.Selenium
 {
-    public class NoopWebdriver : IWebDriver
+    public class NoopDriver : IWebDriver
     {
         public IWebElement FindElement(By @by)
         {
