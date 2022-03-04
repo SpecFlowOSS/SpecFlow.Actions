@@ -3,7 +3,7 @@ using FluentAssertions;
 using Moq;
 using OpenQA.Selenium;
 using Xunit;
-using SpecFlow.Actions.Selenium.Driver;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 
 namespace SpecFlow.Actions.Selenium.Tests
 {
