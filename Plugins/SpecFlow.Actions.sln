@@ -90,7 +90,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_GHActions", "_GHActions", 
 		..\.github\workflows\specflow.actions.windowsAppDriver.yaml = ..\.github\workflows\specflow.actions.windowsAppDriver.yaml
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium.IntegrationTests", "SpecFlow.Actions.Playwright\SpecFlow.Actions.Playwright.IntegrationTests\SpecFlow.Actions.Selenium.IntegrationTests.csproj", "{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Playwright.IntegrationTests", "SpecFlow.Actions.Playwright\SpecFlow.Actions.Playwright.IntegrationTests\SpecFlow.Actions.Playwright.IntegrationTests.csproj", "{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
