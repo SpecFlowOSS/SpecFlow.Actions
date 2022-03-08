@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="BrowserStackLocal" Version="2.0.0" />
+	  <PackageReference Include="BrowserStackLocal" Version="2.0.0-verbose" />
 	</ItemGroup>
 
 	<ItemGroup>
