@@ -5,6 +5,7 @@
     <AssemblyName>SpecFlow.Actions.Playwright.SpecFlowPlugin</AssemblyName>
     <PackageId>SpecFlow.Actions.Playwright</PackageId>
     <Product>SpecFlow.Actions.Playwright</Product>
+	  <NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.Playwright.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>
