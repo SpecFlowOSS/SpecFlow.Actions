@@ -9,15 +9,15 @@
 		<dependencies>
 			<group targetFramework=".NETFramework4.7.1">
 				<dependency id="SpecFlow.Actions.Configuration" version="$version$" />
-				<dependency id="Microsoft.Playwright" version="1.13.0" />
+				<dependency id="Microsoft.Playwright" version="1.19.1" />
 				<dependency id="SpecFlow" version="3.9.40" />
-				<dependency id="System.Text.Json" version="5.0.2" />
+				<dependency id="System.Text.Json" version="6.0.1" />
 			</group>
-			<group targetFramework=".NETCoreApp2.1">
+			<group targetFramework=".NETCoreApp3.1">
 				<dependency id="SpecFlow.Actions.Configuration" version="$version$"/>
-				<dependency id="Microsoft.Playwright" version="1.13.0"  />
+				<dependency id="Microsoft.Playwright" version="1.19.1"  />
 				<dependency id="SpecFlow" version="3.9.40" />
-				<dependency id="System.Text.Json" version="5.0.2" />
+				<dependency id="System.Text.Json" version="6.0.1" />
 			</group>
 		</dependencies>
 		<frameworkAssemblies>

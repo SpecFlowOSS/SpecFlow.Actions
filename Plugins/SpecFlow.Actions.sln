@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Selenium", "Selenium", "{742074B7-55BC-4270-910E-C0D372F55ADB}"
 EndProject
@@ -28,8 +28,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Playwright", "Playwright", "{4516E49D-DC11-4716-A152-2FBEE3DA476E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Playwright", "SpecFlow.Actions.Playwright\SpecFlow.Actions.Playwright\SpecFlow.Actions.Playwright.csproj", "{8A1BED00-ACD7-43AC-8669-B83AD5106CEF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example", "SpecFlow.Actions.Playwright\Example\Example.csproj", "{C7F6707E-1C8C-49EC-AAC5-840D07142DE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsAppDriver", "WindowsAppDriver", "{3327DE91-555F-4F18-8D44-F9856CCEFA03}"
 EndProject
@@ -79,6 +77,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specflow.Actions.Browsersta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium.IntegrationTests", "SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.IntegrationTests\SpecFlow.Actions.Selenium.IntegrationTests.csproj", "{8904EE5D-B603-4BA2-92FD-B236CD2A58F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_GHActions", "_GHActions", "{FBC31702-FBB8-47EE-9B12-1C65645F6326}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\specflow.actions.android.yaml = ..\.github\workflows\specflow.actions.android.yaml
+		..\.github\workflows\specflow.actions.appium.yaml = ..\.github\workflows\specflow.actions.appium.yaml
+		..\.github\workflows\specflow.actions.boaconstrictor.yaml = ..\.github\workflows\specflow.actions.boaconstrictor.yaml
+		..\.github\workflows\specflow.actions.browserstack.yaml = ..\.github\workflows\specflow.actions.browserstack.yaml
+		..\.github\workflows\specflow.actions.configuration.yaml = ..\.github\workflows\specflow.actions.configuration.yaml
+		..\.github\workflows\specflow.actions.docker.yaml = ..\.github\workflows\specflow.actions.docker.yaml
+		..\.github\workflows\specflow.actions.playwright.yaml = ..\.github\workflows\specflow.actions.playwright.yaml
+		..\.github\workflows\specflow.actions.selenium.yaml = ..\.github\workflows\specflow.actions.selenium.yaml
+		..\.github\workflows\specflow.actions.windowsAppDriver.yaml = ..\.github\workflows\specflow.actions.windowsAppDriver.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpecFlow.Actions.Selenium.IntegrationTests", "SpecFlow.Actions.Playwright\SpecFlow.Actions.Playwright.IntegrationTests\SpecFlow.Actions.Selenium.IntegrationTests.csproj", "{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,10 +118,6 @@ Global
 		{8A1BED00-ACD7-43AC-8669-B83AD5106CEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A1BED00-ACD7-43AC-8669-B83AD5106CEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A1BED00-ACD7-43AC-8669-B83AD5106CEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C7F6707E-1C8C-49EC-AAC5-840D07142DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C7F6707E-1C8C-49EC-AAC5-840D07142DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C7F6707E-1C8C-49EC-AAC5-840D07142DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C7F6707E-1C8C-49EC-AAC5-840D07142DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{541A2958-ABC4-4485-8A20-DDFFD80BAC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{541A2958-ABC4-4485-8A20-DDFFD80BAC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541A2958-ABC4-4485-8A20-DDFFD80BAC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -171,6 +180,10 @@ Global
 		{8904EE5D-B603-4BA2-92FD-B236CD2A58F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8904EE5D-B603-4BA2-92FD-B236CD2A58F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8904EE5D-B603-4BA2-92FD-B236CD2A58F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,7 +194,6 @@ Global
 		{32C0E74F-65FF-4CD0-9AF1-A915109AF088} = {D6FFB660-2A29-452D-B704-A5783DB80607}
 		{9CCC96A4-22A6-46AF-8885-4B831DDA0C71} = {063E01A2-05BD-4926-AF3C-C9B11985A1B0}
 		{8A1BED00-ACD7-43AC-8669-B83AD5106CEF} = {4516E49D-DC11-4716-A152-2FBEE3DA476E}
-		{C7F6707E-1C8C-49EC-AAC5-840D07142DE7} = {4516E49D-DC11-4716-A152-2FBEE3DA476E}
 		{541A2958-ABC4-4485-8A20-DDFFD80BAC74} = {3327DE91-555F-4F18-8D44-F9856CCEFA03}
 		{BB91FAAC-FB7D-4C47-8C9E-2CFA844EB119} = {3327DE91-555F-4F18-8D44-F9856CCEFA03}
 		{DAB6ADE6-A359-4648-8FFD-9CFF2C26ED10} = {3327DE91-555F-4F18-8D44-F9856CCEFA03}
@@ -197,6 +209,7 @@ Global
 		{7F74C329-0748-472E-832D-D263C0D7AC7B} = {1F6AED49-8FBA-4970-9D0C-A0B07A86C15C}
 		{605AE806-2D04-4A25-AB18-44C6B4D84E2F} = {063E01A2-05BD-4926-AF3C-C9B11985A1B0}
 		{8904EE5D-B603-4BA2-92FD-B236CD2A58F6} = {742074B7-55BC-4270-910E-C0D372F55ADB}
+		{FF6B06DD-4B66-418E-9F8C-F96F00CD29DE} = {4516E49D-DC11-4716-A152-2FBEE3DA476E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C77D596F-1752-43EB-8984-FB53D4DAF102}
