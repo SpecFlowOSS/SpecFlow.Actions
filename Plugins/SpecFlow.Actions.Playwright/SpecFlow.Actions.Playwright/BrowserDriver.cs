@@ -11,26 +11,37 @@ namespace SpecFlow.Actions.Playwright
     {
         private readonly IPlaywrightConfiguration _playwrightConfiguration;
         private readonly IDriverInitialiser _driverInitialiser;
-        protected readonly AsyncLazy<IBrowser> _currentBrowserLazy;
+        protected readonly AsyncLazy<(IPlaywright playwright, IBrowser browser)> _currentBrowserLazy;
         protected bool _isDisposed;
 
         public BrowserDriver(IPlaywrightConfiguration playwrightConfiguration, IDriverInitialiser driverInitialiser)
         {
             _playwrightConfiguration = playwrightConfiguration;
             _driverInitialiser = driverInitialiser;
-            _currentBrowserLazy = new AsyncLazy<IBrowser>(CreatePlaywrightAsync);
+            _currentBrowserLazy = new AsyncLazy<(IPlaywright, IBrowser)>(CreatePlaywrightAsync);
         }
 
         /// <summary>
         /// The current Playwright instance
         /// </summary>
-        public Task<IBrowser> Current => _currentBrowserLazy.Value;
+        public Task<(IPlaywright Playwright, IBrowser Browser)> Current => _currentBrowserLazy.Value;
+
+        public async Task<IPlaywright> GetPlaywright()
+        {
+            return (await Current).Playwright;
+        }
+
+        public async Task<IBrowser> GetBrowser()
+        {
+            return (await Current).Browser;
+        }
+
 
         /// <summary>
         /// Creates a new instance of Playwright (opens a browser)
         /// </summary>
         /// <returns></returns>
-        private async Task<IBrowser> CreatePlaywrightAsync()
+        private async Task<(IPlaywright,IBrowser)> CreatePlaywrightAsync()
         {
             return _playwrightConfiguration.Browser switch
             {
@@ -57,8 +68,8 @@ namespace SpecFlow.Actions.Playwright
             {
                 Task.Run(async delegate
                 {
-                    await (await Current).CloseAsync();
-                    await (await Current).DisposeAsync();
+                    await (await Current).Browser.CloseAsync();
+                    await (await Current).Browser.DisposeAsync();
                 });
             }
 
