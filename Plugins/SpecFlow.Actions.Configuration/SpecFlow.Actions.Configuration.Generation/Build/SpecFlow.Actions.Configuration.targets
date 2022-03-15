@@ -25,12 +25,14 @@
 	</Target>
 
 	<PropertyGroup>
-		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_TargetGeneratorPluginFramework>
-		<_TargetGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_TargetGeneratorPluginFramework>
-		<_TargetGeneratorPluginPath>$(MSBuildThisFileDirectory)\$(_TargetGeneratorPluginFramework)\SpecFlow.Actions.Configuration.Generation.SpecFlowPlugin.dll</_TargetGeneratorPluginPath>
+		<_SpecFlowActionsConfigurationGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_SpecFlowActionsConfigurationGeneratorPluginFramework>
+		<_SpecFlowActionsConfigurationGeneratorPluginFramework Condition=" '$(MSBuildRuntimeType)' != 'Core'">net471</_SpecFlowActionsConfigurationGeneratorPluginFramework>
+		<_SpecFlowActionsConfigurationGeneratorPluginPath>$(MSBuildThisFileDirectory)\$(_SpecFlowActionsConfigurationGeneratorPluginFramework)\SpecFlow.Actions.Configuration.Generation.SpecFlowPlugin.dll</_SpecFlowActionsConfigurationGeneratorPluginPath>
 
-		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' ">netcoreapp2.1</_SeleniumRuntimePluginFramework>
-		<_SeleniumRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">net471</_SeleniumRuntimePluginFramework>
-		<_SeleniumRuntimePluginPath>$(MSBuildThisFileDirectory)\..\lib\$(_SeleniumRuntimePluginFramework)\SpecFlow.Actions.Configuration.SpecFlowPlugin.dll</_SeleniumRuntimePluginPath>
-	</PropertyGroup>
+		<_SpecFlowActionsConfigurationRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' ">netcoreapp2.1</_SpecFlowActionsConfigurationRuntimePluginFramework>
+		<_SpecFlowActionsConfigurationRuntimePluginFramework Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">net471</_SpecFlowActionsConfigurationRuntimePluginFramework>
+		<_SpecFlowActionsConfigurationRuntimePluginPath>$(MSBuildThisFileDirectory)\..\lib\$(_SpecFlowActionsConfigurationRuntimePluginFramework)\SpecFlow.Actions.Configuration.SpecFlowPlugin.dll</_SpecFlowActionsConfigurationRuntimePluginPath>
+	
+
+</PropertyGroup>
 </Project>
