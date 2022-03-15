@@ -114,7 +114,7 @@ namespace SpecFlow.Actions.Configuration.Generation
                 _testGeneratorProvider.SetTestClassCategories(generationContext, unprocessedTags);
             }
 
-            var codeMemberField = new CodeMemberField(typeof(string[]), "_featureTags");
+            var codeMemberField = new CodeMemberField(typeof(string[]), "featureTags");
             codeMemberField.InitExpression = _scenarioPartHelper.GetStringArrayExpression(generationContext.Feature.Tags);
             generationContext.TestClass.Members.Add(codeMemberField);
         }

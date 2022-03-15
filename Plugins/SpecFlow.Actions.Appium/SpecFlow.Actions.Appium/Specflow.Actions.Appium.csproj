@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Appium.WebDriver" Version="4.3.1" />
-	  <PackageReference Include="SpecFlow" Version="3.9.22" />
+	  <PackageReference Include="SpecFlow" Version="3.9.58" />
 	</ItemGroup>
 
 	<ItemGroup>
