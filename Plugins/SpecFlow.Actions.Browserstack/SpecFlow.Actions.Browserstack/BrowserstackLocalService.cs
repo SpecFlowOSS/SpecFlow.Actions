@@ -11,7 +11,7 @@ namespace SpecFlow.Actions.Browserstack
 
         private static Lazy<Local>? _browserstackLocal;
 
-        private BrowserstackLocalService()
+        static BrowserstackLocalService()
         {
             _browserstackLocal = new Lazy<Local>(() => new Local());
         }
@@ -27,8 +27,12 @@ namespace SpecFlow.Actions.Browserstack
             {
                 if (!_isRunning)
                 {
-                    _browserstackLocal?.Value.start(capabilities);
-                    _isRunning = true;
+                    if (_browserstackLocal is not null)
+                    {
+                        var browserStackLocal = _browserstackLocal.Value;
+                        browserStackLocal.start(capabilities);
+                        _isRunning = true;
+                    }
                 }
             }
         }
