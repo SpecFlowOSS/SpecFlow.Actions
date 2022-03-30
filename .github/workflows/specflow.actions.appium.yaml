@@ -29,7 +29,7 @@ jobs:
       # Authenticates packages to push to GPR
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.x' 
+          dotnet-version: '6.0.x' 
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.Appium/SpecFlow.Actions.Appium.sln
@@ -61,7 +61,7 @@ jobs:
           name: NuGet-Package
       - uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: '6.0.x'
       - name: Publish the package to nuget.org
         shell: pwsh
         env:

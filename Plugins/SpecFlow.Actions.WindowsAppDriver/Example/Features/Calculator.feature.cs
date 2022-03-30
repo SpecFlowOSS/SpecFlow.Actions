@@ -19,23 +19,25 @@ namespace Example.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Calculator", Description=@"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
-Simple calculator for adding **two** numbers
-
-Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.feature)
-***Further read***: **[Learn more about how to generate Living Documentation](https://docs.specflow.org/projects/specflow-livingdoc/en/latest/LivingDocGenerator/Generating-Documentation.html)**", SourceFile="Features\\Calculator.feature", SourceLine=0)]
-    public partial class CalculatorFeature
+    public partial class CalculatorFeature : object, Xunit.IClassFixture<CalculatorFeature.FixtureData>, System.IDisposable
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private static string[] featureTags = ((string[])(null));
+        
+        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Calculator.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
-        public virtual void FeatureSetup()
+        public CalculatorFeature(CalculatorFeature.FixtureData fixtureData, Example_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        {
+            this._testOutputHelper = testOutputHelper;
+            this.TestInitialize();
+        }
+        
+        public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Calculator", @"![Calculator](https://specflow.org/wp-content/uploads/2020/09/calculator.png)
@@ -46,8 +48,7 @@ Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.fea
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
-        public virtual void FeatureTearDown()
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -57,7 +58,6 @@ Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.fea
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
         public void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -66,6 +66,7 @@ Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.fea
         public void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public void ScenarioStart()
@@ -78,8 +79,15 @@ Link to a feature: [Calculator](SpecFlowCalculator.Specs/Features/Calculator.fea
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Add two numbers", new string[] {
-                "Add"}, SourceLine=8)]
+        void System.IDisposable.Dispose()
+        {
+            this.TestTearDown();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
+        [Xunit.TraitAttribute("Description", "Add two numbers")]
+        [Xunit.TraitAttribute("Category", "Add")]
         public void AddTwoNumbers()
         {
             string[] tagsOfScenario = new string[] {
@@ -112,8 +120,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Subtract two numbers", new string[] {
-                "Subtract"}, SourceLine=15)]
+        [Xunit.SkippableFactAttribute(DisplayName="Subtract two numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
+        [Xunit.TraitAttribute("Description", "Subtract two numbers")]
+        [Xunit.TraitAttribute("Category", "Subtract")]
         public void SubtractTwoNumbers()
         {
             string[] tagsOfScenario = new string[] {
@@ -146,8 +156,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Divide two numbers", new string[] {
-                "Divide"}, SourceLine=22)]
+        [Xunit.SkippableFactAttribute(DisplayName="Divide two numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
+        [Xunit.TraitAttribute("Description", "Divide two numbers")]
+        [Xunit.TraitAttribute("Category", "Divide")]
         public void DivideTwoNumbers()
         {
             string[] tagsOfScenario = new string[] {
@@ -180,8 +192,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Divide by 0 returns 0", new string[] {
-                "Divide"}, SourceLine=29)]
+        [Xunit.SkippableFactAttribute(DisplayName="Divide by 0 returns 0")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
+        [Xunit.TraitAttribute("Description", "Divide by 0 returns 0")]
+        [Xunit.TraitAttribute("Category", "Divide")]
         public void DivideBy0Returns0()
         {
             string[] tagsOfScenario = new string[] {
@@ -214,8 +228,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Multiply two numbers", new string[] {
-                "Multiply"}, SourceLine=36)]
+        [Xunit.SkippableFactAttribute(DisplayName="Multiply two numbers")]
+        [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
+        [Xunit.TraitAttribute("Description", "Multiply two numbers")]
+        [Xunit.TraitAttribute("Category", "Multiply")]
         public void MultiplyTwoNumbers()
         {
             string[] tagsOfScenario = new string[] {
@@ -246,6 +262,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
+        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        public class FixtureData : System.IDisposable
+        {
+            
+            public FixtureData()
+            {
+                CalculatorFeature.FeatureSetup();
+            }
+            
+            void System.IDisposable.Dispose()
+            {
+                CalculatorFeature.FeatureTearDown();
+            }
         }
     }
 }
