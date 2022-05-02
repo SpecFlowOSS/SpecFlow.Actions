@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
+		<AssemblyName>SpecFlow.Actions.LambdaTest.SpecFlowPlugin</AssemblyName>
+		<PackageId>SpecFlow.Actions.LambdaTest</PackageId>
+		<Product>SpecFlow.Actions.LambdaTest</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium\SpecFlow.Actions.Selenium.csproj" />
+	</ItemGroup>
+
+</Project>
