@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Edge;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
+using SpecFlow.Actions.Selenium.Hoster;
 
 namespace SpecFlow.Actions.Browserstack.DriverInitialisers;
 
@@ -10,20 +11,13 @@ internal class BrowserstackEdgeDriverInitialiser : EdgeDriverInitialiser
     private readonly BrowserstackDriverInitialiser _browserstackDriverInitialiser;
 
     public BrowserstackEdgeDriverInitialiser(BrowserstackDriverInitialiser browserstackDriverInitialiser,
-        ISeleniumConfiguration seleniumConfiguration) : base(seleniumConfiguration)
+        ISeleniumConfiguration seleniumConfiguration, ICredentialProvider credentialProvider) : base(seleniumConfiguration, credentialProvider)
     {
         _browserstackDriverInitialiser = browserstackDriverInitialiser;
     }
 
-    protected override IWebDriver GetDriver(EdgeOptions options)
+    protected override IWebDriver CreateWebDriver(EdgeOptions options)
     {
         return _browserstackDriverInitialiser.GetWebDriver(options);
-    }
-
-    protected override EdgeOptions GetEdgeOptions()
-    {
-        var options = base.GetEdgeOptions();
-
-        return _browserstackDriverInitialiser.AddBrowserstackOptions(options);
     }
 }

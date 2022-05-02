@@ -1,48 +1,20 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
-using System.Linq;
 
 namespace SpecFlow.Actions.Selenium.DriverInitialisers
 {
-    public class ChromeDriverInitialiser : IDriverInitialiser
+    public class ChromeDriverInitialiser : DriverInitialiser<ChromeOptions>
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
         private static readonly Lazy<string?> ChromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
 
-        public ChromeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration)
+        public ChromeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ICredentialProvider credentialProvider) : base(seleniumConfiguration, credentialProvider)
         {
-            _seleniumConfiguration = seleniumConfiguration;
         }
 
-        public IWebDriver Initialise()
-        {
-            var options = GetChromeOptions();
-            return GetWebDriver(options);
-        }
-
-        protected virtual ChromeOptions GetChromeOptions()
-        {
-            var options = new ChromeOptions();
-
-            if (_seleniumConfiguration.Capabilities.Any())
-            {
-                foreach (var capability in _seleniumConfiguration.Capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
-                }
-            }
-
-            if (_seleniumConfiguration.Arguments.Any())
-            {
-                options.AddArguments(_seleniumConfiguration.Arguments);
-            }
-
-            return options;
-        }
-
-        protected virtual IWebDriver GetWebDriver(ChromeOptions options)
+        protected override IWebDriver CreateWebDriver(ChromeOptions options)
         {
             return string.IsNullOrWhiteSpace(ChromeWebDriverFilePath.Value)
                 ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))

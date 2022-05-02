@@ -5,6 +5,7 @@ using SpecFlow.Actions.LambdaTest.DriverInitialisers;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -54,6 +55,8 @@ namespace SpecFlow.Actions.LambdaTest
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<LambdaTestConfiguration, ISeleniumConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<LambdaTestCredentialProvider, ICredentialProvider>();
+
             RegisterInitialisers(e.ObjectContainer);
         }
 
@@ -71,13 +74,14 @@ namespace SpecFlow.Actions.LambdaTest
 
                 var scenarioContext = container.Resolve<ScenarioContext>();
 
+                var credentialProvider = container.Resolve<ICredentialProvider>();
                 return config.Browser switch
                 {
-                    Browser.Chrome => new LambdaTestChromeDriverInitialiser(config, scenarioContext),
-                    Browser.Firefox => new LambdaTestFirefoxDriverInitialiser(config, scenarioContext),
-                    Browser.Edge => new LambdaTestEdgeDriverInitialiser(config,scenarioContext),
-                    Browser.InternetExplorer => new LambdaTestInternetExplorerDriverInitialiser(config, scenarioContext),
-                    Browser.Safari => new LambdaTestSafariDriverInitialiser(config, scenarioContext),
+                    Browser.Chrome => new LambdaTestChromeDriverInitialiser(config, scenarioContext, credentialProvider),
+                    Browser.Firefox => new LambdaTestFirefoxDriverInitialiser(config, scenarioContext, credentialProvider),
+                    Browser.Edge => new LambdaTestEdgeDriverInitialiser(config,scenarioContext, credentialProvider),
+                    Browser.InternetExplorer => new LambdaTestInternetExplorerDriverInitialiser(config, scenarioContext, credentialProvider),
+                    Browser.Safari => new LambdaTestSafariDriverInitialiser(config, scenarioContext, credentialProvider),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
             });

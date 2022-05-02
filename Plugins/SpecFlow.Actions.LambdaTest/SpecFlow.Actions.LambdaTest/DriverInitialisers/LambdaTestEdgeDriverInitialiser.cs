@@ -3,62 +3,48 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Remote;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
 using System.Collections;
 using TechTalk.SpecFlow;
 
-namespace SpecFlow.Actions.LambdaTest.DriverInitialisers
+namespace SpecFlow.Actions.LambdaTest.DriverInitialisers;
+
+internal class LambdaTestEdgeDriverInitialiser : EdgeDriverInitialiser
 {
-    internal class LambdaTestEdgeDriverInitialiser : EdgeDriverInitialiser
+    private readonly Uri _remoteServer;
+    private readonly ScenarioContext _scenarioContext;
+
+    public LambdaTestEdgeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration,
+        ScenarioContext scenarioContext, ICredentialProvider credentialProvider) : base(seleniumConfiguration,
+        credentialProvider)
     {
-        private readonly ScenarioContext _scenarioContext;
+        _scenarioContext = scenarioContext;
+        _remoteServer = new Uri("http://" + credentialProvider.Username + ":" + credentialProvider.AccessKey +
+                                "@hub.lambdatest.com" + "/wd/hub/");
+    }
 
-        private static Lazy<string?> Username => new(() => Environment.GetEnvironmentVariable("LT_USERNAME"));
-        private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("LT_ACCESS_KEY"));
 
-        private readonly Uri _remoteServer;
+    protected override IWebDriver CreateWebDriver(EdgeOptions options)
+    {
+        options.AddAdditionalCapability("name", GetScenarioTitle());
+        return new RemoteWebDriver(_remoteServer, options);
+    }
 
-        public LambdaTestEdgeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
+    private string GetScenarioTitle()
+    {
+        var testName = _scenarioContext.ScenarioInfo.Title;
+
+        if (_scenarioContext.ScenarioInfo.Arguments.Count > 0)
         {
-            _scenarioContext = scenarioContext;
-            _remoteServer = new Uri("http://" + Username + ":" + AccessKey + "@hub.lambdatest.com" + "/wd/hub/");
-        }        
-        
-        protected override EdgeOptions GetEdgeOptions()
-        {
-            var options = base.GetEdgeOptions();
-
-            if (Username.Value is not null && AccessKey.Value is not null)
-            {
-                options.AddAdditionalCapability("username", Username.Value);
-                options.AddAdditionalCapability("accesskey", AccessKey.Value);
-            }
-
-            options.AddAdditionalCapability("name", GetScenarioTitle());
-
-            return options;
+            testName += ": ";
         }
 
-        protected override IWebDriver GetWebDriver(EdgeOptions options)
+        foreach (DictionaryEntry argument in _scenarioContext.ScenarioInfo.Arguments)
         {
-            return new RemoteWebDriver(_remoteServer, options);
+            testName += argument.Key + ":" + argument.Value + "; ";
         }
 
-        private string GetScenarioTitle()
-        {
-            var testName = _scenarioContext.ScenarioInfo.Title;
-
-            if (_scenarioContext.ScenarioInfo.Arguments.Count > 0)
-            {
-                testName += ": ";
-            }
-
-            foreach (DictionaryEntry argument in _scenarioContext.ScenarioInfo.Arguments)
-            {
-                testName += argument.Key + ":" + argument.Value + "; ";
-            }
-
-            return testName.Trim();
-        }
+        return testName.Trim();
     }
 }

@@ -1,55 +1,29 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
-using System.Linq;
 
-namespace SpecFlow.Actions.Selenium.DriverInitialisers
+namespace SpecFlow.Actions.Selenium.DriverInitialisers;
+
+public class InternetExplorerDriverInitialiser : DriverInitialiser<InternetExplorerOptions>
 {
-    public class InternetExplorerDriverInitialiser : IDriverInitialiser
+    private static readonly Lazy<string?> InternetExplorerWebDriverFilePath =
+        new Lazy<string?>(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
+
+    public InternetExplorerDriverInitialiser(ISeleniumConfiguration seleniumConfiguration,
+        ICredentialProvider credentialProvider) : base(seleniumConfiguration, credentialProvider)
     {
-        private readonly ISeleniumConfiguration _seleniumConfiguration;
-        private static readonly Lazy<string?> InternetExplorerWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("IE_WEBDRIVER_FILE_PATH"));
+    }
 
-        public InternetExplorerDriverInitialiser(ISeleniumConfiguration seleniumConfiguration)
-        {
-            _seleniumConfiguration = seleniumConfiguration;
-        }
 
-        public IWebDriver Initialise()
-        {
-            var options = GetInternetExplorerOptions();
-
-            return GetWebDriver(options);
-        }
-
-        protected virtual InternetExplorerOptions GetInternetExplorerOptions()
-        {
-            var options = new InternetExplorerOptions();
-
-            if (_seleniumConfiguration.Capabilities.Any())
-            {
-                foreach (var capability in _seleniumConfiguration.Capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value);
-                }
-            }
-
-            if (_seleniumConfiguration.Arguments.Any())
-            {
-                options.AddAdditionalCapability("args", _seleniumConfiguration.Arguments.ToList());
-            }
-
-            return options;
-        }
-
-        protected virtual IWebDriver GetWebDriver(InternetExplorerOptions options)
-        {
-            return string.IsNullOrWhiteSpace(InternetExplorerWebDriverFilePath.Value)
-                ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options,
-                    TimeSpan.FromSeconds(120))
-                : new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(InternetExplorerWebDriverFilePath.Value), options,
-                    TimeSpan.FromSeconds(120));
-        }
+    protected override IWebDriver CreateWebDriver(InternetExplorerOptions options)
+    {
+        return string.IsNullOrWhiteSpace(InternetExplorerWebDriverFilePath.Value)
+            ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options,
+                TimeSpan.FromSeconds(120))
+            : new InternetExplorerDriver(
+                InternetExplorerDriverService.CreateDefaultService(InternetExplorerWebDriverFilePath.Value), options,
+                TimeSpan.FromSeconds(120));
     }
 }

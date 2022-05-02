@@ -3,6 +3,7 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
 using System.Collections;
 using TechTalk.SpecFlow;
@@ -14,33 +15,16 @@ namespace SpecFlow.Actions.LambdaTest.DriverInitialisers
         private readonly ScenarioContext _scenarioContext;
         private readonly Uri _remoteServer;
 
-        private static Lazy<string?> Username => new(() => Environment.GetEnvironmentVariable("LT_USERNAME"));
-        private static Lazy<string?> AccessKey => new(() => Environment.GetEnvironmentVariable("LT_ACCESS_KEY"));
-
-        public LambdaTestSafariDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext) : base(seleniumConfiguration)
+        public LambdaTestSafariDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ScenarioContext scenarioContext, ICredentialProvider credentialProvider) : base(seleniumConfiguration, credentialProvider)
         {
             _scenarioContext = scenarioContext;
-            _remoteServer = new Uri("http://" + Username + ":" + AccessKey + "@hub.lambdatest.com" + "/wd/hub/");
+            _remoteServer = new Uri("http://" + credentialProvider.Username + ":" + credentialProvider.AccessKey + "@hub.lambdatest.com" + "/wd/hub/");
         }
 
-        protected override IWebDriver GetDriver(SafariOptions options)
+        protected override IWebDriver CreateWebDriver(SafariOptions options)
         {
-            return new RemoteWebDriver(_remoteServer, options);
-        }
-
-        protected override SafariOptions GetSafariOptions()
-        {
-            var options = base.GetSafariOptions();
-
-            if (Username.Value is not null && AccessKey.Value is not null)
-            {
-                options.AddAdditionalCapability("username", Username.Value);
-                options.AddAdditionalCapability("accesskey", AccessKey.Value);
-            }
-
             options.AddAdditionalCapability("name", GetScenarioTitle());
-
-            return options;
+            return new RemoteWebDriver(_remoteServer, options);
         }
 
         private string GetScenarioTitle()

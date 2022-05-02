@@ -1,8 +1,7 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.DriverInitialisers;
 using System;
 using System.Collections;
 using TechTalk.SpecFlow;
@@ -22,12 +21,6 @@ public class BrowserstackDriverInitialiser
         _scenarioContext = scenarioContext;
         _browserstackRemoteServer = new Uri("https://hub-cloud.browserstack.com/wd/hub/");
     }
-
-    private static Lazy<string?> BrowserstackUsername =>
-        new Lazy<string?>(() => Environment.GetEnvironmentVariable("BROWSERSTACK_USERNAME"));
-
-    private static Lazy<string?> AccessKey =>
-        new Lazy<string?>(() => Environment.GetEnvironmentVariable("BROWSERSTACK_ACCESS_KEY"));
 
 
     private string GetScenarioTitle()
@@ -50,35 +43,8 @@ public class BrowserstackDriverInitialiser
 
     public IWebDriver GetWebDriver(DriverOptions options)
     {
+        options.TryToAddGlobalCapability("name", GetScenarioTitle());
+
         return new RemoteWebDriver(_browserstackRemoteServer, options);
-    }
-
-    public T AddBrowserstackOptions<T>(T options) where T : DriverOptions
-    {
-        if (BrowserstackUsername.Value is not null && AccessKey.Value is not null)
-        {
-            TryToAddGlobalCapability(options, "browserstack.user", BrowserstackUsername.Value);
-            TryToAddGlobalCapability(options, "browserstack.key", AccessKey.Value);
-        }
-
-        TryToAddGlobalCapability(options, "name", GetScenarioTitle());
-
-        return options;
-    }
-
-    private void TryToAddGlobalCapability<T>(T options, string name, string value) where T : DriverOptions
-    {
-        switch (options)
-        {
-            case FirefoxOptions firefoxOptions:
-                firefoxOptions.AddAdditionalCapability(name, value, true);
-                break;
-            case ChromeOptions chromeOptions:
-                chromeOptions.AddAdditionalCapability(name, value, true);
-                break;
-            default:
-                options.AddAdditionalCapability(name, value);
-                break;
-        }
     }
 }
