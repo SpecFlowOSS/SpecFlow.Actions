@@ -2,10 +2,8 @@
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
-    "browserstack": {
-      "localcapabilities": {
-        "forcelocal": "true"
-      }
+    "capabilities": {
+      
     }
   }
 }

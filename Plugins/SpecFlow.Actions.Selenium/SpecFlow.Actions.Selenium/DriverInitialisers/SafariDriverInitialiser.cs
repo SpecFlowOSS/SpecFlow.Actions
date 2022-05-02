@@ -20,10 +20,10 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         {
             var options = GetSafariOptions();
 
-            return GetDriver(options);
+            return GetWebDriver(options);
         }
 
-        protected virtual IWebDriver GetDriver(SafariOptions options)
+        protected virtual IWebDriver GetWebDriver(SafariOptions options)
         {
             return string.IsNullOrWhiteSpace(SafariWebDriverFilePath.Value)
                 ? new SafariDriver(SafariDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))

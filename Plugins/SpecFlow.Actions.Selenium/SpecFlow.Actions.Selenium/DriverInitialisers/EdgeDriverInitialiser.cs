@@ -20,7 +20,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         {
             var options = GetEdgeOptions();
 
-            return GetWebDriver(options);
+            return GetDriver(options);
         }
 
         protected virtual EdgeOptions GetEdgeOptions()
@@ -43,7 +43,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
             return options;
         }
 
-        protected virtual IWebDriver GetWebDriver(EdgeOptions options)
+        protected virtual IWebDriver GetDriver(EdgeOptions options)
         {
             return string.IsNullOrWhiteSpace(EdgeWebDriverFilePath.Value)
                 ? new EdgeDriver(EdgeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))

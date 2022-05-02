@@ -20,7 +20,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         {
             var options = GetInternetExplorerOptions();
 
-            return GetDriver(options);
+            return GetWebDriver(options);
         }
 
         protected virtual InternetExplorerOptions GetInternetExplorerOptions()
@@ -43,7 +43,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
             return options;
         }
 
-        protected virtual IWebDriver GetDriver(InternetExplorerOptions options)
+        protected virtual IWebDriver GetWebDriver(InternetExplorerOptions options)
         {
             return string.IsNullOrWhiteSpace(InternetExplorerWebDriverFilePath.Value)
                 ? new InternetExplorerDriver(InternetExplorerDriverService.CreateDefaultService(), options,

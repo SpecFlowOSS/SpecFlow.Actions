@@ -71,15 +71,14 @@ namespace Specflow.Actions.Browserstack
                         ((BrowserstackConfiguration)config).BrowserstackLocalCapabilities.ToList());
                 }
 
-                var scenarioContext = container.Resolve<ScenarioContext>();
-
+                var browserstackDriverInitialiser = container.Resolve<BrowserstackDriverInitialiser>();
                 return config.Browser switch
                 {
-                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(config, scenarioContext),
-                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(config, scenarioContext),
-                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(config,scenarioContext),
-                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(config, scenarioContext),
-                    Browser.Safari => new BrowserstackSafariDriverInitialiser(config, scenarioContext),
+                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(browserstackDriverInitialiser, config),
+                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(browserstackDriverInitialiser, config),
+                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(browserstackDriverInitialiser, config),
+                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(browserstackDriverInitialiser, config),
+                    Browser.Safari => new BrowserstackSafariDriverInitialiser(browserstackDriverInitialiser, config),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
             });

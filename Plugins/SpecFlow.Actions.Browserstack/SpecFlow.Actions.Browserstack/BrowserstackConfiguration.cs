@@ -16,6 +16,17 @@ namespace SpecFlow.Actions.Browserstack
         public Dictionary<string, string> BrowserstackLocalCapabilities =>
             _specFlowActionsConfiguration.GetDictionary("selenium:browserstack:localcapabilities");
 
-        public bool BrowserstackLocalRequired => base.Capabilities["browserstack.local"] == "true";
+        public bool BrowserstackLocalRequired
+        {
+            get
+            {
+                if (base.Capabilities.ContainsKey("browserstack.local"))
+                {
+                    return base.Capabilities["browserstack.local"] == "true";
+                }
+
+                return false;
+            }
+        }
     }
 }

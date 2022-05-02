@@ -19,7 +19,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         public IWebDriver Initialise()
         {
             var options = GetChromeOptions();
-            return GetDriver(options);
+            return GetWebDriver(options);
         }
 
         protected virtual ChromeOptions GetChromeOptions()
@@ -42,7 +42,7 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
             return options;
         }
 
-        protected virtual IWebDriver GetDriver(ChromeOptions options)
+        protected virtual IWebDriver GetWebDriver(ChromeOptions options)
         {
             return string.IsNullOrWhiteSpace(ChromeWebDriverFilePath.Value)
                 ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))

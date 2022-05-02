@@ -38,6 +38,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="specflow.actions.windows11.firefox.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="specflow.actions.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
