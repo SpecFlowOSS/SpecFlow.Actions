@@ -15,8 +15,8 @@ public class LambdaTestCredentialProvider : ICredentialProvider
         _accessKey = new Lazy<string?>(() => Environment.GetEnvironmentVariable("LT_ACCESS_KEY"));
     }
 
-    public string? Username { get; }
+    public string? Username => _username.Value;
     public string? UsernameArgumentName => "username";
-    public string? AccessKey { get; }
+    public string? AccessKey => _accessKey.Value;
     public string? AccessKeyArgumentName => "accesskey";
 }

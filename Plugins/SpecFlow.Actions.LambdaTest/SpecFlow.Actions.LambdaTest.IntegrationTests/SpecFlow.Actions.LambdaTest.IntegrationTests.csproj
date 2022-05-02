@@ -3,7 +3,7 @@
 	<Import Project="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\Build\SpecFlow.Actions.Configuration.props" />
 
 	<PropertyGroup>
-		<TargetFrameworks>net5.0;net471</TargetFrameworks>
+		<TargetFrameworks>net6.0;net471</TargetFrameworks>
 	</PropertyGroup>
 
 	<ItemGroup>
