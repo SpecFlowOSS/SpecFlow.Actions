@@ -65,23 +65,16 @@ namespace SpecFlow.Actions.LambdaTest
             objectContainer.RegisterFactoryAs<IDriverInitialiser>(container =>
             {
                 var config = container.Resolve<ISeleniumConfiguration>();
-
-                if (((LambdaTestConfiguration)config).BrowserstackLocalRequired)
-                {
-                    LambdaTestLocalService.Start(
-                        ((LambdaTestConfiguration)config).BrowserstackLocalCapabilities.ToList());
-                }
-
-                var scenarioContext = container.Resolve<ScenarioContext>();
-
+                
                 var credentialProvider = container.Resolve<ICredentialProvider>();
+                var lambdaTestDriverInitialiser = container.Resolve<LambdaTestDriverInitialiser>();
                 return config.Browser switch
                 {
-                    Browser.Chrome => new LambdaTestChromeDriverInitialiser(config, scenarioContext, credentialProvider),
-                    Browser.Firefox => new LambdaTestFirefoxDriverInitialiser(config, scenarioContext, credentialProvider),
-                    Browser.Edge => new LambdaTestEdgeDriverInitialiser(config,scenarioContext, credentialProvider),
-                    Browser.InternetExplorer => new LambdaTestInternetExplorerDriverInitialiser(config, scenarioContext, credentialProvider),
-                    Browser.Safari => new LambdaTestSafariDriverInitialiser(config, scenarioContext, credentialProvider),
+                    Browser.Chrome => new LambdaTestChromeDriverInitialiser(lambdaTestDriverInitialiser, config, credentialProvider),
+                    Browser.Firefox => new LambdaTestFirefoxDriverInitialiser(lambdaTestDriverInitialiser, config, credentialProvider),
+                    Browser.Edge => new LambdaTestEdgeDriverInitialiser(lambdaTestDriverInitialiser, config, credentialProvider),
+                    Browser.InternetExplorer => new LambdaTestInternetExplorerDriverInitialiser(lambdaTestDriverInitialiser, config, credentialProvider),
+                    Browser.Safari => new LambdaTestSafariDriverInitialiser(lambdaTestDriverInitialiser, config, credentialProvider),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
             });

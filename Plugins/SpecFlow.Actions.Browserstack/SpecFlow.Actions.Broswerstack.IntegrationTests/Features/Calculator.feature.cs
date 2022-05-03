@@ -21,7 +21,7 @@ namespace Specflow.Actions.Browserstack.IntegrationTests.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Xunit.TraitAttribute("Category", "Calculator")]
-    public partial class CalculatorFeature_osxmoterey_safari : object, Xunit.IClassFixture<CalculatorFeature_osxmoterey_safari.FixtureData>, System.IDisposable
+    public partial class CalculatorFeature_osxmonterey_safari : object, Xunit.IClassFixture<CalculatorFeature_osxmonterey_safari.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -34,7 +34,7 @@ namespace Specflow.Actions.Browserstack.IntegrationTests.Features
 #line 1 "Calculator.feature"
 #line hidden
         
-        public CalculatorFeature_osxmoterey_safari(CalculatorFeature_osxmoterey_safari.FixtureData fixtureData, Specflow_Actions_Browserstack_IntegrationTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public CalculatorFeature_osxmonterey_safari(CalculatorFeature_osxmonterey_safari.FixtureData fixtureData, Specflow_Actions_Browserstack_IntegrationTests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -70,7 +70,7 @@ Link to a feature: [Calculator](CalculatorSelenium.Specs/Features/Calculator.fea
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-			testRunner.ScenarioContext["__SpecFlowActionsConfigurationTarget"] = "osxmoterey.safari";
+			testRunner.ScenarioContext["__SpecFlowActionsConfigurationTarget"] = "osxmonterey.safari";
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
@@ -130,12 +130,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                CalculatorFeature_osxmoterey_safari.FeatureSetup();
+                CalculatorFeature_osxmonterey_safari.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                CalculatorFeature_osxmoterey_safari.FeatureTearDown();
+                CalculatorFeature_osxmonterey_safari.FeatureTearDown();
             }
         }
     }

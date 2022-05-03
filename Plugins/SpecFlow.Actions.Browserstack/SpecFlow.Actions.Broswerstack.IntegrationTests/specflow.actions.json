@@ -3,7 +3,10 @@
     "defaultTimeout": 60,
     "pollingInterval": 5,
     "capabilities": {
-      
-    }
+    },
+    "browserstack": {
+      "url": "https://hub-cloud.browserstack.com/wd/hub/"
+    } 
+
   }
 }

@@ -16,7 +16,7 @@ public class LambdaTestCredentialProvider : ICredentialProvider
     }
 
     public string? Username => _username.Value;
-    public string? UsernameArgumentName => "username";
+    public string? UsernameArgumentName => "user";
     public string? AccessKey => _accessKey.Value;
-    public string? AccessKeyArgumentName => "accesskey";
+    public string? AccessKeyArgumentName => "accessKey";
 }

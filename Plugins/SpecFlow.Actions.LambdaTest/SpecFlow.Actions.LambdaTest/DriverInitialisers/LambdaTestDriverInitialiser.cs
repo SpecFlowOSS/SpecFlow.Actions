@@ -5,18 +5,18 @@ using System;
 using System.Collections;
 using TechTalk.SpecFlow;
 
-namespace SpecFlow.Actions.Browserstack.DriverInitialisers;
+namespace SpecFlow.Actions.LambdaTest.DriverInitialisers;
 
-public class BrowserstackDriverInitialiser
+public class LambdaTestDriverInitialiser
 {
     private readonly Uri _browserstackRemoteServer;
     private readonly ScenarioContext _scenarioContext;
 
-    public BrowserstackDriverInitialiser(BrowserstackConfiguration browserstackConfiguration,
+    public LambdaTestDriverInitialiser(LambdaTestConfiguration lambdaTestConfiguration,
         ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
-        _browserstackRemoteServer = new Uri(browserstackConfiguration.Url);
+        _browserstackRemoteServer = new Uri(lambdaTestConfiguration.Url);
     }
 
 

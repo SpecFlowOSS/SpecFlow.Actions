@@ -28,5 +28,11 @@ namespace SpecFlow.Actions.Browserstack
                 return false;
             }
         }
+
+
+        public string Url =>
+            _specFlowActionsConfiguration.Get("selenium:browserstack:url",
+                "https://hub-cloud.browserstack.com/wd/hub/");
+
     }
 }

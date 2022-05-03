@@ -44,7 +44,7 @@
 		<None Update="specflow.actions.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Update="specflow.actions.osxmoterey.safari.json">
+		<None Update="specflow.actions.osxmonterey.safari.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="specflow.actions.osxsierra.chrome.json">
