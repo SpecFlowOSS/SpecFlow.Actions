@@ -34,7 +34,6 @@ namespace SpecFlow.Actions.LambdaTest
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterTestRun(object sender, RuntimePluginAfterTestRunEventArgs e)
         {
-            LambdaTestLocalService.Stop();
         }
 
         private void RuntimePluginTestExecutionLifecycleEventEmitter_AfterScenario(object? sender, RuntimePluginAfterScenarioEventArgs e)
