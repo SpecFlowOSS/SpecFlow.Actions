@@ -22,6 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "General", "General", "{DF85
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Browserstack", "Browserstack", "{063E01A2-05BD-4926-AF3C-C9B11985A1B0}"
+	ProjectSection(SolutionItems) = preProject
+		Specflow.Actions.Browserstack\Readme.md = Specflow.Actions.Browserstack\Readme.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Specflow.Actions.Browserstack", "Specflow.Actions.Browserstack\Specflow.Actions.Browserstack\Specflow.Actions.Browserstack.csproj", "{9CCC96A4-22A6-46AF-8885-4B831DDA0C71}"
 EndProject
