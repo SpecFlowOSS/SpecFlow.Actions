@@ -12,6 +12,7 @@ This SpecFlow.Action will help you use Browserstack and Selenium together with S
         - Firefox
         - Edge
         - Internet Explorer
+        - Safari
 - Configuration via `specflow.actions.json`
 
 ## Configuration
@@ -25,22 +26,16 @@ Example:
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
-    "testPlatform": "browserstack",
-    "browser": "edge",
+    "browser": "firefox",
     "capabilities": {
-      "os": "Windows",
-      "os_version": "10",
-      "resolution": "1920x1080",
-      "build": "Examples"
+      "platform": "Windows 10"
+    },
+    "lambdatest": {
+      "url": "http://hub.lambdatest.com/wd/hub/"
     }
   }
 }
 ```
-
-### testPlatform
-Supported values:
-- `local` - default value if no value is provided. Will initialise the webdriver on the local machine.
-- `browserstack` - Will initialise a remote webdriver instance to execute against Browserstack.
 
 ### browser
 Supported values:
@@ -48,6 +43,15 @@ Supported values:
 - `firefox`
 - `internetexplorer`
 - `edge`
+- 'safari'
+
+### LambdaTest specific configuration
+
+There is no need to specify the browser in the Selenium capabilities. It is taken from the browser configuration value.
+
+#### url
+
+Optional. Can be used if you have another hub Url, than the default one
 
 ### Multiple target configurations
 
@@ -60,15 +64,9 @@ Example:
 ``` json
 {
   "selenium": {
-    "defaultTimeout": 60,
-    "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "Safari",
     "capabilities": {
-      "os": "OS X",
-      "os_version": "Monterey",
-      "resolution": "1920x1080",
-      "build": "OS_X_Monterey.Safari"
+      "platform": "macOS Monterey"
     }
   }
 }
@@ -79,15 +77,9 @@ Example:
 ``` json
 {
   "selenium": {
-    "defaultTimeout": 60,
-    "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "Chrome",
     "capabilities": {
-      "os": "Windows",
-      "os_version": "11",
-      "resolution": "1920x1080",
-      "build": "Windows_11.Chrome"
+      "platform": "Windows 11"
     }
   }
 }
@@ -96,7 +88,9 @@ Example:
 For the example shown above, all tests will execute against both Safari and Chrome. The configuration format of these targets follows the same structure as if you provide a single config in ```specflow.actions.json```
 
 ### capabilities
-See https://www.browserstack.com/automate/capabilities
+See https://www.lambdatest.com/capabilities-generator/
+
+Capabilities are Selenium 3 Json Wire protocol capabilities.
 
 ## How to use it
 
