@@ -1,48 +1,20 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SpecFlow.Actions.Selenium.Configuration;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
-using System.Linq;
 
 namespace SpecFlow.Actions.Selenium.DriverInitialisers
 {
-    public class ChromeDriverInitialiser : IDriverInitialiser
+    public class ChromeDriverInitialiser : DriverInitialiser<ChromeOptions>
     {
-        private readonly ISeleniumConfiguration _browserstackConfiguration;
         private static readonly Lazy<string?> ChromeWebDriverFilePath = new(() => Environment.GetEnvironmentVariable("CHROME_WEBDRIVER_FILE_PATH"));
 
-        public ChromeDriverInitialiser(ISeleniumConfiguration browserstackConfiguration)
+        public ChromeDriverInitialiser(ISeleniumConfiguration seleniumConfiguration, ICredentialProvider credentialProvider) : base(seleniumConfiguration, credentialProvider)
         {
-            _browserstackConfiguration = browserstackConfiguration;
         }
 
-        public IWebDriver Initialise()
-        {
-            var options = GetChromeOptions();
-            return GetDriver(options);
-        }
-
-        protected virtual ChromeOptions GetChromeOptions()
-        {
-            var options = new ChromeOptions();
-
-            if (_browserstackConfiguration.Capabilities.Any())
-            {
-                foreach (var capability in _browserstackConfiguration.Capabilities)
-                {
-                    options.AddAdditionalCapability(capability.Key, capability.Value, true);
-                }
-            }
-
-            if (_browserstackConfiguration.Arguments.Any())
-            {
-                options.AddArguments(_browserstackConfiguration.Arguments);
-            }
-
-            return options;
-        }
-
-        protected virtual IWebDriver GetDriver(ChromeOptions options)
+        protected override IWebDriver CreateWebDriver(ChromeOptions options)
         {
             return string.IsNullOrWhiteSpace(ChromeWebDriverFilePath.Value)
                 ? new ChromeDriver(ChromeDriverService.CreateDefaultService(), options, TimeSpan.FromSeconds(120))

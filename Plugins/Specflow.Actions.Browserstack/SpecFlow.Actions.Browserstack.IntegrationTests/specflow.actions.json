@@ -2,10 +2,11 @@
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
+    "capabilities": {
+    },
     "browserstack": {
-      "localcapabilities": {
-        "forcelocal": "true"
-      }
-    }
+      "url": "https://hub-cloud.browserstack.com/wd/hub/"
+    } 
+
   }
 }

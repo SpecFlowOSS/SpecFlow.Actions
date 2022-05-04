@@ -12,11 +12,12 @@ This SpecFlow.Action will help you use Browserstack and Selenium together with S
         - Firefox
         - Edge
         - Internet Explorer
+        - Safari
 - Configuration via `specflow.actions.json`
 
 ## Configuration
 
-You can configure this plugin via the  `specflow.actions.json`.
+You can configure this plugin via the `specflow.actions.json`.
 
 Example:
 
@@ -25,22 +26,23 @@ Example:
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "edge",
     "capabilities": {
       "os": "Windows",
       "os_version": "10",
       "resolution": "1920x1080",
       "build": "Examples"
+    },
+    "browserstack": {
+        "url": "https://hub-cloud.browserstack.com/wd/hub/",
+        "localcapabilities": {
+            "proxyHost": "127.0.0.1",
+            "proxyPort": "8000"
+        }
     }
   }
 }
 ```
-
-### testPlatform
-Supported values:
-- `local` - default value if no value is provided. Will initialise the webdriver on the local machine.
-- `browserstack` - Will initialise a remote webdriver instance to execute against Browserstack.
 
 ### browser
 Supported values:
@@ -48,6 +50,25 @@ Supported values:
 - `firefox`
 - `internetexplorer`
 - `edge`
+- 'safari'
+
+### Browserstack specific configuration
+
+There is no need to specify the browser in the Selenium capabilities. It is taken from the browser configuration value.
+
+#### url
+
+Optional. Can be used if you have another hub Url, than the default one
+
+#### localcapabilities
+
+Optional. Can be used to specify the capabilites for local testing.
+
+Available Capabilites: https://www.browserstack.com/docs/local-testing/binary-params
+
+#### Enable Local Testing
+
+To enable local testing, add the capability "browserstack.local" with value "true" to the normal Selenium capabilities
 
 ### Multiple target configurations
 
@@ -62,7 +83,6 @@ Example:
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "Safari",
     "capabilities": {
       "os": "OS X",
@@ -81,7 +101,6 @@ Example:
   "selenium": {
     "defaultTimeout": 60,
     "pollingInterval": 5,
-    "testPlatform": "browserstack",
     "browser": "Chrome",
     "capabilities": {
       "os": "Windows",
@@ -98,12 +117,14 @@ For the example shown above, all tests will execute against both Safari and Chro
 ### capabilities
 See https://www.browserstack.com/automate/capabilities
 
+Capabilities are Selenium 3 Json Wire protocol capabilities.
+
 ## How to use it
 
 The browser is started automatically when you try to use the WebDriver the first time.  
 It is closed after the scenario ends.
 
-The test result and (in case of failure) reason is sent to browserstack automatically during the test execution.
+The test result and (in case of failure) reason is sent to BrowserStack automatically during the test execution.
 
 ### BrowserInteractions
 

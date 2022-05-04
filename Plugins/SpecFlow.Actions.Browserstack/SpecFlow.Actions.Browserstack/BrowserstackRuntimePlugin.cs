@@ -6,6 +6,7 @@ using SpecFlow.Actions.Browserstack.DriverInitialisers;
 using SpecFlow.Actions.Selenium;
 using SpecFlow.Actions.Selenium.Configuration;
 using SpecFlow.Actions.Selenium.DriverInitialisers;
+using SpecFlow.Actions.Selenium.Hoster;
 using System;
 using System.Linq;
 using TechTalk.SpecFlow;
@@ -56,6 +57,7 @@ namespace Specflow.Actions.Browserstack
         private void RuntimePluginEvents_CustomizeScenarioDependencies(object? sender, CustomizeScenarioDependenciesEventArgs e)
         {
             e.ObjectContainer.RegisterTypeAs<BrowserstackConfiguration, ISeleniumConfiguration>();
+            e.ObjectContainer.RegisterTypeAs<BrowserstackCredentialProvider, ICredentialProvider>();
             RegisterInitialisers(e.ObjectContainer);
         }
 
@@ -71,15 +73,15 @@ namespace Specflow.Actions.Browserstack
                         ((BrowserstackConfiguration)config).BrowserstackLocalCapabilities.ToList());
                 }
 
-                var scenarioContext = container.Resolve<ScenarioContext>();
-
+                var browserstackDriverInitialiser = container.Resolve<BrowserstackDriverInitialiser>();
+                var credentialProvider = container.Resolve<ICredentialProvider>();
                 return config.Browser switch
                 {
-                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(config, scenarioContext),
-                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(config, scenarioContext),
-                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(config,scenarioContext),
-                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(config, scenarioContext),
-                    Browser.Safari => new BrowserstackSafariDriverInitialiser(config, scenarioContext),
+                    Browser.Chrome => new BrowserstackChromeDriverInitialiser(browserstackDriverInitialiser, config, credentialProvider),
+                    Browser.Firefox => new BrowserstackFirefoxDriverInitialiser(browserstackDriverInitialiser, config, credentialProvider),
+                    Browser.Edge => new BrowserstackEdgeDriverInitialiser(browserstackDriverInitialiser, config, credentialProvider),
+                    Browser.InternetExplorer => new BrowserstackInternetExplorerDriverInitialiser(browserstackDriverInitialiser, config, credentialProvider),
+                    Browser.Safari => new BrowserstackSafariDriverInitialiser(browserstackDriverInitialiser, config, credentialProvider),
                     _ => throw new ArgumentOutOfRangeException($"Browser {config.Browser} not implemented")
                 };
             });

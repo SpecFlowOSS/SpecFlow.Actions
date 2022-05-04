@@ -42,5 +42,23 @@ namespace SpecFlow.Actions.Configuration.Tests
 
             actualValue.Should().BeNull();
         }
+
+        [Fact]
+        public void GetDictionary_ObjectDefinedInParentAndTarget_Merged()
+        {
+            var parentContent = @"{""parent"": { ""children"": { ""parentChild"":""a value""} }}";
+            var targetContent = @"{""parent"": { ""children"": { ""childChild"":""another value""} }}";
+
+
+            var specflowActionJsonLoaderMock = new Mock<ISpecFlowActionJsonLoader>();
+            specflowActionJsonLoaderMock.Setup(m => m.Load()).Returns(parentContent);
+            specflowActionJsonLoaderMock.Setup(m => m.LoadTarget()).Returns(targetContent);
+
+            var specFlowActionsConfiguration = new SpecFlowActionsConfiguration(specflowActionJsonLoaderMock.Object);
+
+            var actualValue = specFlowActionsConfiguration.GetDictionary("parent:children");
+
+            actualValue.Should().HaveCount(2);
+        }
     }
 }

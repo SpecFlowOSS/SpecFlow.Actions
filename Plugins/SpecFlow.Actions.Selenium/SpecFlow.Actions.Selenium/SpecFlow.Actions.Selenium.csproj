@@ -19,4 +19,8 @@
     <ProjectReference Include="..\..\SpecFlow.Actions.Configuration\SpecFlow.Actions.Configuration.Generation\SpecFlow.Actions.Configuration.Generation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hoster\" />
+  </ItemGroup>
+
 </Project>
