@@ -36,8 +36,8 @@ jobs:
       - run: dotnet build Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln
       - run: dotnet test Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln --filter Category!=failing
         env:
-          BROWSERSTACK_USERNAME: ${{secrets.BROWSERSTACK_USERNAME}}
-          BROWSERSTACK_ACCESS_KEY: ${{secrets.BROWSERSTACK_ACCESS_KEY}}
+          LT_USERNAME: ${{secrets.LT_USERNAME}}
+          LT_ACCESS_KEY: ${{secrets.LT_ACCESS_KEY}}
 
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln
