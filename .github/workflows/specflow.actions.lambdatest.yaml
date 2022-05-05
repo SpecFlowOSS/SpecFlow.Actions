@@ -63,6 +63,10 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
+    - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: test-results
     - uses: dorny/test-reporter@v1
       with:
         artifact: test-results            # artifact name
