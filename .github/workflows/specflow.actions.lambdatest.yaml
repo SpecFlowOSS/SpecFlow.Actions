@@ -39,6 +39,14 @@ jobs:
           LT_USERNAME: ${{secrets.LT_USERNAME}}
           LT_ACCESS_KEY: ${{secrets.LT_ACCESS_KEY}}
 
+      - name: Generate Test Report
+        uses: zyborg/dotnet-tests-report@v1
+        with:
+          test_results_path: Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.IntegrationTests/bin/Debug/net6.0/*.trx
+          report_name: lambdatest_integration_tests
+          report_title: LambdaTest Integration Tests
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create the package
         run: dotnet pack --configuration Release Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln
 
