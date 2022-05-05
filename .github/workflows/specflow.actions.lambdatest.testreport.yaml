@@ -1,4 +1,4 @@
-name: 'Test Report'
+name: 'SpecFlow.Actions.LambdaTest Report'
 on:
   workflow_run:
     workflows: ['SpecFlow.Actions.LambdaTest']                     # runs after CI workflow
