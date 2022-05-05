@@ -58,21 +58,21 @@ jobs:
             Plugins/SpecFlow.Actions.Selenium/SpecFlow.Actions.Selenium/bin/Release/**/*.nupkg
             Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.Generation/bin/Release/**/*.nupkg
 
-  test-report:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
-    steps:
-    - name: Download a single artifact
-      uses: actions/download-artifact@v2
-      with:
-        name: test-results
-    - uses: dorny/test-reporter@v1
-      with:
-        artifact: test-results            # artifact name
-        name: Test Report                  # Name of the check run which will be created
-        path: '*.trx'                     # Path to test results (inside artifact .zip)
-        reporter: dotnet-trx              # Format of test results       
+  # test-report:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #   - name: Download a single artifact
+  #     uses: actions/download-artifact@v2
+  #     with:
+  #       name: test-results
+  #   - uses: dorny/test-reporter@v1
+  #     with:
+  #       artifact: test-results            # artifact name
+  #       name: Test Report                  # Name of the check run which will be created
+  #       path: '*.trx'                     # Path to test results (inside artifact .zip)
+  #       reporter: dotnet-trx              # Format of test results       
 
   release:
     runs-on: windows-latest
