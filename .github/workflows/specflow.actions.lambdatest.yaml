@@ -34,7 +34,7 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: dotnet build Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln
-      - run: dotnet test Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln --filter Category!=failing
+      - run: dotnet test Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.sln --filter Category!=failing --logger "trx;logfilename=LambdaTestIntegrationTests.trx"
         env:
           LT_USERNAME: ${{secrets.LT_USERNAME}}
           LT_ACCESS_KEY: ${{secrets.LT_ACCESS_KEY}}
@@ -42,7 +42,7 @@ jobs:
       - name: Generate Test Report
         uses: zyborg/dotnet-tests-report@v1
         with:
-          test_results_path: Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.IntegrationTests/TestResults/*.trx
+          test_results_path: Plugins/SpecFlow.Actions.LambdaTest/SpecFlow.Actions.LambdaTest.IntegrationTests/TestResults/LambdaTestIntegrationTests.trx
           report_name: lambdatest_integration_tests
           report_title: LambdaTest Integration Tests
           github_token: ${{ secrets.GITHUB_TOKEN }}
