@@ -2,7 +2,7 @@
 
 [![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.LambdaTest)](https://www.nuget.org/packages/SpecFlow.Actions.LambdaTest/)
 
-This SpecFlow.Action will help you use Browserstack and Selenium together with SpecFlow. As an extension of [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium), It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
+This SpecFlow.Action will help you use LambdaTest and Selenium together with SpecFlow. As an extension of [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium), It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
 
 ## Included Features
 
@@ -97,7 +97,7 @@ Capabilities are Selenium 3 Json Wire protocol capabilities.
 The browser is started automatically when you try to use the WebDriver the first time.  
 It is closed after the scenario ends.
 
-The test result and (in case of failure) reason is sent to browserstack automatically during the test execution.
+The test result and (in case of failure) reason is sent to LambdaTest automatically during the test execution.
 
 ### BrowserInteractions
 

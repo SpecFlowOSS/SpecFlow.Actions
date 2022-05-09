@@ -9,14 +9,14 @@ namespace SpecFlow.Actions.LambdaTest.DriverInitialisers;
 
 public class LambdaTestDriverInitialiser
 {
-    private readonly Uri _browserstackRemoteServer;
+    private readonly Uri _remoteServer;
     private readonly ScenarioContext _scenarioContext;
 
     public LambdaTestDriverInitialiser(LambdaTestConfiguration lambdaTestConfiguration,
         ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
-        _browserstackRemoteServer = new Uri(lambdaTestConfiguration.Url);
+        _remoteServer = new Uri(lambdaTestConfiguration.Url);
     }
 
 
@@ -42,6 +42,6 @@ public class LambdaTestDriverInitialiser
     {
         options.TryToAddGlobalCapability("name", GetScenarioTitle());
 
-        return new RemoteWebDriver(_browserstackRemoteServer, options);
+        return new RemoteWebDriver(_remoteServer, options);
     }
 }
