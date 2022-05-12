@@ -88,7 +88,6 @@ namespace SpecFlow.Actions.Configuration.Generation
                     new CodeNamespaceImport("TechTalk.SpecFlow"),
                     new CodeNamespaceImport("System"),
                     new CodeNamespaceImport("System.Linq"),
-                    new CodeNamespaceImport("SpecFlow.Actions.Selenium")
                 }
             };
         }
