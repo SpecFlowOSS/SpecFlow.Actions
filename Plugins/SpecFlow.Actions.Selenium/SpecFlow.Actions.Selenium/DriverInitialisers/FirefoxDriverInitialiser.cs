@@ -16,6 +16,11 @@ public class FirefoxDriverInitialiser : DriverInitialiser<FirefoxOptions>
     {
     }
 
+    protected override void AddDefaultCapabilities(FirefoxOptions options)
+    {
+        
+    }
+
     protected override IWebDriver CreateWebDriver(FirefoxOptions options)
     {
         return string.IsNullOrWhiteSpace(FirefoxWebDriverFilePath.Value)

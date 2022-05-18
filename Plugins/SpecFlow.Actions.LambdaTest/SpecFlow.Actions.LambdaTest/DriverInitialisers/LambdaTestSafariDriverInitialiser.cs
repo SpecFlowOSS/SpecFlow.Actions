@@ -18,6 +18,11 @@ internal class LambdaTestSafariDriverInitialiser : SafariDriverInitialiser
         _lambdaTestDriverInitialiser = lambdaTestDriverInitialiser;
     }
 
+    protected override void AddDefaultCapabilities(SafariOptions options)
+    {
+        base.AddDefaultCapabilities(options);
+        _lambdaTestDriverInitialiser.AddDefaultCapabilities(options);
+    }
 
     protected override IWebDriver CreateWebDriver(SafariOptions options)
     {

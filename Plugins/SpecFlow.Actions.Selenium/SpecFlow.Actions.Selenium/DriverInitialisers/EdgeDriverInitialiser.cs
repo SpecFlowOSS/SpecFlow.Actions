@@ -17,6 +17,11 @@ public class EdgeDriverInitialiser : DriverInitialiser<EdgeOptions>
     }
 
 
+    protected override void AddDefaultCapabilities(EdgeOptions options)
+    {
+        
+    }
+
     protected override IWebDriver CreateWebDriver(EdgeOptions options)
     {
         return string.IsNullOrWhiteSpace(EdgeWebDriverFilePath.Value)

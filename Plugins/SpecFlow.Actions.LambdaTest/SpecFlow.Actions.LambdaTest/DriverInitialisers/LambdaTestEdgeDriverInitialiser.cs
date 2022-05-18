@@ -18,6 +18,11 @@ internal class LambdaTestEdgeDriverInitialiser : EdgeDriverInitialiser
         _lambdaTestDriverInitialiser = lambdaTestDriverInitialiser;
     }
 
+    protected override void AddDefaultCapabilities(EdgeOptions options)
+    {
+        base.AddDefaultCapabilities(options);
+        _lambdaTestDriverInitialiser.AddDefaultCapabilities(options);
+    }
 
     protected override IWebDriver CreateWebDriver(EdgeOptions options)
     {

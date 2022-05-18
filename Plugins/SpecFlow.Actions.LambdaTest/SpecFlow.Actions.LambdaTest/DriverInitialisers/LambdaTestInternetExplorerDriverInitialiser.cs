@@ -18,6 +18,11 @@ internal class LambdaTestInternetExplorerDriverInitialiser : InternetExplorerDri
         _lambdaTestDriverInitialiser = lambdaTestDriverInitialiser;
     }
 
+    protected override void AddDefaultCapabilities(InternetExplorerOptions options)
+    {
+        base.AddDefaultCapabilities(options);
+        _lambdaTestDriverInitialiser.AddDefaultCapabilities(options);
+    }
 
     protected override IWebDriver CreateWebDriver(InternetExplorerOptions options)
     {

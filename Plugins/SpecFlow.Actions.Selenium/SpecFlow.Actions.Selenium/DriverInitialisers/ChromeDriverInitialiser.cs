@@ -14,6 +14,11 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
         {
         }
 
+        protected override void AddDefaultCapabilities(ChromeOptions options)
+        {
+            
+        }
+
         protected override IWebDriver CreateWebDriver(ChromeOptions options)
         {
             return string.IsNullOrWhiteSpace(ChromeWebDriverFilePath.Value)

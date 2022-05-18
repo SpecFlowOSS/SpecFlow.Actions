@@ -27,6 +27,42 @@ public abstract class DriverInitialiser<T> : IDriverInitialiser where T : Driver
     {
         var options = new T();
 
+        AddDefaultCapabilities(options);
+
+        AddCapabilitiesFromConfiguration(options);
+
+        AddCredentialCapabilities(options);
+
+        AddArgumentsFromConfiguration(options);
+
+        return options;
+    }
+
+    protected abstract void AddDefaultCapabilities(T options);
+
+    private void AddArgumentsFromConfiguration(T options)
+    {
+        if (_seleniumConfiguration.Arguments.Any())
+        {
+            options.TryToAddArguments(_seleniumConfiguration.Arguments);
+        }
+    }
+
+    private void AddCredentialCapabilities(T options)
+    {
+        if (_credentialProvider.UsernameArgumentName is not null && _credentialProvider.Username is not null)
+        {
+            options.TryToAddGlobalCapability(_credentialProvider.UsernameArgumentName, _credentialProvider.Username);
+        }
+
+        if (_credentialProvider.AccessKeyArgumentName is not null && _credentialProvider.AccessKey is not null)
+        {
+            options.TryToAddGlobalCapability(_credentialProvider.AccessKeyArgumentName, _credentialProvider.AccessKey);
+        }
+    }
+
+    private void AddCapabilitiesFromConfiguration(T options)
+    {
         if (_seleniumConfiguration.Capabilities.Any())
         {
             foreach (var capability in _seleniumConfiguration.Capabilities)
@@ -34,23 +70,6 @@ public abstract class DriverInitialiser<T> : IDriverInitialiser where T : Driver
                 options.TryToAddGlobalCapability(capability.Key, capability.Value);
             }
         }
-
-        if (_credentialProvider.UsernameArgumentName is not null && _credentialProvider.Username is not null)
-        {
-            options.TryToAddGlobalCapability(_credentialProvider.UsernameArgumentName,  _credentialProvider.Username);
-        }
-
-        if (_credentialProvider.AccessKeyArgumentName is not null && _credentialProvider.AccessKey is not null)
-        {
-            options.TryToAddGlobalCapability(_credentialProvider.AccessKeyArgumentName, _credentialProvider.AccessKey);
-        }
-
-        if (_seleniumConfiguration.Arguments.Any())
-        {
-            options.TryToAddArguments(_seleniumConfiguration.Arguments);
-        }
-
-        return options;
     }
 
 

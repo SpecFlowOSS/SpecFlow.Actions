@@ -23,4 +23,10 @@ internal class LambdaTestChromeDriverInitialiser : ChromeDriverInitialiser
     {
         return _lambdaTestDriverInitialiser.GetWebDriver(options);
     }
+
+    protected override void AddDefaultCapabilities(ChromeOptions options)
+    {
+        base.AddDefaultCapabilities(options);
+        _lambdaTestDriverInitialiser.AddDefaultCapabilities(options);
+    }
 }
