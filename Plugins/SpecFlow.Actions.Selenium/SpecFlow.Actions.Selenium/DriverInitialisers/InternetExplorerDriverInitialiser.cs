@@ -17,6 +17,11 @@ public class InternetExplorerDriverInitialiser : DriverInitialiser<InternetExplo
     }
 
 
+    protected override void AddDefaultCapabilities(InternetExplorerOptions options)
+    {
+        
+    }
+
     protected override IWebDriver CreateWebDriver(InternetExplorerOptions options)
     {
         return string.IsNullOrWhiteSpace(InternetExplorerWebDriverFilePath.Value)

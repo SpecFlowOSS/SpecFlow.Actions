@@ -16,6 +16,11 @@ public class SafariDriverInitialiser : DriverInitialiser<SafariOptions>
     {
     }
 
+    protected override void AddDefaultCapabilities(SafariOptions options)
+    {
+        
+    }
+
     protected override IWebDriver CreateWebDriver(SafariOptions options)
     {
         return string.IsNullOrWhiteSpace(SafariWebDriverFilePath.Value)

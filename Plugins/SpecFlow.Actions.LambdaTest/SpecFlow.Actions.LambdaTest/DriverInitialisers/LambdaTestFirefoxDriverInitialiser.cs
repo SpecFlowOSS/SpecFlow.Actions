@@ -18,6 +18,11 @@ internal class LambdaTestFirefoxDriverInitialiser : FirefoxDriverInitialiser
         _lambdaTestDriverInitialiser = lambdaTestDriverInitialiser;
     }
 
+    protected override void AddDefaultCapabilities(FirefoxOptions options)
+    {
+        base.AddDefaultCapabilities(options);
+        _lambdaTestDriverInitialiser.AddDefaultCapabilities(options);
+    }
 
     protected override IWebDriver CreateWebDriver(FirefoxOptions options)
     {
