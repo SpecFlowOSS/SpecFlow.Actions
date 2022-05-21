@@ -108,7 +108,7 @@ public class SomePageObjectClass : BasePage
     public async Task FillOutSomeInput(string str)
     {
         //Enter text
-        await FirstNumberFieldSelector.SendTextAsync(await _page, str);
+        await _interactions.SendTextAsync(FirstNumberFieldSelector, str);
     }
 }
 ```
