@@ -2,7 +2,7 @@
 
 [![Nuget](https://img.shields.io/nuget/v/SpecFlow.Actions.LambdaTest)](https://www.nuget.org/packages/SpecFlow.Actions.LambdaTest/)
 
-This SpecFlow.Action will help you use LambdaTest and Selenium together with SpecFlow. As an extension of [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium), It handles the lifetime of your browser and provides seamless integration with the Browserstack Automate feature.
+This SpecFlow.Action will help you use LambdaTest and Selenium together with SpecFlow. As an extension of [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium), It handles the lifetime of your browser and provides seamless integration with the LambdaTest Automation feature.
 
 ## Included Features
 
