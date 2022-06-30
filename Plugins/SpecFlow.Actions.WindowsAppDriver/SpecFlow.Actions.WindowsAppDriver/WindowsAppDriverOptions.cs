@@ -38,6 +38,10 @@ namespace SpecFlow.Actions.WindowsAppDriver
                 {
                     options.AddAdditionalCapability(capability.Key, Path.Combine(Directory.GetCurrentDirectory(), capability.Value));
                 }
+                else
+                {
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
+                }
             }
 
             return options;
