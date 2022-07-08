@@ -3,6 +3,7 @@ using SpecFlow.Actions.Appium;
 using SpecFlow.Actions.Appium.Configuration.WindowsAppDriver;
 using SpecFlow.Actions.Appium.Driver;
 using System;
+using System.Collections;
 using System.IO;
 
 namespace SpecFlow.Actions.WindowsAppDriver
@@ -31,12 +32,15 @@ namespace SpecFlow.Actions.WindowsAppDriver
                 options.AddAdditionalCapability("app", appFilePath);
             }
 
-
             foreach (var capability in _windowsAppDriverConfiguration.Capabilities)
             {
                 if (string.Equals(capability.Key, "app", StringComparison.OrdinalIgnoreCase))
                 {
                     options.AddAdditionalCapability(capability.Key, Path.Combine(Directory.GetCurrentDirectory(), capability.Value));
+                }
+                else
+                {
+                    options.AddAdditionalCapability(capability.Key, capability.Value);
                 }
             }
 

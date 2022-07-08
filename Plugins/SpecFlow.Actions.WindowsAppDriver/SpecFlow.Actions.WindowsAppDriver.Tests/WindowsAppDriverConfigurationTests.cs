@@ -1,9 +1,9 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
 using SpecFlow.Actions.Configuration;
 using SpecFlow.Actions.WindowsAppDriver.Configuration;
-using Xunit;
-using FluentAssertions;
 using System.Collections.Generic;
+using Xunit;
 
 namespace SpecFlow.Actions.WindowsAppDriver.Tests
 {
@@ -66,6 +66,19 @@ namespace SpecFlow.Actions.WindowsAppDriver.Tests
             var appDriverConfiguration = GetAppDriverConfiguration(specflowJsonContent);
 
             appDriverConfiguration.Capabilities!.Should().Contain(expected);
+        }
+
+        [Fact]
+        public void Capabilities_ContainsAdditionalCapabilities_If_ValuesSpecified()
+        {
+            var specflowJsonContent = "{\"windowsAppDriver\": {\"capabilities\": {\"app\": \"path\", \"appArguments\": \"-env local\"}}}";
+
+            var expectedApp = new KeyValuePair<string, string>("app", "path");
+            var expectedAppArguments = new KeyValuePair<string, string>("appArguments", "-env local");
+
+            var appDriverConfiguration = GetAppDriverConfiguration(specflowJsonContent);
+
+            appDriverConfiguration.Capabilities.Should().Contain(expectedApp, expectedAppArguments);
         }
     }
 }
