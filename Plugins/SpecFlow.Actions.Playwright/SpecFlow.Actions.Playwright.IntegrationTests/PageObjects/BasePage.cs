@@ -14,7 +14,7 @@ namespace Example.PageObjects
         
         public BasePage(BrowserDriver browserDriver)
         {
-            _browserContext = CreateBrowserContextAsync(browserDriver.Current);
+            _browserContext = CreateBrowserContextAsync(browserDriver.GetBrowser());
             _tracing = _browserContext.ContinueWith(t => t.Result.Tracing);
             _page = CreatePageAsync(_browserContext);
             

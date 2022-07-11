@@ -5,18 +5,18 @@ namespace SpecFlow.Actions.Playwright
 {
     public interface IDriverInitialiser
     {
-        Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
-        Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
-        Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
-        Task<IBrowser> GetChromiumDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
-        Task<IBrowser> GetWebKitDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
+        Task<(IPlaywright, IBrowser)> GetChromeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
+        Task<(IPlaywright, IBrowser)> GetEdgeDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
+        Task<(IPlaywright, IBrowser)> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
+        Task<(IPlaywright, IBrowser)> GetChromiumDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
+        Task<(IPlaywright, IBrowser)> GetWebKitDriverAsync(string[]? args = null, float? timeout = DriverInitialiser.DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null);
     }
 
     public class DriverInitialiser : IDriverInitialiser
     {
         public const float DEFAULT_TIMEOUT = 30f;
 
-        public async Task<IBrowser> GetChromeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
+        public async Task<(IPlaywright, IBrowser)> GetChromeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
         {
             var options = GetOptions(args, timeout, headless, slowmo, traceDir);
             options.Channel = "chrome";
@@ -24,14 +24,14 @@ namespace SpecFlow.Actions.Playwright
             return await GetBrowserAsync(BrowserType.Chromium, options);
         }
 
-        public async Task<IBrowser> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
+        public async Task<(IPlaywright, IBrowser)> GetFirefoxDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
         {
             var options = GetOptions(args, timeout, headless, slowmo, traceDir);
 
             return await GetBrowserAsync(BrowserType.Firefox, options);
         }
 
-        public async Task<IBrowser> GetEdgeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
+        public async Task<(IPlaywright, IBrowser)> GetEdgeDriverAsync(string[]? args = null, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
         {
             var options = GetOptions(args, timeout, headless, slowmo, traceDir);
             options.Channel = "msedge";
@@ -39,14 +39,14 @@ namespace SpecFlow.Actions.Playwright
             return await GetBrowserAsync(BrowserType.Chromium, options);
         }
 
-        public async Task<IBrowser> GetChromiumDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
+        public async Task<(IPlaywright, IBrowser)> GetChromiumDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
         {
             var options = GetOptions(args, timeout, headless, slowmo, traceDir);
 
             return await GetBrowserAsync(BrowserType.Chromium, options);
         }
 
-        public async Task<IBrowser> GetWebKitDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
+        public async Task<(IPlaywright, IBrowser)> GetWebKitDriverAsync(string[]? args, float? timeout = DEFAULT_TIMEOUT, bool? headless = true, float? slowmo = null, string? traceDir = null)
         {
             var options = GetOptions(args, timeout, headless, slowmo, traceDir);
 
@@ -57,11 +57,11 @@ namespace SpecFlow.Actions.Playwright
             => new()
             { Args = args, Timeout = ToMilliseconds(timeout), Headless = headless, SlowMo = slowmo, TracesDir = traceDir};
 
-        private async Task<IBrowser> GetBrowserAsync(string browserType, BrowserTypeLaunchOptions options)
+        private async Task<(IPlaywright,IBrowser)> GetBrowserAsync(string browserType, BrowserTypeLaunchOptions options)
         {
-            var playwright = await Microsoft.Playwright.Playwright.CreateAsync();
+            IPlaywright? playwright = await Microsoft.Playwright.Playwright.CreateAsync();
 
-            return await playwright[browserType].LaunchAsync(options);
+            return (playwright, await playwright[browserType].LaunchAsync(options));
         }
 
         private static float? ToMilliseconds(float? seconds)
