@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - '.github/workflows/specflow.actions.windowsAppDriver.yaml'
-      - 'Plugins/specflow.actions.WindowsAppDriver/**'
+      - 'Plugins/SpecFlow.Actions.WindowsAppDriver/**'
       - 'Plugins/*'
   pull_request:
     branches:
