@@ -34,7 +34,8 @@ namespace SpecFlow.Actions.WindowsAppDriver
 
             foreach (var capability in _windowsAppDriverConfiguration.Capabilities)
             {
-                if (string.Equals(capability.Key, "app", StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(capability.Key, "app", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(capability.Key, "appWorkingDir", StringComparison.OrdinalIgnoreCase))
                 {
                     options.AddAdditionalCapability(capability.Key, Path.Combine(Directory.GetCurrentDirectory(), capability.Value));
                 }
