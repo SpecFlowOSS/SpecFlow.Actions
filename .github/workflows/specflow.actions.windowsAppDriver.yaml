@@ -44,6 +44,7 @@ jobs:
         with:
           name: NuGet-Package
           path:  |
+            Plugins/SpecFlow.Actions.Appium/SpecFlow.Actions.Appium/bin/Release/**/*.nupkg
             Plugins/SpecFlow.Actions.WindowsAppDriver/SpecFlow.Actions.WindowsAppDriver/bin/Release/**/*.nupkg
             Plugins/SpecFlow.Actions.Configuration/SpecFlow.Actions.Configuration.Generation/bin/Release/**/*.nupkg
             
