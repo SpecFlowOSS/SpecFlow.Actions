@@ -5,6 +5,7 @@
 		<AssemblyName>SpecFlow.Actions.Appium.SpecFlowPlugin</AssemblyName>
 		<PackageId>SpecFlow.Actions.Appium</PackageId>
 		<Product>SpecFlow.Actions.Appium</Product>
+		<NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.Appium.nuspec</NuspecFile>
 	</PropertyGroup>
 
 	<ItemGroup>

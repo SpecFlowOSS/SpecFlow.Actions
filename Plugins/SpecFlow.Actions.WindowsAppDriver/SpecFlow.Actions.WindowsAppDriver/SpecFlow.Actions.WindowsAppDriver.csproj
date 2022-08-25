@@ -5,6 +5,7 @@
 	  <AssemblyName>SpecFlow.Actions.WindowsAppDriver.SpecFlowPlugin</AssemblyName>
 	  <PackageId>SpecFlow.Actions.WindowsAppDriver</PackageId>
 	  <Product>SpecFlow.Actions.WindowsAppDriver</Product>
+    <NuspecFile>$(MSBuildThisFileDirectory)SpecFlow.Actions.WindowsAppDriver.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>

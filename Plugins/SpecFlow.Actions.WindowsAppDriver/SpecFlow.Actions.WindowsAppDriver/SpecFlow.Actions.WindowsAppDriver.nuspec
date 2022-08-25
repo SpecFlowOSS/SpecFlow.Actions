@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>SpecFlow.Actions.WindowsAppDriver</id>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$owner$</owners>
+    <description>SpecFlow.Actions.WindowsAppDriver</description>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.1">
+        <dependency id="SpecFlow.Actions.Configuration" version="$version$"/>
+        <dependency id="SpecFlow.Actions.Appium" version="$version$"/>
+        <dependency id="WindowsAppDriver.WebDriver" version="4.3.1"  />
+        <dependency id="SpecFlow" version="3.9.40" />
+      </group>
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="SpecFlow.Actions.Configuration" version="$version$"/>
+        <dependency id="SpecFlow.Actions.Appium" version="$version$"/>
+        <dependency id="WindowsAppDriver.WebDriver" version="4.3.1" />
+        <dependency id="SpecFlow" version="3.9.40" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$config$\net471\SpecFlow.Actions.WindowsAppDriver.*" target="lib\net471"/>
+    <file src="bin\$config$\netcoreapp2.1\SpecFlow.Actions.WindowsAppDriver.SpecFlowPlugin.dll" target="lib\netcoreapp2.1"/>
+    <file src="bin\$config$\netcoreapp2.1\SpecFlow.Actions.WindowsAppDriver.SpecFlowPlugin.pdb" target="lib\netcoreapp2.1"/>
+
+    <file src="$SolutionDir$..\LICENSE" target="LICENSE" />
+    <file src="$SolutionDir$specflow-icon.png" target="images\" />
+  </files>
+</package>
