@@ -162,7 +162,7 @@ namespace SpecFlow.Actions.Selenium
         /// <returns></returns>
         public static IEnumerable<IWebElement> WhereElementsHavePropertyValue(this IEnumerable<IWebElement> webElements, string propertyName, string value)
         {
-            return webElements.Where(element => element.GetProperty(propertyName).Equals(value));
+            return webElements.Where(element => element.GetDomProperty(propertyName).Equals(value) || element.GetDomAttribute(propertyName).Equals(value));
         }
 
         /// <summary>
