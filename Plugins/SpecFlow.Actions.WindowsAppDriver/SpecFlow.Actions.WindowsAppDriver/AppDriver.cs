@@ -11,7 +11,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
         private readonly IDriverFactory _driverFactory;
         private readonly IDriverOptions _driverOptions;
 
-        private readonly Uri _driverUri = new("http://127.0.0.1:4723/");
+        private readonly Uri _driverUri;
 
         private readonly Lazy<WindowsDriver<WindowsElement>> _lazyDriver;
         private bool _isDisposed;
@@ -21,6 +21,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
             _windowsAppDriverConfiguration = windowsAppDriverConfiguration;
             _driverFactory = driverFactory;
             _driverOptions = driverOptions;
+            _driverUri = new($"http://127.0.0.1:{windowsAppDriverConfiguration.WindowsAppDriverPort}");
             _lazyDriver = new Lazy<WindowsDriver<WindowsElement>>(CreateAppDriver);
         }
 
@@ -49,7 +50,8 @@ namespace SpecFlow.Actions.WindowsAppDriver
 
             if (_lazyDriver.IsValueCreated)
             {
-                Current.CloseApp();
+                if (_windowsAppDriverConfiguration.CloseAppAutomatically)
+                    Current.CloseApp();
             }
 
             _isDisposed = true;

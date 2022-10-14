@@ -25,7 +25,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
 
             if (path != null)
             {
-                _appDriverProcess = Process.Start(path); 
+                _appDriverProcess = Process.Start(path, _windowsAppDriverConfiguration.WindowsAppDriverPort != null ? _windowsAppDriverConfiguration.WindowsAppDriverPort.ToString() : "");
             }
         }
 
