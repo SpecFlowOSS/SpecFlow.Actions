@@ -7,6 +7,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
 {
     public class AppDriver : IDisposable
     {
+        private const int WindowsAppDriverDefaultPort = 4723;
         private readonly IWindowsAppDriverConfiguration _windowsAppDriverConfiguration;
         private readonly IDriverFactory _driverFactory;
         private readonly IDriverOptions _driverOptions;
@@ -21,7 +22,7 @@ namespace SpecFlow.Actions.WindowsAppDriver
             _windowsAppDriverConfiguration = windowsAppDriverConfiguration;
             _driverFactory = driverFactory;
             _driverOptions = driverOptions;
-            _driverUri = new($"http://127.0.0.1:{windowsAppDriverConfiguration.WindowsAppDriverPort}");
+            _driverUri = new($"http://127.0.0.1:{windowsAppDriverConfiguration.WindowsAppDriverPort.GetValueOrDefault(WindowsAppDriverDefaultPort)}");
             _lazyDriver = new Lazy<WindowsDriver<WindowsElement>>(CreateAppDriver);
         }
 
