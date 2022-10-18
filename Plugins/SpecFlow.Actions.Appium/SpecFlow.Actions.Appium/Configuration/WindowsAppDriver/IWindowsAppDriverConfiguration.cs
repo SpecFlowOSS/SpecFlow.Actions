@@ -8,6 +8,10 @@ namespace SpecFlow.Actions.Appium.Configuration.WindowsAppDriver
 
         string? WindowsAppDriverPath { get; }
 
+        int? WindowsAppDriverPort { get; }
+
         bool? EnableScreenshots { get; }
+
+        bool CloseAppAutomatically { get; }
     }
 }

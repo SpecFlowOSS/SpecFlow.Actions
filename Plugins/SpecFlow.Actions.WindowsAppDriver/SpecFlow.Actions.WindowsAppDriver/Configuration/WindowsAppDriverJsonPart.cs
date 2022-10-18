@@ -9,6 +9,10 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
 
         [JsonInclude] public string? WindowsAppDriverPath { get; set; }
 
+        [JsonInclude] public int? WindowsAppDriverPort { get; set; }
+
         [JsonInclude] public bool? EnableScreenshots { get; set; }
+
+        [JsonInclude] public bool? CloseAppAutomatically { get; set; }
     }
 }

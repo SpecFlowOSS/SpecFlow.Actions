@@ -41,5 +41,9 @@ namespace SpecFlow.Actions.WindowsAppDriver.Configuration
         public string? WindowsAppDriverPath => _specflowJsonPart.Value.WindowsAppDriver.WindowsAppDriverPath;
 
         public bool? EnableScreenshots => _specflowJsonPart.Value.WindowsAppDriver.EnableScreenshots;
+
+        public int? WindowsAppDriverPort => _specflowJsonPart.Value.WindowsAppDriver.WindowsAppDriverPort;
+
+        public bool CloseAppAutomatically => _specflowJsonPart.Value.WindowsAppDriver.CloseAppAutomatically ?? true;
     }
 }

@@ -28,7 +28,9 @@ Example:
       "app": "../SpecFlowCalculator/bin/Debug/net5.0-windows/SpecFlowCalculator.exe"
     },
     "WindowsAppDriverPath": "C:/Program Files/Windows Application Driver/WinAppDriver.exe",
-    "EnableScreenshots": true
+    "WindowsAppDriverPort": 4723,
+    "EnableScreenshots": true,
+    "CloseAppAutomatically": false
   }
 }
 ```
@@ -49,6 +51,10 @@ Example:
     ```text
     \TestResults\Screenshots\2021-10-11_171822\Calculator\Add two numbers\the first number is 50 (OK).png
     ```
+
+4. ```WindowsAppDriverPort``` - If specified, the Windows App Driver will be launched using this port. If not specified, the default port 4723 will be used. (This setting is useful, if the default port is already in use by another application.)
+
+5. ```CloseAppAutomatically``` - This setting is optional and defaults to `true`. If `false`, the app will not be closed automatically after each scenario.
 
 ### Important information
 
