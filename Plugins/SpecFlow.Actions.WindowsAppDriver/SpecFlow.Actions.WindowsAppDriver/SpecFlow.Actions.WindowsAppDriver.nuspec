@@ -10,13 +10,13 @@
       <group targetFramework=".NETFramework4.7.1">
         <dependency id="SpecFlow.Actions.Configuration" version="$version$"/>
         <dependency id="SpecFlow.Actions.Appium" version="$version$"/>
-        <dependency id="WindowsAppDriver.WebDriver" version="4.3.1"  />
+        <dependency id="Appium.WebDriver" version="4.3.1"  />
         <dependency id="SpecFlow" version="3.9.40" />
       </group>
       <group targetFramework=".NETCoreApp2.1">
         <dependency id="SpecFlow.Actions.Configuration" version="$version$"/>
         <dependency id="SpecFlow.Actions.Appium" version="$version$"/>
-        <dependency id="WindowsAppDriver.WebDriver" version="4.3.1" />
+        <dependency id="Appium.WebDriver" version="4.3.1" />
         <dependency id="SpecFlow" version="3.9.40" />
       </group>
     </dependencies>
