@@ -85,7 +85,7 @@ namespace SpecFlow.Actions.Selenium
         /// <param name="value"></param>
         public static void SelectDropdownOptionByValue(this IWebElement webElement, string value)
         {
-            GetSelectElement(webElement).SelectByText(value);
+            GetSelectElement(webElement).SelectByValue(value);
         }
 
         /// <summary>
