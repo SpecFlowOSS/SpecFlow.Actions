@@ -44,6 +44,7 @@ public abstract class DriverInitialiser<T> : IDriverInitialiser where T : Driver
     {
         if (_seleniumConfiguration.Arguments.Any())
         {
+            DriverOptionsHelper.TryToAddArguments(options, _seleniumConfiguration.Arguments);
             options.TryToAddArguments(_seleniumConfiguration.Arguments);
         }
     }

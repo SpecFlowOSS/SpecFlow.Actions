@@ -18,39 +18,47 @@ namespace SpecFlow.Actions.Selenium.DriverInitialisers
             switch (options)
             {
                 case FirefoxOptions firefoxOptions:
-                    firefoxOptions.AddAdditionalCapability(name, value, true);
+                    firefoxOptions.AddAdditionalFirefoxOption(name, value);
                     break;
                 case ChromeOptions chromeOptions:
-                    chromeOptions.AddAdditionalCapability(name, value, true);
+                    chromeOptions.AddAdditionalChromeOption(name, value);
                     break;
                 default:
-                    options.AddAdditionalCapability(name, value);
+                    options.AddAdditionalOption(name, value);
                     break;
             }
         }
 
         public static void TryToAddArguments<T>(this T options, string[] arguments) where T : DriverOptions
         {
-            switch (options)
+            try
             {
-                case FirefoxOptions firefoxOptions:
-                    firefoxOptions.AddArguments(arguments);
-                    break;
-                case ChromeOptions chromeOptions:
-                    chromeOptions.AddArguments(arguments);
-                    break;
-                case EdgeOptions edgeOptions:
-                    edgeOptions.AddAdditionalCapability("args", arguments.ToList());
-                    break;
-                case InternetExplorerOptions internetExplorerOptions:
-                    internetExplorerOptions.AddAdditionalCapability("args", arguments.ToList());
-                    break;
-                case SafariOptions safariOptions:
-                    safariOptions.AddAdditionalCapability("args", arguments.ToList());
-                    break;
-                default:
-                    throw new NotImplementedException(nameof(TryToAddArguments) + " is not implemented for " +
-                                                      options.GetType().Name);
+
+                switch (options)
+                {
+                    case FirefoxOptions firefoxOptions:
+                        firefoxOptions.AddArguments(arguments);
+                        break;
+                    case ChromeOptions chromeOptions:
+                        chromeOptions.AddArguments(arguments);
+                        break;
+                    case EdgeOptions edgeOptions:
+                        edgeOptions.AddAdditionalEdgeOption("args", arguments.ToList());
+                        break;
+                    case InternetExplorerOptions internetExplorerOptions:
+                        internetExplorerOptions.AddAdditionalInternetExplorerOption("args", arguments.ToList());
+                        break;
+                    case SafariOptions safariOptions:
+                        safariOptions.AddAdditionalOption("args", arguments.ToList());
+                        break;
+                    default:
+                        throw new NotImplementedException(nameof(TryToAddArguments) + " is not implemented for " +
+                                                          options.GetType().Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
