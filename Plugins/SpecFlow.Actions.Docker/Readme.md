@@ -7,7 +7,7 @@ This SpecFlow.Actions will help you by using Docker together with SpecFlow.
 ## Included Features
 
 - Start Docker containers from Dockerfile/docker-compose.yml at the start of the test scenario.
-- Stop Docker containers from Dockerfile/docker-compose.yml at the start of the test scenario.
+- Stop Docker containers from Dockerfile/docker-compose.yml at the end of the test scenario.
 
 ## Configuration
 
