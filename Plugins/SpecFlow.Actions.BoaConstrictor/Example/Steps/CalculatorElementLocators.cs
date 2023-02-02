@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Boa.Constrictor;
-using Boa.Constrictor.WebDriver;
-using static Boa.Constrictor.WebDriver.WebLocator;
+using Boa.Constrictor.Selenium;
+using static Boa.Constrictor.Selenium.WebLocator;
 
 namespace Example.Steps
 {
