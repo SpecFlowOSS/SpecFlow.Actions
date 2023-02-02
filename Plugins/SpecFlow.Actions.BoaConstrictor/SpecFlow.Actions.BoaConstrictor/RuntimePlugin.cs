@@ -1,12 +1,11 @@
 ﻿using Boa.Constrictor.Screenplay;
-using Boa.Constrictor.WebDriver;
-using OpenQA.Selenium;
+using Boa.Constrictor.Selenium;
 using SpecFlow.Actions.BoaConstrictor;
 using SpecFlow.Actions.Selenium;
 using TechTalk.SpecFlow.Plugins;
 using TechTalk.SpecFlow.UnitTestProvider;
 
-[assembly:RuntimePlugin(typeof(BoaConstrictorRuntimePlugin))]
+[assembly: RuntimePlugin(typeof(BoaConstrictorRuntimePlugin))]
 
 namespace SpecFlow.Actions.BoaConstrictor
 {

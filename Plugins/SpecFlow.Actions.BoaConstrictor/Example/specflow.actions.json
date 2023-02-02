@@ -3,8 +3,8 @@
     "browser": "chrome",
     "arguments": [
       "--start-maximized",
-      "--incognito",
       "headless",
+      "--incognito",
       "--window-size=1920,1080"
     ],
     "defaultTimeout": 120,

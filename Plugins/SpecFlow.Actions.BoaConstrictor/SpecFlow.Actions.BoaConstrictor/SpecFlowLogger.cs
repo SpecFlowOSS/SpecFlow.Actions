@@ -1,6 +1,6 @@
 ﻿// unset
 
-using Boa.Constrictor.Logging;
+using Boa.Constrictor.Screenplay;
 using TechTalk.SpecFlow.Infrastructure;
 
 namespace SpecFlow.Actions.BoaConstrictor
