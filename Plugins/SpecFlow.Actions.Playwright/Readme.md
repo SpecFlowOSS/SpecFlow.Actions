@@ -8,7 +8,7 @@ This SpecFlow.Action will help you use [Playwright](https://playwright.dev/) tog
 
 ### Setup
 
-You will need to read through the [setup process for Playwright](https://playwright.dev/dotnet/docs/intro/) so that your environment is ready for execution.
+You will need to read through the [setup process for Playwright](https://playwright.dev/dotnet/docs/intro) so that your environment is ready for execution.
 
 ## Included Features
 
